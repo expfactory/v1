@@ -26,6 +26,9 @@ for experiment in experiments:
     for field in experiment[0].keys():
         values = experiment[0][field]
         # Join lists with a comma
+        if field == "reference":
+            if values != '':
+                values = '<a href="%s" target="_blank">%s</a>' %(values,values)
         if isinstance(values,list):
             values = ",".join(values)
         valid.loc[experiment[0]["tag"],field] = values
@@ -47,8 +50,18 @@ template_file = os.path.abspath("load_experiment.js")
 template_experiments(battery_dest,battery_repo,valid_experiments,template_file=template_file)
 
 # First prepare rendered table
-table = valid.to_html(index=None,classes="table table-striped table-bordered")
-table = table.replace('class="dataframe',' id="chart" class="dataframe')  
+table = '<table border="1"  id="chart" class="dataframe table table-striped table-bordered"><thead><tr style="text-align: right;">\n<tr>\n'
+for field in fields:
+    table = "%s<th>%s</th>" %(table,field)
+table = "%s</tr>\n</thead>\n<tbody>\n" %(table)
+
+for row in valid.iterrows():
+    table = "%s<tr>\n" %(table)
+    for field in row[1]:
+        table = "%s<td>%s</td>\n" %(table,field)
+    table = "%s</tr>\n" %(table)
+
+table = "%s</tbody></table>\n" %(table)
 
 # Write the new index
 index_template = "".join(open("index.html","rb").readlines())
