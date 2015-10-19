@@ -18,7 +18,7 @@ output_js = os.path.abspath("../static/js/load_experiments.js")
 data_folder = os.path.abspath("../data")
 
 # Let's make a dataframe of valid experiments
-fields = ["preview"] + [f[0] for f in get_validation_fields()]
+fields = ["name","preview"] + [f[0] for f in get_validation_fields()]
 valid = pandas.DataFrame(columns=fields)
 
 # Make a table of experiment information
@@ -35,6 +35,8 @@ for experiment in experiments:
 
     # Add a preview link
     valid.loc[experiment[0]["tag"],"preview"] = '<a href="exp_hub?exp=%s" target="_blank">DEMO</a>' %(experiment[0]["tag"])
+    valid.loc[experiment[0]["tag"],"name"] = experiment[0]["tag"]
+
 
 # Clear old experiments
 experiment_dir = os.path.abspath("../static/experiments/")
