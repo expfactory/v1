@@ -45,10 +45,13 @@ for a returning subject, keeping the total time under 30 minutes)
 // full list of experiment names:
 var experiment_list = [SUB_EXPERIMENTTIMES_SUB]
 
-function load_experiment_from_hub(experiment_name){
+// We will load all experiments, because we are lazy
+// This variable will be overwritten
+experiment_names = experimentDraw(experiment_list)
 
-    /* One the experiments are selected, load the appropriate files */
-    switch (experiment_name) {
+/* One the experiments are selected, load the appropriate files */
+for (i = 0; i < experiment_names.length; i++) {
+	switch (experiment_names[i]) {
         [SUB_EXPERIMENTLOAD_SUB]
     }
 }
