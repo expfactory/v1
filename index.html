@@ -1,494 +1,172 @@
 <!DOCTYPE html>
-<meta charset="utf-8">
 <html>
-  <head>
-    <title>Psiturk Experiment Database</title>
+    <head>
+    <meta charset="UTF-8">
+    <title>Psiturk and the Experiment Factory</title>
     <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-    <script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
-    <script src="//cdn.datatables.net/plug-ins/1.10.7/integration/bootstrap/3/dataTables.bootstrap.js"></script>
     <link href='http://fonts.googleapis.com/css?family=Roboto:300' rel='stylesheet' type='text/css'>
-    <link href='//cdn.datatables.net/plug-ins/1.10.7/integration/bootstrap/3/dataTables.bootstrap.css' rel='stylesheet' type='text/css'>
-    <style>
- 
-      body {
-          font-family: 'Roboto', sans-serif;
-      }
-      rect.bordered {
-        stroke: #E6E6E6;
-        stroke-width:2px;   
-      }
-
-      .container {
-          padding: 20px;
-          width: 1400px
-      }
-
-      text.mono {
-        font-size: 9pt;
-        font-family: 'Roboto', sans-serif lower-case;
-        fill: #aaa;
-      }
-
-      text.yaxis {
-        fill: #000;
-      }
-
-      text.xaxis {
-        fill: #000;
-      }
-
-      footer {
-          padding-left:20px;
-          padding-bottom:10px;
-      }
-    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script> 
+    <script src="static/js/tipsy.js"></script>
+    <link rel="stylesheet" href="static/css/psiturk.css">
 </head>
 <body>
-<div class="container">
-    <h1>Psiturk-Experiments</h1>
-    <div class="row">
-            <table border="1"  id="chart" class="dataframe table table-striped table-bordered"><thead><tr style="text-align: right;">
-<tr>
-<th>folder</th><th>preview</th><th>doi</th><th>run</th><th>name</th><th>contributors</th><th>time</th><th>notes</th><th>reference</th><th>lab</th><th>cognitive_atlas_concept_id</th><th>cognitive_atlas_concept</th><th>tag</th><th>cognitive_atlas_task_id</th></tr>
-</thead>
-<tbody>
-<tr>
-<td>local_global</td>
-<td><a href="exp_hub?exp=local_global" target="_blank">DEMO</a></td>
-<td></td>
-<td>experiment.js,style.css</td>
-<td></td>
-<td>Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack</td>
-<td>5</td>
-<td></td>
-<td></td>
-<td>Poldracklab</td>
-<td>trm_4aae62e4ad209</td>
-<td>cognitive control</td>
-<td>local_global</td>
-<td></td>
-</tr>
-<tr>
-<td>simple_rt</td>
-<td><a href="exp_hub?exp=simple_rt" target="_blank">DEMO</a></td>
-<td></td>
-<td>experiment.js,style.css</td>
-<td></td>
-<td>Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack</td>
-<td>3.5</td>
-<td></td>
-<td></td>
-<td>Poldracklab</td>
-<td>trm_4aae62e4ad209</td>
-<td>cognitive control</td>
-<td>simple_rt</td>
-<td></td>
-</tr>
-<tr>
-<td>letter_memory</td>
-<td><a href="exp_hub?exp=letter_memory" target="_blank">DEMO</a></td>
-<td></td>
-<td>experiment.js</td>
-<td></td>
-<td>Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack</td>
-<td>5</td>
-<td>Condition records difficulty as quantified by the sequence length</td>
-<td><a href="http://www.sciencedirect.com/science/article/pii/S001002859990734X" target="_blank">http://www.sciencedirect.com/science/article/pii/S001002859990734X</a></td>
-<td>Poldracklab</td>
-<td>trm_4aae62e4ad209</td>
-<td>cognitive control</td>
-<td>letter_memory</td>
-<td></td>
-</tr>
-<tr>
-<td>adaptive_n_back</td>
-<td><a href="exp_hub?exp=adaptive_n_back" target="_blank">DEMO</a></td>
-<td></td>
-<td>experiment.js,static/js/jspsych/plugins/jspsych-call-function.js</td>
-<td>Cognitive control and brain resources in major depression: An fMRI study using the n-back task</td>
-<td>Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack</td>
-<td>16</td>
-<td>This task differs in that the subject only has to respond on target trials, rather than indicating whether the current trial is a match or not. Condition records the n for that block of trials. The second reference is not explicitly used.</td>
-<td><a href="['http://www.sciencedirect.com/science/article/pii/S1053811905001424', 'http://www.pnas.org/content/105/19/6829.full']" target="_blank">['http://www.sciencedirect.com/science/article/pii/S1053811905001424', 'http://www.pnas.org/content/105/19/6829.full']</a></td>
-<td>Poldracklab</td>
-<td>trm_4aae62e4ad209</td>
-<td>cognitive control</td>
-<td>adaptive_n_back</td>
-<td></td>
-</tr>
-<tr>
-<td>stop_signal</td>
-<td><a href="exp_hub?exp=stop_signal" target="_blank">DEMO</a></td>
-<td></td>
-<td>experiment.js,jspsych-stop-signal.js,static/js/jspsych/plugins/jspsych-call-function.js</td>
-<td></td>
-<td>Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack</td>
-<td>30</td>
-<td>Condition refers to whether the trial is practice or high_freq/low_freq (the two test conditions) as well as whether it was a go or SS trial</td>
-<td><a href="http://www.pnas.org/content/suppl/2009/04/20/0808187106.DCSupplemental/0808187106SI.pdf#nameddest=STXT" target="_blank">http://www.pnas.org/content/suppl/2009/04/20/0808187106.DCSupplemental/0808187106SI.pdf#nameddest=STXT</a></td>
-<td>Poldracklab</td>
-<td>trm_4aae62e4ad209</td>
-<td>cognitive control</td>
-<td>stop_signal</td>
-<td></td>
-</tr>
-<tr>
-<td>flanker</td>
-<td><a href="exp_hub?exp=flanker" target="_blank">DEMO</a></td>
-<td></td>
-<td>experiment.js,style.css</td>
-<td></td>
-<td>Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack</td>
-<td>6.5</td>
-<td></td>
-<td></td>
-<td>Poldracklab</td>
-<td>trm_4aae62e4ad209</td>
-<td>cognitive control</td>
-<td>flanker</td>
-<td></td>
-</tr>
-<tr>
-<td>number_letter</td>
-<td><a href="exp_hub?exp=number_letter" target="_blank">DEMO</a></td>
-<td></td>
-<td>experiment.js,style.css</td>
-<td></td>
-<td>Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack</td>
-<td>5</td>
-<td>condition indicates block (which task, or rotateswitch block) and trial_id indicates stimulus position</td>
-<td><a href="http://www.sciencedirect.com/science/article/pii/S001002859990734X" target="_blank">http://www.sciencedirect.com/science/article/pii/S001002859990734X</a></td>
-<td>Poldracklab</td>
-<td>trm_4aae62e4ad209</td>
-<td>cognitive control</td>
-<td>number_letter</td>
-<td></td>
-</tr>
-<tr>
-<td>antisaccade</td>
-<td><a href="exp_hub?exp=antisaccade" target="_blank">DEMO</a></td>
-<td>10.1006/cogp.1999.0734</td>
-<td>experiment.js,style.css</td>
-<td>The unity and diversity of executive functions and their contributions to complex “Frontal Lobe” tasks: a latent variable analysis</td>
-<td>Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack</td>
-<td>8</td>
-<td></td>
-<td></td>
-<td>Poldracklab</td>
-<td>trm_4aae62e4ad209</td>
-<td>cognitive control</td>
-<td>antisaccade</td>
-<td></td>
-</tr>
-<tr>
-<td>tone_monitoring</td>
-<td><a href="exp_hub?exp=tone_monitoring" target="_blank">DEMO</a></td>
-<td></td>
-<td>experiment.js,static/js/jspsych/custom_plugins/jspsych-categorize-audio.js,static/js/jspsych/plugins/jspsych-single-audio.js,static/js/jspsych/plugins/jspsych-call-function.js</td>
-<td></td>
-<td>Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack</td>
-<td>6</td>
-<td>condition indicates practice/test, trial_id indicates stimulus heard on each trial. Correct response is determined by repetitions since last response and is not calculated in this script (calculate in post)</td>
-<td><a href="http://www.sciencedirect.com/science/article/pii/S001002859990734X" target="_blank">http://www.sciencedirect.com/science/article/pii/S001002859990734X</a></td>
-<td>Poldracklab</td>
-<td>trm_4aae62e4ad209</td>
-<td>cognitive control</td>
-<td>tone_monitoring</td>
-<td></td>
-</tr>
-<tr>
-<td>keep_track</td>
-<td><a href="exp_hub?exp=keep_track" target="_blank">DEMO</a></td>
-<td></td>
-<td>experiment.js,style.css</td>
-<td></td>
-<td>Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack</td>
-<td>6</td>
-<td>Condition indicates difficulty as quantified by the 'target length': the number of categories the subject had to remember</td>
-<td><a href="http://www.sciencedirect.com/science/article/pii/S001002859990734X" target="_blank">http://www.sciencedirect.com/science/article/pii/S001002859990734X</a></td>
-<td>Poldracklab</td>
-<td>trm_4aae62e4ad209</td>
-<td>cognitive control</td>
-<td>keep_track</td>
-<td></td>
-</tr>
-<tr>
-<td>ax_cpt</td>
-<td><a href="exp_hub?exp=ax_cpt" target="_blank">DEMO</a></td>
-<td></td>
-<td>experiment.js,style.css</td>
-<td></td>
-<td>Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack</td>
-<td>20</td>
-<td>Condition indicates cue/target trial type: AX, BX, AY, BY</td>
-<td><a href="http://www.pnas.org/content/suppl/2009/04/20/0808187106.DCSupplemental/0808187106SI.pdf#nameddest=STXT" target="_blank">http://www.pnas.org/content/suppl/2009/04/20/0808187106.DCSupplemental/0808187106SI.pdf#nameddest=STXT</a></td>
-<td>Poldracklab</td>
-<td>trm_4aae62e4ad209</td>
-<td>cognitive control</td>
-<td>ax_cpt</td>
-<td></td>
-</tr>
-<tr>
-<td>stroop</td>
-<td><a href="exp_hub?exp=stroop" target="_blank">DEMO</a></td>
-<td></td>
-<td>experiment.js,style.css</td>
-<td></td>
-<td>Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack</td>
-<td>5</td>
-<td>Conditions refers to congruency on each trial</td>
-<td><a href="http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0057410" target="_blank">http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0057410</a></td>
-<td>Poldracklab</td>
-<td>trm_4aae62e4ad209</td>
-<td>cognitive control</td>
-<td>stroop</td>
-<td></td>
-</tr>
-<tr>
-<td>volatile_bandit</td>
-<td><a href="exp_hub?exp=volatile_bandit" target="_blank">DEMO</a></td>
-<td></td>
-<td>experiment.js,style.css</td>
-<td></td>
-<td>Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack</td>
-<td>18</td>
-<td></td>
-<td><a href="http://www.nature.com/neuro/journal/v10/n9/pdf/nn1954.pdf" target="_blank">http://www.nature.com/neuro/journal/v10/n9/pdf/nn1954.pdf</a></td>
-<td>Poldracklab</td>
-<td>trm_4aae62e4ad209</td>
-<td>cognitive control</td>
-<td>volatile_bandit</td>
-<td></td>
-</tr>
-<tr>
-<td>plus_minus</td>
-<td><a href="exp_hub?exp=plus_minus" target="_blank">DEMO</a></td>
-<td></td>
-<td>experiment.js</td>
-<td></td>
-<td>Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack</td>
-<td>5</td>
-<td>Condition indicates block task (add, subtract, alternate)</td>
-<td><a href="http://www.sciencedirect.com/science/article/pii/S001002859990734X" target="_blank">http://www.sciencedirect.com/science/article/pii/S001002859990734X</a></td>
-<td>Poldracklab</td>
-<td>trm_4aae62e4ad209</td>
-<td>cognitive control</td>
-<td>plus_minus</td>
-<td></td>
-</tr>
-<tr>
-<td>dpx</td>
-<td><a href="exp_hub?exp=dpx" target="_blank">DEMO</a></td>
-<td></td>
-<td>experiment.js,style.css</td>
-<td>Cognitive Control Predicts Use of Model-based Reinforcement learning</td>
-<td>Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack</td>
-<td>15</td>
-<td>Condition indicates cue/target trial type: AX, BX, AY, BY</td>
-<td><a href="http://www.cns.nyu.edu/~rotto/jocn_in_press.pdf" target="_blank">http://www.cns.nyu.edu/~rotto/jocn_in_press.pdf</a></td>
-<td>Poldracklab</td>
-<td>trm_4aae62e4ad209</td>
-<td>cognitive control</td>
-<td>dpx</td>
-<td></td>
-</tr>
-<tr>
-<td>multisource</td>
-<td><a href="exp_hub?exp=multisource" target="_blank">DEMO</a></td>
-<td></td>
-<td>experiment.js,style.css</td>
-<td>The Multi-Source Interference Task: validation study with fMRI in individual subjects</td>
-<td>Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack</td>
-<td>7</td>
-<td>Condition records current block (practice/test control/interference), trial_id records stimulus ID (where the target is: left, middle or right) and whether the target is large or small</td>
-<td></td>
-<td>Poldracklab</td>
-<td>trm_4aae62e4ad209</td>
-<td>cognitive control</td>
-<td>multisource</td>
-<td></td>
-</tr>
-<tr>
-<td>art</td>
-<td><a href="exp_hub?exp=art" target="_blank">DEMO</a></td>
-<td></td>
-<td>experiment.js,style.css,static/js/jspsych/plugins/jspsych-call-function.js</td>
-<td>Decision Making and Learning While Taking Sequential Risks</td>
-<td>Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack</td>
-<td>45</td>
-<td></td>
-<td><a href="http://www.ncbi.nlm.nih.gov/pubmed/18194061" target="_blank">http://www.ncbi.nlm.nih.gov/pubmed/18194061</a></td>
-<td>Poldracklab</td>
-<td>trm_4aae62e4ad209</td>
-<td>cognitive control</td>
-<td>art</td>
-<td></td>
-</tr>
-<tr>
-<td>ided</td>
-<td><a href="exp_hub?exp=ided" target="_blank">DEMO</a></td>
-<td></td>
-<td>experiment.js,style.css,static/js/jspsych/plugins/jspsych-call-function.js</td>
-<td>Impaired extra-dimensional shift performance in medicated and unmedicated Parkinson's disease: evidence for a specific attentional dysfunction</td>
-<td>Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack</td>
-<td>10</td>
-<td>Condition indicates stage in the IDED task</td>
-<td><a href="http://www.sciencedirect.com/science/article/pii/0028393289901280" target="_blank">http://www.sciencedirect.com/science/article/pii/0028393289901280</a></td>
-<td>Poldracklab</td>
-<td>trm_4aae62e4ad209</td>
-<td>cognitive control</td>
-<td>ided</td>
-<td></td>
-</tr>
-<tr>
-<td>ant</td>
-<td><a href="exp_hub?exp=ant" target="_blank">DEMO</a></td>
-<td>10.1162/089892902317361886</td>
-<td>experiment.js,style.css,jspsych-ANT-practice.js</td>
-<td>Testing the efficiency and independence of attentional networks.</td>
-<td>Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack</td>
-<td>20</td>
-<td></td>
-<td></td>
-<td>Poldracklab</td>
-<td>trm_4aae62e4ad209</td>
-<td>cognitive control</td>
-<td>ant</td>
-<td></td>
-</tr>
-<tr>
-<td>choice_rt</td>
-<td><a href="exp_hub?exp=choice_rt" target="_blank">DEMO</a></td>
-<td></td>
-<td>experiment.js,style.css</td>
-<td></td>
-<td>Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack</td>
-<td>4</td>
-<td></td>
-<td></td>
-<td>Poldracklab</td>
-<td>trm_4aae62e4ad209</td>
-<td>cognitive control</td>
-<td>choice_rt</td>
-<td></td>
-</tr>
-<tr>
-<td>simon</td>
-<td><a href="exp_hub?exp=simon" target="_blank">DEMO</a></td>
-<td></td>
-<td>experiment.js,style.css</td>
-<td></td>
-<td>Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack</td>
-<td>5</td>
-<td></td>
-<td></td>
-<td>Poldracklab</td>
-<td>trm_4aae62e4ad209</td>
-<td>cognitive control</td>
-<td>simon</td>
-<td></td>
-</tr>
-<tr>
-<td>image_monitoring</td>
-<td><a href="exp_hub?exp=image_monitoring" target="_blank">DEMO</a></td>
-<td></td>
-<td>experiment.js,style.css,static/js/jspsych/plugins/jspsych-call-function.js</td>
-<td></td>
-<td>Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack</td>
-<td>6</td>
-<td>condition indicates practice/test, trial_id indicates stimulus shown on each trial. Correct response is determined by repetitions since last response and is not calculated in experiment.js (calculate in post)</td>
-<td><a href="http://www.sciencedirect.com/science/article/pii/S001002859990734X" target="_blank">http://www.sciencedirect.com/science/article/pii/S001002859990734X</a></td>
-<td>Poldracklab</td>
-<td>trm_4aae62e4ad209</td>
-<td>cognitive control</td>
-<td>image_monitoring</td>
-<td></td>
-</tr>
-<tr>
-<td>rng</td>
-<td><a href="exp_hub?exp=rng" target="_blank">DEMO</a></td>
-<td></td>
-<td>experiment.js,style.css,static/js/jspsych/custom_plugins/jspsych-multi-button.js</td>
-<td></td>
-<td>Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack</td>
-<td>3</td>
-<td></td>
-<td><a href="http://www.sciencedirect.com/science/article/pii/S1053811905001424" target="_blank">http://www.sciencedirect.com/science/article/pii/S1053811905001424</a></td>
-<td>Poldracklab</td>
-<td>trm_4aae62e4ad209</td>
-<td>cognitive control</td>
-<td>rng</td>
-<td></td>
-</tr>
-<tr>
-<td>go_nogo</td>
-<td><a href="exp_hub?exp=go_nogo" target="_blank">DEMO</a></td>
-<td></td>
-<td>experiment.js,style.css</td>
-<td>Go-Nogo Task</td>
-<td>Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack</td>
-<td>7</td>
-<td></td>
-<td></td>
-<td>Poldracklab</td>
-<td>trm_4aae62e4ad209</td>
-<td>cognitive control</td>
-<td>go_nogo</td>
-<td></td>
-</tr>
-<tr>
-<td>two_stage_decision</td>
-<td><a href="exp_hub?exp=two_stage_decision" target="_blank">DEMO</a></td>
-<td>10.1016/j.neuron.2011.02.027</td>
-<td>experiment.js,style.css,static/js/jspsych/plugins/jspsych-call-function.js</td>
-<td>Model-Based Influences on Humans' Choices and Striatal Prediction Errors</td>
-<td>Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack</td>
-<td>26</td>
-<td>Condition = ordered stims in stage 1 and stage 2 (so [0, 1] or [1, 0] for stage 1 and [2, 3], [4, 5] etc. for stage 2 and FB for the FB condition (1 for reward, 0 for no reward)</td>
-<td><a href="http://www.sciencedirect.com/science/article/pii/S0896627311001255" target="_blank">http://www.sciencedirect.com/science/article/pii/S0896627311001255</a></td>
-<td>Poldracklab</td>
-<td>trm_4aae62e4ad209</td>
-<td>cognitive control</td>
-<td>two_stage_decision</td>
-<td></td>
-</tr>
-<tr>
-<td>n_back</td>
-<td><a href="exp_hub?exp=n_back" target="_blank">DEMO</a></td>
-<td></td>
-<td>experiment.js</td>
-<td>Cognitive control and brain resources in major depression: An fMRI study using the n-back task</td>
-<td>Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack</td>
-<td>16</td>
-<td>This task differs in that the subject only has to respond on target trials, rather than indicating whether the current trial is  a match or not</td>
-<td><a href="http://www.sciencedirect.com/science/article/pii/S1053811905001424" target="_blank">http://www.sciencedirect.com/science/article/pii/S1053811905001424</a></td>
-<td>Poldracklab</td>
-<td>trm_4aae62e4ad209</td>
-<td>cognitive control</td>
-<td>n_back</td>
-<td></td>
-</tr>
-</tbody></table>
 
-    </div>
-    <div class="row">
-        <a href="https://raw.githubusercontent.com/psiturk/psiturk.github.io/master/data/psiturk-experiments.tsv" class="btn btn-sm btn-default" style="width:150px;"><span class="glyphicon glyphicon-arrow-down"></span> Download Data (tsv)</a>
-        <a href="https://raw.githubusercontent.com/psiturk/psiturk.github.io/master/data/psiturk-experiments.pkl" class="btn btn-sm btn-default" style="width:150px;"><span class="glyphicon glyphicon-arrow-down"></span> Download Data (pkl)</a>
-        <a href="https://raw.githubusercontent.com/psiturk/psiturk.github.io/master/data/psiturk-experiments.json" class="btn btn-sm btn-default" style="width:150px;"><span class="glyphicon glyphicon-arrow-down"></span> Download Data (json)</a>
-<a href="http://www.cognitiveatlas.org" class="btn btn-sm btn-default" style="width:150px;" target="_blank"><span class="fa fa-home"></span> Cognitive Atlas</a>
-    </div>
-</div>
-    <script type="text/javascript">
-    $(document).ready(function() {
-        $('#chart').dataTable();
+<h1 class="title"><img height="25px" style="padding-right:5px; padding-top:5px" src="static/images/psiturkpygray.png"/> Psiturk <span style="color:#CCC">and the</span> Experiment Factory</h1>
+
+<!-- Experiments - so many tiny pieces! -->
+<!-- Sidebar with logo -->
+<div id="littlepieces"></div>
+
+<script>
+// Tooltips
+var tip = d3.tip()
+    .attr('class', 'd3-tip')
+    .offset([-10, 0])
+    .html(function(d) {
+        return "<a href='" + d.tag + ".html' target='_blank'><strong><span style='color:black;text-decoration:none'>" + d.tag +"</span></a>";
+})
+
+// D3
+// Colors to match primary paint colors
+var colors = ["brown","#E9AB17","#1756E8"]
+
+var n = 1; // number of distinct clusters (classes)
+var m = 26; // total objects
+
+var nodes = [{"cluster": 1, "radius": "10", "color": colors[2], "tag": "local_global" },{"cluster": 1, "radius": "10", "color": colors[2], "tag": "simple_rt" },{"cluster": 1, "radius": "10", "color": colors[1], "tag": "letter_memory" },{"cluster": 1, "radius": "10", "color": colors[0], "tag": "adaptive_n_back" },{"cluster": 1, "radius": "10", "color": colors[1], "tag": "stop_signal" },{"cluster": 1, "radius": "10", "color": colors[2], "tag": "flanker" },{"cluster": 1, "radius": "10", "color": colors[1], "tag": "number_letter" },{"cluster": 1, "radius": "10", "color": colors[1], "tag": "antisaccade" },{"cluster": 1, "radius": "10", "color": colors[2], "tag": "tone_monitoring" },{"cluster": 1, "radius": "10", "color": colors[2], "tag": "keep_track" },{"cluster": 1, "radius": "10", "color": colors[0], "tag": "ax_cpt" },{"cluster": 1, "radius": "10", "color": colors[2], "tag": "stroop" },{"cluster": 1, "radius": "10", "color": colors[2], "tag": "volatile_bandit" },{"cluster": 1, "radius": "10", "color": colors[2], "tag": "plus_minus" },{"cluster": 1, "radius": "10", "color": colors[1], "tag": "dpx" },{"cluster": 1, "radius": "10", "color": colors[0], "tag": "multisource" },{"cluster": 1, "radius": "10", "color": colors[1], "tag": "art" },{"cluster": 1, "radius": "10", "color": colors[0], "tag": "ided" },{"cluster": 1, "radius": "10", "color": colors[0], "tag": "ant" },{"cluster": 1, "radius": "10", "color": colors[2], "tag": "choice_rt" },{"cluster": 1, "radius": "10", "color": colors[1], "tag": "simon" },{"cluster": 1, "radius": "10", "color": colors[2], "tag": "image_monitoring" },{"cluster": 1, "radius": "10", "color": colors[1], "tag": "rng" },{"cluster": 1, "radius": "10", "color": colors[0], "tag": "go_nogo" },{"cluster": 1, "radius": "10", "color": colors[2], "tag": "two_stage_decision" },{"cluster": 1, "radius": "10", "color": colors[0], "tag": "n_back" }];
+
+var width = 1400,
+    height = 220,
+    padding = 20, // separation between nodes
+    maxRadius = 50;
+
+var x = d3.scale.ordinal()
+    .domain(d3.range(m))
+    .rangePoints([0, width], 1);
+
+var nodes = d3.range(m).map(function(ii) {
+  var i = nodes[ii].cluster,
+      v = (i + 1) / m * -Math.log(Math.random());
+  return {
+    radius: Math.max(10,Math.sqrt(v) * maxRadius),
+    color: nodes[ii].color,
+    tag: nodes[ii].tag,
+    cy: x(i),
+    cx: width / 2
+  };
+});
+
+var force = d3.layout.force()
+    .nodes(nodes)
+    .size([width, height])
+    .gravity(0)
+    .charge(0)
+    .on("tick", tick)
+    .start();
+
+var svg = d3.select("#littlepieces").append("svg")
+    .attr("width", width)
+    .attr("height", height);
+
+svg.call(tip);
+
+var circle = svg.selectAll("rect")
+    .data(nodes)
+  .enter().append("rect")
+    .attr("width", function(d) { return d.radius; })
+    .attr("height", function(d) { return d.radius; })
+    .style("fill", function(d) { return d.color; })
+    .on('mouseout.tip', tip.hide)
+    .on('mouseover.tip', tip.show)
+    .on('click', function(d){
+        window.location = d.tag + ".html";
+    })
+    .call(force.drag);
+
+function tick(e) {
+  circle
+      .each(gravity(.2 * e.alpha))
+      .each(collide(.5))
+      .attr("x", function(d) { return d.x = Math.max(d.radius, Math.min(width - d.radius, d.x)); })
+      .attr("y", function(d) { return d.y = Math.max(d.radius, Math.min(height - d.radius, d.y)); });
+}
+
+// Move nodes toward cluster focus.
+function gravity(alpha) {
+  return function(d) {
+    d.y += (d.cy - d.y) * alpha;
+    d.x += (d.cx - d.x) * alpha;
+  };
+}
+
+// Resolve collisions between nodes.
+function collide(alpha) {
+  var quadtree = d3.geom.quadtree(nodes);
+  return function(d) {
+    var r = d.radius + maxRadius + padding,
+        nx1 = d.x - r,
+        nx2 = d.x + r,
+        ny1 = d.y - r,
+        ny2 = d.y + r;
+    quadtree.visit(function(quad, x1, y1, x2, y2) {
+      if (quad.point && (quad.point !== d)) {
+        var x = d.x - quad.point.x,
+            y = d.y - quad.point.y,
+            l = Math.sqrt(x * x + y * y),
+            r = d.radius + quad.point.radius + (d.color !== quad.point.color) * padding;
+        if (l < r) {
+          l = (l - r) / l * alpha;
+          d.x -= x *= l;
+          d.y -= y *= l;
+          quad.point.x += x;
+          quad.point.y += y;
+        }
+      }
+      return x1 > nx2 || x2 < nx1 || y1 > ny2 || y2 < ny1;
     });
-    </script>
+  };
+}
 
-  </body>
-<footer>
-<a href="http://psiturk.github.io/psiturk-python">Documentation</a>
-</footer>
+</script>
+
+<!-- Centers -->
+<div class="tagline1">A million little pieces...</div>
+<div class="experiment"><h1 id="infobox"></h1></div>
+<div class="tagline2">assembled for psychological science.</div>
+
+<script>
+
+// A $( document ).ready() block.
+$( document ).ready(function() {
+    
+    // Show text description on mouseover
+    $("#newlink").mouseover(function(){
+       $("#infobox").text("Create a new experiment or battery.")
+    })
+
+    $("#codelink").mouseover(function(){
+       $("#infobox").text("Contribute to our code base.")
+    })
+
+    $("#doclink").mouseover(function(){
+       $("#infobox").text("Learn about the experiment factory.")
+    })
+
+    $("#browselink").mouseover(function(){
+       $("#infobox").text("Browse our experimental paradigms.")
+    })
+
+});
+
+</script>
+
+<nav>
+  <ul>
+    <li id="newlink"><a href="http://psiturk-python.readthedocs.org/en/latest/getting-started.html"><i class="fa fa-fw fa-plus"></i></a></li>
+    <li id="browselink"><a href="table.html"><i class="fa fa-fw fa-search"></i></a></li>
+    <li id="codelink"><a href="https://github.com/psiturk" target="_blank"><i class="fa fa-fw fa-code-fork"></i></a></li>
+    <li id="doclink"><a href="http://psiturk-python.readthedocs.org/en/latest/" target="_blank"><i class="fa fa-fw fa-question"></i></a></li>
+  </ul>
+</nav>
+</body>
 </html>
