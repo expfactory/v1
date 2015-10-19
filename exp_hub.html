@@ -38,12 +38,13 @@
 
                      for (i = 0; i < experiment_list.length; i++) {
                          if (experiment_list[i].name == url_var);
+                         console.log([experiment_list[i].name])
                          return [experiment_list[i].name]
                      }
 
                  }
 
-                var experiment_names = find_experiment(json_data,experiment_list)
+                experiment_names = find_experiment(json_data,experiment_list)
 
 		var task_list = '<ul list-text>'
 		for (i=0; i<experiment_names.length; i++) {
