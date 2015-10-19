@@ -18,7 +18,7 @@ output_js = os.path.abspath("../static/js/load_experiments.js")
 data_folder = os.path.abspath("../data")
 
 # Let's make a dataframe of valid experiments
-fields = [f[0] for f in get_validation_fields()] + ["preview"]
+fields = ["preview"] + [f[0] for f in get_validation_fields()]
 valid = pandas.DataFrame(columns=fields)
 
 # Make a table of experiment information
