@@ -38,11 +38,10 @@
                  experiment_list = [{'name': 'local_global', 'time': 5}, {'name': 'simple_rt', 'time': 3.5}, {'name': 'letter_memory', 'time': 5}, {'name': 'adaptive_n_back', 'time': 16}, {'name': 'stop_signal', 'time': 30}, {'name': 'flanker', 'time': 6.5}, {'name': 'number_letter', 'time': 5}, {'name': 'antisaccade', 'time': 8}, {'name': 'tone_monitoring', 'time': 6}, {'name': 'keep_track', 'time': 6}, {'name': 'ax_cpt', 'time': 20}, {'name': 'stroop', 'time': 5}, {'name': 'volatile_bandit', 'time': 18}, {'name': 'plus_minus', 'time': 5}, {'name': 'dpx', 'time': 15}, {'name': 'multisource', 'time': 7}, {'name': 'art', 'time': 45}, {'name': 'ided', 'time': 10}, {'name': 'ant', 'time': 20}, {'name': 'choice_rt', 'time': 4}, {'name': 'simon', 'time': 5}, {'name': 'image_monitoring', 'time': 6}, {'name': 'rng', 'time': 3}, {'name': 'go_nogo', 'time': 7}, {'name': 'two_stage_decision', 'time': 26}, {'name': 'n_back', 'time': 16}]
 
 
-
-/* One the experiments are selected, load the appropriate files */
-for (i = 0; i < experiment_list.length; i++) {
-	switch (experiment_list[i].name) {
-        
+                 /* One the experiments are selected, load the appropriate files */
+                 for (i = 0; i < experiment_list.length; i++) {
+                 	switch (experiment_list[i].name) {
+                           
 case "local_global":
          loadjscssfile("static/experiments/local_global/experiment.js","js")
          loadjscssfile("static/experiments/local_global/style.css","css")
@@ -153,9 +152,98 @@ case "two_stage_decision":
 case "n_back":
          loadjscssfile("static/experiments/n_back/experiment.js","js")
          break;
+        
+                     }
+                 }
 
-    }
-}
+                /* takes an experiment array and concatenates it with the array of each experiment \
+                identified in 'experiment_names' */
+                function cat_experiments(experiment_array) {
+	           for (i = 0; i < experiment_names.length; i++) {
+		      switch (experiment_names[i]) {
+                          
+case "local_global":
+      experiments = experiments.concat(local_global_experiment)
+      break;
+case "simple_rt":
+      experiments = experiments.concat(simple_rt_experiment)
+      break;
+case "letter_memory":
+      experiments = experiments.concat(letter_memory_experiment)
+      break;
+case "adaptive_n_back":
+      experiments = experiments.concat(adaptive_n_back_experiment)
+      break;
+case "stop_signal":
+      experiments = experiments.concat(stop_signal_experiment)
+      break;
+case "flanker":
+      experiments = experiments.concat(flanker_experiment)
+      break;
+case "number_letter":
+      experiments = experiments.concat(number_letter_experiment)
+      break;
+case "antisaccade":
+      experiments = experiments.concat(antisaccade_experiment)
+      break;
+case "tone_monitoring":
+      experiments = experiments.concat(tone_monitoring_experiment)
+      break;
+case "keep_track":
+      experiments = experiments.concat(keep_track_experiment)
+      break;
+case "ax_cpt":
+      experiments = experiments.concat(ax_cpt_experiment)
+      break;
+case "stroop":
+      experiments = experiments.concat(stroop_experiment)
+      break;
+case "volatile_bandit":
+      experiments = experiments.concat(volatile_bandit_experiment)
+      break;
+case "plus_minus":
+      experiments = experiments.concat(plus_minus_experiment)
+      break;
+case "dpx":
+      experiments = experiments.concat(dpx_experiment)
+      break;
+case "multisource":
+      experiments = experiments.concat(multisource_experiment)
+      break;
+case "art":
+      experiments = experiments.concat(art_experiment)
+      break;
+case "ided":
+      experiments = experiments.concat(ided_experiment)
+      break;
+case "ant":
+      experiments = experiments.concat(ant_experiment)
+      break;
+case "choice_rt":
+      experiments = experiments.concat(choice_rt_experiment)
+      break;
+case "simon":
+      experiments = experiments.concat(simon_experiment)
+      break;
+case "image_monitoring":
+      experiments = experiments.concat(image_monitoring_experiment)
+      break;
+case "rng":
+      experiments = experiments.concat(rng_experiment)
+      break;
+case "go_nogo":
+      experiments = experiments.concat(go_nogo_experiment)
+      break;
+case "two_stage_decision":
+      experiments = experiments.concat(two_stage_decision_experiment)
+      break;
+case "n_back":
+      experiments = experiments.concat(n_back_experiment)
+      break;
+
+		        }
+	            }
+                 }
 
 
                  // A function to find an experiment from the list in load_experiments.js

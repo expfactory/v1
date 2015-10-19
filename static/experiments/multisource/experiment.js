@@ -253,9 +253,9 @@ for (var b = 0; b < num_blocks; b++) {
 practice_control = jsPsych.randomization.repeat(practice_control_stimuli, 8, true)
 //practice_interference = jsPsych.randomization.repeat(practice_interference_stimuli, 1, true)
 practice_control.image = practice_control.image.slice(0,20)
-practice_interference.image = practice_interference.image.slice(0,20)
+//practice_interference.image = practice_interference.image.slice(0,20)
 practice_control.data = practice_control.data.slice(0,20)
-practice_interference.data = practice_interference.data.slice(0,20)
+//practice_interference.data = practice_interference.data.slice(0,20)
 
 var practice_blocks = [practice_control, practice_interference]
 

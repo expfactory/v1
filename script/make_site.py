@@ -1,5 +1,5 @@
 from psiturkpy.experiment import get_experiments, get_validation_fields
-from psiturkpy.battery import template_experiments, get_timing_js
+from psiturkpy.battery import template_experiments, get_timing_js, get_load_js, get_concat_js
 from psiturkpy.vm import custom_battery_download
 from psiturkpy.utils import sub_template
 from glob import glob
@@ -77,7 +77,11 @@ filey.close()
 # Write experiment hub
 hub_template = "".join(open("exp_hub.html","rb").readlines())
 timingjs = get_timing_js(valid_experiments)
+loadjs = get_load_js(valid_experiments) 
+concatjs = get_concat_js(valid_experiments) 
 hub_template = sub_template(hub_template,"[SUB_EXPERIMENTTIMES_SUB]",str(timingjs))
+hub_template = sub_template(hub_template,"[SUB_EXPERIMENTCONCAT_SUB]",concatjs)
+hub_template = sub_template(hub_template,"[SUB_EXPERIMENTLOAD_SUB]",loadjs)
 filey = open(output_hub,"wb")
 filey.writelines(hub_template)
 filey.close()
