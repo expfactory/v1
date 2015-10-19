@@ -44,10 +44,11 @@ for a returning subject, keeping the total time under 30 minutes)
 */ 
 // full list of experiment names:
 var experiment_list = [{'name': 'local_global', 'time': 5}, {'name': 'simple_rt', 'time': 3.5}, {'name': 'letter_memory', 'time': 5}, {'name': 'adaptive_n_back', 'time': 16}, {'name': 'stop_signal', 'time': 30}, {'name': 'flanker', 'time': 6.5}, {'name': 'number_letter', 'time': 5}, {'name': 'antisaccade', 'time': 8}, {'name': 'tone_monitoring', 'time': 6}, {'name': 'keep_track', 'time': 6}, {'name': 'ax_cpt', 'time': 20}, {'name': 'stroop', 'time': 5}, {'name': 'volatile_bandit', 'time': 18}, {'name': 'plus_minus', 'time': 5}, {'name': 'dpx', 'time': 15}, {'name': 'multisource', 'time': 7}, {'name': 'art', 'time': 45}, {'name': 'ided', 'time': 10}, {'name': 'ant', 'time': 20}, {'name': 'choice_rt', 'time': 4}, {'name': 'simon', 'time': 5}, {'name': 'image_monitoring', 'time': 6}, {'name': 'rng', 'time': 3}, {'name': 'go_nogo', 'time': 7}, {'name': 'two_stage_decision', 'time': 26}, {'name': 'n_back', 'time': 16}]
-						
-/* One the experiments are selected, load the appropriate files */
-for (i = 0; i < experiment_names.length; i++) {
-	switch (experiment_names[i]) {
+
+function load_experiment_from_hub(experiment_name){
+
+    /* One the experiments are selected, load the appropriate files */
+    switch (experiment_name) {
         
 case "local_global":
          loadjscssfile("static/experiments/local_global/experiment.js","js")
@@ -160,15 +161,14 @@ case "n_back":
          loadjscssfile("static/experiments/n_back/experiment.js","js")
          break;
 
-	}
+    }
 }
 
 /* takes an experiment array and concatenates it with the array of each experiment \
 identified in 'experiment_names' */
-function cat_experiments(experiment_array) {
-	for (i = 0; i < experiment_names.length; i++) {
-		switch (experiment_names[i]) {
-                
+function cat_experiments(experiment_array,experiment_name) {
+    switch (experiment_name) {
+        
 case "local_global":
       experiments = experiments.concat(local_global_experiment)
       break;
@@ -248,6 +248,5 @@ case "n_back":
       experiments = experiments.concat(n_back_experiment)
       break;
 
-		}
-	}
+    }
 }

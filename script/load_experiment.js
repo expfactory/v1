@@ -44,20 +44,19 @@ for a returning subject, keeping the total time under 30 minutes)
 */ 
 // full list of experiment names:
 var experiment_list = [SUB_EXPERIMENTTIMES_SUB]
-						
-/* One the experiments are selected, load the appropriate files */
-for (i = 0; i < experiment_names.length; i++) {
-	switch (experiment_names[i]) {
+
+function load_experiment_from_hub(experiment_name){
+
+    /* One the experiments are selected, load the appropriate files */
+    switch (experiment_name) {
         [SUB_EXPERIMENTLOAD_SUB]
-	}
+    }
 }
 
 /* takes an experiment array and concatenates it with the array of each experiment \
 identified in 'experiment_names' */
-function cat_experiments(experiment_array) {
-	for (i = 0; i < experiment_names.length; i++) {
-		switch (experiment_names[i]) {
-                [SUB_EXPERIMENTCONCAT_SUB]
-		}
-	}
+function cat_experiments(experiment_array,experiment_name) {
+    switch (experiment_name) {
+        [SUB_EXPERIMENTCONCAT_SUB]
+    }
 }
