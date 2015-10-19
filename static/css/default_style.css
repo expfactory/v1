@@ -1,0 +1,123 @@
+
+.multi-parent {
+	position:relative;
+	text-align:center;
+}
+
+.centerbox {
+  width:35vw;
+  height: 20vw;
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-right:-50%;
+  transform: translate(-50%,-50%);
+}
+
+/* Used for general instructions */
+.block-text {
+  width:100%;
+  height 100vw;
+  text-align: justify;
+  margin: 0 auto;
+  margin-bottom: 1em;
+  font-size: 20px;
+  line-height: 120%;
+}
+
+/* As above but centered instead of justified. Good for instructions with few lines */
+.center-block-text {
+  width:100%;
+  height 100vw;
+  text-align: center;
+  margin: 0 auto;
+  margin-bottom: 1em;
+  font-size: 20px;
+  line-height: 120%;
+}
+
+/* Used in lists */
+.list-text li{
+  font-size: 18px;
+}
+
+/* used for large text shown in the center of the screen, like FB or stimuli */
+.center-text {
+	text-align:center;
+	font-size: 40px;
+	position: relative;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+/* fixation should be used like this in: '<div class = centerbox><div class = fixation>+</div></div>'*/
+.fixation {
+	text-align: center;
+	font-size: 150px;
+	position: relative;
+    top: 50%; 
+    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+}
+
+
+/* flex box used to vertically and horizontally center an img.
+Sample html: <div class = centerbox><div class = img-container><img...></img></div></div>
+*/
+.img-container {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center; /* align horizontal */
+    align-items: center; /* align vertical */
+}
+
+#legal {
+  margin: 0 auto;
+  margin-top: 1.5em;
+  font-size: 0.8em;
+}
+
+body {
+	padding: 0;
+	margin: 0;
+	font-family: Palatino Linotype, Bookman Antiqua, Palatino, serif;
+	font-size: 16px;
+	line-height: 20px;
+}
+
+
+button {
+	border: 1px solid #999;
+	border-top: 1px solid #e0e0e0;
+	border-left: 1px solid #e0e0e0;
+	margin: 10px;
+	padding-left: 5px;
+	padding-right: 5px;
+	height: 29px;
+	min-width: 70px;
+}
+button:active {
+	border-left: 1px solid #c9c9c9;
+	border-top: 1px solid #c9c9c9;
+	background: none;
+	background-color: #c9c9c9;
+}
+
+button[disabled] {
+	border: 1px solid #999;
+	border-top: 1px solid #e0e0e0;
+	border-left: 1px solid #e0e0e0;
+	cursor: not-allowed;
+}
+
+
+
+
+
+
