@@ -1,6 +1,7 @@
 from psiturkpy.experiment import get_experiments, get_validation_fields
-from psiturkpy.battery import template_experiments
+from psiturkpy.battery import template_experiments, get_timing_js
 from psiturkpy.vm import custom_battery_download
+from psiturkpy.utils import sub_template
 from glob import glob
 import shutil
 import os
@@ -15,6 +16,7 @@ experiments = get_experiments("%s/experiments" %tmpdir,load=True)
 # We will write an index, and a load_experiment.js file
 output_index = os.path.abspath("../index.html")
 output_js = os.path.abspath("../static/js/load_experiments.js")
+output_hub = os.path.abspath("../exp_hub.html")
 data_folder = os.path.abspath("../data")
 
 # Let's make a dataframe of valid experiments
@@ -70,6 +72,14 @@ index_template = "".join(open("index.html","rb").readlines())
 index_template = index_template.replace("[[SUB_TABLE_SUB]]",table)
 filey = open(output_index,"wb")
 filey.writelines(index_template)
+filey.close()
+
+# Write experiment hub
+hub_template = "".join(open("exp_hub.html","rb").readlines())
+timingjs = get_timing_js(valid_experiments)
+hub_template = sub_template(hub_template,"[SUB_EXPERIMENTTIMES_SUB]",str(timingjs))
+filey = open(output_hub,"wb")
+filey.writelines(hub_template)
 filey.close()
 
 # Function to save pretty json file
