@@ -1,15 +1,15 @@
 # Instructions to Generate Site
 
-[psiturk.github.io](http://psiturk.github.io)
+[expfactory.github.io](http://expfactory.github.io)
 
 First cd to the scripts folder - the relative path is important:
 
       cd scripts
 
-You will need psiturk-python installed for this to work:
+You will need efactory-python installed for this to work:
 
 
-      pip install git+git://github.com/psiturk/psiturk-python.git
+      pip install git+git://github.com/expfactory/efactory-python.git
 
 
 Next, run "make_site.py"

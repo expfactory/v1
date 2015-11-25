@@ -15,7 +15,7 @@
 
 <!-- Experiments - so many tiny pieces! -->
 <!-- Sidebar with logo -->
-<div id="littlepieces"></div>
+<div id="littlepieces" style="position:absolute;top:105px"></div>
 
 <script>
 // Tooltips
@@ -33,10 +33,10 @@ var colors = ["brown","#E9AB17","#1756E8"]
 var n = 1; // number of distinct clusters (classes)
 var m = 26; // total objects
 
-var nodes = [{"cluster": 1, "radius": "10", "color": colors[2], "tag": "local_global" },{"cluster": 1, "radius": "10", "color": colors[2], "tag": "simple_rt" },{"cluster": 1, "radius": "10", "color": colors[1], "tag": "letter_memory" },{"cluster": 1, "radius": "10", "color": colors[0], "tag": "adaptive_n_back" },{"cluster": 1, "radius": "10", "color": colors[1], "tag": "stop_signal" },{"cluster": 1, "radius": "10", "color": colors[2], "tag": "flanker" },{"cluster": 1, "radius": "10", "color": colors[1], "tag": "number_letter" },{"cluster": 1, "radius": "10", "color": colors[1], "tag": "antisaccade" },{"cluster": 1, "radius": "10", "color": colors[2], "tag": "tone_monitoring" },{"cluster": 1, "radius": "10", "color": colors[2], "tag": "keep_track" },{"cluster": 1, "radius": "10", "color": colors[0], "tag": "ax_cpt" },{"cluster": 1, "radius": "10", "color": colors[2], "tag": "stroop" },{"cluster": 1, "radius": "10", "color": colors[2], "tag": "volatile_bandit" },{"cluster": 1, "radius": "10", "color": colors[2], "tag": "plus_minus" },{"cluster": 1, "radius": "10", "color": colors[1], "tag": "dpx" },{"cluster": 1, "radius": "10", "color": colors[0], "tag": "multisource" },{"cluster": 1, "radius": "10", "color": colors[1], "tag": "art" },{"cluster": 1, "radius": "10", "color": colors[0], "tag": "ided" },{"cluster": 1, "radius": "10", "color": colors[0], "tag": "ant" },{"cluster": 1, "radius": "10", "color": colors[2], "tag": "choice_rt" },{"cluster": 1, "radius": "10", "color": colors[1], "tag": "simon" },{"cluster": 1, "radius": "10", "color": colors[2], "tag": "image_monitoring" },{"cluster": 1, "radius": "10", "color": colors[1], "tag": "rng" },{"cluster": 1, "radius": "10", "color": colors[0], "tag": "go_nogo" },{"cluster": 1, "radius": "10", "color": colors[2], "tag": "two_stage_decision" },{"cluster": 1, "radius": "10", "color": colors[0], "tag": "n_back" }];
+var nodes = [{"cluster": 1, "radius": "10", "color": colors[2], "tag": "local_global" },{"cluster": 1, "radius": "10", "color": colors[2], "tag": "simple_rt" },{"cluster": 1, "radius": "10", "color": colors[1], "tag": "letter_memory" },{"cluster": 1, "radius": "10", "color": colors[0], "tag": "adaptive_n_back" },{"cluster": 2, "radius": "10", "color": colors[1], "tag": "stop_signal" },{"cluster": 4, "radius": "10", "color": colors[2], "tag": "flanker" },{"cluster": 2, "radius": "10", "color": colors[1], "tag": "number_letter" },{"cluster": 4, "radius": "10", "color": colors[1], "tag": "antisaccade" },{"cluster": 2, "radius": "10", "color": colors[2], "tag": "tone_monitoring" },{"cluster": 2, "radius": "10", "color": colors[2], "tag": "keep_track" },{"cluster": 1, "radius": "10", "color": colors[0], "tag": "ax_cpt" },{"cluster": 2, "radius": "10", "color": colors[2], "tag": "stroop" },{"cluster": 2, "radius": "10", "color": colors[2], "tag": "volatile_bandit" },{"cluster": 3, "radius": "10", "color": colors[2], "tag": "plus_minus" },{"cluster": 1, "radius": "10", "color": colors[1], "tag": "dpx" },{"cluster": 3, "radius": "10", "color": colors[0], "tag": "multisource" },{"cluster": 1, "radius": "10", "color": colors[1], "tag": "art" },{"cluster": 1, "radius": "10", "color": colors[0], "tag": "ided" },{"cluster": 3, "radius": "10", "color": colors[0], "tag": "ant" },{"cluster": 1, "radius": "10", "color": colors[2], "tag": "choice_rt" },{"cluster": 3, "radius": "10", "color": colors[1], "tag": "simon" },{"cluster": 4, "radius": "10", "color": colors[2], "tag": "image_monitoring" },{"cluster": 3, "radius": "10", "color": colors[1], "tag": "rng" },{"cluster": 4, "radius": "10", "color": colors[0], "tag": "go_nogo" },{"cluster": 3, "radius": "10", "color": colors[2], "tag": "two_stage_decision" },{"cluster": 4, "radius": "10", "color": colors[0], "tag": "n_back" }];
 
 var width = 1400,
-    height = 220,
+    height = 80,
     padding = 20, // separation between nodes
     maxRadius = 50;
 
@@ -48,7 +48,7 @@ var nodes = d3.range(m).map(function(ii) {
   var i = nodes[ii].cluster,
       v = (i + 1) / m * -Math.log(Math.random());
   return {
-    radius: Math.max(10,Math.sqrt(v) * maxRadius),
+    radius: Math.max(20,Math.sqrt(v) * maxRadius),
     color: nodes[ii].color,
     tag: nodes[ii].tag,
     cy: x(i),

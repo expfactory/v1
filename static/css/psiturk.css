@@ -25,6 +25,11 @@ svg:focus {
   color: #999; 
 }
 
+#littlepieces {
+  position: absolute:
+  top: 400px;
+}
+
 .tip {
   text-decoration: none;
 }
