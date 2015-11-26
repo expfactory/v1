@@ -1,7 +1,7 @@
-from psiturkpy.experiment import get_experiments, get_validation_fields
-from psiturkpy.battery import template_experiments, get_timing_js, get_load_js, get_concat_js
-from psiturkpy.vm import custom_battery_download
-from psiturkpy.utils import sub_template
+from expfactory.experiment import get_experiments, get_validation_fields
+from expfactory.battery import template_experiments, get_timing_js, get_load_js, get_concat_js
+from expfactory.vm import custom_battery_download
+from expfactory.utils import sub_template
 from random import choice
 from glob import glob
 import shutil
@@ -9,6 +9,7 @@ import os
 import pandas
 import json
 
+# STOPPED HERE - need to figure out why this isn't working
 
 # Download experiments to temporary directory
 tmpdir = custom_battery_download()
@@ -130,6 +131,6 @@ def save_pretty_json(outfile,myjson):
     filey.close()
 
 # Finally, save other versions of updated metadata for people to use
-save_pretty_json("%s/psiturk-experiments.json" %(data_folder),json.loads(valid.to_json(orient="records")))
-valid.to_csv("%s/psiturk-experiments.tsv" %(data_folder),sep="\t",index=None)
-valid.to_pickle("%s/psiturk-experiments.pkl" %(data_folder))
+save_pretty_json("%s/expfactory-experiments.json" %(data_folder),json.loads(valid.to_json(orient="records")))
+valid.to_csv("%s/expfactory-experiments.tsv" %(data_folder),sep="\t",index=None)
+valid.to_pickle("%s/expfactory-experiments.pkl" %(data_folder))

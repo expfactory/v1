@@ -1,172 +1,172 @@
 <!DOCTYPE html>
- <html>
-     <head>
-     <meta charset="UTF-8">
-     <title>Psiturk and the Experiment Factory</title>
-     <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
-     <link href='http://fonts.googleapis.com/css?family=Roboto:300' rel='stylesheet' type='text/css'>
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script> 
-     <script src="static/js/tipsy.js"></script>
-     <link rel="stylesheet" href="static/css/expfactory.css">
- </head>
- <body>
- 
- <h1 class="title"><img height="25px" style="padding-right:5px; padding-top:5px" src="static/images/expfactorygray.png"/> Psiturk <span style="color:#CCC">and the</span> Experiment Factory</h1>
- 
- <!-- Experiments - so many tiny pieces! -->
- <!-- Sidebar with logo -->
+<html>
+    <head>
+    <meta charset="UTF-8">
+    <title>Psiturk and the Experiment Factory</title>
+    <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <link href='http://fonts.googleapis.com/css?family=Roboto:300' rel='stylesheet' type='text/css'>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script> 
+    <script src="static/js/tipsy.js"></script>
+    <link rel="stylesheet" href="static/css/psiturk.css">
+</head>
+<body>
+
+<h1 class="title"><img height="25px" style="padding-right:5px; padding-top:5px" src="static/images/psiturkpygray.png"/> Psiturk <span style="color:#CCC">and the</span> Experiment Factory</h1>
+
+<!-- Experiments - so many tiny pieces! -->
+<!-- Sidebar with logo -->
 <div id="littlepieces"></div>
- 
- <script>
- // Tooltips
- var tip = d3.tip()
-     .attr('class', 'd3-tip')
-     .offset([-10, 0])
-     .html(function(d) {
-         return "<a href='" + d.tag + ".html' target='_blank'><strong><span style='color:black;text-decoration:none'>" + d.tag +"</span></a>";
- })
- 
- // D3
- // Colors to match primary paint colors
- var colors = ["brown","#E9AB17","#1756E8"]
- 
- var n = 1; // number of distinct clusters (classes)
- var m = 26; // total objects
- 
-var nodes = [{"cluster": 1, "radius": "10", "color": colors[2], "tag": "local_global" },{"cluster": 1, "radius": "10", "color": colors[2], "tag": "simple_rt" },{"cluster": 1, "radius": "10", "color": colors[1], "tag": "letter_memory" },{"cluster": 1, "radius": "10", "color": colors[0], "tag": "adaptive_n_back" },{"cluster": 1, "radius": "10", "color": colors[1], "tag": "stop_signal" },{"cluster": 1, "radius": "10", "color": colors[2], "tag": "flanker" },{"cluster": 1, "radius": "10", "color": colors[1], "tag": "number_letter" },{"cluster": 1, "radius": "10", "color": colors[1], "tag": "antisaccade" },{"cluster": 1, "radius": "10", "color": colors[2], "tag": "tone_monitoring" },{"cluster": 1, "radius": "10", "color": colors[2], "tag": "keep_track" },{"cluster": 1, "radius": "10", "color": colors[0], "tag": "ax_cpt" },{"cluster": 1, "radius": "10", "color": colors[2], "tag": "stroop" },{"cluster": 1, "radius": "10", "color": colors[2], "tag": "volatile_bandit" },{"cluster": 1, "radius": "10", "color": colors[2], "tag": "plus_minus" },{"cluster": 1, "radius": "10", "color": colors[1], "tag": "dpx" },{"cluster": 1, "radius": "10", "color": colors[0], "tag": "multisource" },{"cluster": 1, "radius": "10", "color": colors[1], "tag": "art" },{"cluster": 1, "radius": "10", "color": colors[0], "tag": "ided" },{"cluster": 1, "radius": "10", "color": colors[0], "tag": "ant" },{"cluster": 1, "radius": "10", "color": colors[2], "tag": "choice_rt" },{"cluster": 1, "radius": "10", "color": colors[1], "tag": "simon" },{"cluster": 1, "radius": "10", "color": colors[2], "tag": "image_monitoring" },{"cluster": 1, "radius": "10", "color": colors[1], "tag": "rng" },{"cluster": 1, "radius": "10", "color": colors[0], "tag": "go_nogo" },{"cluster": 1, "radius": "10", "color": colors[2], "tag": "two_stage_decision" },{"cluster": 1, "radius": "10", "color": colors[0], "tag": "n_back" }];
- 
- var width = 1400,
-     height = 220,
-     padding = 20, // separation between nodes
-     maxRadius = 50;
- 
- var x = d3.scale.ordinal()
-     .domain(d3.range(m))
-     .rangePoints([0, width], 1);
- 
- var nodes = d3.range(m).map(function(ii) {
-   var i = nodes[ii].cluster,
-       v = (i + 1) / m * -Math.log(Math.random());
-   return {
-     radius: Math.max(10,Math.sqrt(v) * maxRadius),
-     color: nodes[ii].color,
-     tag: nodes[ii].tag,
-     cy: x(i),
-     cx: width / 2
-   };
- });
- 
- var force = d3.layout.force()
-     .nodes(nodes)
-     .size([width, height])
-     .gravity(0)
-     .charge(0)
-     .on("tick", tick)
-     .start();
- 
- var svg = d3.select("#littlepieces").append("svg")
-     .attr("width", width)
-     .attr("height", height);
- 
- svg.call(tip);
- 
- var circle = svg.selectAll("rect")
-     .data(nodes)
-   .enter().append("rect")
-     .attr("width", function(d) { return d.radius; })
-     .attr("height", function(d) { return d.radius; })
-     .style("fill", function(d) { return d.color; })
-     .on('mouseout.tip', tip.hide)
-     .on('mouseover.tip', tip.show)
-     .on('click', function(d){
-         window.location = d.tag + ".html";
-     })
-     .call(force.drag);
- 
- function tick(e) {
-   circle
-       .each(gravity(.2 * e.alpha))
-       .each(collide(.5))
-       .attr("x", function(d) { return d.x = Math.max(d.radius, Math.min(width - d.radius, d.x)); })
-       .attr("y", function(d) { return d.y = Math.max(d.radius, Math.min(height - d.radius, d.y)); });
- }
- 
- // Move nodes toward cluster focus.
- function gravity(alpha) {
-   return function(d) {
-     d.y += (d.cy - d.y) * alpha;
-     d.x += (d.cx - d.x) * alpha;
-   };
- }
- 
- // Resolve collisions between nodes.
- function collide(alpha) {
-   var quadtree = d3.geom.quadtree(nodes);
-   return function(d) {
-     var r = d.radius + maxRadius + padding,
-         nx1 = d.x - r,
-         nx2 = d.x + r,
-         ny1 = d.y - r,
-         ny2 = d.y + r;
-     quadtree.visit(function(quad, x1, y1, x2, y2) {
-       if (quad.point && (quad.point !== d)) {
-         var x = d.x - quad.point.x,
-             y = d.y - quad.point.y,
-             l = Math.sqrt(x * x + y * y),
-             r = d.radius + quad.point.radius + (d.color !== quad.point.color) * padding;
-         if (l < r) {
-           l = (l - r) / l * alpha;
-           d.x -= x *= l;
-           d.y -= y *= l;
-           quad.point.x += x;
-           quad.point.y += y;
-         }
-       }
-       return x1 > nx2 || x2 < nx1 || y1 > ny2 || y2 < ny1;
-     });
-   };
- }
- 
- </script>
- 
- <!-- Centers -->
- <div class="tagline1">A million little pieces...</div>
- <div class="experiment"><h1 id="infobox"></h1></div>
- <div class="tagline2">assembled for psychological science.</div>
- 
- <script>
- 
- // A $( document ).ready() block.
- $( document ).ready(function() {
-     
-     // Show text description on mouseover
-     $("#newlink").mouseover(function(){
-        $("#infobox").text("Create a new experiment or battery.")
-     })
- 
-     $("#codelink").mouseover(function(){
-        $("#infobox").text("Contribute to our code base.")
-     })
- 
-     $("#doclink").mouseover(function(){
-        $("#infobox").text("Learn about the experiment factory.")
-     })
- 
-     $("#browselink").mouseover(function(){
-        $("#infobox").text("Browse our experimental paradigms.")
-     })
- 
- });
- 
- </script>
- 
- <nav>
-   <ul>
-     <li id="newlink"><a href="http://efactory-python.readthedocs.org/en/latest/getting-started.html"><i class="fa fa-fw fa-plus"></i></a></li>
-     <li id="browselink"><a href="table.html"><i class="fa fa-fw fa-search"></i></a></li>
-     <li id="codelink"><a href="https://github.com/expfactory" target="_blank"><i class="fa fa-fw fa-code-fork"></i></a></li>
-     <li id="doclink"><a href="http://efactory-python.readthedocs.org/en/latest/" target="_blank"><i class="fa fa-fw fa-question"></i></a></li>
-   </ul>
- </nav>
- </body>
- </html>
+
+<script>
+// Tooltips
+var tip = d3.tip()
+    .attr('class', 'd3-tip')
+    .offset([-10, 0])
+    .html(function(d) {
+        return "<a href='" + d.tag + ".html' target='_blank'><strong><span style='color:black;text-decoration:none'>" + d.tag +"</span></a>";
+})
+
+// D3
+// Colors to match primary paint colors
+var colors = ["brown","#E9AB17","#1756E8"]
+
+var n = 1; // number of distinct clusters (classes)
+var m = 37; // total objects
+
+var nodes = [{"cluster": 1, "radius": "10", "color": colors[2], "tag": "local_global" },{"cluster": 1, "radius": "10", "color": colors[0], "tag": "simple_rt" },{"cluster": 1, "radius": "10", "color": colors[0], "tag": "letter_memory" },{"cluster": 1, "radius": "10", "color": colors[1], "tag": "dospert_rp" },{"cluster": 1, "radius": "10", "color": colors[0], "tag": "adaptive_n_back" },{"cluster": 1, "radius": "10", "color": colors[2], "tag": "stop_signal" },{"cluster": 1, "radius": "10", "color": colors[1], "tag": "flanker" },{"cluster": 1, "radius": "10", "color": colors[0], "tag": "multiplication" },{"cluster": 1, "radius": "10", "color": colors[0], "tag": "number_letter" },{"cluster": 1, "radius": "10", "color": colors[1], "tag": "antisaccade" },{"cluster": 1, "radius": "10", "color": colors[0], "tag": "tone_monitoring" },{"cluster": 1, "radius": "10", "color": colors[2], "tag": "keep_track" },{"cluster": 1, "radius": "10", "color": colors[2], "tag": "ax_cpt" },{"cluster": 1, "radius": "10", "color": colors[2], "tag": "stroop" },{"cluster": 1, "radius": "10", "color": colors[0], "tag": "volatile_bandit" },{"cluster": 1, "radius": "10", "color": colors[1], "tag": "plus_minus" },{"cluster": 1, "radius": "10", "color": colors[1], "tag": "dospert_rt" },{"cluster": 1, "radius": "10", "color": colors[2], "tag": "dpx" },{"cluster": 1, "radius": "10", "color": colors[0], "tag": "multisource" },{"cluster": 1, "radius": "10", "color": colors[0], "tag": "art" },{"cluster": 1, "radius": "10", "color": colors[0], "tag": "holt_laury" },{"cluster": 1, "radius": "10", "color": colors[2], "tag": "directed_forgetting" },{"cluster": 1, "radius": "10", "color": colors[2], "tag": "ided" },{"cluster": 1, "radius": "10", "color": colors[1], "tag": "discount_titrate" },{"cluster": 1, "radius": "10", "color": colors[0], "tag": "ant" },{"cluster": 1, "radius": "10", "color": colors[1], "tag": "choice_rt" },{"cluster": 1, "radius": "10", "color": colors[2], "tag": "kirby" },{"cluster": 1, "radius": "10", "color": colors[1], "tag": "simon" },{"cluster": 1, "radius": "10", "color": colors[1], "tag": "probabilistic_selection" },{"cluster": 1, "radius": "10", "color": colors[1], "tag": "recent_probes" },{"cluster": 1, "radius": "10", "color": colors[1], "tag": "image_monitoring" },{"cluster": 1, "radius": "10", "color": colors[1], "tag": "dospert_eb" },{"cluster": 1, "radius": "10", "color": colors[0], "tag": "rng" },{"cluster": 1, "radius": "10", "color": colors[0], "tag": "threebytwo" },{"cluster": 1, "radius": "10", "color": colors[0], "tag": "go_nogo" },{"cluster": 1, "radius": "10", "color": colors[0], "tag": "two_stage_decision" },{"cluster": 1, "radius": "10", "color": colors[2], "tag": "n_back" }];
+
+var width = 1400,
+    height = 220,
+    padding = 20, // separation between nodes
+    maxRadius = 50;
+
+var x = d3.scale.ordinal()
+    .domain(d3.range(m))
+    .rangePoints([0, width], 1);
+
+var nodes = d3.range(m).map(function(ii) {
+  var i = nodes[ii].cluster,
+      v = (i + 1) / m * -Math.log(Math.random());
+  return {
+    radius: Math.max(10,Math.sqrt(v) * maxRadius),
+    color: nodes[ii].color,
+    tag: nodes[ii].tag,
+    cy: x(i),
+    cx: width / 2
+  };
+});
+
+var force = d3.layout.force()
+    .nodes(nodes)
+    .size([width, height])
+    .gravity(0)
+    .charge(0)
+    .on("tick", tick)
+    .start();
+
+var svg = d3.select("#littlepieces").append("svg")
+    .attr("width", width)
+    .attr("height", height);
+
+svg.call(tip);
+
+var circle = svg.selectAll("rect")
+    .data(nodes)
+  .enter().append("rect")
+    .attr("width", function(d) { return d.radius; })
+    .attr("height", function(d) { return d.radius; })
+    .style("fill", function(d) { return d.color; })
+    .on('mouseout.tip', tip.hide)
+    .on('mouseover.tip', tip.show)
+    .on('click', function(d){
+        window.location = d.tag + ".html";
+    })
+    .call(force.drag);
+
+function tick(e) {
+  circle
+      .each(gravity(.2 * e.alpha))
+      .each(collide(.5))
+      .attr("x", function(d) { return d.x = Math.max(d.radius, Math.min(width - d.radius, d.x)); })
+      .attr("y", function(d) { return d.y = Math.max(d.radius, Math.min(height - d.radius, d.y)); });
+}
+
+// Move nodes toward cluster focus.
+function gravity(alpha) {
+  return function(d) {
+    d.y += (d.cy - d.y) * alpha;
+    d.x += (d.cx - d.x) * alpha;
+  };
+}
+
+// Resolve collisions between nodes.
+function collide(alpha) {
+  var quadtree = d3.geom.quadtree(nodes);
+  return function(d) {
+    var r = d.radius + maxRadius + padding,
+        nx1 = d.x - r,
+        nx2 = d.x + r,
+        ny1 = d.y - r,
+        ny2 = d.y + r;
+    quadtree.visit(function(quad, x1, y1, x2, y2) {
+      if (quad.point && (quad.point !== d)) {
+        var x = d.x - quad.point.x,
+            y = d.y - quad.point.y,
+            l = Math.sqrt(x * x + y * y),
+            r = d.radius + quad.point.radius + (d.color !== quad.point.color) * padding;
+        if (l < r) {
+          l = (l - r) / l * alpha;
+          d.x -= x *= l;
+          d.y -= y *= l;
+          quad.point.x += x;
+          quad.point.y += y;
+        }
+      }
+      return x1 > nx2 || x2 < nx1 || y1 > ny2 || y2 < ny1;
+    });
+  };
+}
+
+</script>
+
+<!-- Centers -->
+<div class="tagline1">A million little pieces...</div>
+<div class="experiment"><h1 id="infobox"></h1></div>
+<div class="tagline2">assembled for psychological science.</div>
+
+<script>
+
+// A $( document ).ready() block.
+$( document ).ready(function() {
+    
+    // Show text description on mouseover
+    $("#newlink").mouseover(function(){
+       $("#infobox").text("Create a new experiment or battery.")
+    })
+
+    $("#codelink").mouseover(function(){
+       $("#infobox").text("Contribute to our code base.")
+    })
+
+    $("#doclink").mouseover(function(){
+       $("#infobox").text("Learn about the experiment factory.")
+    })
+
+    $("#browselink").mouseover(function(){
+       $("#infobox").text("Browse our experimental paradigms.")
+    })
+
+});
+
+</script>
+
+<nav>
+  <ul>
+    <li id="newlink"><a href="http://psiturk-python.readthedocs.org/en/latest/getting-started.html"><i class="fa fa-fw fa-plus"></i></a></li>
+    <li id="browselink"><a href="table.html"><i class="fa fa-fw fa-search"></i></a></li>
+    <li id="codelink"><a href="https://github.com/psiturk" target="_blank"><i class="fa fa-fw fa-code-fork"></i></a></li>
+    <li id="doclink"><a href="http://psiturk-python.readthedocs.org/en/latest/" target="_blank"><i class="fa fa-fw fa-question"></i></a></li>
+  </ul>
+</nav>
+</body>
+</html>
