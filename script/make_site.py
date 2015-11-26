@@ -9,8 +9,6 @@ import os
 import pandas
 import json
 
-# STOPPED HERE - need to figure out why this isn't working
-
 # Download experiments to temporary directory
 tmpdir = custom_battery_download()
 experiments = get_experiments("%s/experiments" %tmpdir,load=True)
