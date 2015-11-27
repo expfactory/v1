@@ -64,7 +64,7 @@ experiment_dir = os.path.abspath("../static/experiments/")
 shutil.rmtree(experiment_dir)
 
 # Clear old docs
-docs_dir = os.path.abspath("../doc/")
+docs_dir = os.path.abspath("../docs/")
 shutil.rmtree(docs_dir)
 new_docs = os.path.abspath("../../expfactory-python/doc/build/html")
 copy_directory(new_docs,docs_dir)
