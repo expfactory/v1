@@ -1,6 +1,7 @@
 from expfactory.experiment import get_experiments, get_validation_fields
 from expfactory.battery import template_experiments, get_timing_js, get_load_js, get_concat_js
 from expfactory.vm import custom_battery_download
+from expfactory.utils import copy_directory
 from expfactory.utils import sub_template
 from random import choice
 from glob import glob
@@ -61,6 +62,12 @@ filey.close()
 # Clear old experiments
 experiment_dir = os.path.abspath("../static/experiments/")
 shutil.rmtree(experiment_dir)
+
+# Clear old docs
+docs_dir = os.path.abspath("../doc/")
+shutil.rmtree(docs_dir)
+new_docs = os.path.abspath("../../expfactory-python/doc/build/html")
+copy_directory(new_docs,docs_dir)
 
 # Copy updated valid experiments into our experiment directory
 battery_dest = os.path.abspath("..")
