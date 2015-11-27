@@ -63,12 +63,6 @@ filey.close()
 experiment_dir = os.path.abspath("../static/experiments/")
 shutil.rmtree(experiment_dir)
 
-# Clear old docs
-docs_dir = os.path.abspath("../docs/")
-shutil.rmtree(docs_dir)
-new_docs = os.path.abspath("../../expfactory-python/doc/build/html")
-copy_directory(new_docs,docs_dir)
-
 # Copy updated valid experiments into our experiment directory
 battery_dest = os.path.abspath("..")
 battery_repo = "%s/battery" %(tmpdir)
