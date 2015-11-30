@@ -75,6 +75,7 @@ case "adaptive_n_back":
 case "stop_signal":
          loadjscssfile("static/experiments/stop_signal/experiment.js","js")
          loadjscssfile("static/experiments/stop_signal/jspsych-stop-signal.js","js")
+         loadjscssfile("static/experiments/stop_signal/style.css","css")
          loadjscssfile("static/js/jspsych/plugins/jspsych-call-function.js","js")
          break;
 case "flanker":
