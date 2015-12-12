@@ -23,8 +23,6 @@ data_folder = os.path.abspath("../data")
 # fields = ["folder","preview"] + [f[0] for f in get_validation_fields()]
 fields = ['preview','tag',
           'contributors','time','notes',
-          'cognitive_atlas_concept_id',
-          'cognitive_atlas_concept',
           'cognitive_atlas_task_id']
 
 valid = pandas.DataFrame(columns=fields)
