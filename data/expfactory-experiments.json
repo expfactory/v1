@@ -32,6 +32,14 @@
         "time": 30
     },
     {
+        "cognitive_atlas_task_id": "tsk_4a57abb949dc8",
+        "contributors": "Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack",
+        "notes": "",
+        "preview": "<a href=\"test_task.html\" target=\"_blank\">DEMO</a>",
+        "tag": "test_task",
+        "time": 1
+    },
+    {
         "cognitive_atlas_task_id": "tsk_4a57abb949a4f",
         "contributors": "Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack",
         "notes": "",

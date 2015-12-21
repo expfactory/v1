@@ -43,7 +43,7 @@ but eventually they should be selected by some function (I.E. random new combina
 for a returning subject, keeping the total time under 30 minutes)
 */ 
 // full list of experiment names:
-var experiment_list = [{'name': 'local_global', 'time': 5}, {'name': 'simple_rt', 'time': 3.5}, {'name': 'adaptive_n_back', 'time': 16}, {'name': 'stop_signal', 'time': 30}, {'name': 'flanker', 'time': 6.5}, {'name': 'keep_track', 'time': 6}, {'name': 'stroop', 'time': 5}, {'name': 'dpx', 'time': 15}, {'name': 'art', 'time': 45}, {'name': 'holt_laury', 'time': 999}, {'name': 'ided', 'time': 10}, {'name': 'discount_titrate', 'time': 10}, {'name': 'choice_rt', 'time': 4}, {'name': 'kirby', 'time': 5}, {'name': 'simon', 'time': 5}, {'name': 'probabilistic_selection', 'time': 999}, {'name': 'image_monitoring', 'time': 6}, {'name': 'go_nogo', 'time': 7}, {'name': 'two_stage_decision', 'time': 26}]
+var experiment_list = [{'name': 'local_global', 'time': 5}, {'name': 'simple_rt', 'time': 3.5}, {'name': 'adaptive_n_back', 'time': 16}, {'name': 'stop_signal', 'time': 30}, {'name': 'test_task', 'time': 1}, {'name': 'flanker', 'time': 6.5}, {'name': 'keep_track', 'time': 6}, {'name': 'stroop', 'time': 5}, {'name': 'dpx', 'time': 15}, {'name': 'art', 'time': 45}, {'name': 'holt_laury', 'time': 999}, {'name': 'ided', 'time': 10}, {'name': 'discount_titrate', 'time': 10}, {'name': 'choice_rt', 'time': 4}, {'name': 'kirby', 'time': 5}, {'name': 'simon', 'time': 5}, {'name': 'probabilistic_selection', 'time': 999}, {'name': 'image_monitoring', 'time': 6}, {'name': 'go_nogo', 'time': 7}, {'name': 'two_stage_decision', 'time': 26}]
 
 // We will load all experiments, because we are lazy
 // This variable will be overwritten
@@ -71,6 +71,10 @@ case "stop_signal":
          loadjscssfile("static/experiments/stop_signal/style.css","css")
          loadjscssfile("static/js/jspsych/plugins/jspsych-call-function.js","js")
          break;
+case "test_task":
+         loadjscssfile("static/experiments/test_task/experiment.js","js")
+         loadjscssfile("static/experiments/test_task/style.css","css")
+         break;
 case "flanker":
          loadjscssfile("static/experiments/flanker/experiment.js","js")
          loadjscssfile("static/experiments/flanker/style.css","css")
@@ -91,6 +95,7 @@ case "art":
          loadjscssfile("static/experiments/art/experiment.js","js")
          loadjscssfile("static/experiments/art/style.css","css")
          loadjscssfile("static/js/jspsych/plugins/jspsych-call-function.js","js")
+         loadjscssfile("static/js/jspsych/custom_plugins/jspsych-single-stim-button.js","js")
          break;
 case "holt_laury":
          loadjscssfile("static/experiments/holt_laury/experiment.js","js")
@@ -155,6 +160,9 @@ case "adaptive_n_back":
       break;
 case "stop_signal":
       experiments = experiments.concat(stop_signal_experiment)
+      break;
+case "test_task":
+      experiments = experiments.concat(test_task_experiment)
       break;
 case "flanker":
       experiments = experiments.concat(flanker_experiment)
