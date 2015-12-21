@@ -1,14 +1,14 @@
 from expfactory.experiment import get_experiments, get_validation_fields
-from expfactory.battery import template_experiments, get_timing_js, get_load_js, get_concat_js
+from expfactory.utils import copy_directory, sub_template
+from expfactory.battery import template_experiments
 from expfactory.vm import custom_battery_download
-from expfactory.utils import copy_directory
-from expfactory.utils import sub_template
+from expfactory.views import get_experiment_html
 from random import choice
 from glob import glob
 import shutil
-import os
 import pandas
 import json
+import os
 
 # Download experiments to temporary directory
 tmpdir = custom_battery_download()
@@ -71,31 +71,8 @@ template_experiments(battery_dest,battery_repo,valid_experiments,template_file=t
 
 # For each experiment, we will generate a demo page
 for experiment in experiments:
-    js = ""
-    css = ""
     demo_page = os.path.abspath("../%s.html" %experiment[0]["tag"])
-    # Get the scripts, add to variables depending on extension    
-    scripts = experiment[0]["run"]
-    for script in scripts:
-        ext = script.split(".")[-1]
-        # Do we have a relative experiment path?
-        if len(script.split("/")) == 1:
-            if ext == "js":
-                js = "%s\n<script src='static/experiments/%s/%s'></script>" %(js,experiment[0]["tag"],script)
-            elif ext == "css":
-                css = "%s\n<link rel='stylesheet prefetch' href='static/experiments/%s/%s'>" %(css,experiment[0]["tag"],script)
-        # Do we have a battery relative path?
-        else:    
-            if ext == "js":
-                js = "%s\n<script src='%s'></script>" %(js,script)
-            elif ext == "css":
-                css = "%s\n<link rel='stylesheet prefetch' href='%s'>" %(css,script)
-
-    # Write to output file
-    exp_template = "".join(open("experiment.html","rb").readlines())
-    exp_template = sub_template(exp_template,"[SUB_JSSCRIPTS_SUB]",js)
-    exp_template = sub_template(exp_template,"[SUB_STYLE_SUB]",css)
-    exp_template = sub_template(exp_template,"[SUB_TAG_SUB]",experiment[0]["tag"])
+    exp_template = get_experiment_html(experiment)
     filey = open(demo_page,"wb")
     filey.writelines(exp_template)
     filey.close()
