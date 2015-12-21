@@ -57,6 +57,14 @@ filey = open(output_index,"wb")
 filey.writelines(index_template)
 filey.close()
 
+# Update entire static directory
+old_dirs = ["templates","static"]
+for folder in old_dirs:
+    copy_to = os.path.abspath("../%s" %folder)
+    copy_from = "%s/battery/%s" %(tmpdir,folder)
+    shutil.rmtree(copy_to)
+    copy_directory(copy_from,copy_to)
+
 # Clear old experiments
 experiment_dir = os.path.abspath("../static/experiments/")
 shutil.rmtree(experiment_dir)
