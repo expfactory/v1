@@ -23,7 +23,7 @@
 <script src='static/experiments/go_nogo/experiment.js'></script>
 <script>
 jsPsych.init({
-    experiment_structure: go_nogo_experiment,
+    timeline: go_nogo_experiment,
     on_finish: function () {
         jsPsych.data.localSave('go_nogo_results.csv', 'csv');
     }

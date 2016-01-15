@@ -1,0 +1,24 @@
+[
+    {
+        "name": "Antisaccade",
+        "run": [
+                "experiment.js",
+                "style.css"
+               ],
+        "tag": "antisaccade",
+        "cognitive_atlas_task_id": "tsk_4a57abb949869",
+        "contributors": [
+                         "Ian Eisenberg",
+                         "Zeynep Enkavi",
+                         "Patrick Bissett",
+                         "Vanessa Sochat",
+                         "Russell Poldrack"
+                        ], 
+        "time":8,
+        "experiment_variables": "",
+        "reference": "http://www.sciencedirect.com/science/article/pii/S001002859990734X",
+        "notes": "Condition indicates the location of the target stimulus",
+        "publish":"True"
+    
+   }
+]

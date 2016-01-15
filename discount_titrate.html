@@ -23,7 +23,7 @@
 <script src='static/experiments/discount_titrate/experiment.js'></script>
 <script>
 jsPsych.init({
-    experiment_structure: discount_titrate_experiment,
+    timeline: discount_titrate_experiment,
     on_finish: function () {
         jsPsych.data.localSave('discount_titrate_results.csv', 'csv');
     }

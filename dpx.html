@@ -23,7 +23,7 @@
 <script src='static/experiments/dpx/experiment.js'></script>
 <script>
 jsPsych.init({
-    experiment_structure: dpx_experiment,
+    timeline: dpx_experiment,
     on_finish: function () {
         jsPsych.data.localSave('dpx_results.csv', 'csv');
     }

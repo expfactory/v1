@@ -1,0 +1,36 @@
+
+.ANT_up {
+  height: 15vw;
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-right:-50%;
+  transform: translate(-50%,-200%);
+}
+
+.ANT_down {
+  height: 15vw;
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-right:-50%;
+  transform: translate(-50%,100%);
+}
+
+.ANT_text {
+	text-align: center;
+	font-size: 60px;
+  position: relative;
+  top: 50%; 
+  transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+}
+
+.ANT_centercue_text {
+	text-align: center;
+	font-size: 60px;
+	position: relative;
+  top: 50%; 
+  transform: translateY(-40%);
+  -webkit-transform: translateY(-40%);
+}

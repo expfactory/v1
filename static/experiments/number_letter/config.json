@@ -1,0 +1,25 @@
+[
+    {
+        "name": "Number-Letter",
+        "run": [
+                 "experiment.js",
+                 "style.css"
+               ],
+        "tag": "number_letter",
+        "cognitive_atlas_task_id": "trm_4c3e0a9576c3b",
+        "contributors": [
+                         "Ian Eisenberg",
+                         "Zeynep Enkavi",
+                         "Patrick Bissett",
+                         "Vanessa Sochat",
+                         "Russell Poldrack"
+                        ], 
+        "time":5,
+        "experiment_variables": "",
+        "reference": "http://www.sciencedirect.com/science/article/pii/S001002859990734X",
+        "notes": "condition indicates block (which task, or rotateswitch block) and trial_id indicates stimulus position",
+        "publish":"True"
+    
+   }
+]
+

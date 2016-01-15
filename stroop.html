@@ -23,7 +23,7 @@
 <script src='static/experiments/stroop/experiment.js'></script>
 <script>
 jsPsych.init({
-    experiment_structure: stroop_experiment,
+    timeline: stroop_experiment,
     on_finish: function () {
         jsPsych.data.localSave('stroop_results.csv', 'csv');
     }

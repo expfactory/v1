@@ -23,7 +23,7 @@
 <script src='static/experiments/holt_laury/experiment.js'></script>
 <script>
 jsPsych.init({
-    experiment_structure: holt_laury_experiment,
+    timeline: holt_laury_experiment,
     on_finish: function () {
         jsPsych.data.localSave('holt_laury_results.csv', 'csv');
     }

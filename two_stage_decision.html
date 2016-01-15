@@ -24,7 +24,7 @@
 <script src='static/js/jspsych/plugins/jspsych-call-function.js'></script>
 <script>
 jsPsych.init({
-    experiment_structure: two_stage_decision_experiment,
+    timeline: two_stage_decision_experiment,
     on_finish: function () {
         jsPsych.data.localSave('two_stage_decision_results.csv', 'csv');
     }

@@ -1,0 +1,24 @@
+[
+    {
+        "name": "Letter Memory",
+        "run": [
+                "experiment.js"
+               ],
+        "tag": "letter_memory",
+        "cognitive_atlas_task_id": "trm_5696a9cfe45b1",
+        "contributors": [
+                         "Ian Eisenberg",
+                         "Zeynep Enkavi",
+                         "Patrick Bissett",
+                         "Vanessa Sochat",
+                         "Russell Poldrack"
+                        ], 
+        "time":5,
+        "experiment_variables": "",
+        "reference": "http://www.sciencedirect.com/science/article/pii/S001002859990734X",
+        "notes": "Condition records difficulty as quantified by the sequence length",
+        "publish":"True"
+    
+   }
+]
+

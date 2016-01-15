@@ -23,7 +23,7 @@
 <script src='static/experiments/keep_track/experiment.js'></script>
 <script>
 jsPsych.init({
-    experiment_structure: keep_track_experiment,
+    timeline: keep_track_experiment,
     on_finish: function () {
         jsPsych.data.localSave('keep_track_results.csv', 'csv');
     }

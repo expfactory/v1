@@ -24,7 +24,7 @@
 <script src='static/js/jspsych/plugins/jspsych-call-function.js'></script>
 <script>
 jsPsych.init({
-    experiment_structure: image_monitoring_experiment,
+    timeline: image_monitoring_experiment,
     on_finish: function () {
         jsPsych.data.localSave('image_monitoring_results.csv', 'csv');
     }

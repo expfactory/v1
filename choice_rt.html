@@ -23,7 +23,7 @@
 <script src='static/experiments/choice_rt/experiment.js'></script>
 <script>
 jsPsych.init({
-    experiment_structure: choice_rt_experiment,
+    timeline: choice_rt_experiment,
     on_finish: function () {
         jsPsych.data.localSave('choice_rt_results.csv', 'csv');
     }

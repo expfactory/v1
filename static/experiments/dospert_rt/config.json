@@ -1,0 +1,25 @@
+[
+    {
+        "name": "Dospert_rt: Domain specific risk taking",
+        "run": [
+                 "experiment.js",
+                 "style.css",
+                 "static/js/jspsych/custom_plugins/jspsych-radio-buttonlist.js"
+               ],
+        "tag": "dospert_rt",
+        "cognitive_atlas_task_id": "trm_5696abecf2569",
+        "contributors": [
+                         "Zeynep Enkavi",
+                         "Ian Eisenberg",
+                         "Patrick Bissett",
+                         "Vanessa Sochat",
+                         "Russell Poldrack"
+                        ], 
+        "time":999,
+        "experiment_variables": "",
+        "reference": "https://sites.google.com/a/decisionsciences.columbia.edu/dospert",
+        "notes": "",
+        "publish":"True"
+    
+   }
+]

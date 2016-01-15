@@ -1,0 +1,25 @@
+[
+    {
+        "name": "",
+        "run": [
+                "experiment.js",
+                "style.css"
+               ],
+        "tag": "volatile_bandit",
+        "cognitive_atlas_task_id": "trm_5696b180169bd",
+        "contributors": [
+                         "Ian Eisenberg",
+                         "Zeynep Enkavi",
+                         "Patrick Bissett",
+                         "Vanessa Sochat",
+                         "Russell Poldrack"
+                        ], 
+        "time":18,
+        "experiment_variables": "",
+        "reference": "http://www.nature.com/neuro/journal/v10/n9/pdf/nn1954.pdf",
+        "notes": "",
+        "publish":"True"
+    
+   }
+]
+
