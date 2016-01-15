@@ -25,7 +25,7 @@
 <script src='static/js/jspsych/custom_plugins/jspsych-single-stim-button.js'></script>
 <script>
 jsPsych.init({
-    experiment_structure: art_experiment,
+    timeline: art_experiment,
     on_finish: function () {
         jsPsych.data.localSave('art_results.csv', 'csv');
     }

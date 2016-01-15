@@ -23,7 +23,7 @@
 <script src='static/experiments/flanker/experiment.js'></script>
 <script>
 jsPsych.init({
-    experiment_structure: flanker_experiment,
+    timeline: flanker_experiment,
     on_finish: function () {
         jsPsych.data.localSave('flanker_results.csv', 'csv');
     }

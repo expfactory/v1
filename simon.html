@@ -23,7 +23,7 @@
 <script src='static/experiments/simon/experiment.js'></script>
 <script>
 jsPsych.init({
-    experiment_structure: simon_experiment,
+    timeline: simon_experiment,
     on_finish: function () {
         jsPsych.data.localSave('simon_results.csv', 'csv');
     }

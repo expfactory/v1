@@ -23,7 +23,7 @@
 <script src='static/experiments/kirby/experiment.js'></script>
 <script>
 jsPsych.init({
-    experiment_structure: kirby_experiment,
+    timeline: kirby_experiment,
     on_finish: function () {
         jsPsych.data.localSave('kirby_results.csv', 'csv');
     }

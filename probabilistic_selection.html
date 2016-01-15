@@ -23,7 +23,7 @@
 <script src='static/experiments/probabilistic_selection/experiment.js'></script>
 <script>
 jsPsych.init({
-    experiment_structure: probabilistic_selection_experiment,
+    timeline: probabilistic_selection_experiment,
     on_finish: function () {
         jsPsych.data.localSave('probabilistic_selection_results.csv', 'csv');
     }

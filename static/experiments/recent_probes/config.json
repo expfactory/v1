@@ -1,0 +1,25 @@
+[
+    {
+        "name": "Recent Probes",
+        "run": [
+                 "experiment.js",
+                 "style.css"
+               ],
+        "tag": "recent_probes",
+        "cognitive_atlas_task_id": "trm_56674987c8f0c",
+        "contributors": [
+                         "Jamie Li",
+                         "Ian Eisenberg",
+                         "Zeynep Enkavi",
+                         "Patrick Bissett",
+                         "Vanessa Sochat",
+                         "Russell Poldrack"
+                        ], 
+        "time":999,
+        "experiment_variables": "",
+        "reference": "http://www.ncbi.nlm.nih.gov/pmc/articles/PMC2206737/",
+        "notes": "",
+        "publish":"True"
+    
+   }
+]

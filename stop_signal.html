@@ -25,7 +25,7 @@
 <script src='static/js/jspsych/plugins/jspsych-call-function.js'></script>
 <script>
 jsPsych.init({
-    experiment_structure: stop_signal_experiment,
+    timeline: stop_signal_experiment,
     on_finish: function () {
         jsPsych.data.localSave('stop_signal_results.csv', 'csv');
     }

@@ -1,0 +1,24 @@
+[
+    {
+        "name": "Plus-Minus",
+        "run": [
+                "experiment.js"
+               ],
+        "tag": "plus_minus",
+        "cognitive_atlas_task_id": "trm_5696b316c220a",
+        "contributors": [
+                         "Ian Eisenberg",
+                         "Zeynep Enkavi",
+                         "Patrick Bissett",
+                         "Vanessa Sochat",
+                         "Russell Poldrack"
+                        ], 
+        "time":5,
+        "experiment_variables": "",
+        "reference": "http://www.sciencedirect.com/science/article/pii/S001002859990734X",
+        "notes": "Condition indicates block task (add, subtract, alternate)",
+        "publish":"True"
+    
+   }
+]
+

@@ -23,7 +23,7 @@
 <script src='static/js/jspsych/plugins/jspsych-call-function.js'></script>
 <script>
 jsPsych.init({
-    experiment_structure: adaptive_n_back_experiment,
+    timeline: adaptive_n_back_experiment,
     on_finish: function () {
         jsPsych.data.localSave('adaptive_n_back_results.csv', 'csv');
     }

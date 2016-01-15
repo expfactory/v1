@@ -21,14 +21,14 @@ var getFeedback = function() {
 	var condition = curr_data.condition
 	var response = curr_data.key_press
 	if (response == -1) {
-		return '<div class = centerbox><div class = center-text>TOO SLOW</p></div>'
+		return '<div class = centerbox><div class = center-text>Respond Faster!</p></div>'
 	}
 	if (condition == "AX" && response == 37) {
-		return '<div class = centerbox><div class = center-text>CORRECT</p></div>'
+		return '<div class = centerbox><div class = center-text>Correct</p></div>'
 	} else if (condition != "AX" && response == 40) {
-		return '<div class = centerbox><div class = center-text>CORRECT</p></div>'
+		return '<div class = centerbox><div class = center-text>Correct</p></div>'
 	} else {
-		return '<div class = centerbox><div class = center-text>INCORRECT</p></div>'
+		return '<div class = centerbox><div class = center-text>Incorrect</p></div>'
 	}
 }
 /* ************************************ */
@@ -63,8 +63,8 @@ var welcome_block = {
 
 var end_block = {
   type: 'text',
-  text: '<div class = centerbox><p class = center-block-text>Finished with this task.</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
-  cont_key: 13,
+  text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
+  cont_key: [13],
   timing_post_trial: 0
 };
 
@@ -72,7 +72,7 @@ var instructions_block = {
   type: 'instructions',
   pages: [
 	'<div class = centerbox><p class = block-text>In this task, on each trial you will see a group of blue circles presented for a short time, followed by the presentation of  group of black circles. For instance you may see:</p><p class = block-text><img src = "static/experiments/dpx/images/cue2.png" ></img>	...followed by...		<img src = "static/experiments/dpx/images/probe2.png" ></img><br><br></p></div>',
-	'<div class = centerbox><p class = block-text>Your job is to respond by pressing an arrow key during the presentation of the <strong>second</strong> group  of circles. For most pairs of circles you should press the <strong>down</strong> arrow key. One pair of circles is the <strong>target</strong> pair, and for this pair you should press the <strong>left</strong> arrow key.</p><p class = block-text>After you respond you will get feedback about whether you were correct. The target pair is shown below:</p><p class = block-text><img src = "static/experiments/dpx/images/' + valid_cue + '" ></img>	...followed by...		<img src = "static/experiments/dpx/images/' + valid_probe + '.png" ></img><br><br></p></div>',
+	'<div class = centerbox><p class = block-text>Your job is to respond by pressing an arrow key during the presentation of the <strong>second</strong> group  of circles. For most pairs of circles you should press the <strong>down</strong> arrow key. One pair of circles is the <strong>target</strong> pair, and for this pair you should press the <strong>left</strong> arrow key.</p><p class = block-text>After you respond you will get feedback about whether you were correct. The target pair is shown below:</p><p class = block-text><img src = "static/experiments/dpx/images/' + valid_cue + '" ></img>	...followed by...		<img src = "static/experiments/dpx/images/' + valid_probe + '" ></img><br></br></p></div>',
 	'<div class = centerbox><p class = block-text>We will now start the experiment. Remember, press the left arrow key only after seeing the target pair. The target pair is shown below (for the last time). Memorize it!</p><p class = block-text><img src = "static/experiments/dpx/images/' + valid_cue + '" ></img>	...followed by...		<img src = "static/experiments/dpx/images/' + valid_probe + '" ></img><br></br></p></div>'
 	],
   allow_keys: false,
@@ -88,7 +88,7 @@ var rest_block = {
 
 var feedback_block = {
   type: 'single-stim',
-  stimuli: getFeedback,
+  stimulus: getFeedback,
   is_html: true,
   choices: 'none',
   data: {exp_id: "dpx", trial_id: "feedback"},
@@ -99,7 +99,7 @@ var feedback_block = {
 
 var fixation_block = {
   type: 'single-stim',
-  stimuli: '<div class = centerbox><div class = fixation>+</div></div>',
+  stimulus: '<div class = centerbox><div class = fixation>+</div></div>',
   is_html: true,
   choices: [37,40],
   data: {exp_id: "dpx", "trial_id": "fixation"},
@@ -112,7 +112,7 @@ var fixation_block = {
 /* define test block cues and probes*/
 var A_cue = {
   type: 'single-stim',
-  stimuli: prefix + path + valid_cue + postfix,
+  stimulus: prefix + path + valid_cue + postfix,
   is_html: true,
   choices: 'none',
   data: {exp_id: "dpx", trial_id: "cue"},
@@ -123,7 +123,7 @@ var A_cue = {
 
 var other_cue = {
   type: 'single-stim',
-  stimuli: getInvalidCue,
+  stimulus: getInvalidCue,
   is_html: true,
   choices: 'none',
   data: {exp_id: "dpx", trial_id: "cue"},
@@ -134,7 +134,7 @@ var other_cue = {
 
 var X_probe = {
   type: 'single-stim',
-  stimuli: prefix + path + valid_probe + postfix,
+  stimulus: prefix + path + valid_probe + postfix,
   is_html: true,
   choices: [37,40],
   data: {exp_id: "dpx", trial_id: "probe"},
@@ -146,7 +146,7 @@ var X_probe = {
 
 var other_probe = {
   type: 'single-stim',
-  stimuli: getInvalidProbe,
+  stimulus: getInvalidProbe,
   is_html: true,
   choices: [37,40],
   data: {exp_id: "dpx", trial_id: "probe"},

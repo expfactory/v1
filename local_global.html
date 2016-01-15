@@ -23,7 +23,7 @@
 <script src='static/experiments/local_global/experiment.js'></script>
 <script>
 jsPsych.init({
-    experiment_structure: local_global_experiment,
+    timeline: local_global_experiment,
     on_finish: function () {
         jsPsych.data.localSave('local_global_results.csv', 'csv');
     }
