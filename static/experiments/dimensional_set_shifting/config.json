@@ -1,0 +1,33 @@
+[
+    {
+        "name": "Intra-Dimensional/Extra-Dimensional Set Shifting",
+        "run": [
+                 "static/js/jspsych/jspsych.js",
+                 "static/js/jspsych/plugins/jspsych-text.js",
+                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js",
+                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js",
+                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-categorize.js",
+                 "static/js/jspsych/plugins/jspsych-call-function.js",
+                 "experiment.js",
+                 "static/css/jspsych.css",
+                 "static/css/default_style.css",
+                 "style.css"
+               ], 
+        "tag": "dimensional_set_shifting",
+        "cognitive_atlas_task_id": "trm_5667476fc14dd",
+        "contributors": [
+                         "Ian Eisenberg",
+                         "Zeynep Enkavi",
+                         "Patrick Bissett",
+                         "Vanessa Sochat",
+                         "Russell Poldrack"
+                        ], 
+        "time":10,
+        "experiment_variables": "",
+        "reference": "http://www.sciencedirect.com/science/article/pii/0028393289901280",
+        "notes": "Condition indicates stage in the IDED task",
+        "publish":"True"
+    
+   }
+]
+

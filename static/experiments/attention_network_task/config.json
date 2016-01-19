@@ -1,0 +1,31 @@
+[
+    {
+        "name": "Attention Network Task",
+        "run": [
+                 "static/js/jspsych/jspsych.js",
+                 "static/js/jspsych/plugins/jspsych-text.js",
+                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js",
+                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js",
+                 "jspsych-ANT-practice.js",
+                 "experiment.js",
+                 "static/css/jspsych.css",
+                 "static/css/default_style.css",
+                 "style.css"
+              ],
+        "tag": "attention_network_task",
+        "cognitive_atlas_task_id": "trm_551f0857e1db8",
+        "contributors": [
+                         "Ian Eisenberg",
+                         "Zeynep Enkavi",
+                         "Patrick Bissett",
+                         "Vanessa Sochat",
+                         "Russell Poldrack"
+                        ], 
+        "time":20,
+        "experiment_variables": "",
+        "reference": "http://www.mitpressjournals.org/doi/pdf/10.1162/089892902317361886",
+        "notes": "",
+        "publish":"True"
+    
+   }
+]

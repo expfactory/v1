@@ -1,0 +1,30 @@
+[
+    {
+        "name": "Dot Pattern Expectancy",
+        "run": [
+                 "static/js/jspsych/plugins/jspsych-text.js",
+                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js",
+                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js",
+                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-categorize.js",
+                 "experiment.js",
+                 "static/css/jspsych.css",
+                 "static/css/default_style.css",
+                 "style.css"
+               ],
+        "tag": "dot_pattern_expectancy",
+        "cognitive_atlas_task_id": "trm_515495b718cd6",
+        "contributors": [
+                         "Ian Eisenberg",
+                         "Zeynep Enkavi",
+                         "Patrick Bissett",
+                         "Vanessa Sochat",
+                         "Russell Poldrack"
+                        ], 
+        "time":15,
+        "experiment_variables": "",
+        "reference": "http://www.mitpressjournals.org/doi/pdf/10.1162/jocn_a_00709",
+        "notes": "Condition indicates cue/target trial type: AX, BX, AY, BY",
+        "publish":"True"
+    
+   }
+]
