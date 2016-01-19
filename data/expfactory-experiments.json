@@ -8,20 +8,36 @@
         "time": 5
     },
     {
-        "cognitive_atlas_task_id": "tsk_4a57abb949dc8",
-        "contributors": "Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack",
-        "notes": "",
-        "preview": "<a href=\"simple_rt.html\" target=\"_blank\">DEMO</a>",
-        "tag": "simple_rt",
-        "time": 3.5
-    },
-    {
         "cognitive_atlas_task_id": "trm_5696a599bfcb6",
         "contributors": "Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack",
         "notes": "",
         "preview": "<a href=\"bickel_titrator.html\" target=\"_blank\">DEMO</a>",
         "tag": "bickel_titrator",
         "time": 2
+    },
+    {
+        "cognitive_atlas_task_id": "trm_569989ef8cff4",
+        "contributors": "Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack",
+        "notes": "",
+        "preview": "<a href=\"willingness_to_wait.html\" target=\"_blank\">DEMO</a>",
+        "tag": "willingness_to_wait",
+        "time": 5
+    },
+    {
+        "cognitive_atlas_task_id": "trm_551f0857e1db8",
+        "contributors": "Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack",
+        "notes": "",
+        "preview": "<a href=\"attention_network_task.html\" target=\"_blank\">DEMO</a>",
+        "tag": "attention_network_task",
+        "time": 20
+    },
+    {
+        "cognitive_atlas_task_id": "trm_4f2417d4a63ae",
+        "contributors": "Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack",
+        "notes": "",
+        "preview": "<a href=\"random_number_generation.html\" target=\"_blank\">DEMO</a>",
+        "tag": "random_number_generation",
+        "time": 3
     },
     {
         "cognitive_atlas_task_id": "trm_5696a9cfe45b1",
@@ -96,12 +112,28 @@
         "time": 5
     },
     {
+        "cognitive_atlas_task_id": "tsk_4a57abb949934",
+        "contributors": "Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack",
+        "notes": "",
+        "preview": "<a href=\"choice_reaction_time.html\" target=\"_blank\">DEMO</a>",
+        "tag": "choice_reaction_time",
+        "time": 4
+    },
+    {
         "cognitive_atlas_task_id": "trm_4c3e0a9576c3b",
         "contributors": "Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack",
         "notes": "condition indicates block (which task, or rotateswitch block) and trial_id indicates stimulus position",
         "preview": "<a href=\"number_letter.html\" target=\"_blank\">DEMO</a>",
         "tag": "number_letter",
         "time": 5
+    },
+    {
+        "cognitive_atlas_task_id": "trm_5667488d52ccc",
+        "contributors": "Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack",
+        "notes": "",
+        "preview": "<a href=\"angling_risk_task.html\" target=\"_blank\">DEMO</a>",
+        "tag": "angling_risk_task",
+        "time": 45
     },
     {
         "cognitive_atlas_task_id": "tsk_4a57abb949869",
@@ -184,11 +216,11 @@
         "time": 999
     },
     {
-        "cognitive_atlas_task_id": "trm_515495b718cd6",
+        "cognitive_atlas_task_id": "trm_4c8a85c5c75eb",
         "contributors": "Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack",
-        "notes": "Condition indicates cue/target trial type: AX, BX, AY, BY",
-        "preview": "<a href=\"dpx.html\" target=\"_blank\">DEMO</a>",
-        "tag": "dpx",
+        "notes": "",
+        "preview": "<a href=\"writing_task.html\" target=\"_blank\">DEMO</a>",
+        "tag": "writing_task",
         "time": 15
     },
     {
@@ -200,12 +232,12 @@
         "time": 7
     },
     {
-        "cognitive_atlas_task_id": "trm_5667488d52ccc",
+        "cognitive_atlas_task_id": "trm_515495b718cd6",
         "contributors": "Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack",
-        "notes": "",
-        "preview": "<a href=\"art.html\" target=\"_blank\">DEMO</a>",
-        "tag": "art",
-        "time": 45
+        "notes": "Condition indicates cue/target trial type: AX, BX, AY, BY",
+        "preview": "<a href=\"dot_pattern_expectancy.html\" target=\"_blank\">DEMO</a>",
+        "tag": "dot_pattern_expectancy",
+        "time": 15
     },
     {
         "cognitive_atlas_task_id": "trm_56674f71483b0",
@@ -232,14 +264,6 @@
         "time": 999
     },
     {
-        "cognitive_atlas_task_id": "trm_5667476fc14dd",
-        "contributors": "Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack",
-        "notes": "Condition indicates stage in the IDED task",
-        "preview": "<a href=\"ided.html\" target=\"_blank\">DEMO</a>",
-        "tag": "ided",
-        "time": 10
-    },
-    {
         "cognitive_atlas_task_id": "trm_56674d6aa9faf",
         "contributors": "Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack",
         "notes": "",
@@ -259,25 +283,9 @@
         "cognitive_atlas_task_id": "trm_51c453f64d2a6",
         "contributors": "Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack",
         "notes": "",
-        "preview": "<a href=\"prp.html\" target=\"_blank\">DEMO</a>",
-        "tag": "prp",
+        "preview": "<a href=\"psychological_refractory_period.html\" target=\"_blank\">DEMO</a>",
+        "tag": "psychological_refractory_period",
         "time": 15
-    },
-    {
-        "cognitive_atlas_task_id": "trm_551f0857e1db8",
-        "contributors": "Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack",
-        "notes": "",
-        "preview": "<a href=\"ant.html\" target=\"_blank\">DEMO</a>",
-        "tag": "ant",
-        "time": 20
-    },
-    {
-        "cognitive_atlas_task_id": "tsk_4a57abb949934",
-        "contributors": "Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack",
-        "notes": "",
-        "preview": "<a href=\"choice_rt.html\" target=\"_blank\">DEMO</a>",
-        "tag": "choice_rt",
-        "time": 4
     },
     {
         "cognitive_atlas_task_id": "tsk_4a57abb949e98",
@@ -294,6 +302,14 @@
         "preview": "<a href=\"simon.html\" target=\"_blank\">DEMO</a>",
         "tag": "simon",
         "time": 5
+    },
+    {
+        "cognitive_atlas_task_id": "trm_5667476fc14dd",
+        "contributors": "Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack",
+        "notes": "Condition indicates stage in the IDED task",
+        "preview": "<a href=\"dimensional_set_shifting.html\" target=\"_blank\">DEMO</a>",
+        "tag": "dimensional_set_shifting",
+        "time": 10
     },
     {
         "cognitive_atlas_task_id": "trm_5667483dcc371",
@@ -328,14 +344,6 @@
         "time": 999
     },
     {
-        "cognitive_atlas_task_id": "trm_4f2417d4a63ae",
-        "contributors": "Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack",
-        "notes": "",
-        "preview": "<a href=\"rng.html\" target=\"_blank\">DEMO</a>",
-        "tag": "rng",
-        "time": 3
-    },
-    {
         "cognitive_atlas_task_id": "trm_5696c3fa0061a",
         "contributors": "Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack",
         "notes": "",
@@ -358,6 +366,14 @@
         "preview": "<a href=\"go_nogo.html\" target=\"_blank\">DEMO</a>",
         "tag": "go_nogo",
         "time": 7
+    },
+    {
+        "cognitive_atlas_task_id": "tsk_4a57abb949dc8",
+        "contributors": "Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack",
+        "notes": "",
+        "preview": "<a href=\"simple_reaction_time.html\" target=\"_blank\">DEMO</a>",
+        "tag": "simple_reaction_time",
+        "time": 3.5
     },
     {
         "cognitive_atlas_task_id": "trm_5667451917a34",

@@ -1,0 +1,30 @@
+<!DOCTYPE html><html class=''>
+<head>
+    <meta charset='UTF-8'>
+    <meta name="robots" content="noindex">
+    <title>The Experiment Factory: Preview</title>
+    
+<link rel='stylesheet prefetch' href='static/css/jspsych.css'>
+<link rel='stylesheet prefetch' href='static/css/default_style.css'>
+<link rel='stylesheet prefetch' href='static/experiments/willingness_to_wait/style.css'>
+</head>
+
+<body>
+
+<script src='//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+
+<script src='static/js/jspsych/jspsych.js'></script>
+<script src='static/js/jspsych/plugins/jspsych-text.js'></script>
+<script src='static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js'></script>
+<script src='static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js'></script>
+<script src='static/experiments/willingness_to_wait/experiment.js'></script>
+<script>
+jsPsych.init({
+    timeline: willingness_to_wait_experiment,
+    on_finish: function () {
+        jsPsych.data.localSave('willingness_to_wait_results.csv', 'csv');
+    }
+});
+</script>
+</body>
+</html>

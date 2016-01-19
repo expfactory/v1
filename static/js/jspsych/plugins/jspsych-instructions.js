@@ -44,6 +44,8 @@ jsPsych.plugins.instructions = (function() {
           nav_html += "<button id='jspsych-instructions-back' class='jspsych-btn'>&lt; Previous</button>";
         }
         nav_html += "<button id='jspsych-instructions-next' class='jspsych-btn'>Next &gt;</button></div>"
+        
+        nav_html += "</div>"
 
         display_element.append(nav_html);
 
@@ -58,6 +60,8 @@ jsPsych.plugins.instructions = (function() {
           clear_button_handlers();
           next();
         });
+
+
 
       }
     }

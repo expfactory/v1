@@ -1,0 +1,31 @@
+<!DOCTYPE html><html class=''>
+<head>
+    <meta charset='UTF-8'>
+    <meta name="robots" content="noindex">
+    <title>The Experiment Factory: Preview</title>
+    
+<link rel='stylesheet prefetch' href='static/css/jspsych.css'>
+<link rel='stylesheet prefetch' href='static/css/default_style.css'>
+<link rel='stylesheet prefetch' href='static/experiments/psychological_refractory_period/style.css'>
+</head>
+
+<body>
+
+<script src='//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+
+<script src='static/js/jspsych/jspsych.js'></script>
+<script src='static/js/jspsych/plugins/jspsych-text.js'></script>
+<script src='static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js'></script>
+<script src='static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js'></script>
+<script src='static/js/jspsych/poldrack_plugins/jspsych-poldrack-multi-stim-multi-response.js'></script>
+<script src='static/experiments/psychological_refractory_period/experiment.js'></script>
+<script>
+jsPsych.init({
+    timeline: psychological_refractory_period_experiment,
+    on_finish: function () {
+        jsPsych.data.localSave('psychological_refractory_period_results.csv', 'csv');
+    }
+});
+</script>
+</body>
+</html>
