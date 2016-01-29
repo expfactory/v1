@@ -2,6 +2,15 @@
 /* ************************************ */
 /* Define helper functions */
 /* ************************************ */
+function getDisplayElement () {
+    $('<div class = display_stage_background></div>').appendTo('body')
+    return $('<div class = display_stage></div>').appendTo('body')
+}
+
+function addID() {
+  jsPsych.data.addDataToLastTrial({'exp_id': 'tower_of_london_imagine'})
+}
+
 var getStim = function() {
   var response_area = '<div class = tol_response_div>' +
                   '<button class = tol_response_button id = 1>1</button>' +
@@ -41,11 +50,19 @@ var makeBoard = function(container, ball_placement) {
   return board
 }
 
+var getInstructFeedback = function() {
+	return '<div class = centerbox><p class = center-block-text>' + feedback_instruct_text + '</p></div>'
+}
 
 
 /* ************************************ */
 /* Define experimental variables */
 /* ************************************ */
+// generic task variables
+var sumInstructTime = 0    //ms
+var instructTimeThresh = 7   ///in seconds
+
+// task specific variables
 var colors = ['Green', 'Red', 'Blue']
 var problem_i = 0
 /*keeps track of peg board (where balls are). Lowest ball is the first value for each peg.
@@ -78,19 +95,32 @@ var answers = [2,2,3,3,4,4,4,4,5,5,5,5]
 /* ************************************ */
 /* define static blocks */
 var welcome_block = {
-  type: 'text',
-  text: '<div class = centerbox><p class = block-text>Welcome to the Tower of London experiment. Press <strong>enter</strong> to begin.</p></div>',
+  type: 'poldrack-text',
+  timing_response: 60000,
+  text: '<div class = centerbox><p class = center-block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   timing_post_trial: 0
 };
 
 var end_block = {
-  type: 'text',
+  type: 'poldrack-text',
+  timing_response: 60000,
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
   cont_key: [13],
   timing_post_trial: 0
 };
 
+
+var feedback_instruct_text = 'Starting with instructions.  Press <strong> Enter </strong> to continue.'
+var feedback_instruct_block = {
+  type: 'poldrack-text',
+  cont_key: [13],
+  text: getInstructFeedback,
+  timing_post_trial: 0,
+  timing_response: 6000
+};
+/// This ensures that the subject does not read through the instructions too quickly.  If they do it too quickly, then we will go over the loop again.
+var instruction_trials = []
 var instructions_block = {
   type: 'poldrack-instructions',
   pages: ['<div class = tol_topbox><p class = block-text>During this task, two pictures will be presented at a time. The pictures will be of colored balls arranged on pegs like this:</p></div>' + ref_board + makeBoard('peg_board', example_problem1) + '<div class = tol_bottombox><p class = block-text>Imagine that these balls have holes through them and the pegs are going through the holes. Notice that the first peg can hold three balls, the second peg can hold two balls, and the third peg can hold one ball.</p></div>',
@@ -100,10 +130,34 @@ var instructions_block = {
   show_clickable_nav: true,
   timing_post_trial: 1000
 };
+instruction_trials.push(feedback_instruct_block)
+instruction_trials.push(instructions_block)
+
+var instruction_node = {
+    timeline: instruction_trials,
+	/* This function defines stopping criteria */
+    loop_function: function(data){
+		for(i=0;i<data.length;i++){
+			if((data[i].trial_type=='poldrack-instructions') && (data[i].rt!=-1)){
+				rt=data[i].rt
+				sumInstructTime=sumInstructTime+rt
+			}
+		}
+		if(sumInstructTime<=instructTimeThresh*1000){
+			feedback_instruct_text = 'Read through instructions too quickly.  Please take your time and make sure you understand the instructions.  Press <strong>enter</strong> to continue.'
+			return true
+		} else if(sumInstructTime>instructTimeThresh*1000){
+			feedback_instruct_text = 'Done with instructions. Press <strong>enter</strong> to continue.'
+			return false
+		}
+    }
+}
+
 
 
 var start_test_block = {
-  type: 'text',
+  type: 'poldrack-text',
+  timing_response: 60000,
   text: '<div class = centerbox><p class = block-text>We will now start the test. There will be ' + problems.length + ' problems to complete. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   timing_post_trial: 1000
@@ -115,7 +169,7 @@ var test_block = {
   type: 'single-stim-button',
   stimulus: getStim,
   button_class: 'tol_response_button',
-  data: {exp_id: "tol", trial_id: "test"},
+  data: {trial_id: "test"},
   timing_stim: 20000,
   timing_response: 20000,
   timing_post_trial: 1000,
@@ -129,7 +183,7 @@ var test_block = {
 /* create experiment definition array */
 var tower_of_london_imagine_experiment = [];
 tower_of_london_imagine_experiment.push(welcome_block);
-tower_of_london_imagine_experiment.push(instructions_block);
+tower_of_london_imagine_experiment.push(instruction_node);
 tower_of_london_imagine_experiment.push(start_test_block);
 tower_of_london_imagine_experiment.push(test_block);
 tower_of_london_imagine_experiment.push(end_block);

@@ -1,6 +1,34 @@
 /* ************************************ */
 /* Define helper functions */
 /* ************************************ */
+function getDisplayElement () {
+    $('<div class = display_stage_background></div>').appendTo('body')
+    return $('<div class = display_stage></div>').appendTo('body')
+}
+
+function evalAttentionChecks() {
+  var check_percent = 1
+  if (run_attention_checks) {
+    var attention_check_trials = jsPsych.data.getTrialsOfType('attention-check')
+    var checks_passed = 0
+    for (var i = 0; i < attention_check_trials.length; i++) {
+      if (attention_check_trials[i].correct === true) {
+        checks_passed += 1
+      }
+    }
+    check_percent = checks_passed/attention_check_trials.length
+  } 
+  return check_percent
+}
+
+function addID() {
+  jsPsych.data.addDataToLastTrial({'exp_id': 'directed_forgetting'})
+}
+
+var getInstructFeedback = function() {
+	return '<div class = centerbox><p class = center-block-text>' + feedback_instruct_text + '</p></div>'
+}
+
 
 /* Append gap and current trial to data and then recalculate for next trial*/
 
@@ -140,10 +168,16 @@ var getProbe = function() {
 };
 
 
-
 /* ************************************ */
 /* Define experimental variables */
 /* ************************************ */
+// generic task variables
+var run_attention_checks = true
+var attention_check_thresh = 0.65
+var sumInstructTime = 0    //ms
+var instructTimeThresh = 5   ///in seconds
+
+// task specific variables
 var num_trials = 24 // num trials per run
 var num_runs = 3
 var experimentLength = num_trials * num_runs
@@ -161,25 +195,53 @@ var fileType = '.png'
 /* ************************************ */
 /* Set up jsPsych blocks */
 /* ************************************ */
+// Set up attention check node
+var attention_check_block = {
+  type: 'attention-check',
+  timing_response: 30000,
+  response_ends_trial: true,
+  timing_post_trial: 200
+}
 
+var attention_node = {
+  timeline: [attention_check_block],
+  conditional_function: function() {
+    return run_attention_checks
+  }
+}
 
 var welcome_block = {
-  type: 'text',
-  text: '<div class = centerbox><p class = block-text>Welcome to the Directed Forgetting task. Press <strong>enter</strong> to begin.</p></div>',
+  type: 'poldrack-text',
+  timing_response: 60000,
+  data: {exp_id: "directed_forgetting", trial_id: "welcome"},
+  text: '<div class = centerbox><p class = center-block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   timing_post_trial: 0
 };
 
-
 var end_block = {
-  type: 'text',
+  type: 'poldrack-text',
+  data: {exp_id: "directed_forgetting", trial_id: "end"},
+  timing_response: 60000,
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
   cont_key: [13],
   timing_post_trial: 0
 };
 
+var feedback_instruct_text = 'Starting with instructions.  Press <strong> Enter </strong> to continue.'
+var feedback_instruct_block = {
+  type: 'poldrack-text',
+  data: {exp_id: "directed_forgetting", trial_id: "instructions"},
+  cont_key: [13],
+  text: getInstructFeedback,
+  timing_post_trial: 0,
+  timing_response: 6000
+};
+/// This ensures that the subject does not read through the instructions too quickly.  If they do it too quickly, then we will go over the loop again.
+var instruction_trials = []	   
 var instructions_block = {
   type: 'poldrack-instructions',
+  data: {exp_id: "directed_forgetting", trial_id: "instructions"},
   pages:  [
 	'<div class = centerbox><p class = block-text>In this experiment, you will be presented with 6 letters on each trial, known as your memory set.  You must memorize all 6 letters. </p></div>',
     '<div class = centerbox><p class = block-text>After the presentation of 6 letters, there will be a short delay. You will then be presented with a cue, either <strong>TOP</strong> or <strong>BOT</strong>. This will instruct you to forget the 3 letters located at either the top or bottom (respectively) of the screen.</p> <p class = block-text> The three remaining letters that you must remember are called your <strong>memory set</strong>.</p></div>',
@@ -190,10 +252,34 @@ var instructions_block = {
   show_clickable_nav: true,
   timing_post_trial: 1000
 };
+instruction_trials.push(feedback_instruct_block)
+instruction_trials.push(instructions_block)
+
+var instruction_node = {
+    timeline: instruction_trials,
+	/* This function defines stopping criteria */
+    loop_function: function(data){
+		for(i=0;i<data.length;i++){
+			if((data[i].trial_type=='poldrack-instructions') && (data[i].rt!=-1)){
+				rt=data[i].rt
+				sumInstructTime=sumInstructTime+rt
+			}
+		}
+		if(sumInstructTime<=instructTimeThresh*1000){
+			feedback_instruct_text = 'Read through instructions too quickly.  Please take your time and make sure you understand the instructions.  Press <strong>enter</strong> to continue.'
+			return true
+		} else if(sumInstructTime>instructTimeThresh*1000){
+			feedback_instruct_text = 'Done with instructions. Press <strong>enter</strong> to continue.'
+			return false
+		}
+    }
+}
 
 
 var start_test_block = {
-  type: 'text',
+  type: 'poldrack-text',
+  timing_response: 60000,
+  data: {exp_id: "directed_forgetting", trial_id: "test_intro"},
   text: '<div class = centerbox><p class = block-text>We will now start a test run. Remeber, at the end of the trial respond with the <strong> Left</strong> arrow key if the letter presented is in the memory set, and the <strong> Right </strong> arrow key if it is not in the memory set.</p><p class = block-text> Press <strong>Enter</strong> to begin the experiment.</p></div>',
   cont_key: [13],
   timing_post_trial: 1000
@@ -204,7 +290,7 @@ var start_fixation_block = {
   stimulus: '<div class = centerbox><div class = fixation><span style="color:red">+</span></div></div>',
   is_html: true,
   choices: 'none',
-  data: {exp_id: "directed_forgetting", "trial_id": "fixation"},
+  data: {exp_id: "directed_forgetting", trial_id: "fixation", exp_stage: "test"},
   timing_post_trial: 0,
   timing_stim: 1000,
   timing_response: 1000,
@@ -216,7 +302,7 @@ var fixation_block = {
   stimulus: '<div class = centerbox><div class = fixation><span style="color:red">+</span></div></div>',
   is_html: true,
   choices: 'none',
-  data: {exp_id: "directed_forgetting", "trial_id": "fixation"},
+  data: {exp_id: "directed_forgetting", trial_id: "fixation", exp_stage: "test"},
   timing_post_trial: 0,
   timing_stim: 3000,
   timing_response: 3000,
@@ -228,7 +314,7 @@ var ITI_fixation_block = {
   stimulus: '<div class = centerbox><div class = fixation><span style="color:red">+</span></div></div>',
   is_html: true,
   choices: [37,39],
-  data: {exp_id: "directed_forgetting", "trial_id": "ITI_fixation"},
+  data: {exp_id: "directed_forgetting", trial_id: "ITI_fixation", exp_stage: "test"},
   timing_post_trial: 0,
   response_ends_trial: false,
   timing_stim: 4000,
@@ -240,7 +326,7 @@ var training_block = {
   type: 'poldrack-single-stim',
   stimulus: getTrainingSet,
   is_html: true,
-  data: {exp_id: "directed_forgetting", trial_id: "test"},
+  data: {exp_id: "directed_forgetting", trial_id: "stim", exp_stage: "test"},
   choices: 'none',
   timing_post_trial: 0,
   timing_stim: 2000,
@@ -254,7 +340,7 @@ var cue_block = {
   type: 'poldrack-single-stim',
   stimulus: getCue,
   is_html: true,
-  data: {exp_id: "directed_forgetting", trial_id: "cue"},
+  data: {exp_id: "directed_forgetting", trial_id: "cue", exp_stage: "test"},
   choices: false,
   timing_post_trial: 0,
   timing_stim: 1000,
@@ -266,7 +352,7 @@ var probe_block = {
   type: 'poldrack-single-stim',
   stimulus: getProbe,
   is_html: true,
-  data: {exp_id: "directed_forgetting", trial_id: "probe"},
+  data: {exp_id: "directed_forgetting", trial_id: "probe", exp_stage: "test"},
   choices: [37,39],
   timing_post_trial: 0,
   timing_stim: 2000,
@@ -279,7 +365,7 @@ var probe_block = {
 /* create experiment definition array */
 var directed_forgetting_experiment = [];
 directed_forgetting_experiment.push(welcome_block);
-directed_forgetting_experiment.push(instructions_block);
+directed_forgetting_experiment.push(instruction_node);
 for (r = 0; r < num_runs; r ++ ) {
 directed_forgetting_experiment.push(start_test_block);
 	for(i=0; i<num_trials; i++){
@@ -290,5 +376,6 @@ directed_forgetting_experiment.push(start_test_block);
 		directed_forgetting_experiment.push(probe_block);
 		directed_forgetting_experiment.push(ITI_fixation_block);
 	}
+	directed_forgetting_experiment.push(attention_node)
 }
 directed_forgetting_experiment.push(end_block);

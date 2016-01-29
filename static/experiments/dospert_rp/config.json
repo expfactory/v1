@@ -1,16 +1,18 @@
 [
     {
         "name": "Dospert_rp: Domain Specific Risk Taking",
+        "template":"jspsych",
         "run": [
+                 "static/js/jspsych/jspsych.js",
                  "static/js/jspsych/plugins/jspsych-text.js",
                  "static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js",
-                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-radio-buttonlist.js",
+                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-survey-multi-choice.js",
                  "experiment.js",
+                 "style.css",
                  "static/css/jspsych.css",
-                 "static/css/default_style.css",
-                 "style.css"
+                 "static/css/default_style.css"
                ],
-        "tag": "dospert_rp",
+        "exp_id": "dospert_rp",
         "cognitive_atlas_task_id": "trm_5696abecf2569",
         "contributors": [
                          "Zeynep Enkavi",
@@ -20,10 +22,11 @@
                          "Russell Poldrack"
                         ], 
         "time":999,
-        "experiment_variables": "",
         "reference": "https://sites.google.com/a/decisionsciences.columbia.edu/dospert",
-        "notes": "",
-        "publish":"True"
-    
+        "publish":"True",
+        "deployment_variables":{"jspsych_init":
+                                        {"fullscreen": true,
+                                        "display_element": "getDisplayElement"}
+                       }
    }
 ]

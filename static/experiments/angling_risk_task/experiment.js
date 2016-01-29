@@ -4,6 +4,34 @@
 /* ************************************ */
 /* Define helper functions */
 /* ************************************ */
+function getDisplayElement () {
+    $('<div class = display_stage_background></div>').appendTo('body')
+    return $('<div class = display_stage></div>').appendTo('body')
+}
+
+function evalAttentionChecks() {
+  var check_percent = 1
+  if (run_attention_checks) {
+    var attention_check_trials = jsPsych.data.getTrialsOfType('attention-check')
+    var checks_passed = 0
+    for (var i = 0; i < attention_check_trials.length; i++) {
+      if (attention_check_trials[i].correct === true) {
+        checks_passed += 1
+      }
+    }
+    check_percent = checks_passed/attention_check_trials.length
+  } 
+  return check_percent
+}
+
+function addID() {
+  jsPsych.data.addDataToLastTrial({'exp_id': 'angling_risk_task'})
+}
+
+var getInstructFeedback = function() {
+	return '<div class = centerbox><p class = center-block-text>' + feedback_instruct_text + '</p></div>'
+}
+
 function appendTextAfter(input,search_term, new_text) {
 	var index = input.indexOf(search_term)+search_term.length
 	return input.slice(0,index) + new_text + input.slice(index)
@@ -27,7 +55,7 @@ function getGame() {
 		game_state = appendTextAfter(game_state, 'Red Fish in Cooler: </strong>', 0)
 		game_state = appendTextAfter(game_state, "Catch N' ", release)
 		game_state = appendTextAfter(game_state, "weathertext>", weather)
-		$(document.body).html(game_state)
+		$('.jspsych-display-element').html(game_state)
 		if (weather == "Sunny") {
 			$('.lake').css("background-color", "LightBlue")
 		} else {
@@ -49,7 +77,7 @@ function getGame() {
 		if (release == "Keep") {
 			game_state = appendTextAfter(game_state, 'Red Fish in Cooler: </strong>', Math.round(trip_bank/pay*100)/100)
 		}
-		$(document.body).html(game_state)
+		$('.jspsych-display-element').html(game_state)
 		if (weather == "Sunny") {
 			$('.lake').css("background-color", "LightBlue")
 		} else {
@@ -70,7 +98,8 @@ function get_data() {
 		FB = 0
 	}
 	return {exp_id: "angling_risk_task",
-			trial_id: "test",
+			exp_stage: "test",
+			trial_id: "stim",
 			red_fish_num: red_fish_num + 1,
 			trip_bank: trip_bank - last_pay,
 			FB: FB,
@@ -90,7 +119,8 @@ function get_practice_data() {
 		FB = 0
 	}
 	return {exp_id: "angling_risk_task",
-			trial_id: "practice",
+			exp_stage: "practice",
+			trial_id: "stim",
 			red_fish_num: red_fish_num + 1,
 			trip_bank: trip_bank - last_pay,
 			FB: FB,
@@ -267,11 +297,16 @@ function place_fish() {
 	}
 }
 
-
 /* ************************************ */
 /* Define experimental variables */
 /* ************************************ */
-//Task variables
+// generic task variables
+var run_attention_checks = true
+var attention_check_thresh = 0.45
+var sumInstructTime = 0    //ms
+var instructTimeThresh = 5   ///in seconds
+
+// task specific variables
 var num_practice_rounds = 2
 var num_rounds = 30
 var red_fish_num = 0
@@ -299,7 +334,7 @@ var filled_areas = [];
 
 var game_setup = "<div class = titlebox><div class = center-text>Catch N' </div></div>" +
 "<div class = lake></div>" +
-"<div class = cooler><p class = info-text><strong>Red Fish in Cooler: </strong></p></div>" +
+"<div class = cooler><p class = info-text>&nbsp&nbsp<strong>Red Fish in Cooler: </strong></p></div>" +
 "<div class = weatherbox><div class = center-text id = weathertext></div></div>" +
 "<div class = infocontainer>" +
     "<div class = subinfocontainer>" +
@@ -318,15 +353,42 @@ var game_setup = "<div class = titlebox><div class = center-text>Catch N' </div>
 /* ************************************ */
 /* Set up jsPsych blocks */
 /* ************************************ */
-/* define static blocks */
+// Set up attention check node
+var attention_check_block = {
+  type: 'attention-check',
+  timing_response: 30000,
+  response_ends_trial: true,
+  timing_post_trial: 200
+}
 
+var attention_node = {
+  timeline: [attention_check_block],
+  conditional_function: function() {
+    return run_attention_checks
+  }
+}
+
+/* define static blocks */
 var welcome_block = {
-  type: 'text',
-  text: '<div class = centerbox><p class = block-text>Welcome to the ART experiment. Press <strong>enter</strong> to begin.</p></div>',
+  type: 'poldrack-text',
+  text: '<div class = centerbox><p class = center-block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
+  data: {trial_id: "welcome"},
+  timing_response: 60000,
   timing_post_trial: 0
 };
 
+var feedback_instruct_text = 'Starting with instructions.  Press <strong> Enter </strong> to continue.'
+var feedback_instruct_block = {
+  type: 'poldrack-text',
+  cont_key: [13],
+  data: {trial_id: "instructions"},
+  text: getInstructFeedback,
+  timing_post_trial: 0,
+  timing_response: 6000
+};
+/// This ensures that the subject does not read through the instructions too quickly.  If they do it too quickly, then we will go over the loop again.
+var instruction_trials = []	
 var instructions_block = {
   type: 'poldrack-instructions',
   pages: [
@@ -337,31 +399,60 @@ var instructions_block = {
 	'<div class = centerbox><p class = block-text>Before we start the tournaments, there will be a brief practice session for each of the four tournaments. Before each practice tournament starts you will choose the number of fish in the lake (1-200). During the actual experiment, you will not be able to choose the number of fish.</p></div>',
   ],
   allow_keys: false,
+  data: {trial_id: "instructions"},
   show_clickable_nav: true,
   timing_post_trial: 1000
 };
+instruction_trials.push(feedback_instruct_block)
+instruction_trials.push(instructions_block)
+
+var instruction_node = {
+    timeline: instruction_trials,
+	/* This function defines stopping criteria */
+    loop_function: function(data){
+		for(i=0;i<data.length;i++){
+			if((data[i].trial_type=='poldrack-instructions') && (data[i].rt!=-1)){
+				rt=data[i].rt
+				sumInstructTime=sumInstructTime+rt
+			}
+		}
+		if(sumInstructTime<=instructTimeThresh*1000){
+			feedback_instruct_text = 'Read through instructions too quickly.  Please take your time and make sure you understand the instructions.  Press <strong>enter</strong> to continue.'
+			return true
+		} else if(sumInstructTime>instructTimeThresh*1000){
+			feedback_instruct_text = 'Done with instructions. Press <strong>enter</strong> to continue.'
+			return false
+		}
+    }
+}
 
 var end_block = {
-  type: 'text',
+  type: 'poldrack-text',
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
+  data: {trial_id: "end block"},
+  timing_response: 60000,
   timing_post_trial: 0
 };
 
 var round_over_block = {
-  type: 'text',
+  type: 'poldrack-text',
   text: getRoundOverText,
   cont_key: [13],
-  timing_post_trial: 0
+  timing_response: 60000,
+  data: {trial_id: "round over"},
+  timing_post_trial: 0,
 };
 
 var ask_fish_block = {
 		type: 'survey-text',
-		questions: [["<p>For this tournament, how many fish are in the lake? Please enter a number between 1-200</p><p>If you don't respond, or respond out of these bounds the number of fish will be randomly set between 1-200.</p>"]]
+		data: {trial_id: "ask fish"},
+		questions: [["<p>For this tournament, how many fish are in the lake? Please enter a number between 1-200</p><p>If you don't respond, or respond out of these bounds the number of fish will be randomly set between 1-200.</p>"]],
 }
 
 var set_fish_block = {
 	type: 'call-function',
+	data: {trial_id: "set fish"},
 	func: function() {
 		var last_data = jsPsych.data.getData().slice(-1)[0]
 		var last_response = parseInt(last_data.responses.slice(7,10))
@@ -370,7 +461,7 @@ var set_fish_block = {
 			start_fish_num = Math.floor(Math.random()*200)+1
 		}
 	},
-    timing_post_trial: 0
+    timing_post_trial: 0,
 }
 
 var practice_block = {
@@ -414,7 +505,7 @@ var game_node = {
 
 angling_risk_task_experiment = []
 angling_risk_task_experiment.push(welcome_block)
-angling_risk_task_experiment.push(instructions_block)
+angling_risk_task_experiment.push(instruction_node)
 for (b = 0; b<practiceblocks.length; b++) {
 	block = practiceblocks[b]
 	weather = block.weather
@@ -429,18 +520,19 @@ for (b = 0; b<practiceblocks.length; b++) {
 	} else {
 		release_rule = "the number of fish in the lake stays the same"
 	}
-	var tournament_intro_block = {
-		type: 'text',
+	var tournament_intro_block_practice = {
+		type: 'poldrack-text',
 		text: '<div class = centerbox><p class = block-text>You will now start a tournament. The weather is <span style="color:blue">' + weather + '</span> which means ' + weather_rule + '. The release rule is <span style="color:red">"' + release + '"</span>, which means ' + release_rule + '.</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>',
 		cont_key: [13],
-		data: {weather: weather, release: release},
+		timing_response: 60000,
+		data: {weather: weather, release: release, trial_id: "practice_intro"},
 		on_finish: function(data) {
 			weather = data.weather
 			release = data.release
 			tournament_bank = 0
 		}
 	}
-	angling_risk_task_experiment.push(tournament_intro_block)
+	angling_risk_task_experiment.push(tournament_intro_block_practice)
 	angling_risk_task_experiment.push(ask_fish_block)
 	angling_risk_task_experiment.push(set_fish_block)
 	for (i=0; i <num_practice_rounds; i++) {
@@ -466,10 +558,11 @@ for (b = 0; b<blocks.length; b++) {
 		release_rule = "the number of fish in the lake stays the same"
 	}
 	var tournament_intro_block = {
-		type: 'text',
+		type: 'poldrack-text',
 		text: '<div class = centerbox><p class = block-text>You will now start a tournament. The weather is <span style="color:blue">' + weather + '</span> which means ' + weather_rule + '. The release rule is <span style="color:red">"' + release + '"</span>, which means ' + release_rule + '.</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>',
 		cont_key: [13],
-		data: {weather: weather, release: release},
+		timing_response: 120000,
+		data: {weather: weather, release: release, trial_id: "test_intro"},
 		on_finish: function(data) {
 			weather = data.weather
 			release = data.release
@@ -480,6 +573,9 @@ for (b = 0; b<blocks.length; b++) {
 	for (i=0; i <num_rounds; i++) {
 		angling_risk_task_experiment.push(game_node)
 		angling_risk_task_experiment.push(round_over_block)
+	}
+	if ($.inArray(b,[0,2]) != -1) {
+		angling_risk_task_experiment.push(attention_node)
 	}
 }
 angling_risk_task_experiment.push(end_block)

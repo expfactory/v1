@@ -1,13 +1,34 @@
-// Reference http://www.sciencedirect.com/science/article/pii/0028393289901280
-// Impaired extra-dimensional shift performance in medicated and unmedicated Parkinson's disease: evidence for a specific attentional dysfunction. Downes et al. 1989
-
-/*
-Condition indicates stage in the IDED task
-*/
-
 /* ************************************ */
 /* Define helper functions */
 /* ************************************ */
+function getDisplayElement () {
+    $('<div class = display_stage_background></div>').appendTo('body')
+    return $('<div class = display_stage></div>').appendTo('body')
+}
+
+function evalAttentionChecks() {
+  var check_percent = 1
+  if (run_attention_checks) {
+    var attention_check_trials = jsPsych.data.getTrialsOfType('attention-check')
+    var checks_passed = 0
+    for (var i = 0; i < attention_check_trials.length; i++) {
+      if (attention_check_trials[i].correct === true) {
+        checks_passed += 1
+      }
+    }
+    check_percent = checks_passed/attention_check_trials.length
+  } 
+  return check_percent
+}
+
+function addID() {
+  jsPsych.data.addDataToLastTrial({'exp_id': 'dimensional_set_shifting'})
+}
+
+var getInstructFeedback = function() {
+	return '<div class = centerbox><p class = center-block-text>' + feedback_instruct_text + '</p></div>'
+}
+
 function get_stim() {
 	/* This function takes the stim (either 2 in one dimension, or 4, 2 from each of the 2 dimensions), pairs them together
 	(if necessary, as in the 2 dimension conditions) and displays them in random boxes
@@ -43,14 +64,21 @@ function get_correct_response() {
 }
 
 function get_data() {
-	return {exp_id: 'dimensional_set_shifting', trial_id: 'test', condition: stages[stage_counter]}
+	return {exp_id: 'dimensional_set_shifting', trial_id: 'stim', exp_stage: 'test', condition: stages[stage_counter]}
 }
 	
+
 
 /* ************************************ */
 /* Define experimental variables */
 /* ************************************ */
+// generic task variables
+var run_attention_checks = true
+var attention_check_thresh = 0.65
+var sumInstructTime = 0    //ms
+var instructTimeThresh = 5   ///in seconds
 
+// task specific variables
 // Set up task variables
 var responses = [37,38,39,40]
 var blocks = ['simple', 'separate', 'compound', 'ID', 'ED'] //Simple: 1 dimension alone, separate: 2 dimensions side-by-side, compound: overlapping
@@ -95,36 +123,83 @@ var version2_repeat = 0
 /* ************************************ */
 /* Set up jsPsych blocks */
 /* ************************************ */
+// Set up attention check node
+var attention_check_block = {
+  type: 'attention-check',
+  timing_response: 30000,
+  response_ends_trial: true,
+  timing_post_trial: 200
+}
+
+var attention_node = {
+  timeline: [attention_check_block],
+  conditional_function: function() {
+    return run_attention_checks
+  }
+}
+
 /* define static blocks */
 var welcome_block = {
-  type: 'text',
-  text: '<div class = centerbox><p class = center-block-text>Welcome to the Intra-dimensional set shifting experiment.</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>',
+  type: 'poldrack-text',
+  timing_response: 60000,
+  data: {exp_id: "dimensional_set_shifting", trial_id: "welcome"},
+  text: '<div class = centerbox><p class = "white-text center-block-text">Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
-  on_finish: function() {
-  	$('body').css('background','black')
-  },
   timing_post_trial: 0
 };
 
+var feedback_instruct_text = 'Starting with instructions.  Press <strong> Enter </strong> to continue.'
+var feedback_instruct_block = {
+  type: 'poldrack-text',
+  data: {exp_id: "dimensional_set_shifting", trial_id: "instructions"},
+  cont_key: [13],
+  text: getInstructFeedback,
+  timing_post_trial: 0,
+  timing_response: 6000
+};
+/// This ensures that the subject does not read through the instructions too quickly.  If they do it too quickly, then we will go over the loop again.
+var instruction_trials = []	  
 var instructions_block = {
   type: 'poldrack-instructions',
+  data: {exp_id: "dimensional_set_shifting", trial_id: "instructions"},
   pages: [
-    '<div class = centerbox><p class = "white-text block-text">In this task you will see two patterns placed in two of four boxes on the screen (shown on the next screen). One of the patterns is correct. You must select the one you think is correct by pressing the arrow key corresponding to the correct box (left, right, up or down).</p><p class = "white-text block-text>There is a rule you can follow to make sure you make the correct choice each time. The computer will be keeping track of how well you arc doing and when it is clear that you know the rule then the computer will change, but this not happen very often. To begin with, there is nothing on the screen to tell you which of the two patterns is correct, so your first choice will be a simple guess. However, the computer will give a message after each attempt to tell you whether you are right or wrong. </p></div>', 
-	    instruction_stim + '<div class = centerbox><p style = "font-size: 18px;" class = center-text>An example trial.</p></div>',
+    '<div class = centerbox><p class = "white-text block-text">In this task you will see two patterns placed in two of four boxes on the screen (shown on the next screen). One of the patterns is correct. You must select the one you think is correct by pressing the arrow key corresponding to the correct box (left, right, up or down).</p><p class = "white-text block-text">There is a rule you can follow to make sure you make the correct choice each time. The computer will be keeping track of how well you arc doing and when it is clear that you know the rule then the computer will change, but this not happen very often. To begin with, there is nothing on the screen to tell you which of the two patterns is correct, so your first choice will be a simple guess. However, the computer will give a message after each attempt to tell you whether you are right or wrong. </p></div>', 
+	    instruction_stim + '<div class = betweenStimBox><div class = "white-text center-text">An example trial.</div></div>',
  '<div class = centerbox><p class = "white-text block-text">Once again, you will see two patterns similar to what you saw on the last page. One of the patterns is correct. You select a pattern by pressing the corresponding arrow key. After you respond you will get feedback about whether you were correct. After the computer knows that you have learned the rule, the rule will change. </p></div>'
 	],
   allow_keys: false,
   show_clickable_nav: true,
   timing_post_trial: 1000
 };
+instruction_trials.push(feedback_instruct_block)
+instruction_trials.push(instructions_block)
+
+var instruction_node = {
+    timeline: instruction_trials,
+	/* This function defines stopping criteria */
+    loop_function: function(data){
+		for(i=0;i<data.length;i++){
+			if((data[i].trial_type=='poldrack-instructions') && (data[i].rt!=-1)){
+				rt=data[i].rt
+				sumInstructTime=sumInstructTime+rt
+			}
+		}
+		if(sumInstructTime<=instructTimeThresh*1000){
+			feedback_instruct_text = 'Read through instructions too quickly.  Please take your time and make sure you understand the instructions.  Press <strong>enter</strong> to continue.'
+			return true
+		} else if(sumInstructTime>instructTimeThresh*1000){
+			feedback_instruct_text = 'Done with instructions. Press <strong>enter</strong> to continue.'
+			return false
+		}
+    }
+}
 
 var end_block = {
-  type: 'text',
+  type: 'poldrack-text',
+  timing_response: 60000,
+  data: {exp_id: "dimensional_set_shifting", trial_id: "end"},
   text: '<div class = centerbox><p class = "white-text center-block-text">Thanks for completing this task!</p><p class = "white-text center-block-text>Press <strong>enter</strong> to continue.</p></div>',
   cont_key: [13],
-  on_finish: function() {
-  	$('body').css('background','white')
-  },
   timing_post_trial: 0
 };
 
@@ -133,7 +208,7 @@ var fixation_block = {
   stimulus: '<div class = centerbox><div class = fixation>+</div></div>',
   is_html: true,
   choices: 'none',
-  data: {exp_id: "dimensional_set_shifting", "trial_id": "fixation"},
+  data: {exp_id: "dimensional_set_shifting", trial_id: "fixation"},
   timing_post_trial: 500,
   timing_stim: 500,
   timing_response: 500
@@ -141,6 +216,7 @@ var fixation_block = {
 
 var define_simple_stims = {
 	type: 'call-function',
+	data: {exp_id: "dimensional_set_shifting", trial_id: "define_simple_stims"},
 	func: function() {
 		var Dim1_stim1 = center_prefix + Dim1_z + path + Dim1_stim[0] + postfix
 		var Dim1_stim2 = center_prefix + Dim1_z + path + Dim1_stim[1] + postfix
@@ -151,6 +227,7 @@ var define_simple_stims = {
 
 var define_separate_stims = {
 	type: 'call-function',
+	data: {exp_id: "dimensional_set_shifting", trial_id: "define_separate_stims"},
 	func: function() {
 		var Dim1_stim1 = left_prefix + Dim1_z + path + Dim1_stim[0] + postfix
 		var Dim1_stim2 = left_prefix + Dim1_z + path + Dim1_stim[1] + postfix
@@ -163,6 +240,7 @@ var define_separate_stims = {
 
 var define_compound_stims = {
 	type: 'call-function',
+	data: {exp_id: "dimensional_set_shifting", trial_id: "define_compound_stims"},
 	func: function() {
 		var Dim1_stim1 = center_prefix + Dim1_z + path + Dim1_stim[0] + postfix
 		var Dim1_stim2 = center_prefix + Dim1_z + path + Dim1_stim[1] + postfix
@@ -175,6 +253,7 @@ var define_compound_stims = {
 
 var define_ID_stims = {
 	type: 'call-function',
+	data: {exp_id: "dimensional_set_shifting", trial_id: "define_ID_stims"},
 	func: function() {
 		var Dim1_stim1 = center_prefix + Dim1_z + path + Dim1_stim[2] + postfix
 		var Dim1_stim2 = center_prefix + Dim1_z + path + Dim1_stim[3] + postfix
@@ -187,6 +266,7 @@ var define_ID_stims = {
 
 var define_ED_stims = {
 	type: 'call-function',
+	data: {exp_id: "dimensional_set_shifting", trial_id: "define_ED_stims"},
 	func: function() {
 		var Dim1_stim1 = center_prefix + Dim1_z + path + Dim1_stim[4] + postfix
 		var Dim1_stim2 = center_prefix + Dim1_z + path + Dim1_stim[5] + postfix
@@ -199,6 +279,7 @@ var define_ED_stims = {
 
 var reverse_stims = {
 	type: 'call-function',
+	data: {exp_id: "dimensional_set_shifting", trial_id: "reverse_stims"},
 	func: function() {
 		reversal = !reversal
 	},
@@ -208,7 +289,7 @@ var reverse_stims = {
 /* create experiment definition array */
 dimensional_set_shifting_experiment = []
 dimensional_set_shifting_experiment.push(welcome_block)
-dimensional_set_shifting_experiment.push(instructions_block)
+dimensional_set_shifting_experiment.push(instruction_node)
 /* define test trials */
 for (b=0; b<blocks.length; b++) {
 	block = blocks[b]

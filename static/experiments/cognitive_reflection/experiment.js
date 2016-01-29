@@ -1,6 +1,14 @@
 /* ************************************ */
 /* Define helper functions */
 /* ************************************ */
+function getDisplayElement () {
+    $('<div class = display_stage_background></div>').appendTo('body')
+    return $('<div class = display_stage></div>').appendTo('body')
+}
+
+function addID() {
+  jsPsych.data.addDataToLastTrial({'exp_id': 'cognitive_reflection'})
+}
 
 /* ************************************ */
 /* Define experimental variables */
@@ -11,13 +19,13 @@
 /* ************************************ */
 
 /* define static blocks */
-
 var welcome_block = {
-  type: 'text',
-  text: '<div class = centerbox><p class = block-text>Welcome to the experiment. In this experiment you will answer three questions. Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: [13]
+  type: 'poldrack-text',
+  timing_response: 60000,
+  text: '<div class = centerbox><p class = center-block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
+  cont_key: [13],
+  timing_post_trial: 0
 };
-
 
 var experiment_block = {
     type: 'survey-text',
@@ -30,7 +38,7 @@ var experiment_block = {
 
 
 var end_block = {
-  type: 'text',
+  type: 'poldrack-text',
   text: '<div class = centerbox><p class = center-block-text>Congratulations for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
   cont_key: [13]
 };

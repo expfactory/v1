@@ -41,7 +41,7 @@ but eventually they should be selected by some function (I.E. random new combina
 for a returning subject, keeping the total time under 30 minutes)
 */ 
 // full list of experiment names:
-experiment_list = [{'name': 'local_global', 'time': 5}, {'name': 'bickel_titrator', 'time': 2}, {'name': 'willingness_to_wait', 'time': 5}, {'name': 'attention_network_task', 'time': 20}, {'name': 'random_number_generation', 'time': 3}, {'name': 'letter_memory', 'time': 5}, {'name': 'tower_of_london', 'time': 8}, {'name': 'dospert_rp', 'time': 999}, {'name': 'digit_span', 'time': 5}, {'name': 'adaptive_n_back', 'time': 16}, {'name': 'stop_signal', 'time': 30}, {'name': 'test_task', 'time': 1}, {'name': 'flanker', 'time': 6.5}, {'name': 'multiplication', 'time': 5}, {'name': 'choice_reaction_time', 'time': 4}, {'name': 'number_letter', 'time': 5}, {'name': 'angling_risk_task', 'time': 45}, {'name': 'antisaccade', 'time': 8}, {'name': 'tone_monitoring', 'time': 6}, {'name': 'keep_track', 'time': 6}, {'name': 'ax_cpt', 'time': 20}, {'name': 'cognitive_reflection', 'time': 999}, {'name': 'spatial_span', 'time': 5}, {'name': 'stroop', 'time': 5}, {'name': 'volatile_bandit', 'time': 18}, {'name': 'plus_minus', 'time': 5}, {'name': 'dospert_rt', 'time': 999}, {'name': 'writing_task', 'time': 15}, {'name': 'multisource', 'time': 7}, {'name': 'dot_pattern_expectancy', 'time': 15}, {'name': 'holt_laury', 'time': 999}, {'name': 'hierarchical_rule', 'time': 5}, {'name': 'directed_forgetting', 'time': 999}, {'name': 'dietary_decision', 'time': 10}, {'name': 'discount_titrate', 'time': 10}, {'name': 'psychological_refractory_period', 'time': 15}, {'name': 'kirby', 'time': 5}, {'name': 'simon', 'time': 5}, {'name': 'dimensional_set_shifting', 'time': 10}, {'name': 'probabilistic_selection', 'time': 999}, {'name': 'recent_probes', 'time': 999}, {'name': 'image_monitoring', 'time': 6}, {'name': 'dospert_eb', 'time': 999}, {'name': 'shift_task', 'time': 20}, {'name': 'threebytwo', 'time': 24}, {'name': 'go_nogo', 'time': 7}, {'name': 'simple_reaction_time', 'time': 3.5}, {'name': 'two_stage_decision', 'time': 26}, {'name': 'n_back', 'time': 16}, {'name': 'tower_of_london_imagine', 'time': 8}]						
+experiment_list = [{'name': 'local_global', 'time': 5}, {'name': 'bickel_titrator', 'time': 2}, {'name': 'willingness_to_wait', 'time': 5}, {'name': 'attention_network_task', 'time': 20}, {'name': 'random_number_generation', 'time': 3}, {'name': 'stim_selective_stop_signal', 'time': 30}, {'name': 'motor_selective_stop_signal', 'time': 30}, {'name': 'eating_questionnaire', 'time': 999}, {'name': 'letter_memory', 'time': 5}, {'name': 'information_sampling_task', 'time': 999}, {'name': 'gm_paradigm', 'time': 45}, {'name': 'upps_impulsivity', 'time': 999}, {'name': 'theories_of_willpower', 'time': 999}, {'name': 'tower_of_london', 'time': 8}, {'name': 'dospert_rp', 'time': 999}, {'name': 'digit_span', 'time': 5}, {'name': 'adaptive_n_back', 'time': 16}, {'name': 'leisure_time_activity', 'time': 999}, {'name': 'stop_signal', 'time': 30}, {'name': 'test_task', 'time': 1}, {'name': 'flanker', 'time': 6.5}, {'name': 'multiplication', 'time': 5}, {'name': 'choice_reaction_time', 'time': 4}, {'name': 'emotion_regulation', 'time': 999}, {'name': 'brief_self_control', 'time': 999}, {'name': 'number_letter', 'time': 5}, {'name': 'angling_risk_task', 'time': 45}, {'name': 'antisaccade', 'time': 8}, {'name': 'bis_bas', 'time': 999}, {'name': 'tone_monitoring', 'time': 6}, {'name': 'keep_track', 'time': 6}, {'name': 'ax_cpt', 'time': 20}, {'name': 'cognitive_reflection', 'time': 999}, {'name': 'impulsive_venture', 'time': 999}, {'name': 'spatial_span', 'time': 5}, {'name': 'stroop', 'time': 5}, {'name': 'volatile_bandit', 'time': 18}, {'name': 'plus_minus', 'time': 5}, {'name': 'time_perspective', 'time': 999}, {'name': 'dospert_rt', 'time': 999}, {'name': 'ten_item_personality', 'time': 999}, {'name': 'grit_scale', 'time': 999}, {'name': 'bis11', 'time': 999}, {'name': 'writing_task', 'time': 15}, {'name': 'multisource', 'time': 7}, {'name': 'dot_pattern_expectancy', 'time': 15}, {'name': 'holt_laury', 'time': 999}, {'name': 'hierarchical_rule', 'time': 5}, {'name': 'directed_forgetting', 'time': 999}, {'name': 'dietary_decision', 'time': 10}, {'name': 'discount_titrate', 'time': 10}, {'name': 'future_time_perspective', 'time': 999}, {'name': 'dickman', 'time': 999}, {'name': 'psychological_refractory_period', 'time': 15}, {'name': 'kirby', 'time': 5}, {'name': 'treatment_self_regulation_questionnaire', 'time': 5}, {'name': 'simon', 'time': 5}, {'name': 'dimensional_set_shifting', 'time': 10}, {'name': 'probabilistic_selection', 'time': 999}, {'name': 'recent_probes', 'time': 999}, {'name': 'image_monitoring', 'time': 6}, {'name': 'dospert_eb', 'time': 999}, {'name': 'shift_task', 'time': 20}, {'name': 'threebytwo', 'time': 24}, {'name': 'go_nogo', 'time': 7}, {'name': 'simple_reaction_time', 'time': 3.5}, {'name': 'columbia_card_task_hot', 'time': 999}, {'name': 'columbia_card_task_cold', 'time': 999}, {'name': 'two_stage_decision', 'time': 26}, {'name': 'mpq_control', 'time': 999}, {'name': 'self_regulation', 'time': 999}, {'name': 'n_back', 'time': 16}, {'name': 'tower_of_london_imagine', 'time': 8}]						
 experiment_names = experimentDraw(experiment_list)
 
 /* One the experiments are selected, load the appropriate files */
@@ -50,8 +50,9 @@ for (i = 0; i < experiment_names.length; i++) {
         
 case "local_global":
          loadjscssfile("static/js/jspsych/jspsych.js","js")
-         loadjscssfile("static/js/jspsych/plugins/jspsych-text.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-text.js","js")
          loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-attention-check.js","js")
          loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js","js")
          loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-categorize.js","js")
          loadjscssfile("static/experiments/local_global/experiment.js","js")
@@ -61,8 +62,9 @@ case "local_global":
          break;
 case "bickel_titrator":
          loadjscssfile("static/js/jspsych/jspsych.js","js")
-         loadjscssfile("static/js/jspsych/plugins/jspsych-text.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-text.js","js")
          loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-attention-check.js","js")
          loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js","js")
          loadjscssfile("static/js/jspsych/plugins/jspsych-call-function.js","js")
          loadjscssfile("static/experiments/bickel_titrator/experiment.js","js")
@@ -72,8 +74,9 @@ case "bickel_titrator":
          break;
 case "willingness_to_wait":
          loadjscssfile("static/js/jspsych/jspsych.js","js")
-         loadjscssfile("static/js/jspsych/plugins/jspsych-text.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-text.js","js")
          loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-attention-check.js","js")
          loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js","js")
          loadjscssfile("static/experiments/willingness_to_wait/experiment.js","js")
          loadjscssfile("static/css/jspsych.css","css")
@@ -82,8 +85,10 @@ case "willingness_to_wait":
          break;
 case "attention_network_task":
          loadjscssfile("static/js/jspsych/jspsych.js","js")
-         loadjscssfile("static/js/jspsych/plugins/jspsych-text.js","js")
+         loadjscssfile("static/js/jspsych/plugins/jspsych-call-function.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-text.js","js")
          loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-attention-check.js","js")
          loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js","js")
          loadjscssfile("static/experiments/attention_network_task/jspsych-ANT-practice.js","js")
          loadjscssfile("static/experiments/attention_network_task/experiment.js","js")
@@ -93,8 +98,9 @@ case "attention_network_task":
          break;
 case "random_number_generation":
          loadjscssfile("static/js/jspsych/jspsych.js","js")
-         loadjscssfile("static/js/jspsych/plugins/jspsych-text.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-text.js","js")
          loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-attention-check.js","js")
          loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js","js")
          loadjscssfile("static/js/jspsych/custom_plugins/jspsych-single-stim-button.js","js")
          loadjscssfile("static/experiments/random_number_generation/experiment.js","js")
@@ -102,39 +108,126 @@ case "random_number_generation":
          loadjscssfile("static/css/default_style.css","css")
          loadjscssfile("static/experiments/random_number_generation/style.css","css")
          break;
-case "letter_memory":
+case "stim_selective_stop_signal":
+         loadjscssfile("static/js/jspsych/jspsych.js","js")
+         loadjscssfile("static/js/jspsych/plugins/jspsych-call-function.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-text.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-attention-check.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-categorize.js","js")
+         loadjscssfile("static/experiments/stim_selective_stop_signal/experiment.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-stop-signal.js","js")
+         loadjscssfile("static/css/jspsych.css","css")
+         loadjscssfile("static/css/default_style.css","css")
+         loadjscssfile("static/experiments/stim_selective_stop_signal/style.css","css")
+         break;
+case "motor_selective_stop_signal":
+         loadjscssfile("static/js/jspsych/jspsych.js","js")
+         loadjscssfile("static/js/jspsych/plugins/jspsych-call-function.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-text.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-attention-check.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-categorize.js","js")
+         loadjscssfile("static/experiments/motor_selective_stop_signal/experiment.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-stop-signal.js","js")
+         loadjscssfile("static/css/jspsych.css","css")
+         loadjscssfile("static/css/default_style.css","css")
+         loadjscssfile("static/experiments/motor_selective_stop_signal/style.css","css")
+         break;
+case "eating_questionnaire":
          loadjscssfile("static/js/jspsych/jspsych.js","js")
          loadjscssfile("static/js/jspsych/plugins/jspsych-text.js","js")
          loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-survey-multi-choice.js","js")
+         loadjscssfile("static/experiments/eating_questionnaire/experiment.js","js")
+         loadjscssfile("static/experiments/eating_questionnaire/style.css","css")
+         loadjscssfile("static/css/jspsych.css","css")
+         loadjscssfile("static/css/default_style.css","css")
+         break;
+case "letter_memory":
+         loadjscssfile("static/js/jspsych/jspsych.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-text.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-attention-check.js","js")
          loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js","js")
          loadjscssfile("static/js/jspsych/plugins/jspsych-survey-text.js","js")
          loadjscssfile("static/experiments/letter_memory/experiment.js","js")
          loadjscssfile("static/css/jspsych.css","css")
          loadjscssfile("static/css/default_style.css","css")
          break;
-case "tower_of_london":
+case "information_sampling_task":
          loadjscssfile("static/js/jspsych/jspsych.js","js")
          loadjscssfile("static/js/jspsych/plugins/jspsych-text.js","js")
          loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js","js")
+         loadjscssfile("static/js/jspsych/plugins/jspsych-call-function.js","js")
+         loadjscssfile("static/experiments/information_sampling_task/experiment.js","js")
+         loadjscssfile("static/css/jspsych.css","css")
+         loadjscssfile("static/css/default_style.css","css")
+         loadjscssfile("static/experiments/information_sampling_task/style.css","css")
+         break;
+case "gm_paradigm":
+         loadjscssfile("static/js/jspsych/jspsych.js","js")
+         loadjscssfile("static/js/jspsych/plugins/jspsych-text.js","js")
+         loadjscssfile("static/js/jspsych/plugins/jspsych-call-function.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-stop-signal.js","js")
+         loadjscssfile("static/experiments/gm_paradigm/experiment.js","js")
+         loadjscssfile("static/css/jspsych.css","css")
+         loadjscssfile("static/css/default_style.css","css")
+         loadjscssfile("static/experiments/gm_paradigm/style.css","css")
+         break;
+case "upps_impulsivity":
+         loadjscssfile("static/js/jspsych/jspsych.js","js")
+         loadjscssfile("static/js/jspsych/plugins/jspsych-text.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-attention-check.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-survey-multi-choice.js","js")
+         loadjscssfile("static/experiments/upps_impulsivity/experiment.js","js")
+         loadjscssfile("static/experiments/upps_impulsivity/style.css","css")
+         loadjscssfile("static/css/jspsych.css","css")
+         loadjscssfile("static/css/default_style.css","css")
+         break;
+case "theories_of_willpower":
+         loadjscssfile("static/js/jspsych/jspsych.js","js")
+         loadjscssfile("static/js/jspsych/plugins/jspsych-text.js","js")
+         loadjscssfile("static/js/jspsych/poldracK_plugins/jspsych-poldrack-instructions.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-survey-multi-choice.js","js")
+         loadjscssfile("static/experiments/theories_of_willpower/experiment.js","js")
+         loadjscssfile("static/experiments/theories_of_willpower/style.css","css")
+         loadjscssfile("static/css/jspsych.css","css")
+         loadjscssfile("static/css/default_style.css","css")
+         break;
+case "tower_of_london":
+         loadjscssfile("static/js/jspsych/jspsych.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-text.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-attention-check.js","js")
          loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-single-stim-button.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js","js")
          loadjscssfile("static/experiments/tower_of_london/experiment.js","js")
          loadjscssfile("static/css/jspsych.css","css")
          loadjscssfile("static/css/default_style.css","css")
          loadjscssfile("static/experiments/tower_of_london/style.css","css")
          break;
 case "dospert_rp":
-         loadjscssfile("static/js/jspsych/plugins/jspsych-text.js","js")
-         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js","js")
-         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-radio-buttonlist.js","js")
-         loadjscssfile("static/experiments/dospert_rp/experiment.js","js")
-         loadjscssfile("static/css/jspsych.css","css")
-         loadjscssfile("static/css/default_style.css","css")
-         loadjscssfile("static/experiments/dospert_rp/style.css","css")
-         break;
-case "digit_span":
          loadjscssfile("static/js/jspsych/jspsych.js","js")
          loadjscssfile("static/js/jspsych/plugins/jspsych-text.js","js")
          loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-survey-multi-choice.js","js")
+         loadjscssfile("static/experiments/dospert_rp/experiment.js","js")
+         loadjscssfile("static/experiments/dospert_rp/style.css","css")
+         loadjscssfile("static/css/jspsych.css","css")
+         loadjscssfile("static/css/default_style.css","css")
+         break;
+case "digit_span":
+         loadjscssfile("static/js/jspsych/jspsych.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-text.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-attention-check.js","js")
          loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js","js")
          loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-multi-stim-multi-response.js","js")
          loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-single-stim-button.js","js")
@@ -145,30 +238,44 @@ case "digit_span":
          break;
 case "adaptive_n_back":
          loadjscssfile("static/js/jspsych/jspsych.js","js")
-         loadjscssfile("static/js/jspsych/plugins/jspsych-text.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-text.js","js")
          loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-attention-check.js","js")
          loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js","js")
          loadjscssfile("static/js/jspsych/plugins/jspsych-call-function.js","js")
          loadjscssfile("static/experiments/adaptive_n_back/experiment.js","js")
          loadjscssfile("static/css/jspsych.css","css")
          loadjscssfile("static/css/default_style.css","css")
          break;
+case "leisure_time_activity":
+         loadjscssfile("static/js/jspsych/jspsych.js","js")
+         loadjscssfile("static/js/jspsych/plugins/jspsych-text.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-survey-multi-choice.js","js")
+         loadjscssfile("static/js/jspsych/plugins/jspsych-survey-multi-choice.js","js")
+         loadjscssfile("static/experiments/leisure_time_activity/experiment.js","js")
+         loadjscssfile("static/experiments/leisure_time_activity/style.css","css")
+         loadjscssfile("static/css/jspsych.css","css")
+         loadjscssfile("static/css/default_style.css","css")
+         break;
 case "stop_signal":
          loadjscssfile("static/js/jspsych/jspsych.js","js")
          loadjscssfile("static/js/jspsych/plugins/jspsych-call-function.js","js")
-         loadjscssfile("static/js/jspsych/plugins/jspsych-text.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-text.js","js")
          loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-attention-check.js","js")
          loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js","js")
          loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-categorize.js","js")
          loadjscssfile("static/experiments/stop_signal/experiment.js","js")
-         loadjscssfile("static/experiments/stop_signal/jspsych-stop-signal.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-stop-signal.js","js")
          loadjscssfile("static/css/jspsych.css","css")
          loadjscssfile("static/css/default_style.css","css")
          loadjscssfile("static/experiments/stop_signal/style.css","css")
          break;
 case "test_task":
          loadjscssfile("static/js/jspsych/jspsych.js","js")
-         loadjscssfile("static/js/jspsych/plugins/jspsych-text.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-text.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-attention-check.js","js")
          loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js","js")
          loadjscssfile("static/experiments/test_task/experiment.js","js")
          loadjscssfile("static/css/jspsych.css","css")
@@ -176,8 +283,10 @@ case "test_task":
          loadjscssfile("static/experiments/test_task/style.css","css")
          break;
 case "flanker":
-         loadjscssfile("static/js/jspsych/plugins/jspsych-text.js","js")
+         loadjscssfile("static/js/jspsych/jspsych.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-text.js","js")
          loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-attention-check.js","js")
          loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js","js")
          loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-categorize.js","js")
          loadjscssfile("static/experiments/flanker/experiment.js","js")
@@ -187,8 +296,9 @@ case "flanker":
          break;
 case "multiplication":
          loadjscssfile("static/js/jspsych/jspsych.js","js")
-         loadjscssfile("static/js/jspsych/plugins/jspsych-text.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-text.js","js")
          loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-attention-check.js","js")
          loadjscssfile("static/js/jspsych/custom_plugins/jspsych-single-stim-button.js","js")
          loadjscssfile("static/experiments/multiplication/experiment.js","js")
          loadjscssfile("static/css/jspsych.css","css")
@@ -196,18 +306,42 @@ case "multiplication":
          break;
 case "choice_reaction_time":
          loadjscssfile("static/js/jspsych/jspsych.js","js")
-         loadjscssfile("static/js/jspsych/custom_plugins/jspsych-poldrack-instructions.js","js")
-         loadjscssfile("static/js/jspsych/custom_plugins/jspsych-poldrack-single-stim.js","js")
-         loadjscssfile("static/js/jspsych/custom_plugins/jspsych-poldrack-categorize.js","js")
+         loadjscssfile("static/js/jspsych/plugins/jspsych-call-function.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-text.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-attention-check.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-categorize.js","js")
          loadjscssfile("static/experiments/choice_reaction_time/experiment.js","js")
          loadjscssfile("static/css/jspsych.css","css")
          loadjscssfile("static/css/default_style.css","css")
          loadjscssfile("static/experiments/choice_reaction_time/style.css","css")
          break;
-case "number_letter":
+case "emotion_regulation":
          loadjscssfile("static/js/jspsych/jspsych.js","js")
          loadjscssfile("static/js/jspsych/plugins/jspsych-text.js","js")
          loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-survey-multi-choice.js","js")
+         loadjscssfile("static/experiments/emotion_regulation/experiment.js","js")
+         loadjscssfile("static/experiments/emotion_regulation/style.css","css")
+         loadjscssfile("static/css/jspsych.css","css")
+         loadjscssfile("static/css/default_style.css","css")
+         break;
+case "brief_self_control":
+         loadjscssfile("static/js/jspsych/jspsych.js","js")
+         loadjscssfile("static/js/jspsych/plugins/jspsych-text.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-survey-multi-choice.js","js")
+         loadjscssfile("static/experiments/brief_self_control/experiment.js","js")
+         loadjscssfile("static/experiments/brief_self_control/style.css","css")
+         loadjscssfile("static/css/jspsych.css","css")
+         loadjscssfile("static/css/default_style.css","css")
+         break;
+case "number_letter":
+         loadjscssfile("static/js/jspsych/jspsych.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-text.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-attention-check.js","js")
          loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js","js")
          loadjscssfile("static/experiments/number_letter/experiment.js","js")
          loadjscssfile("static/css/jspsych.css","css")
@@ -216,8 +350,9 @@ case "number_letter":
          break;
 case "angling_risk_task":
          loadjscssfile("static/js/jspsych/jspsych.js","js")
-         loadjscssfile("static/js/jspsych/plugins/jspsych-text.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-text.js","js")
          loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-attention-check.js","js")
          loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js","js")
          loadjscssfile("static/js/jspsych/plugins/jspsych-call-function.js","js")
          loadjscssfile("static/js/jspsych/plugins/jspsych-survey-text.js","js")
@@ -229,18 +364,30 @@ case "angling_risk_task":
          break;
 case "antisaccade":
          loadjscssfile("static/js/jspsych/jspsych.js","js")
-         loadjscssfile("static/js/jspsych/plugins/jspsych-text.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-text.js","js")
          loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-attention-check.js","js")
          loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js","js")
          loadjscssfile("static/experiments/antisaccade/experiment.js","js")
          loadjscssfile("static/css/jspsych.css","css")
          loadjscssfile("static/css/default_style.css","css")
          loadjscssfile("static/experiments/antisaccade/style.css","css")
          break;
-case "tone_monitoring":
+case "bis_bas":
          loadjscssfile("static/js/jspsych/jspsych.js","js")
          loadjscssfile("static/js/jspsych/plugins/jspsych-text.js","js")
          loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-survey-multi-choice.js","js")
+         loadjscssfile("static/experiments/bis_bas/experiment.js","js")
+         loadjscssfile("static/experiments/bis_bas/style.css","css")
+         loadjscssfile("static/css/jspsych.css","css")
+         loadjscssfile("static/css/default_style.css","css")
+         break;
+case "tone_monitoring":
+         loadjscssfile("static/js/jspsych/jspsych.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-text.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-attention-check.js","js")
          loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-categorize-audio.js","js")
          loadjscssfile("static/js/jspsych/plugins/jspsych-single-audio.js","js")
          loadjscssfile("static/js/jspsych/plugins/jspsych-call-function.js","js")
@@ -250,8 +397,9 @@ case "tone_monitoring":
          break;
 case "keep_track":
          loadjscssfile("static/js/jspsych/jspsych.js","js")
-         loadjscssfile("static/js/jspsych/plugins/jspsych-text.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-text.js","js")
          loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-attention-check.js","js")
          loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js","js")
          loadjscssfile("static/js/jspsych/plugins/jspsych-survey-text.js","js")
          loadjscssfile("static/experiments/keep_track/experiment.js","js")
@@ -261,8 +409,9 @@ case "keep_track":
          break;
 case "ax_cpt":
          loadjscssfile("static/js/jspsych/jspsych.js","js")
-         loadjscssfile("static/js/jspsych/plugins/jspsych-text.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-text.js","js")
          loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-attention-check.js","js")
          loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js","js")
          loadjscssfile("static/experiments/ax_cpt/experiment.js","js")
          loadjscssfile("static/css/jspsych.css","css")
@@ -271,16 +420,27 @@ case "ax_cpt":
          break;
 case "cognitive_reflection":
          loadjscssfile("static/js/jspsych/jspsych.js","js")
-         loadjscssfile("static/js/jspsych/plugins/jspsych-text.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-text.js","js")
          loadjscssfile("static/js/jspsych/plugins/jspsych-survey-text.js","js")
          loadjscssfile("static/experiments/cognitive_reflection/experiment.js","js")
          loadjscssfile("static/css/jspsych.css","css")
          loadjscssfile("static/css/default_style.css","css")
          break;
-case "spatial_span":
+case "impulsive_venture":
          loadjscssfile("static/js/jspsych/jspsych.js","js")
          loadjscssfile("static/js/jspsych/plugins/jspsych-text.js","js")
          loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-survey-multi-choice.js","js")
+         loadjscssfile("static/experiments/impulsive_venture/experiment.js","js")
+         loadjscssfile("static/experiments/impulsive_venture/style.css","css")
+         loadjscssfile("static/css/jspsych.css","css")
+         loadjscssfile("static/css/default_style.css","css")
+         break;
+case "spatial_span":
+         loadjscssfile("static/js/jspsych/jspsych.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-text.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-attention-check.js","js")
          loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-multi-stim-multi-response.js","js")
          loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-single-stim-button.js","js")
          loadjscssfile("static/experiments/spatial_span/experiment.js","js")
@@ -290,8 +450,9 @@ case "spatial_span":
          break;
 case "stroop":
          loadjscssfile("static/js/jspsych/jspsych.js","js")
-         loadjscssfile("static/js/jspsych/plugins/jspsych-text.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-text.js","js")
          loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-attention-check.js","js")
          loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js","js")
          loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-categorize.js","js")
          loadjscssfile("static/experiments/stroop/experiment.js","js")
@@ -301,8 +462,9 @@ case "stroop":
          break;
 case "volatile_bandit":
          loadjscssfile("static/js/jspsych/jspsych.js","js")
-         loadjscssfile("static/js/jspsych/plugins/jspsych-text.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-text.js","js")
          loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-attention-check.js","js")
          loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js","js")
          loadjscssfile("static/experiments/volatile_bandit/experiment.js","js")
          loadjscssfile("static/css/jspsych.css","css")
@@ -311,26 +473,70 @@ case "volatile_bandit":
          break;
 case "plus_minus":
          loadjscssfile("static/js/jspsych/jspsych.js","js")
-         loadjscssfile("static/js/jspsych/plugins/jspsych-text.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-text.js","js")
          loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-attention-check.js","js")
          loadjscssfile("static/js/jspsych/plugins/jspsych-survey-text.js","js")
          loadjscssfile("static/experiments/plus_minus/experiment.js","js")
          loadjscssfile("static/css/jspsych.css","css")
          loadjscssfile("static/css/default_style.css","css")
          break;
-case "dospert_rt":
-         loadjscssfile("static/js/jspsych/plugins/jspsych-text.js","js")
-         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js","js")
-         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-radio-buttonlist.js","js")
-         loadjscssfile("static/experiments/dospert_rt/experiment.js","js")
-         loadjscssfile("static/css/jspsych.css","css")
-         loadjscssfile("static/css/default_style.css","css")
-         loadjscssfile("static/experiments/dospert_rt/style.css","css")
-         break;
-case "writing_task":
+case "time_perspective":
          loadjscssfile("static/js/jspsych/jspsych.js","js")
          loadjscssfile("static/js/jspsych/plugins/jspsych-text.js","js")
          loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-attention-check.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-survey-multi-choice.js","js")
+         loadjscssfile("static/experiments/time_perspective/experiment.js","js")
+         loadjscssfile("static/experiments/time_perspective/style.css","css")
+         loadjscssfile("static/css/jspsych.css","css")
+         loadjscssfile("static/css/default_style.css","css")
+         break;
+case "dospert_rt":
+         loadjscssfile("static/js/jspsych/jspsych.js","js")
+         loadjscssfile("static/js/jspsych/plugins/jspsych-text.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-survey-multi-choice.js","js")
+         loadjscssfile("static/experiments/dospert_rt/experiment.js","js")
+         loadjscssfile("static/experiments/dospert_rt/style.css","css")
+         loadjscssfile("static/css/jspsych.css","css")
+         loadjscssfile("static/css/default_style.css","css")
+         break;
+case "ten_item_personality":
+         loadjscssfile("static/js/jspsych/jspsych.js","js")
+         loadjscssfile("static/js/jspsych/plugins/jspsych-text.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-survey-multi-choice.js","js")
+         loadjscssfile("static/experiments/ten_item_personality/experiment.js","js")
+         loadjscssfile("static/experiments/ten_item_personality/style.css","css")
+         loadjscssfile("static/css/jspsych.css","css")
+         loadjscssfile("static/css/default_style.css","css")
+         break;
+case "grit_scale":
+         loadjscssfile("static/js/jspsych/jspsych.js","js")
+         loadjscssfile("static/js/jspsych/plugins/jspsych-text.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-survey-multi-choice.js","js")
+         loadjscssfile("static/experiments/grit_scale/experiment.js","js")
+         loadjscssfile("static/experiments/grit_scale/style.css","css")
+         loadjscssfile("static/css/jspsych.css","css")
+         loadjscssfile("static/css/default_style.css","css")
+         break;
+case "bis11":
+         loadjscssfile("static/js/jspsych/jspsych.js","js")
+         loadjscssfile("static/js/jspsych/plugins/jspsych-text.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-survey-multi-choice.js","js")
+         loadjscssfile("static/experiments/bis11/experiment.js","js")
+         loadjscssfile("static/experiments/bis11/style.css","css")
+         loadjscssfile("static/css/jspsych.css","css")
+         loadjscssfile("static/css/default_style.css","css")
+         break;
+case "writing_task":
+         loadjscssfile("static/js/jspsych/jspsych.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-text.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-attention-check.js","js")
          loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-writing.js","js")
          loadjscssfile("static/experiments/writing_task/experiment.js","js")
          loadjscssfile("static/css/jspsych.css","css")
@@ -339,8 +545,9 @@ case "writing_task":
          break;
 case "multisource":
          loadjscssfile("static/js/jspsych/jspsych.js","js")
-         loadjscssfile("static/js/jspsych/plugins/jspsych-text.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-text.js","js")
          loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-attention-check.js","js")
          loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js","js")
          loadjscssfile("static/experiments/multisource/experiment.js","js")
          loadjscssfile("static/css/jspsych.css","css")
@@ -348,8 +555,10 @@ case "multisource":
          loadjscssfile("static/experiments/multisource/style.css","css")
          break;
 case "dot_pattern_expectancy":
-         loadjscssfile("static/js/jspsych/plugins/jspsych-text.js","js")
+         loadjscssfile("static/js/jspsych/jspsych.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-text.js","js")
          loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-attention-check.js","js")
          loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js","js")
          loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-categorize.js","js")
          loadjscssfile("static/experiments/dot_pattern_expectancy/experiment.js","js")
@@ -358,8 +567,10 @@ case "dot_pattern_expectancy":
          loadjscssfile("static/experiments/dot_pattern_expectancy/style.css","css")
          break;
 case "holt_laury":
-         loadjscssfile("static/js/jspsych/plugins/jspsych-text.js","js")
+         loadjscssfile("static/js/jspsych/jspsych.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-text.js","js")
          loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-attention-check.js","js")
          loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-radio-buttonlist.js","js")
          loadjscssfile("static/experiments/holt_laury/experiment.js","js")
          loadjscssfile("static/css/jspsych.css","css")
@@ -367,8 +578,10 @@ case "holt_laury":
          loadjscssfile("static/experiments/holt_laury/style.css","css")
          break;
 case "hierarchical_rule":
-         loadjscssfile("static/js/jspsych/plugins/jspsych-text.js","js")
+         loadjscssfile("static/js/jspsych/jspsych.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-text.js","js")
          loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-attention-check.js","js")
          loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js","js")
          loadjscssfile("static/experiments/hierarchical_rule/experiment.js","js")
          loadjscssfile("static/css/jspsych.css","css")
@@ -376,8 +589,10 @@ case "hierarchical_rule":
          loadjscssfile("static/experiments/hierarchical_rule/style.css","css")
          break;
 case "directed_forgetting":
-         loadjscssfile("static/js/jspsych/plugins/jspsych-text.js","js")
+         loadjscssfile("static/js/jspsych/jspsych.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-text.js","js")
          loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-attention-check.js","js")
          loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js","js")
          loadjscssfile("static/experiments/directed_forgetting/experiment.js","js")
          loadjscssfile("static/css/jspsych.css","css")
@@ -386,8 +601,9 @@ case "directed_forgetting":
          break;
 case "dietary_decision":
          loadjscssfile("static/js/jspsych/jspsych.js","js")
-         loadjscssfile("static/js/jspsych/plugins/jspsych-text.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-text.js","js")
          loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-attention-check.js","js")
          loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js","js")
          loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-single-stim-button.js","js")
          loadjscssfile("static/experiments/dietary_decision/experiment.js","js")
@@ -396,18 +612,41 @@ case "dietary_decision":
          loadjscssfile("static/experiments/dietary_decision/style.css","css")
          break;
 case "discount_titrate":
-         loadjscssfile("static/js/jspsych/plugins/jspsych-text.js","js")
+         loadjscssfile("static/js/jspsych/jspsych.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-text.js","js")
          loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-attention-check.js","js")
          loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js","js")
          loadjscssfile("static/experiments/discount_titrate/experiment.js","js")
          loadjscssfile("static/css/jspsych.css","css")
          loadjscssfile("static/css/default_style.css","css")
          loadjscssfile("static/experiments/discount_titrate/style.css","css")
          break;
-case "psychological_refractory_period":
+case "future_time_perspective":
          loadjscssfile("static/js/jspsych/jspsych.js","js")
          loadjscssfile("static/js/jspsych/plugins/jspsych-text.js","js")
          loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-survey-multi-choice.js","js")
+         loadjscssfile("static/experiments/future_time_perspective/experiment.js","js")
+         loadjscssfile("static/experiments/future_time_perspective/style.css","css")
+         loadjscssfile("static/css/jspsych.css","css")
+         loadjscssfile("static/css/default_style.css","css")
+         break;
+case "dickman":
+         loadjscssfile("static/js/jspsych/jspsych.js","js")
+         loadjscssfile("static/js/jspsych/plugins/jspsych-text.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-survey-multi-choice.js","js")
+         loadjscssfile("static/experiments/dickman/experiment.js","js")
+         loadjscssfile("static/experiments/dickman/style.css","css")
+         loadjscssfile("static/css/jspsych.css","css")
+         loadjscssfile("static/css/default_style.css","css")
+         break;
+case "psychological_refractory_period":
+         loadjscssfile("static/js/jspsych/jspsych.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-text.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-attention-check.js","js")
          loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js","js")
          loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-multi-stim-multi-response.js","js")
          loadjscssfile("static/experiments/psychological_refractory_period/experiment.js","js")
@@ -417,18 +656,30 @@ case "psychological_refractory_period":
          break;
 case "kirby":
          loadjscssfile("static/js/jspsych/jspsych.js","js")
-         loadjscssfile("static/js/jspsych/plugins/jspsych-text.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-text.js","js")
          loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-attention-check.js","js")
          loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js","js")
          loadjscssfile("static/experiments/kirby/experiment.js","js")
          loadjscssfile("static/css/jspsych.css","css")
          loadjscssfile("static/css/default_style.css","css")
          loadjscssfile("static/experiments/kirby/style.css","css")
          break;
-case "simon":
+case "treatment_self_regulation_questionnaire":
          loadjscssfile("static/js/jspsych/jspsych.js","js")
          loadjscssfile("static/js/jspsych/plugins/jspsych-text.js","js")
          loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-survey-multi-choice.js","js")
+         loadjscssfile("static/experiments/treatment_self_regulation_questionnaire/experiment.js","js")
+         loadjscssfile("static/css/jspsych.css","css")
+         loadjscssfile("static/css/default_style.css","css")
+         break;
+case "simon":
+         loadjscssfile("static/js/jspsych/jspsych.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-text.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-attention-check.js","js")
          loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js","js")
          loadjscssfile("static/js/jspsych/plugins/jspsych-call-function.js","js")
          loadjscssfile("static/experiments/simon/experiment.js","js")
@@ -438,8 +689,9 @@ case "simon":
          break;
 case "dimensional_set_shifting":
          loadjscssfile("static/js/jspsych/jspsych.js","js")
-         loadjscssfile("static/js/jspsych/plugins/jspsych-text.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-text.js","js")
          loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-attention-check.js","js")
          loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js","js")
          loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-categorize.js","js")
          loadjscssfile("static/js/jspsych/plugins/jspsych-call-function.js","js")
@@ -450,8 +702,9 @@ case "dimensional_set_shifting":
          break;
 case "probabilistic_selection":
          loadjscssfile("static/js/jspsych/jspsych.js","js")
-         loadjscssfile("static/js/jspsych/plugins/jspsych-text.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-text.js","js")
          loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-attention-check.js","js")
          loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js","js")
          loadjscssfile("static/experiments/probabilistic_selection/experiment.js","js")
          loadjscssfile("static/css/jspsych.css","css")
@@ -460,8 +713,9 @@ case "probabilistic_selection":
          break;
 case "recent_probes":
          loadjscssfile("static/js/jspsych/jspsych.js","js")
-         loadjscssfile("static/js/jspsych/plugins/jspsych-text.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-text.js","js")
          loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-attention-check.js","js")
          loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js","js")
          loadjscssfile("static/experiments/recent_probes/experiment.js","js")
          loadjscssfile("static/css/jspsych.css","css")
@@ -470,8 +724,9 @@ case "recent_probes":
          break;
 case "image_monitoring":
          loadjscssfile("static/js/jspsych/jspsych.js","js")
-         loadjscssfile("static/js/jspsych/plugins/jspsych-text.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-text.js","js")
          loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-attention-check.js","js")
          loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js","js")
          loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-categorize.js","js")
          loadjscssfile("static/js/jspsych/plugins/jspsych-call-function.js","js")
@@ -481,19 +736,20 @@ case "image_monitoring":
          loadjscssfile("static/experiments/image_monitoring/style.css","css")
          break;
 case "dospert_eb":
-         loadjscssfile("static/js/jspsych/custom_plugins/jspsych-radio-buttonlist.js","js")
-         loadjscssfile("static/js/jspsych/plugins/jspsych-text.js","js")
-         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js","js")
-         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-radio-buttonlist.js","js")
-         loadjscssfile("static/experiments/dospert_eb/experiment.js","js")
-         loadjscssfile("static/css/jspsych.css","css")
-         loadjscssfile("static/css/default_style.css","css")
-         loadjscssfile("static/experiments/dospert_eb/style.css","css")
-         break;
-case "shift_task":
          loadjscssfile("static/js/jspsych/jspsych.js","js")
          loadjscssfile("static/js/jspsych/plugins/jspsych-text.js","js")
          loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-survey-multi-choice.js","js")
+         loadjscssfile("static/experiments/dospert_eb/experiment.js","js")
+         loadjscssfile("static/experiments/dospert_eb/style.css","css")
+         loadjscssfile("static/css/jspsych.css","css")
+         loadjscssfile("static/css/default_style.css","css")
+         break;
+case "shift_task":
+         loadjscssfile("static/js/jspsych/jspsych.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-text.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-attention-check.js","js")
          loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js","js")
          loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-categorize.js","js")
          loadjscssfile("static/js/jspsych/plugins/jspsych-call-function.js","js")
@@ -504,8 +760,9 @@ case "shift_task":
          break;
 case "threebytwo":
          loadjscssfile("static/js/jspsych/jspsych.js","js")
-         loadjscssfile("static/js/jspsych/plugins/jspsych-text.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-text.js","js")
          loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-attention-check.js","js")
          loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js","js")
          loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-categorize.js","js")
          loadjscssfile("static/experiments/threebytwo/experiment.js","js")
@@ -514,8 +771,10 @@ case "threebytwo":
          loadjscssfile("static/experiments/threebytwo/style.css","css")
          break;
 case "go_nogo":
-         loadjscssfile("static/js/jspsych/plugins/jspsych-text.js","js")
+         loadjscssfile("static/js/jspsych/jspsych.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-text.js","js")
          loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-attention-check.js","js")
          loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js","js")
          loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-categorize.js","js")
          loadjscssfile("static/js/jspsych/plugins/jspsych-call-function.js","js")
@@ -526,8 +785,9 @@ case "go_nogo":
          break;
 case "simple_reaction_time":
          loadjscssfile("static/js/jspsych/jspsych.js","js")
-         loadjscssfile("static/js/jspsych/plugins/jspsych-text.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-text.js","js")
          loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-attention-check.js","js")
          loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js","js")
          loadjscssfile("static/js/jspsych/plugins/jspsych-call-function.js","js")
          loadjscssfile("static/experiments/simple_reaction_time/experiment.js","js")
@@ -535,21 +795,66 @@ case "simple_reaction_time":
          loadjscssfile("static/css/default_style.css","css")
          loadjscssfile("static/experiments/simple_reaction_time/style.css","css")
          break;
+case "columbia_card_task_hot":
+         loadjscssfile("static/js/jspsych/jspsych.js","js")
+         loadjscssfile("static/js/jspsych/plugins/jspsych-text.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js","js")
+         loadjscssfile("static/js/jspsych/plugins/jspsych-call-function.js","js")
+         loadjscssfile("static/experiments/columbia_card_task_hot/experiment.js","js")
+         loadjscssfile("static/css/jspsych.css","css")
+         loadjscssfile("static/css/default_style.css","css")
+         loadjscssfile("static/experiments/columbia_card_task_hot/style.css","css")
+         break;
+case "columbia_card_task_cold":
+         loadjscssfile("static/js/jspsych/jspsych.js","js")
+         loadjscssfile("static/js/jspsych/plugins/jspsych-text.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js","js")
+         loadjscssfile("static/js/jspsych/plugins/jspsych-call-function.js","js")
+         loadjscssfile("static/js/jspsych/plugins/jspsych-survey-text.js","js")
+         loadjscssfile("static/experiments/columbia_card_task_cold/experiment.js","js")
+         loadjscssfile("static/css/jspsych.css","css")
+         loadjscssfile("static/css/default_style.css","css")
+         loadjscssfile("static/experiments/columbia_card_task_cold/style.css","css")
+         break;
 case "two_stage_decision":
          loadjscssfile("static/js/jspsych/jspsych.js","js")
          loadjscssfile("static/js/jspsych/plugins/jspsych-call-function.js","js")
-         loadjscssfile("static/js/jspsych/plugins/jspsych-text.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-text.js","js")
          loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-attention-check.js","js")
          loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js","js")
          loadjscssfile("static/experiments/two_stage_decision/experiment.js","js")
          loadjscssfile("static/css/jspsych.css","css")
          loadjscssfile("static/css/default_style.css","css")
          loadjscssfile("static/experiments/two_stage_decision/style.css","css")
          break;
-case "n_back":
+case "mpq_control":
          loadjscssfile("static/js/jspsych/jspsych.js","js")
          loadjscssfile("static/js/jspsych/plugins/jspsych-text.js","js")
          loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-survey-multi-choice.js","js")
+         loadjscssfile("static/experiments/mpq_control/experiment.js","js")
+         loadjscssfile("static/experiments/mpq_control/style.css","css")
+         loadjscssfile("static/css/jspsych.css","css")
+         loadjscssfile("static/css/default_style.css","css")
+         break;
+case "self_regulation":
+         loadjscssfile("static/js/jspsych/jspsych.js","js")
+         loadjscssfile("static/js/jspsych/plugins/jspsych-text.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-survey-multi-choice.js","js")
+         loadjscssfile("static/experiments/self_regulation/experiment.js","js")
+         loadjscssfile("static/experiments/self_regulation/style.css","css")
+         loadjscssfile("static/css/jspsych.css","css")
+         loadjscssfile("static/css/default_style.css","css")
+         break;
+case "n_back":
+         loadjscssfile("static/js/jspsych/jspsych.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-text.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-attention-check.js","js")
          loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js","js")
          loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-categorize.js","js")
          loadjscssfile("static/experiments/n_back/experiment.js","js")
@@ -558,8 +863,9 @@ case "n_back":
          break;
 case "tower_of_london_imagine":
          loadjscssfile("static/js/jspsych/jspsych.js","js")
-         loadjscssfile("static/js/jspsych/plugins/jspsych-text.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-text.js","js")
          loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js","js")
+         loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-attention-check.js","js")
          loadjscssfile("static/js/jspsych/poldrack_plugins/jspsych-single-stim-button.js","js")
          loadjscssfile("static/experiments/tower_of_london_imagine/experiment.js","js")
          loadjscssfile("static/css/jspsych.css","css")
@@ -591,8 +897,29 @@ case "attention_network_task":
 case "random_number_generation":
       experiments = experiments.concat(random_number_generation_experiment)
       break;
+case "stim_selective_stop_signal":
+      experiments = experiments.concat(stim_selective_stop_signal_experiment)
+      break;
+case "motor_selective_stop_signal":
+      experiments = experiments.concat(motor_selective_stop_signal_experiment)
+      break;
+case "eating_questionnaire":
+      experiments = experiments.concat(eating_questionnaire_experiment)
+      break;
 case "letter_memory":
       experiments = experiments.concat(letter_memory_experiment)
+      break;
+case "information_sampling_task":
+      experiments = experiments.concat(information_sampling_task_experiment)
+      break;
+case "gm_paradigm":
+      experiments = experiments.concat(gm_paradigm_experiment)
+      break;
+case "upps_impulsivity":
+      experiments = experiments.concat(upps_impulsivity_experiment)
+      break;
+case "theories_of_willpower":
+      experiments = experiments.concat(theories_of_willpower_experiment)
       break;
 case "tower_of_london":
       experiments = experiments.concat(tower_of_london_experiment)
@@ -605,6 +932,9 @@ case "digit_span":
       break;
 case "adaptive_n_back":
       experiments = experiments.concat(adaptive_n_back_experiment)
+      break;
+case "leisure_time_activity":
+      experiments = experiments.concat(leisure_time_activity_experiment)
       break;
 case "stop_signal":
       experiments = experiments.concat(stop_signal_experiment)
@@ -621,6 +951,12 @@ case "multiplication":
 case "choice_reaction_time":
       experiments = experiments.concat(choice_reaction_time_experiment)
       break;
+case "emotion_regulation":
+      experiments = experiments.concat(emotion_regulation_experiment)
+      break;
+case "brief_self_control":
+      experiments = experiments.concat(brief_self_control_experiment)
+      break;
 case "number_letter":
       experiments = experiments.concat(number_letter_experiment)
       break;
@@ -629,6 +965,9 @@ case "angling_risk_task":
       break;
 case "antisaccade":
       experiments = experiments.concat(antisaccade_experiment)
+      break;
+case "bis_bas":
+      experiments = experiments.concat(bis_bas_experiment)
       break;
 case "tone_monitoring":
       experiments = experiments.concat(tone_monitoring_experiment)
@@ -642,6 +981,9 @@ case "ax_cpt":
 case "cognitive_reflection":
       experiments = experiments.concat(cognitive_reflection_experiment)
       break;
+case "impulsive_venture":
+      experiments = experiments.concat(impulsive_venture_experiment)
+      break;
 case "spatial_span":
       experiments = experiments.concat(spatial_span_experiment)
       break;
@@ -654,8 +996,20 @@ case "volatile_bandit":
 case "plus_minus":
       experiments = experiments.concat(plus_minus_experiment)
       break;
+case "time_perspective":
+      experiments = experiments.concat(time_perspective_experiment)
+      break;
 case "dospert_rt":
       experiments = experiments.concat(dospert_rt_experiment)
+      break;
+case "ten_item_personality":
+      experiments = experiments.concat(ten_item_personality_experiment)
+      break;
+case "grit_scale":
+      experiments = experiments.concat(grit_scale_experiment)
+      break;
+case "bis11":
+      experiments = experiments.concat(bis11_experiment)
       break;
 case "writing_task":
       experiments = experiments.concat(writing_task_experiment)
@@ -681,11 +1035,20 @@ case "dietary_decision":
 case "discount_titrate":
       experiments = experiments.concat(discount_titrate_experiment)
       break;
+case "future_time_perspective":
+      experiments = experiments.concat(future_time_perspective_experiment)
+      break;
+case "dickman":
+      experiments = experiments.concat(dickman_experiment)
+      break;
 case "psychological_refractory_period":
       experiments = experiments.concat(psychological_refractory_period_experiment)
       break;
 case "kirby":
       experiments = experiments.concat(kirby_experiment)
+      break;
+case "treatment_self_regulation_questionnaire":
+      experiments = experiments.concat(treatment_self_regulation_questionnaire_experiment)
       break;
 case "simon":
       experiments = experiments.concat(simon_experiment)
@@ -717,8 +1080,20 @@ case "go_nogo":
 case "simple_reaction_time":
       experiments = experiments.concat(simple_reaction_time_experiment)
       break;
+case "columbia_card_task_hot":
+      experiments = experiments.concat(columbia_card_task_hot_experiment)
+      break;
+case "columbia_card_task_cold":
+      experiments = experiments.concat(columbia_card_task_cold_experiment)
+      break;
 case "two_stage_decision":
       experiments = experiments.concat(two_stage_decision_experiment)
+      break;
+case "mpq_control":
+      experiments = experiments.concat(mpq_control_experiment)
+      break;
+case "self_regulation":
+      experiments = experiments.concat(self_regulation_experiment)
       break;
 case "n_back":
       experiments = experiments.concat(n_back_experiment)

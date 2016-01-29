@@ -4,9 +4,9 @@
     <meta name="robots" content="noindex">
     <title>The Experiment Factory: Preview</title>
     
-<link rel='stylesheet prefetch' href='static/css/jspsych.css'>
-<link rel='stylesheet prefetch' href='static/css/default_style.css'>
-<link rel='stylesheet prefetch' href='static/experiments/random_number_generation/style.css'>
+<link rel='stylesheet' href='static/css/jspsych.css'>
+<link rel='stylesheet' href='static/css/default_style.css'>
+<link rel='stylesheet' href='static/experiments/random_number_generation/style.css'>
 </head>
 
 <body>
@@ -14,17 +14,30 @@
 <script src='//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 
 <script src='static/js/jspsych/jspsych.js'></script>
-<script src='static/js/jspsych/plugins/jspsych-text.js'></script>
+<script src='static/js/jspsych/poldrack_plugins/jspsych-poldrack-text.js'></script>
 <script src='static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js'></script>
+<script src='static/js/jspsych/poldrack_plugins/jspsych-attention-check.js'></script>
 <script src='static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js'></script>
 <script src='static/js/jspsych/custom_plugins/jspsych-single-stim-button.js'></script>
 <script src='static/experiments/random_number_generation/experiment.js'></script>
 <script>
-jsPsych.init({
-    timeline: random_number_generation_experiment,
-    on_finish: function () {
-        jsPsych.data.localSave('random_number_generation_results.csv', 'csv');
-    }
+$( document ).ready(function() {
+
+    expfactory_finished = false;
+
+    jsPsych.init({
+timeline: random_number_generation_experiment,
+display_element: "getDisplayElement",
+fullscreen: true,
+on_trial_finish: function(data){
+addID()
+},
+on_finish: function(data){
+jsPsych.data.localSave('random_number_generation_results.csv', 'csv');
+expfactory_finished = true;
+}
+});
+
 });
 </script>
 </body>

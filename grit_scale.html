@@ -1,0 +1,39 @@
+<!DOCTYPE html><html class=''>
+<head>
+    <meta charset='UTF-8'>
+    <meta name="robots" content="noindex">
+    <title>The Experiment Factory: Preview</title>
+    
+<link rel='stylesheet' href='static/experiments/grit_scale/style.css'>
+<link rel='stylesheet' href='static/css/jspsych.css'>
+<link rel='stylesheet' href='static/css/default_style.css'>
+</head>
+
+<body>
+
+<script src='//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+
+<script src='static/js/jspsych/jspsych.js'></script>
+<script src='static/js/jspsych/plugins/jspsych-text.js'></script>
+<script src='static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js'></script>
+<script src='static/js/jspsych/poldrack_plugins/jspsych-poldrack-survey-multi-choice.js'></script>
+<script src='static/experiments/grit_scale/experiment.js'></script>
+<script>
+$( document ).ready(function() {
+
+    expfactory_finished = false;
+
+    jsPsych.init({
+timeline: grit_scale_experiment,
+display_element: "getDisplayElement",
+fullscreen: true,
+on_finish: function(data){
+jsPsych.data.localSave('grit_scale_results.csv', 'csv');
+expfactory_finished = true;
+}
+});
+
+});
+</script>
+</body>
+</html>

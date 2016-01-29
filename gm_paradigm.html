@@ -1,0 +1,41 @@
+<!DOCTYPE html><html class=''>
+<head>
+    <meta charset='UTF-8'>
+    <meta name="robots" content="noindex">
+    <title>The Experiment Factory: Preview</title>
+    
+<link rel='stylesheet' href='static/css/jspsych.css'>
+<link rel='stylesheet' href='static/css/default_style.css'>
+<link rel='stylesheet' href='static/experiments/gm_paradigm/style.css'>
+</head>
+
+<body>
+
+<script src='//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+
+<script src='static/js/jspsych/jspsych.js'></script>
+<script src='static/js/jspsych/plugins/jspsych-text.js'></script>
+<script src='static/js/jspsych/plugins/jspsych-call-function.js'></script>
+<script src='static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js'></script>
+<script src='static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js'></script>
+<script src='static/js/jspsych/poldrack_plugins/jspsych-stop-signal.js'></script>
+<script src='static/experiments/gm_paradigm/experiment.js'></script>
+<script>
+$( document ).ready(function() {
+
+    expfactory_finished = false;
+
+    jsPsych.init({
+timeline: gm_paradigm_experiment,
+display_element: "getDisplayElement",
+fullscreen: false,
+on_finish: function(data){
+jsPsych.data.localSave('gm_paradigm_results.csv', 'csv');
+expfactory_finished = true;
+}
+});
+
+});
+</script>
+</body>
+</html>

@@ -1,6 +1,30 @@
 /* ************************************ */
 /* Define helper functions */
 /* ************************************ */
+function getDisplayElement () {
+    $('<div class = display_stage_background></div>').appendTo('body')
+    return $('<div class = display_stage></div>').appendTo('body')
+}
+
+function evalAttentionChecks() {
+  var check_percent = 1
+  if (run_attention_checks) {
+    var attention_check_trials = jsPsych.data.getTrialsOfType('attention-check')
+    var checks_passed = 0
+    for (var i = 0; i < attention_check_trials.length; i++) {
+      if (attention_check_trials[i].correct === true) {
+        checks_passed += 1
+      }
+    }
+    check_percent = checks_passed/attention_check_trials.length
+  } 
+  return check_percent
+}
+
+function addID() {
+  jsPsych.data.addDataToLastTrial({'exp_id': 'hierarchical_rule'})
+}
+
 var randomDraw = function(lst) {
     var index = Math.floor(Math.random()*(lst.length))
     return lst[index]
@@ -40,13 +64,22 @@ var getFlatData = function() {
 	return flat_stims.data.shift()
 }
 
-
+var getInstructFeedback = function() {
+	return '<div class = centerbox><p class = center-block-text>' + feedback_instruct_text + '</p></div>'
+}
 /* ************************************ */
 /* Define experimental variables */
 /* ************************************ */
+// generic task variables
+var run_attention_checks = true
+var attention_check_thresh = 0.45
+var sumInstructTime = 0    //ms
+var instructTimeThresh = 5   ///in seconds
+
+// task specific variables
 var exp_len = 200 //number of trials per rule-set
 var flat_first = 0//  Math.floor(Math.random())
-var path_source = 'static/experiments/hierarchical_rule/images/'
+var path_source = '/static/experiments/hierarchical_rule/images/'
 var stim_prefix = '<div class = centerbox><div class = stimBox><img class = hierarchicalStim src ='
 var border_prefix = '<img class = hierarchicalBorder src ='
 var prompt_prefix = '<img class = hierarchicalPrompt src ='
@@ -66,7 +99,7 @@ for (var c=0; c < colors.length; c++) {
 		for (var o = 0; o < orientations.length; o++) {
 			if (c < colors.length/2) {
 				flat_stims.push({stimulus: stim_prefix + path_source + stims[s] + orientations[o] + '.bmp </img>' + border_prefix + path_source + colors[c] + '_border.png' + postfix,
-					data: {stim: stims[s], orientation: orientations[o], border: colors[c], correct_response: random_correct.pop()}})
+					data: {stim: stims[s], orientation: orientations[o], border: colors[c], exp_stage: "test", correct_response: random_correct.pop()}})
 			} else {
 				if (c ==2) {
 					correct_response = choices[s-1]
@@ -74,7 +107,7 @@ for (var c=0; c < colors.length; c++) {
 					correct_response = choices[o-1]
 				}
 				hierarchical_stims.push({stimulus: stim_prefix + path_source + stims[s + (stims.length/2)] + orientations[o] + '.bmp </img>' + border_prefix + path_source + colors[c] + '_border.png' + postfix,
-					data: {stim: stims[s + (stims.length/2)], orientation: orientations[o], border: colors[c], correct_response: correct_response}})
+					data: {stim: stims[s + (stims.length/2)], orientation: orientations[o], exp_stage: "test", border: colors[c], correct_response: correct_response}})
 			}
 		}
 	}
@@ -102,22 +135,45 @@ instructions_grid += '</div>'
 /* ************************************ */
 /* Set up jsPsych blocks */
 /* ************************************ */
+// Set up attention check node
+var attention_check_block = {
+  type: 'attention-check',
+  timing_response: 30000,
+  response_ends_trial: true,
+  timing_post_trial: 200
+}
+
+var attention_node = {
+  timeline: [attention_check_block],
+  conditional_function: function() {
+    return run_attention_checks
+  }
+}
+
 /* define static blocks */
-
 var welcome_block = {
-  type: 'text',
-  text: '<div class = centerbox><p class = block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
+  type: 'poldrack-text',
+  timing_response: 60000,
+  data: {exp_id: "hierarchical_rule", trial_id: "welcome"},
+  text: '<div class = centerbox><p class = "white-text center-block-text">Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
+  timing_post_trial: 0
+}
+
+var feedback_instruct_text = 'Starting with instructions.  Press <strong> Enter </strong> to continue.'
+var feedback_instruct_block = {
+  type: 'poldrack-text',
+  cont_key: [13],
+  data: {exp_id: "hierarchical_rule", trial_id: "instruction"},
+  text: getInstructFeedback,
   timing_post_trial: 0,
-  on_finish: function() {
-  	$('body').css('background','black')
-  },
+  timing_response: 6000
 };
-
-
-
+/// This ensures that the subject does not read through the instructions too quickly.  If they do it too quickly, then we will go over the loop again.
+var instruction_trials = []	 
 var instructions_block = {
   type: 'poldrack-instructions',
+  data: {exp_id: "hierarchical_rule", trial_id: "instruction"},
   pages: [
     '<div class = centerbox><p class = "white-text block-text">In this experiment stimuli will come up one at a time. You should respond to them by pressing the J, K or L keys, after which you will receive feedback about whether you were right or not. If you were correct you will get points which contribute to your bonus payment.</p><p class = "white-text block-text">Your job is to get as many trials correct as possible! On the next page are the stimuli you will be responding to.</p></div>',
     	instructions_grid,
@@ -126,21 +182,44 @@ var instructions_block = {
   allow_keys: false,
   show_clickable_nav: true
 };
+instruction_trials.push(feedback_instruct_block)
+instruction_trials.push(instructions_block)
+
+var instruction_node = {
+    timeline: instruction_trials,
+	/* This function defines stopping criteria */
+    loop_function: function(data){
+		for(i=0;i<data.length;i++){
+			if((data[i].trial_type=='poldrack-instructions') && (data[i].rt!=-1)){
+				rt=data[i].rt
+				sumInstructTime=sumInstructTime+rt
+			}
+		}
+		if(sumInstructTime<=instructTimeThresh*1000){
+			feedback_instruct_text = 'Read through instructions too quickly.  Please take your time and make sure you understand the instructions.  Press <strong>enter</strong> to continue.'
+			return true
+		} else if(sumInstructTime>instructTimeThresh*1000){
+			feedback_instruct_text = 'Done with instructions. Press <strong>enter</strong> to continue.'
+			return false
+		}
+    }
+}
 
 var end_block = {
-  type: 'text',
-  text: '<div class = centerbox><p class = center-"white-text block-text">Thanks for completing this task!</p><p class = center-"white-text block-text">Press <strong>enter</strong> to begin.</p></div>',
+  type: 'poldrack-text',
+  timing_response: 60000,
+  data: {exp_id: "hierarchical_rule", trial_id: "end"},
+  text: '<div class = centerbox><p class = "white-text center-block-text">Thanks for completing this task!</p><p class = "white-text center-block-text">Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
-  timing_post_trial: 0,
-  on_finish: function() {
-  	$('body').css('background','white')
-  }
+  timing_post_trial: 0
 };
 
 
 var start_test_block = {
-  type: 'text',
-  text: '<div class = centerbox><p class = "white-text block-text">We will now start the test.</p><p class = center-"white-text block-text">Press <strong>enter</strong> to begin.</p></div>',
+  type: 'poldrack-text',
+  data: {exp_id: "hierarchical_rule", trial_id: "test_intro"},
+  timing_response: 60000,
+  text: '<div class = centerbox><p class = "white-text center-block-text">We will now start the test.</p><p class = "white-text center-block-text">Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   timing_post_trial: 1000
 };
@@ -150,7 +229,7 @@ var fixation_block = {
   stimulus: prompt_prefix + path_source + 'FIX.png' + ' style:"z-index: -1"' + postfix,
   is_html: true,
   choices: 'none',
-  data: {exp_id: "hierarchical_rule", "trial_id": "feedback"},
+  data: {exp_id: "hierarchical_rule", trial_id: "fixation", exp_stage: "test"},
   response_ends_trial: false,
   timing_post_trial: 0,
   timing_stim: -1,
@@ -162,7 +241,7 @@ var feedback_block = {
   stimulus: getFeedback,
   is_html: true,
   choices: 'none',
-  data: {exp_id: "hierarchical_rule", "trial_id": "feedback"},
+  data: {exp_id: "hierarchical_rule", trial_id: "feedback", exp_stage: "test"},
   response_ends_trial: false,
   timing_post_trial: 0,
   timing_stim: 1000,
@@ -182,7 +261,7 @@ var flat_stim_block = {
 	  prompt: prompt_prefix + path_source + 'FIX_GREEN.png' + ' style:"z-index: -1"' + postfix,
 	  timing_post_trial: 0,
 	  on_finish: function() {
-	  	jsPsych.data.addDataToLastTrial({exp_id: "hierarchical_rule", "trial_id": "flat_stim"})
+	  	jsPsych.data.addDataToLastTrial({exp_id: "hierarchical_rule", trial_id: "flat_stim", exp_stage: "test"})
 	  }
 }
 
@@ -198,7 +277,7 @@ var hierarchical_stim_block = {
 	  prompt: prompt_prefix + path_source + 'FIX_GREEN.png' + ' style:"z-index: -1"' + postfix,
 	  timing_post_trial: 0,
 	  on_finish: function() {
-	  	jsPsych.data.addDataToLastTrial({exp_id: "hierarchical_rule", "trial_id": "hierarchical_stim"})
+	  	jsPsych.data.addDataToLastTrial({exp_id: "hierarchical_rule", trial_id: "hierarchical_stim", exp_stage: "test"})
 	  }
 }
 
@@ -228,14 +307,14 @@ var hierarchical_loop_node = {
 //Set up experiment
 var hierarchical_rule_experiment = []
 hierarchical_rule_experiment.push(welcome_block);
-hierarchical_rule_experiment.push(instructions_block);
+hierarchical_rule_experiment.push(instruction_node);
 hierarchical_rule_experiment.push(start_test_block);
 // setup exp w loop nodes after pushing the practice etc. blocks
 if (flat_first == 1){
-	hierarchical_rule_experiment.push(flat_loop_node, start_test_block, hierarchical_loop_node);
+	hierarchical_rule_experiment.push(flat_loop_node, attention_node, start_test_block, hierarchical_loop_node, attention_node);
 }
 else {
-	hierarchical_rule_experiment.push(hierarchical_loop_node, start_test_block, flat_loop_node);
+	hierarchical_rule_experiment.push(hierarchical_loop_node, attention_node, start_test_block, flat_loop_node, attention_node);
 }
 
 hierarchical_rule_experiment.push(end_block)

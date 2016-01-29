@@ -1,10 +1,12 @@
 [
     {
         "name": "Tone Monitoring",
+        "template":"jspsych",
         "run": [ 
                 "static/js/jspsych/jspsych.js",
-                "static/js/jspsych/plugins/jspsych-text.js",
+                "static/js/jspsych/poldrack_plugins/jspsych-poldrack-text.js",
                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js",
+                "static/js/jspsych/poldrack_plugins/jspsych-attention-check.js",
                 "static/js/jspsych/poldrack_plugins/jspsych-categorize-audio.js",
                 "static/js/jspsych/plugins/jspsych-single-audio.js",
 	         	"static/js/jspsych/plugins/jspsych-call-function.js",
@@ -12,7 +14,7 @@
                 "static/css/default_style.css",
                 "experiment.js"
                ],
-        "tag": "tone_monitoring",
+        "exp_id": "tone_monitoring",
         "cognitive_atlas_task_id": "trm_4c8a84825c4e4",
         "contributors": [
                          "Ian Eisenberg",
@@ -22,10 +24,14 @@
                          "Russell Poldrack"
                         ], 
         "time":6,
-        "experiment_variables": "",
         "reference": "http://www.sciencedirect.com/science/article/pii/S001002859990734X",
         "notes": "condition indicates practice/test, trial_id indicates stimulus heard on each trial. Correct response is determined by repetitions since last response and is not calculated in this script (calculate in post)",
-        "publish":"True"
+        "publish":"True",
+        "deployment_variables":{"jspsych_init":
+                                        {"fullscreen": true,
+                                        "display_element": "getDisplayElement",
+                                        "on_trial_finish": "addID()"}
+                       }
     
    }
 ]

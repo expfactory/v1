@@ -1,6 +1,29 @@
 /* ************************************ */
 /* Define helper functions */
 /* ************************************ */
+function getDisplayElement () {
+    $('<div class = display_stage_background></div>').appendTo('body')
+    return $('<div class = display_stage></div>').appendTo('body')
+}
+
+function evalAttentionChecks() {
+  var check_percent = 1
+  if (run_attention_checks) {
+    var attention_check_trials = jsPsych.data.getTrialsOfType('attention-check')
+    var checks_passed = 0
+    for (var i = 0; i < attention_check_trials.length; i++) {
+      if (attention_check_trials[i].correct === true) {
+        checks_passed += 1
+      }
+    }
+    check_percent = checks_passed/attention_check_trials.length
+  } 
+  return check_percent
+}
+
+function addID() {
+  jsPsych.data.addDataToLastTrial({'exp_id': 'dot_pattern_expectancy'})
+}
 
 var randomDraw = function(lst) {
     var index = Math.floor(Math.random()*(lst.length))
@@ -31,9 +54,20 @@ var getFeedback = function() {
 		return '<div class = centerbox><div class = center-text>Incorrect</p></div>'
 	}
 }
+
+var getInstructFeedback = function() {
+	return '<div class = centerbox><p class = center-block-text>' + feedback_instruct_text + '</p></div>'
+}
 /* ************************************ */
 /* Define experimental variables */
 /* ************************************ */
+// generic task variables
+var run_attention_checks = true
+var attention_check_thresh = 0.65
+var sumInstructTime = 0    //ms
+var instructTimeThresh = 5   ///in seconds
+
+// task specific variables
 var correct_responses = [["left arrow",37],["down arrow",40]]
 var path = 'static/experiments/dot_pattern_expectancy/images/'
 var prefix = '<div class = centerbox><div class = img-container><img src = "'
@@ -53,23 +87,54 @@ var blocks = [block1_list,block2_list, block3_list, block4_list]
 /* ************************************ */
 /* Set up jsPsych blocks */
 /* ************************************ */
+// Set up attention check node
+var attention_check_block = {
+  type: 'attention-check',
+  timing_response: 30000,
+  response_ends_trial: true,
+  timing_post_trial: 200
+}
+
+var attention_node = {
+  timeline: [attention_check_block],
+  conditional_function: function() {
+    return run_attention_checks
+  }
+}
 
 /* define static blocks */
 var welcome_block = {
-  type: 'text',
-  text: '<div class = centerbox><p class = block-text>Welcome to the dot pattern expectancy experiment. Press any key to begin.</p></div>',
+  type: 'poldrack-text',
+  data: {exp_id: "dot_pattern_expectancy", trial_id: "welcome"},
+  timing_response: 60000,
+  text: '<div class = centerbox><p class = center-block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
+  cont_key: [13],
   timing_post_trial: 0
 };
 
 var end_block = {
-  type: 'text',
+  type: 'poldrack-text',
+  data: {exp_id: "dot_pattern_expectancy", trial_id: "end"},
+  timing_response: 60000,
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
   cont_key: [13],
   timing_post_trial: 0
 };
 
+var feedback_instruct_text = 'Starting with instructions.  Press <strong> Enter </strong> to continue.'
+var feedback_instruct_block = {
+  type: 'poldrack-text',
+  data: {exp_id: "dot_pattern_expectancy", trial_id: "instruction"},
+  cont_key: [13],
+  text: getInstructFeedback,
+  timing_post_trial: 0,
+  timing_response: 6000
+};
+/// This ensures that the subject does not read through the instructions too quickly.  If they do it too quickly, then we will go over the loop again.
+var instruction_trials = []	   
 var instructions_block = {
   type: 'poldrack-instructions',
+  data: {exp_id: "dot_pattern_expectancy", trial_id: "instruction"},
   pages: [
 	'<div class = centerbox><p class = block-text>In this task, on each trial you will see a group of blue circles presented for a short time, followed by the presentation of  group of black circles. For instance you may see:</p><p class = block-text><img src = "static/experiments/dot_pattern_expectancy/images/cue2.png" ></img>	...followed by...		<img src = "static/experiments/dot_pattern_expectancy/images/probe2.png" ></img><br><br></p></div>',
 	'<div class = centerbox><p class = block-text>Your job is to respond by pressing an arrow key during the presentation of the <strong>second</strong> group  of circles. For most pairs of circles you should press the <strong>down</strong> arrow key. One pair of circles is the <strong>target</strong> pair, and for this pair you should press the <strong>left</strong> arrow key.</p><p class = block-text>After you respond you will get feedback about whether you were correct. The target pair is shown below:</p><p class = block-text><img src = "static/experiments/dot_pattern_expectancy/images/' + valid_cue + '" ></img>	...followed by...		<img src = "static/experiments/dot_pattern_expectancy/images/' + valid_probe + '" ></img><br></br></p></div>',
@@ -79,9 +144,33 @@ var instructions_block = {
   show_clickable_nav: true,
   timing_post_trial: 1000
 };
+instruction_trials.push(feedback_instruct_block)
+instruction_trials.push(instructions_block)
+
+var instruction_node = {
+    timeline: instruction_trials,
+	/* This function defines stopping criteria */
+    loop_function: function(data){
+		for(i=0;i<data.length;i++){
+			if((data[i].trial_type=='poldrack-instructions') && (data[i].rt!=-1)){
+				rt=data[i].rt
+				sumInstructTime=sumInstructTime+rt
+			}
+		}
+		if(sumInstructTime<=instructTimeThresh*1000){
+			feedback_instruct_text = 'Read through instructions too quickly.  Please take your time and make sure you understand the instructions.  Press <strong>enter</strong> to continue.'
+			return true
+		} else if(sumInstructTime>instructTimeThresh*1000){
+			feedback_instruct_text = 'Done with instructions. Press <strong>enter</strong> to continue.'
+			return false
+		}
+    }
+}
 
 var rest_block = {
-  type: 'text',
+  type: 'poldrack-text',
+  data: {exp_id: "dot_pattern_expectancy", trial_id: "rest"},
+  timing_response: 60000,
   text: '<div class = centerbox><p class = block-text>Take a break! Press any key to continue.</p></div>',
   timing_post_trial: 1000
 };
@@ -91,7 +180,7 @@ var feedback_block = {
   stimulus: getFeedback,
   is_html: true,
   choices: 'none',
-  data: {exp_id: "dot_pattern_expectancy", trial_id: "feedback"},
+  data: {exp_id: "dot_pattern_expectancy", trial_id: "feedback", exp_stage: "test"},
   timing_post_trial: 0,
   timing_stim: 1000,
   timing_response: 1000
@@ -102,7 +191,7 @@ var fixation_block = {
   stimulus: '<div class = centerbox><div class = fixation>+</div></div>',
   is_html: true,
   choices: [37,40],
-  data: {exp_id: "dot_pattern_expectancy", "trial_id": "fixation"},
+  data: {exp_id: "dot_pattern_expectancy", trial_id: "fixation", exp_stage: "test"},
   timing_post_trial: 0,
   timing_stim: 2000,
   timing_response: 2000,
@@ -115,7 +204,7 @@ var A_cue = {
   stimulus: prefix + path + valid_cue + postfix,
   is_html: true,
   choices: 'none',
-  data: {exp_id: "dot_pattern_expectancy", trial_id: "cue"},
+  data: {exp_id: "dot_pattern_expectancy", trial_id: "cue", exp_stage: "test"},
   timing_stim: 500,
   timing_response: 500,
   timing_post_trial: 0
@@ -126,7 +215,7 @@ var other_cue = {
   stimulus: getInvalidCue,
   is_html: true,
   choices: 'none',
-  data: {exp_id: "dot_pattern_expectancy", trial_id: "cue"},
+  data: {exp_id: "dot_pattern_expectancy", trial_id: "cue", exp_stage: "test"},
   timing_stim: 500,
   timing_response: 500,
   timing_post_trial: 0
@@ -137,7 +226,7 @@ var X_probe = {
   stimulus: prefix + path + valid_probe + postfix,
   is_html: true,
   choices: [37,40],
-  data: {exp_id: "dot_pattern_expectancy", trial_id: "probe"},
+  data: {exp_id: "dot_pattern_expectancy", trial_id: "probe", exp_stage: "test"},
   timing_stim: 500,
   timing_response: 1500,
   response_ends_trial: false,
@@ -149,7 +238,7 @@ var other_probe = {
   stimulus: getInvalidProbe,
   is_html: true,
   choices: [37,40],
-  data: {exp_id: "dot_pattern_expectancy", trial_id: "probe"},
+  data: {exp_id: "dot_pattern_expectancy", trial_id: "probe", exp_stage: "test"},
   timing_stim: 500,
   timing_response: 1500,
   response_ends_trial: false,
@@ -162,11 +251,11 @@ var other_probe = {
 
 var dot_pattern_expectancy_experiment = []
 dot_pattern_expectancy_experiment.push(welcome_block);
-dot_pattern_expectancy_experiment.push(instructions_block);
+dot_pattern_expectancy_experiment.push(instruction_node);
 
-for (b = 0; b< 1; b++) {
+for (b = 0; b< blocks.length; b++) {
 	var block = blocks[b]
-	for (i = 0; i < block.length; i++) {
+	for (i = 0; i < block.length; i++) { 
 		switch (block[i]) {
 			case "AX":
 				cue = jQuery.extend(true, {}, A_cue)
@@ -197,6 +286,9 @@ for (b = 0; b< 1; b++) {
 		dot_pattern_expectancy_experiment.push(fixation_block)
 		dot_pattern_expectancy_experiment.push(probe)
 		dot_pattern_expectancy_experiment.push(feedback_block)
+	}
+	if ($.inArray(b,[0,1,3]) != -1) {
+		dot_pattern_expectancy_experiment.push(attention_node)
 	}
 	dot_pattern_expectancy_experiment.push(rest_block)
 }

@@ -21,19 +21,17 @@ jsPsych.plugins["stop-signal"] = (function() {
 	    // it with the output of the function
 	    trial = jsPsych.pluginAPI.evaluateFunctionParameters(trial);
 
-		trial = {};
-		trial.choices = params.choices || [];
-		trial.response_ends_trial = (typeof params.response_ends_trial === 'undefined') ? true : params.response_ends_trial;
-		trial.SS_stimulus = params.SS_stimulus[i];
-		trial.SS_trial_type = params.SS_trial_type[i] // 'stop' or 'go'
+		trial.response_ends_trial = (typeof trial.response_ends_trial === 'undefined') ? true : trial.response_ends_trial;
+		trial.SS_stimulus = trial.SS_stimulus;
+		trial.SS_trial_type = trial.SS_trial_type // 'stop' or 'go'
 		// timing parameters
-		trial.timing_stim = params.timing_stim || -1; // if -1, then show indefinitely
-		trial.timing_SS = params.timing_SS || -1; // if -1, then show indefinitely
-		trial.timing_response = params.timing_response || -1; // if -1, then wait for response forever
-		trial.SSD = params.SSD || -1
+		trial.timing_stim = trial.timing_stim || -1; // if -1, then show indefinitely
+		trial.timing_SS = trial.timing_SS || -1; // if -1, then show indefinitely
+		trial.timing_response = trial.timing_response || -1; // if -1, then wait for response forever
+		trial.SSD = trial.SSD || -1
 		// optional parameters
-		trial.is_html = (typeof params.is_html === 'undefined') ? false : params.is_html;
-		trial.prompt = (typeof params.prompt === 'undefined') ? "" : params.prompt;
+		trial.is_html = (typeof trial.is_html === 'undefined') ? false : trial.is_html;
+		trial.prompt = (typeof trial.prompt === 'undefined') ? "" : trial.prompt;
 		// if any trial variables are functions
 		// this evaluates the function and replaces
 		// it with the output of the function
@@ -69,7 +67,7 @@ jsPsych.plugins["stop-signal"] = (function() {
 
 			// kill any remaining setTimeout handlers
 			for (var i = 0; i < setTimeoutHandlers.length; i++) {
-				clearTimeout(setTimeoutHandlers[i]);
+				clearTimeout(setTimeoutHandlers);
 			}
 
 			// kill keyboard listeners
@@ -77,22 +75,46 @@ jsPsych.plugins["stop-signal"] = (function() {
 				jsPsych.pluginAPI.cancelKeyboardResponse(keyboardListener);
 			}
 
+			//calculate stim and block duration
+	        if (trial.response_ends_trial) {
+	          if (response.rt != -1) {
+	            var block_duration = response.rt
+	          } else {
+	            var block_duration = trial.timing_response
+	          }
+	          if (stim_duration < block_duration & stim_duration != -1) {
+	            var stim_duration = trial.timing_stim
+	          } else {
+	            var stim_duration = block_duration
+	          }
+	        } else {
+	          var block_duration = trial.timing_response
+	          if (stim_duration < block_duration & stim_duration != -1) {
+	            var stim_duration = timing_stim
+	          } else {
+	            var stim_duration = block_duration
+	          }
+	        }
+	        
 			// gather the data to store for the trial
 			var trial_data = {
+				"stimulus": trial.stimulus,
 				"rt": response.rt,
-				"SSD_stimulus": trial.SS_stimulus,
+				"SS_stimulus": trial.SS_stimulus,
 				"key_press": response.key,
-				"SSD": trial.SSD,
-				"SS_trial_type": trial.SS_trial_type
+				"SS_delay": trial.SSD,
+				"SS_trial_type": trial.SS_trial_type,
+		        "possible_responses": trial.choices,
+		        "stim_duration": stim_duration,
+		        "block_duration": block_duration,
+		        "timing_post_trial": trial.timing_post_trial
 			};
-
-			jsPsych.data.write(trial_data);
 
 			// clear the display
 			display_element.html('');
 
 			// move on to the next trial
-			jsPsych.finishTrial();
+			jsPsych.finishTrial(trial_data);
 		};
 
 		// function to handle responses by the subject

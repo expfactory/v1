@@ -1,6 +1,33 @@
 /* ************************************ */
 /* Define helper functions */
 /* ************************************ */
+function getDisplayElement () {
+    $('<div class = display_stage_background></div>').appendTo('body')
+    return $('<div class = display_stage></div>').appendTo('body')
+}
+
+function evalAttentionChecks() {
+  var check_percent = 1
+  if (run_attention_checks) {
+    var attention_check_trials = jsPsych.data.getTrialsOfType('attention-check')
+    var checks_passed = 0
+    for (var i = 0; i < attention_check_trials.length; i++) {
+      if (attention_check_trials[i].correct === true) {
+        checks_passed += 1
+      }
+    }
+    check_percent = checks_passed/attention_check_trials.length
+  } 
+  return check_percent
+}
+
+function addID() {
+  jsPsych.data.addDataToLastTrial({'exp_id': 'antisaccade'})
+}
+
+var getInstructFeedback = function() {
+	return '<div class = centerbox><p class = center-block-text>' + feedback_instruct_text + '</p></div>'
+}
 
 var randomDraw = function(lst) {
     var index = Math.round(Math.random()*(lst.length-1))
@@ -12,10 +39,38 @@ var getFixationLength = function() {
 }
 
 
+
+
+
+var changeData = function(){
+data=jsPsych.data.getData()
+practiceDataCount = 0
+testDataCount = 0
+for(i=0;i<data.length;i++){
+	if(data[i].trial_id == 'practice_intro'){
+	practiceDataCount = practiceDataCount + 1
+	} else if (data[i].trial_id == 'test_intro'){
+	testDataCount = testDataCount + 1
+	}
+	if(practiceDataCount == 1 && testDataCount === 0){
+	//temp_id = data[i].trial_id
+	jsPsych.data.addDataToLastTrial({exp_stage: "practice"})
+	} else if( practiceDataCount == 1 && testDataCount == 1){
+	//temp_id = data[i].trial_id
+	jsPsych.data.addDataToLastTrial({exp_stage: "test"})
+	}
+  }
+}
 /* ************************************ */
 /* Define experimental variables */
 /* ************************************ */
+// generic task variables
+var run_attention_checks = true
+var attention_check_thresh = 0.45
+var sumInstructTime = 0    //ms
+var instructTimeThresh = 5   ///in seconds
 
+// task specific variables
 
 var correct_responses = jsPsych.randomization.repeat([["left arrow",37],["left arrow",37],["right arrow",39],["right arrow",39]],1)
 var prompt_text = '<ul list-text><li>Square:  ' + correct_responses[0][0] + '</li><li>Circle:  ' + correct_responses[1][0] + ' </li><li>Triangle:  ' + correct_responses[2][0] + ' </li><li>Diamond:  ' + correct_responses[3][0] + ' </li></ul>'
@@ -57,22 +112,48 @@ test_cue_sides = jsPsych.randomization.repeat([0,1],exp_len/2,false)
 /* ************************************ */
 /* Set up jsPsych blocks */
 /* ************************************ */
+// Set up attention check node
+var attention_check_block = {
+  type: 'attention-check',
+  timing_response: 30000,
+  response_ends_trial: true,
+  timing_post_trial: 200
+}
+
+var attention_node = {
+  timeline: [attention_check_block],
+  conditional_function: function() {
+    return run_attention_checks
+  }
+}
 
 /* define static blocks */
 var welcome_block = {
-  type: 'text',
-  text: '<div class = centerbox><p class = block-text>Welcome to the antisaccade experiment. Press <strong>enter</strong> to begin.</p></div>',
+  type: 'poldrack-text',
+  text: '<div class = centerbox><p class = center-block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
+  timing_response: 60000,
   timing_post_trial: 0
 };
 
 var end_block = {
-  type: 'text',
+  type: 'poldrack-text',
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
   cont_key: [13],
+  timing_response: 60000,
   timing_post_trial: 0
 };
 
+var feedback_instruct_text = 'Starting with instructions.  Press <strong> Enter </strong> to continue.'
+var feedback_instruct_block = {
+  type: 'poldrack-text',
+  cont_key: [13],
+  text: getInstructFeedback,
+  timing_post_trial: 0,
+  timing_response: 6000
+};
+/// This ensures that the subject does not read through the instructions too quickly.  If they do it too quickly, then we will go over the loop again.
+var instruction_trials = []	
 var instructions_block = {
   type: 'poldrack-instructions',
   pages: ['<div class = centerbox><p class = block-text>In this task you will have to identify which way an arrow is pointing. In each trial a cross will appear on the screen, after which a black square will be presented on one side of the screen (left or right).</p><p class = block-text>Following the square an arrow will be presented on the other side of the screen and then quickly covered up by a grey mask. You should respond by identifying which way the arrow was pointed (left, right, or up) using the arrow keys.</p></div>'],
@@ -80,18 +161,44 @@ var instructions_block = {
   show_clickable_nav: true,
   timing_post_trial: 1000
 };
+instruction_trials.push(feedback_instruct_block)
+instruction_trials.push(instructions_block)
+
+var instruction_node = {
+    timeline: instruction_trials,
+	/* This function defines stopping criteria */
+    loop_function: function(data){
+		for(i=0;i<data.length;i++){
+			if((data[i].trial_type=='poldrack-instructions') && (data[i].rt!=-1)){
+				rt=data[i].rt
+				sumInstructTime=sumInstructTime+rt
+			}
+		}
+		if(sumInstructTime<=instructTimeThresh*1000){
+			feedback_instruct_text = 'Read through instructions too quickly.  Please take your time and make sure you understand the instructions.  Press <strong>enter</strong> to continue.'
+			return true
+		} else if(sumInstructTime>instructTimeThresh*1000){
+			feedback_instruct_text = 'Done with instructions. Press <strong>enter</strong> to continue.'
+			return false
+		}
+    }
+}
 
 var begin_practice_block = {
-  type: 'text',
+  type: 'poldrack-text',
   text: '<div class = centerbox><p class = block-text>We will start with some practice. Remember, use the arrow keys (left, right, and up) to indicate which direction the arrow is pointing.</p><p class = block-text>Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
+  data: {exp_id: "antisaccade", trial_id: "practice_intro"},
+  timing_response: 60000,
   timing_post_trial: 1000
 };
 
 var begin_test_block = {
-  type: 'text',
+  type: 'poldrack-text',
   text: '<div class = centerbox><p class = block-text>We will now start the main experiment. Remember, use the arrow keys (left, right, and up) to indicate which direction the arrow is pointing.</p><p class = block-text>Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
+  data: {exp_id: "antisaccade", trial_id: "test_intro"},
+  timing_response: 60000,
   timing_post_trial: 1000
 };
 
@@ -104,7 +211,8 @@ var fixation_block = {
   data: {exp_id: "antisaccade", "trial_id": "fixation"},
   timing_post_trial: 0,
   timing_stim: getFixationLength(),
-  timing_response: 500
+  timing_response: 500,
+  on_finish: changeData,
 }
 
 
@@ -115,7 +223,7 @@ var fixation_block = {
 
 var antisaccade_experiment = []
 antisaccade_experiment.push(welcome_block);
-antisaccade_experiment.push(instructions_block);
+antisaccade_experiment.push(instruction_node);
 
 //Set up practice
 antisaccade_experiment.push(begin_practice_block)
@@ -144,7 +252,8 @@ for (i=0; i<practice_len; i++) {
       timing_post_trial: 0,
       timing_stim: 225,
       timing_response: 225,
-      response_ends_trial: false
+      response_ends_trial: false,
+      on_finish: changeData,
     }
     
     var target_block = {
@@ -156,7 +265,9 @@ for (i=0; i<practice_len; i++) {
       timing_post_trial: 0,
       timing_stim: 150,
       timing_response: 150,
-      response_ends_trial: false
+      response_ends_trial: false,
+      on_finish: changeData,
+
     }
     
     var mask_block = {
@@ -168,12 +279,14 @@ for (i=0; i<practice_len; i++) {
       timing_post_trial: 0,
       timing_stim: 1000,
       timing_response: 1000,
-      response_ends_trial: false
+      response_ends_trial: false,
+      on_finish: changeData,
     }
     antisaccade_experiment.push(cue_block)
     antisaccade_experiment.push(target_block)
     antisaccade_experiment.push(mask_block)
 }
+antisaccade_experiment.push(attention_node)
 
 //Set up test
 antisaccade_experiment.push(begin_test_block)
@@ -202,7 +315,9 @@ for (i=0; i<exp_len; i++) {
       timing_post_trial: 0,
       timing_stim: 225,
       timing_response: 225,
-      response_ends_trial: false
+      response_ends_trial: false,
+      on_finish: changeData,
+
     }
     
     var target_block = {
@@ -214,7 +329,8 @@ for (i=0; i<exp_len; i++) {
       timing_post_trial: 0,
       timing_stim: 150,
       timing_response: 150,
-      response_ends_trial: false
+      response_ends_trial: false,
+      on_finish: changeData,
     }
     
     var mask_block = {
@@ -226,9 +342,12 @@ for (i=0; i<exp_len; i++) {
       timing_post_trial: 0,
       timing_stim: 1000,
       timing_response: 1000,
-      response_ends_trial: false
+      response_ends_trial: false,
+      on_finish: changeData,
     }
     antisaccade_experiment.push(cue_block)
     antisaccade_experiment.push(target_block)
     antisaccade_experiment.push(mask_block)
 }
+antisaccade_experiment.push(attention_node)
+antisaccade_experiment.push(end_block)

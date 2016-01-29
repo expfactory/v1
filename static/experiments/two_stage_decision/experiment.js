@@ -1,6 +1,30 @@
 /* ************************************ */
 /* Define helper functions */
 /* ************************************ */
+function getDisplayElement () {
+    $('<div class = display_stage_background></div>').appendTo('body')
+    return $('<div class = display_stage></div>').appendTo('body')
+}
+
+function addID() {
+  jsPsych.data.addDataToLastTrial({'exp_id': 'two_stage_decision'})
+}
+
+function evalAttentionChecks() {
+  var check_percent = 1
+  if (run_attention_checks) {
+    var attention_check_trials = jsPsych.data.getTrialsOfType('attention-check')
+    var checks_passed = 0
+    for (var i = 0; i < attention_check_trials.length; i++) {
+      if (attention_check_trials[i].correct === true) {
+        checks_passed += 1
+      }
+    }
+    check_percent = checks_passed/attention_check_trials.length
+  } 
+  return check_percent
+}
+
 //Polar method for generating random samples from a norma distribution.
 //Source: http://blog.yjl.im/2010/09/simulating-normal-random-variable-using.html
 function normal_random(mean, variance) {
@@ -243,12 +267,19 @@ var update_FB_data = function () {
 	jsPsych.data.addDataToLastTrial({condition: FB, trial_num: current_trial, trial_id: phase+'_FB_stage', FB_probs: FB_matrix.slice(0)})
 	return ""	
 }
-
+var getInstructFeedback = function() {
+	return '<div class = centerbox><p class = center-block-text>' + feedback_instruct_text + '</p></div>'
+}
 /* ************************************ */
 /* Define experimental variables */
 /* ************************************ */
+// generic task variables
+var run_attention_checks = true
+var attention_check_thresh = 0.62
+var sumInstructTime = 0    //ms
+var instructTimeThresh = 7   ///in seconds
 
-//define global variables
+// task specific variables
 var practice_trials_num = 10
 var test_trials_num = 200
 var current_trial = -1 
@@ -310,19 +341,53 @@ var curr_ss_stim = practice_ss_stim
 /* ************************************ */
 /* Set up jsPsych blocks */
 /* ************************************ */
+// Set up attention check node
+var attention_check_block = {
+  type: 'attention-check',
+  timing_response: 30000,
+  response_ends_trial: true,
+  timing_post_trial: 200
+}
+
+var attention_node = {
+  timeline: [attention_check_block],
+  conditional_function: function() {
+    return run_attention_checks
+  }
+}
+
 /* define static blocks */
 var welcome_block = {
-  type: 'text',
-  text: '<div class = centerbox><p class = block-text>Welcome to the two-stage decision task experiment. Press <strong>enter</strong> to begin.</p></div>',
+  type: 'poldrack-text',
+  text: '<div class = centerbox><p class = center-block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
+  timing_response: 60000,
   timing_post_trial: 0
 };
 
+var attention_check_block = {
+	type: 'attention-check',
+	timing_response: 30000,
+	response_ends_trial: true,
+	timing_post_trial: 200
+}
+
+
+var feedback_instruct_text = 'Starting with instructions.  Press <strong> Enter </strong> to continue.'
+var feedback_instruct_block = {
+  type: 'poldrack-text',
+  cont_key: [13],
+  text: getInstructFeedback,
+  timing_post_trial: 0,
+  timing_response: 6000
+};
+
+/// This ensures that the subject does not read through the instructions too quickly.  If they do it too quickly, then we will go over the loop again.
+var instruction_trials = []
 var instructions_block = {
   type: 'poldrack-instructions',
   pages: [
-	'<div class = centerbox><p class = block-text>In this task, you need to make decisions in two stages to get a reward. In each stage, two abstract shapes will come up on the screen overlaid on colored backgrounds. You choose one by pressing either the left or right arrow keys.</p><p class = block-text>On the next screen you will see an example "stage" with two shapes on colored backgrounds.</p></div>',
-	"<div class = decision-left style='background:" + curr_colors[0] +"; '><img class = 'decision-stim' src= '" + curr_images[0] + "'></img></div><div class = decision-right style='background:" + curr_colors[0] +"; '><img class = 'decision-stim' src= '" + curr_images[1] + "'></img></div>",
+	"<div class = centerbox><p class = block-text>In this task, you need to make decisions in two stages to get a reward. In each stage, two abstract shapes will come up on the screen overlaid on colored backgrounds. You choose one by pressing either the left or right arrow keys.</p><p class = block-text>Below is an example 'stage' with two shapes on colored backgrounds.</p><div class = decision-left style='background:" + curr_colors[0] +"; '><img class = 'decision-stim' src= '" + curr_images[0] + "'></img></div><div class = decision-right style='background:" + curr_colors[0] +"; '><img class = 'decision-stim' src= '" + curr_images[1] + "'></img></div></div>",
 	'<div class = centerbox><p class = block-text>Both the first and second stage will look something like that. After you make your first-stage choice, you will move to one of two second-stages (referred to as 2a and 2b). Each second stage has its own background color and has two different abstract shapes.</p><p class = block-text>In total, the task has three "stages": a first stage which can lead to either stage 2a or stage 2b. Each stage is associated with a different color background and has its own shapes. In total there are six different shapes in the three stages.</p></div>',
 	'<div class = centerbox><p class = block-text>Each first-stage choice is primarily associated with one of the two second-stages. This means that each first-stage choice is more likely to bring you to one of the two second-stages than the other.</p><p class = block-text>For instance, one first-stage shape may bring you to 2a most of the time, and only sometimes bring you to 2b, while the other shape does the reverse.</p><p class = block-text>After moving to one of the two second-stages, you respond by again pressing an arrow key. After you respond you will get feedback.</p></div>',
 	'<div class = centerbox><p class = block-text>The feedback will either be a gold coin or a "0" indicating whether you won or lost on that trial. The gold coins determine your bonus pay, so try to get as many as possible!</p><p class = block-text>As mentioned, there are four second-stage shapes: two shapes in 2a and two shapes in 2b. These four shapes each have a different chance of paying a gold coin. You want to learn which shape is the best so you can get as many coins as possible.</p></div>',
@@ -333,32 +398,59 @@ var instructions_block = {
   show_clickable_nav: true,
   timing_post_trial: 1000
 }
+instruction_trials.push(feedback_instruct_block)
+instruction_trials.push(instructions_block)
+
+var instruction_node = {
+    timeline: instruction_trials,
+	/* This function defines stopping criteria */
+    loop_function: function(data){
+		for(i=0;i<data.length;i++){
+			if((data[i].trial_type=='poldrack-instructions') && (data[i].rt!=-1)){
+				rt=data[i].rt
+				sumInstructTime=sumInstructTime+rt
+			}
+		}
+		if(sumInstructTime<=instructTimeThresh*1000){
+			feedback_instruct_text = 'Read through instructions too quickly.  Please take your time and make sure you understand the instructions.  Press <strong>enter</strong> to continue.'
+			return true
+		} else if(sumInstructTime>instructTimeThresh*1000){
+			feedback_instruct_text = 'Done with instructions. Press <strong>enter</strong> to continue.'
+			return false
+		}
+    }
+}
+
 
 var end_block = {
-  type: 'text',
+  type: 'poldrack-text',
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
   cont_key: [13],
+  timing_response: 60000,
   timing_post_trial: 0
 };
 
 var wait_block = {
-  type: 'text',
+  type: 'poldrack-text',
   text: '<div class = centerbox><p class = center-block-text>Take a break!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
   cont_key: [13],
+  timing_response: 120000,
   timing_post_trial: 1000
 };
 
 var start_practice_block = {
-  type: 'text',
+  type: 'poldrack-text',
   text: '<div class = centerbox><p class = center-block-text>Starting practice. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
+  timing_response: 60000,
   timing_post_trial: 1000
 };
 
 var start_test_block = {
-  type: 'text',
+  type: 'poldrack-text',
   text: '<div class = centerbox><p class = center-block-text>Starting test. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
+  timing_response: 60000,
   timing_post_trial: 1000
 };
 
@@ -460,8 +552,9 @@ var noFB_node = {
 
 var two_stage_decision_experiment = []
 two_stage_decision_experiment.push(welcome_block);
-two_stage_decision_experiment.push(instructions_block);
+two_stage_decision_experiment.push(instruction_node);
 two_stage_decision_experiment.push(start_practice_block);
+two_stage_decision_experiment.push(attention_node)
 for (var i = 0; i < practice_trials_num; i ++ ) {
 	two_stage_decision_experiment.push(first_stage)
 	two_stage_decision_experiment.push(first_stage_selected)
@@ -469,6 +562,7 @@ for (var i = 0; i < practice_trials_num; i ++ ) {
 	two_stage_decision_experiment.push(FB_node)
 	two_stage_decision_experiment.push(noFB_node)
 }
+two_stage_decision_experiment.push(attention_node)
 two_stage_decision_experiment.push(change_phase_block)
 two_stage_decision_experiment.push(start_test_block)
 for (var i = 0; i < test_trials_num/2; i ++ ) {
@@ -478,12 +572,15 @@ for (var i = 0; i < test_trials_num/2; i ++ ) {
 	two_stage_decision_experiment.push(FB_node)
 	two_stage_decision_experiment.push(noFB_node)
 }
+two_stage_decision_experiment.push(attention_node)
 two_stage_decision_experiment.push(wait_block)
 for (var i = 0; i < test_trials_num/2; i ++ ) {
+	two_stage_decision_experiment.push(attention_node)
 	two_stage_decision_experiment.push(first_stage)
 	two_stage_decision_experiment.push(first_stage_selected)
 	two_stage_decision_experiment.push(second_stage)
 	two_stage_decision_experiment.push(FB_node)
 	two_stage_decision_experiment.push(noFB_node)
 }
+two_stage_decision_experiment.push(attention_node)
 two_stage_decision_experiment.push(end_block)
