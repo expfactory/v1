@@ -198,7 +198,7 @@ var stimArray=['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','
 var probes= ['rec_pos','xrec_pos', 'rec_neg', 'xrec_neg']
 var probeTypeArray=jsPsych.randomization.repeat(probes,experimentLength/4)
 var stimFix = ['fixation']
-var pathSource = 'static/experiments/recent_probes/images/'
+var pathSource = '/static/experiments/recent_probes/images/'
 var fileType = '.png'
 
 
@@ -208,6 +208,7 @@ var fileType = '.png'
 // Set up attention check node
 var attention_check_block = {
   type: 'attention-check',
+  data: {exp_id: "recent_probes", trial_id: "attention_check"},
   timing_response: 30000,
   response_ends_trial: true,
   timing_post_trial: 200
@@ -223,6 +224,7 @@ var attention_node = {
 var welcome_block = {
   type: 'poldrack-text',
   timing_response: 60000,
+  data: {exp_id: "recent_probes", trial_id: "welcome"},
   text: '<div class = centerbox><p class = center-block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   timing_post_trial: 0
@@ -231,6 +233,7 @@ var welcome_block = {
 var end_block = {
   type: 'poldrack-text',
   timing_response: 60000,
+  data: {exp_id: "recent_probes", trial_id: "end"},
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
   cont_key: [13],
   timing_post_trial: 0
@@ -239,15 +242,17 @@ var end_block = {
 var feedback_instruct_text = 'Starting with instructions.  Press <strong> Enter </strong> to continue.'
 var feedback_instruct_block = {
   type: 'poldrack-text',
+  data: {exp_id: "recent_probes", trial_id: "instruction"},
   cont_key: [13],
   text: getInstructFeedback,
   timing_post_trial: 0,
-  timing_response: 6000
+  timing_response: 60000
 };
 /// This ensures that the subject does not read through the instructions too quickly.  If they do it too quickly, then we will go over the loop again.
 var instruction_trials = []
 var instructions_block = {
   type: 'poldrack-instructions',
+  data: {exp_id: "recent_probes", trial_id: "instruction"},
   pages:  [
 	'<div class = centerbox><p class = block-text>In this experiment, you will be presented with 6 letters on each trial, known as your memory set.  You must memorize all 6 letters. </p><p class = block-text>After the presentation of 6 letters, there will be a short delay and then you will be presented with a  single letter. Respond with the <strong> Left</strong> arrow key if it was in the memory set, and the <strong> Right </strong> arrow key if it was not in the memory set.</p></div>',
   ],
@@ -282,6 +287,7 @@ var instruction_node = {
 var start_test_block = {
   type: 'poldrack-text',
   timing_response: 60000,
+  data: {exp_id: "recent_probes", trial_id: "test_intro"},
   text: '<div class = centerbox><p class = block-text>We will now start a test run. Remember, at the end of the trial respond with the <strong> Left</strong> arrow key if the letter presented is in the memory set, and the <strong> Right </strong> arrow key if it is not in the memory set.</p><p class = block-text> Press <strong>Enter</strong> to begin the experiment.</p></div>',
   cont_key: [13],
   timing_post_trial: 1000
@@ -292,7 +298,7 @@ var start_fixation_block = {
   stimulus: '<div class = centerbox><div class = fixation><span style="color:red">+</span></div></div>',
   is_html: true,
   choices: 'none',
-  data: {exp_id: "recent_probes", "trial_id": "fixation"},
+  data: {exp_id: "recent_probes", trial_id: "fixation", exp_stage: "test"},
   timing_post_trial: 0,
   timing_stim: 1000,
   timing_response: 1000,
@@ -304,7 +310,7 @@ var fixation_block = {
   stimulus: '<div class = centerbox><div class = fixation><span style="color:red">+</span></div></div>',
   is_html: true,
   choices: 'none',
-  data: {exp_id: "recent_probes", "trial_id": "fixation"},
+  data: {exp_id: "recent_probes", trial_id: "fixation", exp_stage: "test"},
   timing_post_trial: 0,
   timing_stim: 3000,
   timing_response: 3000,
@@ -316,7 +322,7 @@ var ITI_fixation_block = {
   stimulus: '<div class = centerbox><div class = fixation><span style="color:red">+</span></div></div>',
   is_html: true,
   choices: [37,39],
-  data: {exp_id: "recent_probes", "trial_id": "ITI_fixation"},
+  data: {exp_id: "recent_probes", trial_id: "ITI_fixation", exp_stage: "test"},
   response_ends_trial: false,
   timing_post_trial: 0,
   timing_stim: 4000,
@@ -328,7 +334,7 @@ var training_block = {
   type: 'poldrack-single-stim',
   stimulus: getTrainingSet,
   is_html: true,
-  data: {exp_id: "recent_probes", trial_id: "test"},
+  data: {exp_id: "recent_probes", trial_id: "stim", exp_stage: "test"},
   choices: 'none',
   timing_post_trial: 0,
   timing_stim: 2000,
@@ -341,7 +347,7 @@ var training_block = {
   type: 'poldrack-single-stim',
   stimulus: getProbe,
   is_html: true,
-  data: {exp_id: "recent_probes", trial_id: "probe"},
+  data: {exp_id: "recent_probes", trial_id: "probe", exp_stage: "test"},
   choices: [37,39],
   timing_post_trial: 0,
   timing_stim: 2000,

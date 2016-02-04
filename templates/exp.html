@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title>My experiment</title>
+    <title>My Experiment</title>
     <script src="static/lib/jquery-min.js" type="text/javascript"> </script>
     <script src="static/lib/underscore-min.js" type="text/javascript"> </script>
     <script src="static/lib/backbone-min.js" type="text/javascript"> </script>
@@ -14,67 +14,224 @@
         var condition = "{{ condition }}";
         var counterbalance = "{{ counterbalance }}";
     </script>
+
     
-    <script src="static/js/jspsych/jspsych.js"></script>
-    <script src="static/js/jspsych/plugins/jspsych-text.js"></script>
-    <script src="static/js/jspsych/plugins/jspsych-instructions.js"></script>
-    <script src="static/js/jspsych/plugins/jspsych-single-stim.js"></script>
-    <script src="static/js/jspsych/plugins/jspsych-categorize.js"></script>
-    <script src="static/js/jspsych/custom_plugins/jspsych-consent.js"></script>
-    <script src="static/js/jspsych/plugins/jspsych-survey-text.js"></script>
-    <script src="static/js/jspsych/custom_plugins/jspsych-stim-feedback-IE.js"></script>
+<link rel='stylesheet' type='text/css' href='static/css/default_style.css'>
+<link rel='stylesheet' type='text/css' href='static/css/jspsych.css'>
+<link rel='stylesheet' type='text/css' href='static/experiments/angling_risk_task/style.css'>
+<link rel='stylesheet' type='text/css' href='static/experiments/antisaccade/style.css'>
+<link rel='stylesheet' type='text/css' href='static/experiments/attention_network_task/style.css'>
+<link rel='stylesheet' type='text/css' href='static/experiments/ax_cpt/style.css'>
+<link rel='stylesheet' type='text/css' href='static/experiments/bickel_titrator/style.css'>
+<link rel='stylesheet' type='text/css' href='static/experiments/bis11/style.css'>
+<link rel='stylesheet' type='text/css' href='static/experiments/bis_bas/style.css'>
+<link rel='stylesheet' type='text/css' href='static/experiments/brief_self_control/style.css'>
+<link rel='stylesheet' type='text/css' href='static/experiments/choice_reaction_time/style.css'>
+<link rel='stylesheet' type='text/css' href='static/experiments/columbia_card_task_cold/style.css'>
+<link rel='stylesheet' type='text/css' href='static/experiments/columbia_card_task_hot/style.css'>
+<link rel='stylesheet' type='text/css' href='static/experiments/dickman/style.css'>
+<link rel='stylesheet' type='text/css' href='static/experiments/dietary_decision/style.css'>
+<link rel='stylesheet' type='text/css' href='static/experiments/digit_span/style.css'>
+<link rel='stylesheet' type='text/css' href='static/experiments/dimensional_set_shifting/style.css'>
+<link rel='stylesheet' type='text/css' href='static/experiments/directed_forgetting/style.css'>
+<link rel='stylesheet' type='text/css' href='static/experiments/discount_titrate/style.css'>
+<link rel='stylesheet' type='text/css' href='static/experiments/dospert_eb/style.css'>
+<link rel='stylesheet' type='text/css' href='static/experiments/dospert_rp/style.css'>
+<link rel='stylesheet' type='text/css' href='static/experiments/dospert_rt/style.css'>
+<link rel='stylesheet' type='text/css' href='static/experiments/dot_pattern_expectancy/style.css'>
+<link rel='stylesheet' type='text/css' href='static/experiments/eating_questionnaire/style.css'>
+<link rel='stylesheet' type='text/css' href='static/experiments/emotion_regulation/style.css'>
+<link rel='stylesheet' type='text/css' href='static/experiments/erq/style.css'>
+<link rel='stylesheet' type='text/css' href='static/experiments/flanker/style.css'>
+<link rel='stylesheet' type='text/css' href='static/experiments/future_time_perspective/style.css'>
+<link rel='stylesheet' type='text/css' href='static/experiments/gm_paradigm/style.css'>
+<link rel='stylesheet' type='text/css' href='static/experiments/go_nogo/style.css'>
+<link rel='stylesheet' type='text/css' href='static/experiments/grit_scale/style.css'>
+<link rel='stylesheet' type='text/css' href='static/experiments/hierarchical_rule/style.css'>
+<link rel='stylesheet' type='text/css' href='static/experiments/holt_laury/style.css'>
+<link rel='stylesheet' type='text/css' href='static/experiments/image_monitoring/style.css'>
+<link rel='stylesheet' type='text/css' href='static/experiments/impulsive_venture/style.css'>
+<link rel='stylesheet' type='text/css' href='static/experiments/information_sampling_task/style.css'>
+<link rel='stylesheet' type='text/css' href='static/experiments/keep_track/style.css'>
+<link rel='stylesheet' type='text/css' href='static/experiments/kirby/style.css'>
+<link rel='stylesheet' type='text/css' href='static/experiments/leisure_time_activity/style.css'>
+<link rel='stylesheet' type='text/css' href='static/experiments/local_global/style.css'>
+<link rel='stylesheet' type='text/css' href='static/experiments/mindful_attention_awareness/style.css'>
+<link rel='stylesheet' type='text/css' href='static/experiments/motor_selective_stop_signal/style.css'>
+<link rel='stylesheet' type='text/css' href='static/experiments/mpq_control/style.css'>
+<link rel='stylesheet' type='text/css' href='static/experiments/multisource/style.css'>
+<link rel='stylesheet' type='text/css' href='static/experiments/number_letter/style.css'>
+<link rel='stylesheet' type='text/css' href='static/experiments/probabilistic_selection/style.css'>
+<link rel='stylesheet' type='text/css' href='static/experiments/psychological_refractory_period/style.css'>
+<link rel='stylesheet' type='text/css' href='static/experiments/random_number_generation/style.css'>
+<link rel='stylesheet' type='text/css' href='static/experiments/recent_probes/style.css'>
+<link rel='stylesheet' type='text/css' href='static/experiments/selection_optimization_compensation/style.css'>
+<link rel='stylesheet' type='text/css' href='static/experiments/self_regulation/style.css'>
+<link rel='stylesheet' type='text/css' href='static/experiments/sensation_seeking/style.css'>
+<link rel='stylesheet' type='text/css' href='static/experiments/shift_task/style.css'>
+<link rel='stylesheet' type='text/css' href='static/experiments/simon/style.css'>
+<link rel='stylesheet' type='text/css' href='static/experiments/simple_reaction_time/style.css'>
+<link rel='stylesheet' type='text/css' href='static/experiments/spatial_span/style.css'>
+<link rel='stylesheet' type='text/css' href='static/experiments/stim_selective_stop_signal/style.css'>
+<link rel='stylesheet' type='text/css' href='static/experiments/stop_signal/style.css'>
+<link rel='stylesheet' type='text/css' href='static/experiments/stroop/style.css'>
+<link rel='stylesheet' type='text/css' href='static/experiments/ten_item_personality/style.css'>
+<link rel='stylesheet' type='text/css' href='static/experiments/test_task/style.css'>
+<link rel='stylesheet' type='text/css' href='static/experiments/theories_of_willpower/style.css'>
+<link rel='stylesheet' type='text/css' href='static/experiments/threebytwo/style.css'>
+<link rel='stylesheet' type='text/css' href='static/experiments/time_perspective/style.css'>
+<link rel='stylesheet' type='text/css' href='static/experiments/tower_of_london/style.css'>
+<link rel='stylesheet' type='text/css' href='static/experiments/tower_of_london_imagine/style.css'>
+<link rel='stylesheet' type='text/css' href='static/experiments/two_stage_decision/style.css'>
+<link rel='stylesheet' type='text/css' href='static/experiments/upps_impulsivity/style.css'>
+<link rel='stylesheet' type='text/css' href='static/experiments/volatile_bandit/style.css'>
+<link rel='stylesheet' type='text/css' href='static/experiments/willingness_to_wait/style.css'>
+<link rel='stylesheet' type='text/css' href='static/experiments/writing_task/style.css'>
+<script src='static/experiments/adaptive_n_back/experiment.js'></script>
+<script src='static/experiments/angling_risk_task/experiment.js'></script>
+<script src='static/experiments/antisaccade/experiment.js'></script>
+<script src='static/experiments/attention_network_task/experiment.js'></script>
+<script src='static/experiments/attention_network_task/jspsych-ANT-practice.js'></script>
+<script src='static/experiments/ax_cpt/experiment.js'></script>
+<script src='static/experiments/bickel_titrator/experiment.js'></script>
+<script src='static/experiments/bis11/experiment.js'></script>
+<script src='static/experiments/bis_bas/experiment.js'></script>
+<script src='static/experiments/brief_self_control/experiment.js'></script>
+<script src='static/experiments/choice_reaction_time/experiment.js'></script>
+<script src='static/experiments/cognitive_reflection/experiment.js'></script>
+<script src='static/experiments/columbia_card_task_cold/experiment.js'></script>
+<script src='static/experiments/columbia_card_task_hot/experiment.js'></script>
+<script src='static/experiments/dickman/experiment.js'></script>
+<script src='static/experiments/dietary_decision/experiment.js'></script>
+<script src='static/experiments/digit_span/experiment.js'></script>
+<script src='static/experiments/dimensional_set_shifting/experiment.js'></script>
+<script src='static/experiments/directed_forgetting/experiment.js'></script>
+<script src='static/experiments/discount_titrate/experiment.js'></script>
+<script src='static/experiments/dospert_eb/experiment.js'></script>
+<script src='static/experiments/dospert_rp/experiment.js'></script>
+<script src='static/experiments/dospert_rt/experiment.js'></script>
+<script src='static/experiments/dot_pattern_expectancy/experiment.js'></script>
+<script src='static/experiments/eating_questionnaire/experiment.js'></script>
+<script src='static/experiments/emotion_regulation/experiment.js'></script>
+<script src='static/experiments/erq/experiment.js'></script>
+<script src='static/experiments/flanker/experiment.js'></script>
+<script src='static/experiments/future_time_perspective/experiment.js'></script>
+<script src='static/experiments/gm_paradigm/experiment.js'></script>
+<script src='static/experiments/go_nogo/experiment.js'></script>
+<script src='static/experiments/grit_scale/experiment.js'></script>
+<script src='static/experiments/hierarchical_rule/experiment.js'></script>
+<script src='static/experiments/holt_laury/experiment.js'></script>
+<script src='static/experiments/image_monitoring/experiment.js'></script>
+<script src='static/experiments/impulsive_venture/experiment.js'></script>
+<script src='static/experiments/information_sampling_task/experiment.js'></script>
+<script src='static/experiments/keep_track/experiment.js'></script>
+<script src='static/experiments/kirby/experiment.js'></script>
+<script src='static/experiments/leisure_time_activity/experiment.js'></script>
+<script src='static/experiments/letter_memory/experiment.js'></script>
+<script src='static/experiments/local_global/experiment.js'></script>
+<script src='static/experiments/mindful_attention_awareness/experiment.js'></script>
+<script src='static/experiments/motor_selective_stop_signal/experiment.js'></script>
+<script src='static/experiments/mpq_control/experiment.js'></script>
+<script src='static/experiments/multiplication/experiment.js'></script>
+<script src='static/experiments/multisource/experiment.js'></script>
+<script src='static/experiments/n_back/experiment.js'></script>
+<script src='static/experiments/number_letter/experiment.js'></script>
+<script src='static/experiments/plus_minus/experiment.js'></script>
+<script src='static/experiments/probabilistic_selection/experiment.js'></script>
+<script src='static/experiments/psychological_refractory_period/experiment.js'></script>
+<script src='static/experiments/random_number_generation/experiment.js'></script>
+<script src='static/experiments/recent_probes/experiment.js'></script>
+<script src='static/experiments/selection_optimization_compensation/experiment.js'></script>
+<script src='static/experiments/self_regulation/experiment.js'></script>
+<script src='static/experiments/sensation_seeking/experiment.js'></script>
+<script src='static/experiments/shift_task/experiment.js'></script>
+<script src='static/experiments/simon/experiment.js'></script>
+<script src='static/experiments/simple_reaction_time/experiment.js'></script>
+<script src='static/experiments/spatial_span/experiment.js'></script>
+<script src='static/experiments/stim_selective_stop_signal/experiment.js'></script>
+<script src='static/experiments/stop_signal/experiment.js'></script>
+<script src='static/experiments/stroop/experiment.js'></script>
+<script src='static/experiments/ten_item_personality/experiment.js'></script>
+<script src='static/experiments/test_task/experiment.js'></script>
+<script src='static/experiments/theories_of_willpower/experiment.js'></script>
+<script src='static/experiments/threebytwo/experiment.js'></script>
+<script src='static/experiments/time_perspective/experiment.js'></script>
+<script src='static/experiments/tone_monitoring/experiment.js'></script>
+<script src='static/experiments/tower_of_london/experiment.js'></script>
+<script src='static/experiments/tower_of_london_imagine/experiment.js'></script>
+<script src='static/experiments/treatment_self_regulation_questionnaire/experiment.js'></script>
+<script src='static/experiments/two_stage_decision/experiment.js'></script>
+<script src='static/experiments/upps_impulsivity/experiment.js'></script>
+<script src='static/experiments/volatile_bandit/experiment.js'></script>
+<script src='static/experiments/willingness_to_wait/experiment.js'></script>
+<script src='static/experiments/writing_task/experiment.js'></script>
+<script src='static/js/jspsych/custom_plugins/jspsych-single-stim-button.js'></script>
+<script src='static/js/jspsych/jspsych.js'></script>
+<script src='static/js/jspsych/plugins/jspsych-call-function.js'></script>
+<script src='static/js/jspsych/plugins/jspsych-single-audio.js'></script>
+<script src='static/js/jspsych/plugins/jspsych-single-stim.js'></script>
+<script src='static/js/jspsych/plugins/jspsych-survey-multi-choice.js'></script>
+<script src='static/js/jspsych/plugins/jspsych-survey-text.js'></script>
+<script src='static/js/jspsych/plugins/jspsych-text.js'></script>
+<script src='static/js/jspsych/poldrack_plugins/jspsych-attention-check.js'></script>
+<script src='static/js/jspsych/poldrack_plugins/jspsych-categorize-audio.js'></script>
+<script src='static/js/jspsych/poldrack_plugins/jspsych-poldrack-categorize.js'></script>
+<script src='static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js'></script>
+<script src='static/js/jspsych/poldrack_plugins/jspsych-poldrack-multi-stim-multi-response.js'></script>
+<script src='static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js'></script>
+<script src='static/js/jspsych/poldrack_plugins/jspsych-poldrack-survey-multi-choice.js'></script>
+<script src='static/js/jspsych/poldrack_plugins/jspsych-poldrack-text.js'></script>
+<script src='static/js/jspsych/poldrack_plugins/jspsych-single-stim-button.js'></script>
+<script src='static/js/jspsych/poldrack_plugins/jspsych-stop-signal.js'></script>
+<script src='static/js/jspsych/poldrack_plugins/jspsych-writing.js'></script>    
     <script src="static/js/load_experiments.js" type="text/javascript"></script>
-    <script src="/static/js/psiturk.js" type="text/javascript"></script>	
-    <link href="static/css/jspsych.css" rel="stylesheet" type="text/css"></link>
-    <link href="static/css/default_style.css" rel="stylesheet" type="text/css"></link>
-	
+    <script src="static/js/psiturk.js" type="text/javascript"></script>		
+    <link rel='stylesheet' href='static/css/default_style.css' type="text/css">  
+  
   </head>
   <body>
 	  
 	  <script> 
-	    var psiturk = new PsiTurk(uniqueId, adServerLoc, mode);
-	    
+	   
+              var psiturk = new PsiTurk(uniqueId, adServerLoc, mode);	    
 		var task_list = '<ul list-text>'
 		for (i=0; i<experiment_names.length; i++) {
 			task_list += '<li>' + experiment_names[i] + '</li>'
 		}
-
-
-        var consent_block = {
-          type:'consent',
-          consent_text:'<div class = centerbox><p class = block-text>Welcome to the experiment. Please sign away your brain.</p><br></br>',
-          checkbox_text: 'I agree to participate in this study.',
-          button_text: "Begin experiment!",
-          timing_post_trial: 0
-        };
       
 		
 		var task_list_block = {
 		  type: 'text',
 		  text: '<div class = centerbox><p class = block-text>In this HIT you will be completing the following tasks: </p>' + task_list + '</ul><p class = block-text>Press <strong>enter</strong> to continue.</p></div>',
-		  cont_key: 13,
+		  cont_key: [13],
 		};
 				
 		var experiments = []
 		experiments.push(task_list_block)
-        experiments.push(consent_block);
-		<!-- concatenate on the experimental blocks defined for each of the constituent experiments -->
+
+		// concatenate on the experimental blocks defined for each of the constituent experiments
 		cat_experiments(experiments)
 
-		<!-- start the experiment -->
+            $( document ).ready(function() {
+
+		// start the experiment -->
 		jsPsych.init({
-		    //experiment_structure: experiments,
-		    timeline: experiments,
-        on_finish: function() {
-                psiturk.saveData({
-                    success: function() { psiturk.completeHIT(); }
-                });
-            },
-            on_data_update: function(data) {
-                psiturk.recordTrialData(data);
-            }
+	
+ 	            timeline: experiments,
+                    display_element: "getDisplayElement",
+                    fullscreen: true,
+
+                    on_finish: function() {
+                        psiturk.saveData({
+                        success: function() { psiturk.completeHIT(); }
+                    });
+                },
+                    on_data_update: function(data) {
+                        psiturk.recordTrialData(data);
+                     }
 		});
-		
+
+          });		
 	  </script>
   </body>
 </html>

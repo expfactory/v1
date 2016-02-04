@@ -65,8 +65,9 @@ var getFlatData = function() {
 }
 
 var getInstructFeedback = function() {
-	return '<div class = centerbox><p class = center-block-text>' + feedback_instruct_text + '</p></div>'
+  return '<div class = centerbox><p class = "white-text center-block-text">' + feedback_instruct_text + '</p></div>'
 }
+
 /* ************************************ */
 /* Define experimental variables */
 /* ************************************ */
@@ -138,6 +139,7 @@ instructions_grid += '</div>'
 // Set up attention check node
 var attention_check_block = {
   type: 'attention-check',
+  data: {exp_id: "hierarchical_rule", trial_id: "attention_check"},
   timing_response: 30000,
   response_ends_trial: true,
   timing_post_trial: 200
@@ -167,7 +169,7 @@ var feedback_instruct_block = {
   data: {exp_id: "hierarchical_rule", trial_id: "instruction"},
   text: getInstructFeedback,
   timing_post_trial: 0,
-  timing_response: 6000
+  timing_response: 60000
 };
 /// This ensures that the subject does not read through the instructions too quickly.  If they do it too quickly, then we will go over the loop again.
 var instruction_trials = []	 

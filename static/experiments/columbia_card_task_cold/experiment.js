@@ -2,7 +2,10 @@
 /* Define helper functions */
 /* ************************************ */
 
-/// BUGS TO FIX, make sure that it is only subtracting the FIRST time we hit a loss card.  add data to excel spreadsheet, and then add a last page telling the participants how much they've won
+function getDisplayElement () {
+    $('<div class = display_stage_background></div>').appendTo('body')
+    return $('<div class = display_stage></div>').appendTo('body')
+}
 
 var getInstructFeedback = function() {
 	return '<div class = centerbox><p class = center-block-text>' + feedback_instruct_text + '</p></div>'
@@ -426,7 +429,7 @@ var gameSetup = "<div class = titlebox><div class = center-text><strong>How many
 /* ************************************ */
 /* define static blocks */
 var welcome_block = {
-  type: 'text',
+  type: 'poldrack-text',
   data: {exp_id: "columbia_card_task_cold", trial_id: 'welcome'},
   text:  "<div class = titlebox><div class = center-text><strong>Welcome to the Columbia Card Task--Cold Version</strong></div></div>",
   cont_key: [13],
@@ -440,7 +443,7 @@ var feedback_instruct_block = {
   data: {exp_id: "columbia_card_task_cold", trial_id: 'instruction'},
   text: getInstructFeedback,
   timing_post_trial: 0,
-  timing_response: 6000
+  timing_response: 60000
 };
 /// This ensures that the subject does not read through the instructions too quickly.  If they do it too quickly, then we will go over the loop again.
 var instruction_trials = []	  
@@ -612,18 +615,6 @@ var practice_block2 = {
   timing_post_trial: 0
 };
 
-var practice_chunk = {
-    chunk_type: 'while',
-    timeline: [test_block],
-    continue_function: function(data){ 
-       if (roundOver == 1) {
-       		console.log('test')
-			return false
-		} else {
-			return true
-		}
-    }
-}
 
 var test_block = {
   type: 'poldrack-single-stim',
@@ -639,13 +630,13 @@ var end_instructions = {
   type: 'poldrack-single-stim',
   stimulus: '<div class = centerbox><p class = center-block-text><strong>End of Instructions </strong></p><p class = center-block-text>Press <strong>enter</strong> when you are ready to play the game.</p></div>',
   is_html: true,
-  data: {exp_id: "columbia_card_task_cold", trial_id: 'end instructions'},
+  data: {exp_id: "columbia_card_task_cold", trial_id: 'end_instructions'},
   choices: [13],
   timing_post_trial: 0
 };
 
 var end_block = {
-  type: 'text',
+  type: 'poldrack-text',
   data: {exp_id: "columbia_card_task_cold", trial_id: 'end'},
   text: '<div class = centerbox><p class = center-block-text>Finished with this task.</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
   cont_key: [13],
@@ -655,7 +646,7 @@ var end_block = {
 
 
 var start_practice_block = {
-  type: 'text',
+  type: 'poldrack-text',
   data: {exp_id: "columbia_card_task_cold", trial_id: 'practice_intro'},
   text: '<div class = centerbox><p class = center-block-text>Hello<strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
@@ -663,7 +654,7 @@ var start_practice_block = {
 };
 
 var start_test_block = {
-  type: 'text',
+  type: 'poldrack-text',
   data: {exp_id: "columbia_card_task_cold", trial_id: 'test_intro'},
   text: '<div class = centerbox><p class = block-text>We will now start the test. Respond to the "X" as quickly as possible by pressing the spacebar. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
@@ -671,7 +662,7 @@ var start_test_block = {
 };
 
 var payout_text = {
-  type: 'text',
+  type: 'poldrack-text',
   text: getText,
   data: {exp_id: "columbia_card_task_cold", trial_id: 'reward'},
   cont_key: [13],

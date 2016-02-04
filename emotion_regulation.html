@@ -4,19 +4,20 @@
     <meta name="robots" content="noindex">
     <title>The Experiment Factory: Preview</title>
     
-<link rel='stylesheet' href='static/experiments/emotion_regulation/style.css'>
-<link rel='stylesheet' href='static/css/jspsych.css'>
-<link rel='stylesheet' href='static/css/default_style.css'>
+<link rel='stylesheet' type='text/css' href='static/css/jspsych.css'>
+<link rel='stylesheet' type='text/css' href='static/css/default_style.css'>
+<link rel='stylesheet' type='text/css' href='static/experiments/emotion_regulation/style.css'>
 </head>
 
 <body>
-
 <script src='//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 
 <script src='static/js/jspsych/jspsych.js'></script>
-<script src='static/js/jspsych/plugins/jspsych-text.js'></script>
+<script src='static/js/jspsych/poldrack_plugins/jspsych-poldrack-text.js'></script>
 <script src='static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js'></script>
-<script src='static/js/jspsych/poldrack_plugins/jspsych-poldrack-survey-multi-choice.js'></script>
+<script src='static/js/jspsych/poldrack_plugins/jspsych-attention-check.js'></script>
+<script src='static/js/jspsych/plugins/jspsych-call-function.js'></script>
+<script src='static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js'></script>
 <script src='static/experiments/emotion_regulation/experiment.js'></script>
 <script>
 $( document ).ready(function() {
@@ -27,6 +28,9 @@ $( document ).ready(function() {
 timeline: emotion_regulation_experiment,
 display_element: "getDisplayElement",
 fullscreen: true,
+on_trial_finish: function(data){
+addID()
+},
 on_finish: function(data){
 jsPsych.data.localSave('emotion_regulation_results.csv', 'csv');
 expfactory_finished = true;

@@ -50,6 +50,8 @@ var sumInstructTime = 0    //ms
 var instructTimeThresh = 5   ///in seconds
 
 // task specific variables
+var exp_len = 100
+var practice_len = 20
 var gap = 0
 var current_trial = 0
 //set stim/response mapping
@@ -80,8 +82,8 @@ var test_stimuli_block = [
 ];
 
 
-var practice_trials = jsPsych.randomization.repeat(practice_stimuli, 1); //5
-var test_trials = jsPsych.randomization.repeat(test_stimuli_block, 1); //25
+var practice_trials = jsPsych.randomization.repeat(practice_stimuli, 5); 
+var test_trials = jsPsych.randomization.repeat(test_stimuli_block, 25); 
 
 
 /* ************************************ */
@@ -90,6 +92,7 @@ var test_trials = jsPsych.randomization.repeat(test_stimuli_block, 1); //25
 // Set up attention check node
 var attention_check_block = {
   type: 'attention-check',
+  data: {exp_id: 'choice_reaction_time', trial_id: 'attention_check'},
   timing_response: 30000,
   response_ends_trial: true,
   timing_post_trial: 200
@@ -119,7 +122,7 @@ var feedback_instruct_block = {
   data: {exp_id: 'choice_reaction_time', trial_id: 'instructions'},
   text: getInstructFeedback,
   timing_post_trial: 0,
-  timing_response: 6000
+  timing_response: 60000
 };
 /// This ensures that the subject does not read through the instructions too quickly.  If they do it too quickly, then we will go over the loop again.
 var instruction_trials = []	 
