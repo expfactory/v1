@@ -41,7 +41,7 @@ var getInstructFeedback = function() {
 /* Define experimental variables */
 /* ************************************ */
 // generic task variables
-var run_attention_checks = true
+var run_attention_checks = false
 var attention_check_thresh = 0.65
 var sumInstructTime = 0 //ms
 var instructTimeThresh = 0 ///in seconds
@@ -126,17 +126,6 @@ var attention_node = {
 }
 
 /* define static blocks */
-var welcome_block = {
-	type: 'poldrack-text',
-	timing_response: 180000,
-	data: {
-		trial_id: 'welcome'
-	},
-	text: '<div class = centerbox><p class = center-block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
-	cont_key: [13],
-	timing_post_trial: 0
-};
-
 var category_instructions = '<ul class = list-text>' +
 	'<li><strong>animals</strong>: fish, bird, snake, cow, whale</li>' +
 	'<li><strong>colors</strong>: red, yellow, green, blue, brown</li>' +
@@ -147,7 +136,7 @@ var category_instructions = '<ul class = list-text>' +
 
 
 var feedback_instruct_text =
-	'Starting with instructions.  Press <strong> Enter </strong> to continue.'
+	'Welcome to the experiment. Press <strong>enter</strong> to begin.'
 var feedback_instruct_block = {
 	type: 'poldrack-text',
 	cont_key: [13],
@@ -166,9 +155,10 @@ var instructions_block = {
 		trial_id: 'instruction'
 	},
 	pages: [
-		'<div class = centerbox><p class = block-text>In this experiment you will see a sequence of words presented one at time. These words will fall into one of six cateogries: animals, colors, countries, distances, metals and relatives.</p><p class = block-text>3 to 5 of these cateogries will be "target" categories presented at the bottom of the screen. Your job is to remember the <strong>last</strong> word shown from each of the target categories and report them at the end of the trial.</p></div>',
+		'<div class = centerbox><p class = block-text>In this experiment you will see a sequence of words presented one at time. These words will fall into one of six cateogries: animals, colors, countries, distances, metals and relatives.</p><p class = block-text>3 to 5 of these categories will be "target" categories presented at on the screen. Your job is to remember the <strong>last</strong> word shown from each of the target categories and report them at the end of the trial.</p></div>',
 		'<div class = centerbox><p class = block-text>To make sure there is no confusion about which word is in each category, the words in each category are presented below: ' +
-		category_instructions + '</p><p class = block-text>Make sure you know which category each word belongs to.</p></div>',
+		category_instructions +
+		'</p><p class = block-text>Make sure you know which category each word belongs to.</p></div>',
 		'<div class = centerbox><p class = block-text>To summarize, a trial will start by presenting you with 3-5 target categories (e.g. "colors, animals, relatives"). You will then see a sequence of words from all six categories, one after the other.</p><p class = block-text>For instance, a trial may be: "dog"... "aunt"... "China"... "red"... "copper"... "bird"... etc. You have to remember the last word in each of the target categories, which you will write down at the end of the trial.</p><p class = block-text>For the example sequence with the previously mentioned targets, you  would respond "red, aunt, bird" as those were the last colors, relatives, and animals, respectively. The order that you write the categories down does not matter.</p></div>',
 	],
 	allow_keys: false,
@@ -227,7 +217,7 @@ var end_practice_block = {
 	data: {
 		trial_id: 'practice_end'
 	},
-	text: '<div class = centerbox><p class = block-text>Finished with practice block. You will now complete 9 test blocks.</p><p class = block-text>Press <strong>enter</strong> to begin.</p></div>',
+	text: '<div class = centerbox><p class = center-block-text>Finished with practice block. You will now complete 9 test blocks.</p><p class = block-text>Press <strong>enter</strong> to begin.</p></div>',
 	cont_key: [13],
 	timing_post_trial: 1000
 };
@@ -246,7 +236,6 @@ var start_test_block = {
 
 //Set up experiment
 var keep_track_experiment = []
-keep_track_experiment.push(welcome_block);
 keep_track_experiment.push(instruction_node);
 
 // set up practice
@@ -258,7 +247,7 @@ prompt = '<div class = promptbox><div class = prompt-text>Targets: ' + target.jo
 data = {
 	trial_id: 'prompt',
 	exp_stage: "practice",
-	condition: 'target_length_' + target.length,
+	load: target.length,
 	targets: target
 }
 var prompt_block = {
@@ -266,6 +255,7 @@ var prompt_block = {
 	stimulus: '<div class = centerbox><p class = block-text>Below are the target categories. They will remain on the bottom of the screen during the trial. Press enter when you are sure you can remember them. </p></div>',
 	is_html: true,
 	choices: [13],
+	response_ends_trial: true,
 	data: data,
 	prompt: prompt,
 	timing_post_trial: 0,
@@ -286,13 +276,15 @@ var wait_block = {
 }
 keep_track_experiment.push(prompt_block)
 keep_track_experiment.push(wait_block)
-for (i = 0; i < block.length; i++) {
+for (i = 0; i < 2; i++) { //block.length
 	stim = '<div class = centerbox><div class = keep-track-text>' + block[i][1] + '</div></div>'
+	tempStim = block[i][1]
 	data = {
 		trial_id: block[i][0],
 		exp_stage: "practice",
-		condition: 'target_length_' + target.length,
-		targets: target
+		load: target.length,
+		targets: target,
+		stim: tempStim
 	}
 	var track_block = {
 		type: 'poldrack-single-stim',
@@ -317,7 +309,7 @@ var response_block = {
 	data: {
 		trial_id: 'response',
 		exp_stage: "practice",
-		condition: 'target_length_' + target.length,
+		load: target.length,
 		targets: target
 	}
 }
@@ -327,7 +319,7 @@ keep_track_experiment.push(end_practice_block)
 
 
 // set up test blocks
-for (b = 0; b < blocks.length; b++) {
+for (b = 0; b < 2; b++) { //blocks.length
 	keep_track_experiment.push(start_test_block)
 	block = blocks[b]
 	target = targets[b]
@@ -336,7 +328,7 @@ for (b = 0; b < blocks.length; b++) {
 	data = {
 		trial_id: 'prompt',
 		exp_stage: "test",
-		condition: 'target_length_' + target.length,
+		load: target.length,
 		targets: target
 	}
 	var prompt_block = {
@@ -347,6 +339,7 @@ for (b = 0; b < blocks.length; b++) {
 		data: data,
 		prompt: prompt,
 		timing_post_trial: 0,
+		response_ends_trial: true
 	}
 	var wait_block = {
 		type: 'poldrack-single-stim',
@@ -366,11 +359,13 @@ for (b = 0; b < blocks.length; b++) {
 	keep_track_experiment.push(wait_block)
 	for (i = 0; i < block.length; i++) {
 		stim = '<div class = centerbox><div class = keep-track-text>' + block[i][1] + '</div></div>'
+		tempStim = block[i][1]
 		data = {
 			trial_id: block[i][0],
 			exp_stage: "test",
-			condition: 'target_length_' + target.length,
-			targets: target
+			load: target.length,
+			targets: target,
+			stim: tempStim
 		}
 		var track_block = {
 			type: 'poldrack-single-stim',
@@ -395,7 +390,8 @@ for (b = 0; b < blocks.length; b++) {
 		data: {
 			trial_id: 'response',
 			exp_stage: 'test',
-			condition: 'target_length_' + target.length,
+			target_length: target.length,
+			load: target.length,
 			targets: target
 		}
 	}

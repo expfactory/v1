@@ -26,7 +26,7 @@ function fillArray(value, len) {
 
 var welcome_block = {
   type: 'text',
-  text: '<div class = centerbox><p class = block-text>Welcome to this survey. Press <strong>enter</strong> to begin.</p></div>',
+  text: '<div class = centerbox><p class = center-block-text>Welcome to this survey. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   data: {
     exp_id: "self_regulation"
@@ -47,9 +47,16 @@ var instructions_block = {
 };
 
 var opts = ["Strongly disagree", "Somewhat disagree", "Neutral", "Somewhat agree", "Strongly agree"]
+var scale_reg = {
+  "Strongly disagree": 1,
+  "Somewhat disagree": 2,
+  "Neutral": 3,
+  "Somewhat agree": 4,
+  "Strongly agree": 5
+}
 
 var all_pages = [
-  ["I don't notice the effects of my actions until it's too late.", "I put off making decision.",
+  ["I don't notice the effects of my actions until it's too late.", "I put off making decisions.",
     "It's hard for me to notice when I've 'had enough' (alcohol, food, sweets).",
     "I have trouble following through with things once I've made up my mind to do something.",
     "I don't seem to learn from my mistakes.",
@@ -71,7 +78,7 @@ var all_pages = [
   ],
   ["I have trouble making up my mind about things.", "I get easily distracted from my plans.",
     "When it comes to deciding about a change, I feel overwhelmed by the choices.",
-    "Most of the time don't pay attention to what I'm doing.",
+    "Most of the time I don't pay attention to what I'm doing.",
     "I tend to keep doing the same thing, even when it doesn't work.",
     "Once I have a goal, I can usually plan how to reach it.",
     "If I wanted to change, I am confident that I could do it.",
@@ -82,13 +89,8 @@ var all_pages = [
 
 var all_options = [fillArray(opts, 11), fillArray(opts, 10), fillArray(opts, 10)]
 
-var score_scale = {
-  "Strongly disagree": 1,
-  "Somewhat disagree": 2,
-  "Neutral": 3,
-  "Somewhat agree": 4,
-  "Strongly agree": 5
-}
+//no instructions on reverse scoring. judging by the factor scores using raw scores
+var score_scale = [fillArray(score_scale, 11), fillArray(score_scale, 10), fillArray(score_scale, 10)]
 
 var survey_block = {
   type: "poldrack-survey-multi-choice",
@@ -100,13 +102,7 @@ var survey_block = {
   scale: score_scale,
   show_clickable_nav: true,
   allow_backward: true,
-  required: [fillArray(true, 11), fillArray(true, 10), fillArray(true, 10)],
-  //no instructions on reverse scoring. judging by the factor scores using raw scores
-  reverse_score: [
-    [false, false, false, false, false, false, false, false, false, false, false],
-    [false, false, false, false, false, false, false, false, false, false],
-    [false, false, false, false, false, false, false, false, false, false]
-  ],
+  required: [fillArray(true, 11), fillArray(true, 10), fillArray(true, 10)]
 };
 
 var end_block = {

@@ -28,13 +28,14 @@ var welcome_block = {
   cont_key: [13],
   data: {
     exp_id: "leisure_time_activity"
-  }
+  },
+  timing_post_trial: 0
 };
 
 var instructions_block = {
   type: 'poldrack-instructions',
   pages: [
-    '<div class = centerbox><p class = block-text>Please answer the following question on your level of physical activity.</p></div>',
+    '<div class = centerbox><p class = center-block-text>Please answer the following question on your level of physical activity.</p></div>',
   ],
   allow_keys: false,
   show_clickable_nav: true,
@@ -66,21 +67,18 @@ var survey_block = {
       ]
     ]
   ],
-  scale: {
+  scale: [[{
     "I did not do much physical activity. I mostly did things like watching television, reading, playing cards, or playing computer games. Only occasionally, no more than once or twice a month, did I do anything more active such as going for a walk or playing tennis.": 1,
     "Once or twice a week, I did light activities such as getting outdoors on the weekends for an easy walk or stroll. Or once or twice a week, I did chores around the house such as sweeping floors or vacuuming.": 2,
     "About three times a week, I did moderate activities such as brisk walking, swimming, or riding a bike for about 15 - 20 minutes each time. Or about once a week, I did moderately difficult chores such as raking or mowing the lawn for about 45 - 60 minutes. Or about once a week, I played sports such as softball, basketball, or soccer for about 45 - 60 minutes.": 3,
     "Almost daily, that is five or more times a week, I did moderate activities such as brisk walking, swimming, or riding a bike for 30 minutes or more each time. Or about once a week, I did moderately difficult chores or played sports for 2 hours or more.": 4,
     "About three times a week, I did vigorous activities such as running or riding hard on a bike for 30 minutes or more each time.": 5,
     "Almost daily, that is, five or more times a week, I did vigorous activities such as running or riding hard on a bike for 30 minutes or more each time.": 6
-  },
+  }]],
   show_clickable_nav: true,
   allow_backward: true,
   required: [
     [true]
-  ],
-  reverse_score: [
-    [false]
   ],
 };
 

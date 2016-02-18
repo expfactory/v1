@@ -29,18 +29,18 @@
 </thead>
 <tbody>
 <tr>
-<td><a href="local_global.html" target="_blank">DEMO</a></td>
-<td>local_global</td>
-<td>Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack</td>
-<td>5</td>
-<td>trm_4f241d7adf14e</td>
-</tr>
-<tr>
 <td><a href="bickel_titrator.html" target="_blank">DEMO</a></td>
 <td>bickel_titrator</td>
 <td>Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack</td>
 <td>2</td>
 <td>trm_5696a599bfcb6</td>
+</tr>
+<tr>
+<td><a href="local_global_shape.html" target="_blank">DEMO</a></td>
+<td>local_global_shape</td>
+<td>Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack</td>
+<td>5</td>
+<td>trm_4f241d7adf14e</td>
 </tr>
 <tr>
 <td><a href="willingness_to_wait.html" target="_blank">DEMO</a></td>
@@ -83,6 +83,13 @@
 <td>Zeynep Enkavi,Ian Eisenberg,Patrick Bissett,Vanessa Sochat,Russell Poldrack</td>
 <td>999</td>
 <td>trm_56abebfe9aaa3</td>
+</tr>
+<tr>
+<td><a href="ravens.html" target="_blank">DEMO</a></td>
+<td>ravens</td>
+<td>Zeynep Enkavi,Ian Eisenberg,Patrick Bissett,Vanessa Sochat,Russell Poldrack</td>
+<td>999</td>
+<td>trm_4f24211a03b07</td>
 </tr>
 <tr>
 <td><a href="eating_questionnaire.html" target="_blank">DEMO</a></td>
@@ -355,7 +362,7 @@
 <td>dot_pattern_expectancy</td>
 <td>Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack</td>
 <td>15</td>
-<td>trm_515495b718cd6</td>
+<td>trm_4da86c2a70a7d</td>
 </tr>
 <tr>
 <td><a href="holt_laury.html" target="_blank">DEMO</a></td>
@@ -433,6 +440,20 @@
 <td>Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack</td>
 <td>5</td>
 <td>tsk_4a57abb949dbb</td>
+</tr>
+<tr>
+<td><a href="five_facet_mindfulness.html" target="_blank">DEMO</a></td>
+<td>five_facet_mindfulness</td>
+<td>Zeynep Enkavi,Ian Eisenberg,Patrick Bissett,Vanessa Sochat,Russell Poldrack</td>
+<td>999</td>
+<td>trm_56ab12e0f1a61</td>
+</tr>
+<tr>
+<td><a href="local_global_letter.html" target="_blank">DEMO</a></td>
+<td>local_global_letter</td>
+<td>Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack</td>
+<td>5</td>
+<td>trm_4f241d7adf14e</td>
 </tr>
 <tr>
 <td><a href="dimensional_set_shifting.html" target="_blank">DEMO</a></td>
@@ -581,7 +602,7 @@
     <script type="text/javascript">
         var $table = $('#fresh-table'),
             $homeBtn = $('#homeBtn'), 
-            $cogatBtn = $('#cogatBtn'),
+            $cogatBtn = $('#cogatBtn'), 
             full_screen = false,
             window_height;
             
@@ -623,11 +644,9 @@
                 document.location = "/";
             });
         
-
             $cogatBtn.click(function () {
                 document.location = "/experiments.html";
             });
-
             
             $(window).resize(function () {
                 $table.bootstrapTable('resetView');

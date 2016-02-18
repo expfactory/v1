@@ -28,8 +28,8 @@ var randomDraw = function(lst) {
 
 var getStim = function() {
   response = 0
-  var num1 = Math.floor(Math.random() * 99) + 1
-  var num2 = Math.floor(Math.random() * 99) + 1
+  num1 = Math.floor(Math.random() * 99) + 1
+  num2 = Math.floor(Math.random() * 99) + 1
   answer = num1 * num2
   var text = '<div class = centerbox><form style="font-size: 24px">' + num1 + ' * ' + num2 +
     ' =  <input type ="text" id ="mathtext" style="font-size: 24px"></form><br></br><button class = "default_button submitButton" id = submit_button onclick = submit()>Submit Answer</button></div>'
@@ -48,6 +48,8 @@ var sumInstructTime = 0 //ms
 var instructTimeThresh = 0 ///in seconds
 
 // task specific variables
+var num1 = ''
+var num2 = ''
 var answer = 0
 var response = 0
 var response_time = 180000
@@ -62,19 +64,8 @@ var fatigue_time = 45
 /* Set up jsPsych blocks */
 /* ************************************ */
 /* define static blocks */
-var welcome_block = {
-  type: 'poldrack-text',
-  timing_response: 180000,
-  data: {
-    trial_id: "welcome"
-  },
-  text: '<div class = centerbox><p class = center-block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: [13],
-  timing_post_trial: 0
-};
-
 var feedback_instruct_text =
-  'Starting with instructions.  Press <strong> Enter </strong> to continue.'
+  'Welcome to the experiment. Press <strong>enter</strong> to begin.'
 var feedback_instruct_block = {
   type: 'poldrack-text',
   cont_key: [13],
@@ -146,17 +137,19 @@ var largeStep_block = {
   stimulus: getStim,
   data: {
     trial_id: "stim",
-    exp_stage: "test"
+    exp_stage: "test",
+    multiplication_condition: "large_step"
   },
   button_class: 'submitButton',
   timing_stim: get_response_time,
   timing_response: get_response_time,
-  response_ends_trial: false,
+  response_ends_trial: true, //false
   on_finish: function() {
     jsPsych.data.addDataToLastTrial({
         response: response,
         answer: answer,
-        response_time: response_time
+        response_time: response_time,
+        stim: [num1, num2]
       })
       // staircase
     if (response == answer) {
@@ -176,16 +169,18 @@ var smallStep_block = {
   button_class: 'submitButton',
   data: {
     trial_id: "stim",
-    exp_stage: "test"
+    exp_stage: "test",
+    multiplication_condition: "small_step"
   },
   timing_stim: get_response_time,
   timing_response: get_response_time,
-  response_ends_trial: false,
+  response_ends_trial: true, //false
   on_finish: function() {
     jsPsych.data.addDataToLastTrial({
         response: response,
         answer: answer,
-        response_time: response_time
+        response_time: response_time,
+        stim: [num1, num2]
       })
       // staircase
     if (response == answer) {
@@ -206,16 +201,18 @@ var fatigue_block = {
   button_class: 'submitButton',
   data: {
     trial_id: "stim",
-    exp_stage: "test"
+    exp_stage: "test",
+    multiplication_condition: "fatigue"
   },
   timing_stim: get_response_time,
   timing_response: get_response_time,
-  response_ends_trial: false,
+  response_ends_trial: true, //false
   on_finish: function() {
     jsPsych.data.addDataToLastTrial({
       response: response,
       answer: answer,
-      response_time: response_time
+      response_time: response_time,
+      stim: [num1, num2]
     })
     setTimeout(function() {
       $("#mathtext").focus()
@@ -227,14 +224,13 @@ var fatigue_block = {
 
 /* create experiment definition array */
 var multiplication_experiment = []
-multiplication_experiment.push(welcome_block)
 multiplication_experiment.push(instruction_node)
-for (var i = 0; i < n_large_steps; i++) {
+for (var i = 0; i < 2; i++) { //n_large_steps
   multiplication_experiment.push(largeStep_block)
 }
-for (var i = 0; i < n_small_steps; i++) {
+for (var i = 0; i < 2; i++) { //n_small_steps
   multiplication_experiment.push(smallStep_block)
 }
-for (var i = 0; i < Math.floor(180000 * fatigue_time / response_time); i++) {
+for (var i = 0; i < 2; i++) { //Math.floor(180000 * fatigue_time / response_time)
   multiplication_experiment.push(fatigue_block)
 }

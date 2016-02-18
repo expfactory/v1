@@ -34,7 +34,7 @@ var welcome_block = {
 var instructions_block = {
   type: 'poldrack-instructions',
   pages: [
-    '<div class = centerbox><p class = block-text>Please reach each item and answer the following question as honestly as you can: "How characteristic or true is this of you?"</p></div>',
+    '<div class = centerbox><p class = block-text>Please read each item and answer the following question as honestly as you can: "How characteristic or true is this of you?"</p></div>',
   ],
   allow_keys: false,
   show_clickable_nav: true,
@@ -47,11 +47,18 @@ var instructions_block = {
 var opts = ["Very uncharacteristic", "Uncharacteristic", "Neutral", "Characteristic",
   "Very characteristic"
 ]
+var scale_reg = {
+  "Very uncharacteristic": 1,
+  "Uncharacteristic": 2,
+  "Neutral": 3,
+  "Characteristic": 4,
+  "Very characteristic": 5
+}
 
 var all_pages = [
   [
     "I believe that getting together with one's friends to party is one of life's important pleasures.",
-    "Familiar childhood sigKts, sounds, smells often bring back a flood of wonderful memories.",
+    "Familiar childhood sights, sounds, smells often bring back a flood of wonderful memories.",
     "Fate determines much in my life.",
     "I often think of what I should have done differently in my life.",
     "My decisions are mostly influenced by people and things around me.",
@@ -115,13 +122,8 @@ var all_pages = [
 var all_options = [fillArray(opts, 10), fillArray(opts, 10), fillArray(opts, 10), fillArray(opts,
   10), fillArray(opts, 10), fillArray(opts, 6)]
 
-var score_scale = {
-  "Very uncharacteristic": 1,
-  "Uncharacteristic": 2,
-  "Neutral": 3,
-  "Characteristic": 4,
-  "Very characteristic": 5
-}
+var score_scale = [fillArray(scale_reg, 10), fillArray(scale_reg, 10), fillArray(scale_reg, 10), fillArray(scale_reg,
+  10), fillArray(scale_reg, 10), fillArray(scale_reg, 6)]
 
 var survey_block = {
   type: "poldrack-survey-multi-choice",
@@ -135,15 +137,7 @@ var survey_block = {
   allow_backward: true,
   required: [fillArray(true, 10), fillArray(true, 10), fillArray(true, 10), fillArray(true, 10),
     fillArray(true, 10), fillArray(true, 6)
-  ],
-  reverse_score: [
-    [false, false, false, false, false, false, false, false, false, false],
-    [false, false, false, false, false, false, false, false, false, false],
-    [false, false, false, false, false, false, false, false, false, false],
-    [false, false, false, false, false, false, false, false, false, false],
-    [false, false, false, false, false, false, false, false, false, false],
-    [false, false, false, false, false, false]
-  ],
+  ]
 };
 
 var end_block = {

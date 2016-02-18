@@ -109,7 +109,7 @@ var getImage = function() {
 /* Define experimental variables */
 /* ************************************ */
 // generic task variables
-var run_attention_checks = true
+var run_attention_checks = false
 var attention_check_thresh = 0.65
 var sumInstructTime = 0 //ms
 var instructTimeThresh = 0 ///in seconds
@@ -137,6 +137,15 @@ var trainingVars = {
   'instruction': [],
   'intense': []
 }
+
+var images = []
+for (var i = 0; i < low_intensity_stims.length; i++) {
+  images.push(base_path + low_intensity_stims[i])
+  images.push(base_path + high_intensity_stims[i])
+}
+//preload images
+jsPsych.pluginAPI.preloadImages(images)
+
 if (Math.random() < 0.5) {
   trainingVars.instruction.push('distract');
   trainingVars.intense.push('low');
@@ -204,17 +213,6 @@ var attention_node = {
 }
 
 /* define static blocks */
-var welcome_block = {
-  type: 'poldrack-text',
-  timing_response: 180000,
-  text: '<div class = centerbox><p class = "center-block-text">Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: [13],
-  data: {
-    trial_id: 'welcome'
-  },
-  timing_post_trial: 0
-};
-
 var end_block = {
   type: 'poldrack-text',
   timing_response: 180000,
@@ -227,7 +225,7 @@ var end_block = {
 };
 
 var feedback_instruct_text =
-  'Starting with instructions.  Press <strong> Enter </strong> to continue.'
+  'Welcome to the experiment. Press <strong>enter</strong> to begin.'
 var feedback_instruct_block = {
   type: 'poldrack-text',
   data: {
@@ -310,7 +308,7 @@ var start_practice_block = {
   data: {
     trial_id: 'start_practice'
   },
-  text: '<div class = centerbox><p class = "center-block-text">We will now start some practice. For the next block of trials you will either be told which strategy to use or instructed to select one yourself. Press <strong>enter</strong> to begin.</p></div>',
+  text: '<div class = centerbox><p class = "center-block-text">Now that you are familiar with using the two strategies (distraction and reappraisal), we will continue. We will practice switching off using these strategies. For the next block of trials you will either be told which strategy to use or instructed to select one yourself. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   timing_post_trial: 500
 };
@@ -401,7 +399,6 @@ var view_block = {
 
 /* create experiment definition array */
 var emotion_regulation_experiment = [];
-emotion_regulation_experiment.push(welcome_block);
 emotion_regulation_experiment.push(instruction_node);
 for (var i = 0; i < training_len; i++) {
   emotion_regulation_experiment.push(training_instruct)

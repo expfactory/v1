@@ -36,7 +36,7 @@ var getInstructFeedback = function() {
 /* Define experimental variables */
 /* ************************************ */
 // generic task variables
-var run_attention_checks = true
+var run_attention_checks = false
 var attention_check_thresh = 0.45
 var sumInstructTime = 0 //ms
 var instructTimeThresh = 0 ///in seconds
@@ -79,7 +79,7 @@ for (var i = 0; i < options.small_amt.length; i++) {
 trials = []
 
 //used new features to include the stimulus properties in recorded data
-for (var i = 0; i < stim_html.length; i++) {
+for (var i = 0; i < stim_html.length; i++) { 
   trials.push({
     stimulus: stim_html[i],
     data: data_prop[i]
@@ -108,19 +108,8 @@ var attention_node = {
 }
 
 /* define static blocks */
-var welcome_block = {
-  type: 'poldrack-text',
-  timing_response: 180000,
-  data: {
-    trial_id: "welcome"
-  },
-  text: '<div class = centerbox><p class = center-block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: [13],
-  timing_post_trial: 0
-};
-
 var feedback_instruct_text =
-  'Starting with instructions.  Press <strong> Enter </strong> to continue.'
+  'Welcome to the experiment. Press <strong>enter</strong> to begin.'
 var feedback_instruct_block = {
   type: 'poldrack-text',
   cont_key: [13],
@@ -189,7 +178,8 @@ var practice_block = {
   },
   stimulus: "<div class = centerbox id='container'><p class = center-block-text>Please select the option that you would prefer pressing <strong>'q'</strong> for left <strong>'p'</strong> for right:</p><div class='table'><div class='row'><div id = 'option'><center><font color='green'>$20<br>today</font></center></div><div id = 'option'><center><font color='green'>$25<br>5 days</font></center></div></div></div></div>",
   is_html: true,
-  choices: ['q', 'p']
+  choices: [80,81],
+  response_ends_trial: true, 
 };
 
 var start_test_block = {
@@ -211,14 +201,15 @@ var test_block = {
   },
   timeline: trials,
   is_html: true,
-  choices: ['q', 'p'],
+  choices: [80,81],
+  response_ends_trial: true,
   //used new feature to include choice info in recorded data
   on_finish: function(data) {
     var choice = false;
     if (data.key_press == 80) {
-      choice = 'll';
+      choice = 'larger_later';
     } else if (data.key_press == 81) {
-      choice = 'ss';
+      choice = 'smaller_sooner';
     }
     jsPsych.data.addDataToLastTrial({
       choice: choice
@@ -240,7 +231,6 @@ var end_block = {
 
 //Set up experiment
 var kirby_experiment = []
-kirby_experiment.push(welcome_block);
 kirby_experiment.push(instruction_node);
 kirby_experiment.push(start_practice_block);
 kirby_experiment.push(practice_block);

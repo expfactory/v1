@@ -61,7 +61,7 @@ var getInstructFeedback = function() {
 /* Define experimental variables */
 /* ************************************ */
 // generic task variables
-var run_attention_checks = true
+var run_attention_checks = false
 var attention_check_thresh = 0.45
 var sumInstructTime = 0 //ms
 var instructTimeThresh = 0 ///in seconds
@@ -71,6 +71,8 @@ var congruent_stim = [{
 	stimulus: '<div class = centerbox><div class = stroop-stim style = "color:red">RED</div></div>',
 	data: {
 		condition: 'congruent',
+		stim_color: 'red',
+		stim_word: 'red',
 		correct_response: 82
 	},
 	key_answer: 82
@@ -78,6 +80,8 @@ var congruent_stim = [{
 	stimulus: '<div class = centerbox><div class = stroop-stim style = "color:blue">BLUE</div></div>',
 	data: {
 		condition: 'congruent',
+		stim_color: 'blue',
+		stim_word: 'blue',
 		correct_response: 66
 	},
 	key_answer: 66
@@ -85,6 +89,8 @@ var congruent_stim = [{
 	stimulus: '<div class = centerbox><div class = stroop-stim style = "color:green">GREEN</div></div>',
 	data: {
 		condition: 'congruent',
+		stim_color: 'green',
+		stim_word: 'green',
 		correct_response: 71
 	},
 	key_answer: 71
@@ -94,6 +100,8 @@ var incongruent_stim = [{
 	stimulus: '<div class = centerbox><div class = stroop-stim style = "color:red">BLUE</div></div>',
 	data: {
 		condition: 'incongruent',
+		stim_color: 'red',
+		stim_word: 'blue',
 		correct_response: 82
 	},
 	key_answer: 82
@@ -101,6 +109,8 @@ var incongruent_stim = [{
 	stimulus: '<div class = centerbox><div class = stroop-stim style = "color:red">GREEN</div></div>',
 	data: {
 		condition: 'incongruent',
+		stim_color: 'red',
+		stim_word: 'green',
 		correct_response: 82
 	},
 	key_answer: 82
@@ -108,6 +118,8 @@ var incongruent_stim = [{
 	stimulus: '<div class = centerbox><div class = stroop-stim style = "color:blue">RED</div></div>',
 	data: {
 		condition: 'incongruent',
+		stim_color: 'blue',
+		stim_word: 'red',
 		correct_response: 66
 	},
 	key_answer: 66
@@ -115,6 +127,8 @@ var incongruent_stim = [{
 	stimulus: '<div class = centerbox><div class = stroop-stim style = "color:blue">GREEN</div></div>',
 	data: {
 		condition: 'incongruent',
+		stim_color: 'blue',
+		stim_word: 'green',
 		correct_response: 66
 	},
 	key_answer: 66
@@ -122,6 +136,8 @@ var incongruent_stim = [{
 	stimulus: '<div class = centerbox><div class = stroop-stim style = "color:green">RED</div></div>',
 	data: {
 		condition: 'incongruent',
+		stim_color: 'green',
+		stim_word: 'red',
 		correct_response: 71
 	},
 	key_answer: 71
@@ -129,6 +145,8 @@ var incongruent_stim = [{
 	stimulus: '<div class = centerbox><div class = stroop-stim style = "color:green">BLUE</div></div>',
 	data: {
 		condition: 'incongruent',
+		stim_color: 'green',
+		stim_word: 'blue',
 		correct_response: 71
 	},
 	key_answer: 71
@@ -162,23 +180,12 @@ var attention_node = {
 }
 
 /* define static blocks */
-var welcome_block = {
-	type: 'poldrack-text',
-	data: {
-		trial_id: "welcome"
-	},
-	timing_response: 180000,
-	text: '<div class = centerbox><p class = center-block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
-	cont_key: [13],
-	timing_post_trial: 0
-};
-
 var response_keys =
 	'<ul list-text><li><span class = "large" style = "color:red">WORD</span>: "R key"</li><li><span class = "large" style = "color:blue">WORD</span>: "B key"</li><li><span class = "large" style = "color:green">WORD</span>: "G key"</li></ul>'
 
 
 var feedback_instruct_text =
-	'Starting with instructions.  Press <strong> Enter </strong> to continue.'
+	'Welcome to the experiment. Press <strong>enter</strong> to begin.'
 var feedback_instruct_block = {
 	type: 'poldrack-text',
 	data: {
@@ -277,7 +284,6 @@ var fixation_block = {
 
 /* create experiment definition array */
 stroop_experiment = []
-stroop_experiment.push(welcome_block)
 stroop_experiment.push(instruction_node)
 stroop_experiment.push(start_practice_block)
 	/* define test trials */
@@ -289,10 +295,11 @@ for (i = 0; i < practice_len; i++) {
 		data: practice_stims.data[i],
 		key_answer: practice_stims.key_answer[i],
 		is_html: true,
-		correct_text: '<div stroop class = fb_box><div class = center-text><font size = 20>Correct!</font></div></div>',
-		incorrect_text: '<div stroop class = fb_box><div class = center-text><font size = 20>Incorrect</font></div></div>',
+		correct_text: '<div class = fb_box><div class = center-text><font size = 20>Correct!</font></div></div>',
+		incorrect_text: '<div class = fb_box><div class = center-text><font size = 20>Incorrect</font></div></div>',
+		timeout_message: '<div class = fb_box><div class = center-text><font size = 20>Respond Faster!</font></div></div>',
 		choices: [66, 71, 82],
-		timing_response: -1,
+		timing_response: 1500,
 		timing_stim: -1,
 		timing_feedback_duration: 500,
 		show_stim_with_feedback: true,
@@ -319,10 +326,11 @@ for (i = 0; i < exp_len; i++) {
 		data: test_stims.data[i],
 		key_answer: test_stims.key_answer[i],
 		is_html: true,
-		correct_text: '<div stroop class = fb_box><div class = center-text><font size = 20>Correct!</font></div></div>',
-		incorrect_text: '<div stroop class = fb_box><div class = center-text><font size = 20>Incorrect</font></div></div>',
+		correct_text: '<div class = fb_box><div class = center-text><font size = 20>Correct!</font></div></div>',
+		incorrect_text: '<div class = fb_box><div class = center-text><font size = 20>Incorrect</font></div></div>',
+		timeout_message: '<div class = fb_box><div class = center-text><font size = 20>Respond Faster!</font></div></div>',
 		choices: [66, 71, 82],
-		timing_response: -1,
+		timing_response: 1500,
 		timing_stim: -1,
 		timing_feedback_duration: 500,
 		show_stim_with_feedback: true,

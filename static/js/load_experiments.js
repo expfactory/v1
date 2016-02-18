@@ -28,7 +28,7 @@ var experimentDraw = function(lst, time) {
 }
 
 // full list of experiment names:
-experiment_list = [{'name': 'local_global', 'time': 5}, {'name': 'bickel_titrator', 'time': 2}, {'name': 'willingness_to_wait', 'time': 5}, {'name': 'attention_network_task', 'time': 20}, {'name': 'random_number_generation', 'time': 3}, {'name': 'stim_selective_stop_signal', 'time': 30}, {'name': 'motor_selective_stop_signal', 'time': 30}, {'name': 'sensation_seeking', 'time': 999}, {'name': 'eating_questionnaire', 'time': 999}, {'name': 'letter_memory', 'time': 5}, {'name': 'information_sampling_task', 'time': 999}, {'name': 'gm_paradigm', 'time': 45}, {'name': 'upps_impulsivity', 'time': 999}, {'name': 'theories_of_willpower', 'time': 999}, {'name': 'tower_of_london', 'time': 8}, {'name': 'dospert_rp', 'time': 999}, {'name': 'digit_span', 'time': 5}, {'name': 'adaptive_n_back', 'time': 16}, {'name': 'leisure_time_activity', 'time': 999}, {'name': 'stop_signal', 'time': 30}, {'name': 'test_task', 'time': 1}, {'name': 'flanker', 'time': 6.5}, {'name': 'multiplication', 'time': 5}, {'name': 'choice_reaction_time', 'time': 4}, {'name': 'emotion_regulation', 'time': 10}, {'name': 'brief_self_control', 'time': 999}, {'name': 'number_letter', 'time': 5}, {'name': 'angling_risk_task', 'time': 45}, {'name': 'antisaccade', 'time': 8}, {'name': 'bis_bas', 'time': 999}, {'name': 'tone_monitoring', 'time': 6}, {'name': 'keep_track', 'time': 6}, {'name': 'ax_cpt', 'time': 20}, {'name': 'cognitive_reflection', 'time': 999}, {'name': 'impulsive_venture', 'time': 999}, {'name': 'spatial_span', 'time': 5}, {'name': 'stroop', 'time': 5}, {'name': 'volatile_bandit', 'time': 18}, {'name': 'plus_minus', 'time': 5}, {'name': 'time_perspective', 'time': 999}, {'name': 'dospert_rt', 'time': 999}, {'name': 'ten_item_personality', 'time': 999}, {'name': 'grit_scale', 'time': 999}, {'name': 'bis11', 'time': 999}, {'name': 'writing_task', 'time': 15}, {'name': 'multisource', 'time': 7}, {'name': 'dot_pattern_expectancy', 'time': 15}, {'name': 'holt_laury', 'time': 999}, {'name': 'hierarchical_rule', 'time': 5}, {'name': 'directed_forgetting', 'time': 999}, {'name': 'dietary_decision', 'time': 10}, {'name': 'discount_titrate', 'time': 10}, {'name': 'future_time_perspective', 'time': 999}, {'name': 'dickman', 'time': 999}, {'name': 'psychological_refractory_period', 'time': 15}, {'name': 'kirby', 'time': 5}, {'name': 'treatment_self_regulation_questionnaire', 'time': 5}, {'name': 'simon', 'time': 5}, {'name': 'dimensional_set_shifting', 'time': 10}, {'name': 'probabilistic_selection', 'time': 999}, {'name': 'recent_probes', 'time': 999}, {'name': 'image_monitoring', 'time': 6}, {'name': 'erq', 'time': 999}, {'name': 'dospert_eb', 'time': 999}, {'name': 'shift_task', 'time': 20}, {'name': 'threebytwo', 'time': 24}, {'name': 'go_nogo', 'time': 7}, {'name': 'simple_reaction_time', 'time': 3.5}, {'name': 'columbia_card_task_hot', 'time': 999}, {'name': 'selection_optimization_compensation', 'time': 999}, {'name': 'columbia_card_task_cold', 'time': 999}, {'name': 'two_stage_decision', 'time': 26}, {'name': 'mpq_control', 'time': 999}, {'name': 'self_regulation', 'time': 999}, {'name': 'mindful_attention_awareness', 'time': 999}, {'name': 'n_back', 'time': 16}, {'name': 'tower_of_london_imagine', 'time': 8}]						
+experiment_list = [{'name': 'bickel_titrator', 'time': 2}, {'name': 'local_global_shape', 'time': 5}, {'name': 'willingness_to_wait', 'time': 5}, {'name': 'attention_network_task', 'time': 20}, {'name': 'random_number_generation', 'time': 3}, {'name': 'stim_selective_stop_signal', 'time': 30}, {'name': 'motor_selective_stop_signal', 'time': 30}, {'name': 'sensation_seeking', 'time': 999}, {'name': 'ravens', 'time': 999}, {'name': 'eating_questionnaire', 'time': 999}, {'name': 'letter_memory', 'time': 5}, {'name': 'information_sampling_task', 'time': 999}, {'name': 'gm_paradigm', 'time': 45}, {'name': 'upps_impulsivity', 'time': 999}, {'name': 'theories_of_willpower', 'time': 999}, {'name': 'tower_of_london', 'time': 8}, {'name': 'dospert_rp', 'time': 999}, {'name': 'digit_span', 'time': 5}, {'name': 'adaptive_n_back', 'time': 16}, {'name': 'leisure_time_activity', 'time': 999}, {'name': 'stop_signal', 'time': 30}, {'name': 'test_task', 'time': 1}, {'name': 'flanker', 'time': 6.5}, {'name': 'multiplication', 'time': 5}, {'name': 'choice_reaction_time', 'time': 4}, {'name': 'emotion_regulation', 'time': 10}, {'name': 'brief_self_control', 'time': 999}, {'name': 'number_letter', 'time': 5}, {'name': 'angling_risk_task', 'time': 45}, {'name': 'antisaccade', 'time': 8}, {'name': 'bis_bas', 'time': 999}, {'name': 'tone_monitoring', 'time': 6}, {'name': 'keep_track', 'time': 6}, {'name': 'ax_cpt', 'time': 20}, {'name': 'cognitive_reflection', 'time': 999}, {'name': 'impulsive_venture', 'time': 999}, {'name': 'spatial_span', 'time': 5}, {'name': 'stroop', 'time': 5}, {'name': 'volatile_bandit', 'time': 18}, {'name': 'plus_minus', 'time': 5}, {'name': 'time_perspective', 'time': 999}, {'name': 'dospert_rt', 'time': 999}, {'name': 'ten_item_personality', 'time': 999}, {'name': 'grit_scale', 'time': 999}, {'name': 'bis11', 'time': 999}, {'name': 'writing_task', 'time': 15}, {'name': 'multisource', 'time': 7}, {'name': 'dot_pattern_expectancy', 'time': 15}, {'name': 'holt_laury', 'time': 999}, {'name': 'hierarchical_rule', 'time': 5}, {'name': 'directed_forgetting', 'time': 999}, {'name': 'dietary_decision', 'time': 10}, {'name': 'discount_titrate', 'time': 10}, {'name': 'future_time_perspective', 'time': 999}, {'name': 'dickman', 'time': 999}, {'name': 'psychological_refractory_period', 'time': 15}, {'name': 'kirby', 'time': 5}, {'name': 'treatment_self_regulation_questionnaire', 'time': 5}, {'name': 'simon', 'time': 5}, {'name': 'five_facet_mindfulness', 'time': 999}, {'name': 'local_global_letter', 'time': 5}, {'name': 'dimensional_set_shifting', 'time': 10}, {'name': 'probabilistic_selection', 'time': 999}, {'name': 'recent_probes', 'time': 999}, {'name': 'image_monitoring', 'time': 6}, {'name': 'erq', 'time': 999}, {'name': 'dospert_eb', 'time': 999}, {'name': 'shift_task', 'time': 20}, {'name': 'threebytwo', 'time': 24}, {'name': 'go_nogo', 'time': 7}, {'name': 'simple_reaction_time', 'time': 3.5}, {'name': 'columbia_card_task_hot', 'time': 999}, {'name': 'selection_optimization_compensation', 'time': 999}, {'name': 'columbia_card_task_cold', 'time': 999}, {'name': 'two_stage_decision', 'time': 26}, {'name': 'mpq_control', 'time': 999}, {'name': 'self_regulation', 'time': 999}, {'name': 'mindful_attention_awareness', 'time': 999}, {'name': 'n_back', 'time': 16}, {'name': 'tower_of_london_imagine', 'time': 8}]						
 experiment_names = experimentDraw(experiment_list)
 
 
@@ -38,11 +38,11 @@ function cat_experiments(experiment_array) {
 	for (i = 0; i < experiment_names.length; i++) {
 		switch (experiment_names[i]) {
                 
-case "local_global":
-      experiments = experiments.concat(local_global_experiment)
-      break;
 case "bickel_titrator":
       experiments = experiments.concat(bickel_titrator_experiment)
+      break;
+case "local_global_shape":
+      experiments = experiments.concat(local_global_shape_experiment)
       break;
 case "willingness_to_wait":
       experiments = experiments.concat(willingness_to_wait_experiment)
@@ -61,6 +61,9 @@ case "motor_selective_stop_signal":
       break;
 case "sensation_seeking":
       experiments = experiments.concat(sensation_seeking_experiment)
+      break;
+case "ravens":
+      experiments = experiments.concat(ravens_experiment)
       break;
 case "eating_questionnaire":
       experiments = experiments.concat(eating_questionnaire_experiment)
@@ -211,6 +214,12 @@ case "treatment_self_regulation_questionnaire":
       break;
 case "simon":
       experiments = experiments.concat(simon_experiment)
+      break;
+case "five_facet_mindfulness":
+      experiments = experiments.concat(five_facet_mindfulness_experiment)
+      break;
+case "local_global_letter":
+      experiments = experiments.concat(local_global_letter_experiment)
       break;
 case "dimensional_set_shifting":
       experiments = experiments.concat(dimensional_set_shifting_experiment)
