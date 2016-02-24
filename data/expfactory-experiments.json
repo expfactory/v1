@@ -525,6 +525,13 @@
         "time": 26
     },
     {
+        "cognitive_atlas_task_id": "trm_553ebfc390256",
+        "contributors": "Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack",
+        "exp_id": "perceptual_metacognition",
+        "preview": "<a href=\"perceptual_metacognition.html\" target=\"_blank\">DEMO</a>",
+        "time": 3.5
+    },
+    {
         "cognitive_atlas_task_id": "trm_55a6aa62c54f8",
         "contributors": "Zeynep Enkavi,Ian Eisenberg,Patrick Bissett,Vanessa Sochat,Russell Poldrack",
         "exp_id": "mpq_control",

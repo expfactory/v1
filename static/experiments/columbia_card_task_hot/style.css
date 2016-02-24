@@ -6,7 +6,7 @@
 
 .center-text {
   text-align:center;
-  font-size: 40px;
+  font-size: 90%;
   position: relative;
   top: 50%;
   -ms-transform: translateY(-50%);
@@ -304,7 +304,7 @@
 }
 
 .centerbox-CCT2 {
-  width:50vw;
+  width:70vw;
   height: 30vw;
   position:absolute;
   top:30%;
@@ -364,8 +364,8 @@
   border-color: White;
 } 
 
-.instruct1 {
-  width:70%;
+#instruct1, #instruct2 {
+  width:70vw;
   height: 3%;
   position:absolute;
   top:2%;

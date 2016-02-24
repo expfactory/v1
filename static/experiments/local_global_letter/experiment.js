@@ -34,7 +34,7 @@ var randomDraw = function(lst) {
 
 var makeTrialList = function(len, stim, data) {
   //choice array: numeric key codes for the numbers 1-4
-  var choice_array = [72, 83]
+  var choice_array = [83, 72]
     // 1 is a switch trial: ensure half the trials are switch trials
   var switch_trials = jsPsych.randomization.repeat([0, 1], len / 2)
     //create test array
@@ -273,8 +273,8 @@ var practice_block = {
     trial_id: "stim",
     exp_stage: "practice"
   },
-  correct_text: '<div class = centerbox><div class = center-text>Correct</div></div>',
-  incorrect_text: '<div class = centerbox><div class = center-text>Incorrect</div></div>',
+  correct_text: '<div class = centerbox><div style="color:green"; class = center-text>Correct!</div></div>',
+  incorrect_text: '<div class = centerbox><div style="color:red"; class = center-text>Incorrect</div></div>',
   timeout_message: '<div class = centerbox><div class = center-text>Response faster!</div></div>',
   choices: [72, 83],
   timing_feedback_duration: 1000,

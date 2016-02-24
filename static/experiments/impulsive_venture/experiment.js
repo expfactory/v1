@@ -62,7 +62,7 @@ var all_pages = [
     'Are you an impulsive person?', 'Do you usually think carefully before doing anything?',
     'Do you often do things on the spur of the moment?',
     'Do you mostly speak before thinking things out?',
-    'Do you often get involved in things you later Wish you could get out of?',
+    'Do you often get involved in things you later wish you could get out of?',
     'Do you get so "carried away" by new and exciting ideas. that you never think of possible snags?',
     'Do you need to use a lot of self-control to keep out of trouble?',
     'Would you agree that almost everything enjoyable is illegal or immoral?',
@@ -83,12 +83,11 @@ var all_pages = [
     "Generally do you prefer to enter cold sea water gradually, to diving or jumping straight in?",
     "Would you enjoy the sensation of skiing very fast down a high mountain slope?",
     "Would you like to go scuba diving?", "Would you enjoy fast driving?",
-    "Would you like to go pot-holing?",
     "Would you be put off a job involving quite a bit of danger?"
   ]
 ]
 
-var all_options = [fillArray(opts, 19), fillArray(opts, 16)]
+var all_options = [fillArray(opts, 19), fillArray(opts, 15)]
 
 //higher = more impulsive
 var score_scale = [
@@ -96,7 +95,7 @@ var score_scale = [
       scale_reg, scale_reg, scale_rev, scale_rev, scale_reg, scale_reg
     ],
     [scale_reg, scale_rev, scale_reg, scale_reg, scale_rev, scale_reg, scale_reg, scale_reg, scale_rev, scale_reg, scale_rev, scale_reg, scale_reg,
-      scale_reg, scale_reg, scale_rev
+      scale_reg, scale_rev
     ]
   ]
 
@@ -110,7 +109,7 @@ var survey_block = {
   scale: score_scale,
   show_clickable_nav: true,
   allow_backward: true,
-  required: [fillArray(true, 19), fillArray(true, 16)]
+  required: [fillArray(true, 19), fillArray(true, 15)]
 };
 
 var end_block = {
