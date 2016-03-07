@@ -35,9 +35,24 @@ function assessPerformance() {
   credit_var = (avg_rt > 100)
 }
 
-var post_trial_gap = function() {
-  gap = Math.floor(Math.random() * 1000) + 1000
-  return gap;
+var get_trial_time = function() {
+  function randomExponential(rate, randomUniform) {
+    // http://en.wikipedia.org/wiki/Exponential_distribution#Generating_exponential_variates
+    rate = rate || 1;
+
+    // Allow to pass a random uniform value or function
+    // Default to Math.random()
+    var U = randomUniform;
+    if (typeof randomUniform === 'function') U = randomUniform();
+    if (!U) U = Math.random();
+
+    return -Math.log(U) / rate;
+  }
+  gap = randomExponential(1)*1000
+  if (gap > 4000) {
+    gap = 4000
+  }
+  return gap + 2000;
 }
 
 /* Append gap and current trial to data and then recalculate for next trial*/
@@ -62,7 +77,7 @@ var instructTimeThresh = 0 ///in seconds
 
 // task specific variables
 var practice_len = 5
-var experiment_len = 5
+var experiment_len = 50
 var gap = 0
 var current_trial = 0
 var stim = '<div class = shapebox><div id = cross></div></div>'
@@ -72,6 +87,18 @@ var stim = '<div class = shapebox><div id = cross></div></div>'
 /* ************************************ */
 /* Set up jsPsych blocks */
 /* ************************************ */
+//Set up post task questionnaire
+var post_task_block = {
+   type: 'survey-text',
+   data: {
+       trial_id: "post task questions"
+   },
+   questions: ['<p class = center-block-text style = "font-size: 20px">Please summarize what you were asked to do in this task.</p>',
+              '<p class = center-block-text style = "font-size: 20px">Do you have any comments about this task?</p>'],
+   rows: [15, 15],
+   columns: [60,60]
+};
+
 /* define static blocks */
 var end_block = {
   type: 'poldrack-text',
@@ -86,7 +113,7 @@ var end_block = {
 };
 
 var feedback_instruct_text =
-  'Welcome to the experiment. Press <strong>enter</strong> to begin.'
+  'Welcome to the experiment. This experiment will take about 3 minutes. Press <strong>enter</strong> to begin.'
 var feedback_instruct_block = {
   type: 'poldrack-text',
   data: {
@@ -98,7 +125,6 @@ var feedback_instruct_block = {
   timing_response: 180000
 };
 /// This ensures that the subject does not read through the instructions too quickly.  If they do it too quickly, then we will go over the loop again.
-var instruction_trials = []
 var instructions_block = {
   type: 'poldrack-instructions',
   data: {
@@ -111,11 +137,9 @@ var instructions_block = {
   show_clickable_nav: true,
   timing_post_trial: 1000
 };
-instruction_trials.push(feedback_instruct_block)
-instruction_trials.push(instructions_block)
 
 var instruction_node = {
-  timeline: instruction_trials,
+  timeline: [feedback_instruct_block, instructions_block],
   /* This function defines stopping criteria */
   loop_function: function(data) {
     for (i = 0; i < data.length; i++) {
@@ -175,8 +199,8 @@ var reset_block = {
 var practice_block = {
   type: 'poldrack-single-stim',
   stimulus: stim,
-  timing_stim: 1000,
-  timing_response: 1000,
+  timing_stim: 2000,
+  timing_response: get_trial_time,
   response_ends_trial: false,
   is_html: true,
   data: {
@@ -184,7 +208,6 @@ var practice_block = {
     exp_stage: "practice"
   },
   choices: [32],
-  timing_post_trial: post_trial_gap,
   on_finish: appendData,
 };
 
@@ -192,8 +215,8 @@ var practice_block = {
 var test_block = {
   type: 'poldrack-single-stim',
   stimulus: stim,
-  timing_stim: 1000,
-  timing_response: 1000,
+  timing_stim: 2000,
+  timing_response: get_trial_time,
   response_ends_trial: false,
   is_html: true,
   data: {
@@ -201,7 +224,6 @@ var test_block = {
     exp_stage: "test"
   },
   choices: [32],
-  timing_post_trial: post_trial_gap,
   on_finish: appendData,
 };
 
@@ -218,4 +240,5 @@ simple_reaction_time_experiment.push(start_test_block);
 for (var i = 0; i < experiment_len; i++) {
   simple_reaction_time_experiment.push(test_block);
 }
+simple_reaction_time_experiment.push(post_task_block)
 simple_reaction_time_experiment.push(end_block);

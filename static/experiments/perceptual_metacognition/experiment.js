@@ -264,6 +264,7 @@ function getStim() {
 	makeStim('canvas1', 'backCanvas1', 0, 0)
 	makeStim('canvas2', 'backCanvas2', angle, contrast)
 	curr_data.angle = angle
+	curr_data.contrast = contrast
 	curr_data.reference_side = sides[0]
 	correct_response = choices[['left', 'right'].indexOf(sides[1])]
 	curr_data.correct_response = correct_response
@@ -283,7 +284,7 @@ function getEasyStim() {
 	makeStim('canvas1', 'backCanvas1', 0, 0)
 	makeStim('canvas2', 'backCanvas2', angle, 0.2)
 	curr_data.angle = angle
-	curr_data.reference_side = sides[0]
+	curr_data.contrast = contrast
 	correct_response = choices[['left', 'right'].indexOf(sides[1])]
 	curr_data.correct_response = correct_response
 }
@@ -322,7 +323,7 @@ var afterTrialUpdate = function(data) {
 	jsPsych.data.addDataToLastTrial(curr_data)
 	curr_data = {}
 	current_trial = current_trial + 1
-		//2 up 1 down staircase
+	//2 up 1 down staircase
 	if (data.key_press != -1) {
 		if (correct === false) {
 			contrast += 0.005
@@ -346,13 +347,14 @@ var credit_var = true
 
 // task specific variables
 var practice_len = 10
-var exp_len = 100
+var exp_len = 300
 var contrast = 0.1
 var correct_counter = 0
 var current_trial = 0
 var choices = [37, 39]
 var curr_data = {}
-
+var confidence_choices = [49, 50, 51, 52]
+var catch_trials = [25, 57, 150, 220, 270]
 var confidence_response_area =
 	'<div class = centerbox><div class = fixation>+</div></div><div class = response_div>' +
 	'<button class = response_button id = Confidence_1>1:<br> Not Confident At All</button>' +
@@ -360,9 +362,28 @@ var confidence_response_area =
 	'<button class = response_button id = Confidence_3>3</button>' +
 	'<button class = response_button id = Confidence_4>4:<br> Very Confident</button>'
 
+var confidence_response_area_key =
+	'<div class = centerbox><div class = fixation>+</div></div><div class = response_div>' +
+	'<button class = response_button_key id = Confidence_1>1:<br> Not Confident At All</button>' +
+	'<button class = response_button_key id = Confidence_2>2</button>' +
+	'<button class = response_button_key id = Confidence_3>3</button>' +
+	'<button class = response_button_key id = Confidence_4>4:<br> Very Confident</button>'
+
 /* ************************************ */
 /* Set up jsPsych blocks */
 /* ************************************ */
+//Set up post task questionnaire
+var post_task_block = {
+   type: 'survey-text',
+   data: {
+       trial_id: "post task questions"
+   },
+   questions: ['<p class = center-block-text style = "font-size: 20px">Please summarize what you were asked to do in this task.</p>',
+              '<p class = center-block-text style = "font-size: 20px">Do you have any comments about this task?</p>'],
+   rows: [15, 15],
+   columns: [60,60]
+};
+
 /* define static blocks */
 var end_block = {
 	type: 'poldrack-text',
@@ -377,7 +398,7 @@ var end_block = {
 };
 
 var feedback_instruct_text =
-	'Welcome to the experiment. Press <strong>enter</strong> to begin.'
+	'Welcome to the experiment. This experiment should take about 30 minutes. Press <strong>enter</strong> to begin.'
 var feedback_instruct_block = {
 	type: 'poldrack-text',
 	data: {
@@ -389,24 +410,21 @@ var feedback_instruct_block = {
 	timing_response: 180000
 };
 /// This ensures that the subject does not read through the instructions too quickly.  If they do it too quickly, then we will go over the loop again.
-var instruction_trials = []
 var instructions_block = {
 	type: 'poldrack-instructions',
 	data: {
 		trial_id: "instruction"
 	},
 	pages: [
-		'<div class = centerbox><p class = block-text>In this experiment, you will see two patches of random noise. In one of the patches there is a slight grating (a striped pattern). Your task is to indicate whether the left or right stimulus has the grating by using the arrow keys. After you make your choice you will be asked to rate how confident you are that you were correct, on a scale from 1 to 4. We will begin with practice after you end the instructions.</p></div>'
+		'<div class = centerbox><p class = block-text>In this experiment, you will see two patches of random noise. In one of the patches there is a slight grating (a striped pattern). Your task is to indicate whether the left or right stimulus has the grating by using the arrow keys. There is a fixation cross in the middle of the screen. The patches come on the screen for a very short amount of time, so keep your eyes on the cross.</p><p class = block-text>After you make your choice you will be asked to rate how confident you are that you were correct, on a scale from 1 to 4. Press the corresponding number key to indicate your confidence. We will begin with practice after you end the instructions.</p></div>'
 	],
 	allow_keys: false,
 	show_clickable_nav: true,
 	timing_post_trial: 1000
 };
-instruction_trials.push(feedback_instruct_block)
-instruction_trials.push(instructions_block)
 
 var instruction_node = {
-	timeline: instruction_trials,
+	timeline: [feedback_instruct_block, instructions_block],
 	/* This function defines stopping criteria */
 	loop_function: function(data) {
 		for (i = 0; i < data.length; i++) {
@@ -433,7 +451,7 @@ var start_test_block = {
 		trial_id: "end"
 	},
 	timing_response: 180000,
-	text: '<div class = centerbox><p class = center-block-text>We are done with practice. We will now start the test. This will be identical to the practice - your task is to indicate where the grating is by pressing the arrow keys. After you make your choice, rate how confidence you are that your response was accurate.</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
+	text: '<div class = centerbox><p class = center-block-text>We are done with practice. We will now start the test. This will be identical to the practice - your task is to indicate where the grating is by pressing the arrow keys. After you make your choice, rate how confident you are that your response was accurate.</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
 	cont_key: [13],
 	timing_post_trial: 0
 };
@@ -487,9 +505,9 @@ var easy_block = {
 	}
 };
 
+//below are two different response options - either button click or key press
 var confidence_block = {
 	type: 'single-stim-button',
-	// stimulus: getHealthStim,
 	stimulus: confidence_response_area,
 	button_class: 'response_button',
 	data: {
@@ -502,18 +520,43 @@ var confidence_block = {
 	timing_post_trial: 0
 }
 
+var confidence_key_block = {
+	type: 'poldrack-single-stim',
+	stimulus: confidence_response_area_key,
+	choices: confidence_choices,
+	data: {
+		trial_id: 'confidence_rating',
+		exp_stage: 'test'
+	},
+	is_html: true,
+	timing_stim: 4000,
+	timing_response: 4000,
+	response_ends_trial: true,
+	timing_post_trial: 0,
+	on_finish: function(data) {
+		var index = confidence_choices.indexOf(data.key_press)
+		jsPsych.data.addDataToLastTrial({confidence: 'confidence_' + (index+1)})
+	}
+}
+
 /* create experiment definition array */
 var perceptual_metacognition_experiment = [];
 perceptual_metacognition_experiment.push(instruction_node);
+
 for (var i = 0; i < practice_len; i++) {
 	perceptual_metacognition_experiment.push(fixation_block);
 	perceptual_metacognition_experiment.push(easy_block);
-	perceptual_metacognition_experiment.push(confidence_block);
+	perceptual_metacognition_experiment.push(confidence_key_block);
 }
 perceptual_metacognition_experiment.push(start_test_block)
 for (var i = 0; i < exp_len; i++) {
 	perceptual_metacognition_experiment.push(fixation_block);
-	perceptual_metacognition_experiment.push(test_block);
-	perceptual_metacognition_experiment.push(confidence_block);
+	if (jQuery.inArray(i,catch_trials) !== -1) {
+		perceptual_metacognition_experiment.push(easy_block)
+	} else {
+		perceptual_metacognition_experiment.push(test_block);
+	}
+	perceptual_metacognition_experiment.push(confidence_key_block);
 }
+perceptual_metacognition_experiment.push(post_task_block)
 perceptual_metacognition_experiment.push(end_block);

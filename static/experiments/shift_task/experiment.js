@@ -88,7 +88,7 @@ var getData = function() {
 }
 
 var getAlert = function() {
-  return '<div class = centerbox><div class = center-text>The important feature is <strong>' +
+  return '<div class = alertbox><div class = alert-text>The relevant feature is <strong>' +
     rewarded_feature + '</strong>!</div></div>'
 }
 var getStim = function() {
@@ -122,9 +122,9 @@ var getFeedback = function() {
     image = '<div class = shift_' + position_array[choice] + '><img class = shift_stim src = ' +
       stim_htmls[choice] + ' </img></div>'
     feedback_text = 'You won 0 points.'
-    if (image.indexOf(rewarded_feature) != -1 && Math.random() > 0.25) {
+    if (image.indexOf(rewarded_feature) != -1 && Math.random() > 0.2) {
       feedback_text = 'You won 1 point!'
-    } else if (image.indexOf(rewarded_feature) == -1 && Math.random() <= 0.25) {
+    } else if (image.indexOf(rewarded_feature) == -1 && Math.random() <= 0.2) {
       feedback_text = 'You won 1 point!'
     }
   } else {
@@ -225,6 +225,18 @@ var attention_node = {
   }
 }
 
+//Set up post task questionnaire
+var post_task_block = {
+   type: 'survey-text',
+   data: {
+       trial_id: "post task questions"
+   },
+   questions: ['<p class = center-block-text style = "font-size: 20px">Please summarize what you were asked to do in this task.</p>',
+              '<p class = center-block-text style = "font-size: 20px">Do you have any comments about this task?</p>'],
+   rows: [15, 15],
+   columns: [60,60]
+};
+
 /* define static blocks */
 var end_block = {
   type: 'poldrack-text',
@@ -239,7 +251,7 @@ var end_block = {
 };
 
 var feedback_instruct_text =
-  'Welcome to the experiment. Press <strong>enter</strong> to begin.'
+  'Welcome to the experiment. This task will take about 22 minutes. Press <strong>enter</strong> to begin.'
 var feedback_instruct_block = {
   type: 'poldrack-text',
   data: {
@@ -251,7 +263,6 @@ var feedback_instruct_block = {
   timing_response: 180000
 };
 /// This ensures that the subject does not read through the instructions too quickly.  If they do it too quickly, then we will go over the loop again.
-var instruction_trials = []
 var instructions_block = {
   type: 'poldrack-instructions',
   data: {
@@ -261,17 +272,15 @@ var instructions_block = {
     getStim() +
     '<div class = instructionbox><p class = block-text>On each trial of this experiment three patterned objects will be presented. They will differ in their color, shape and internal pattern.</p><p class = block-text>For instance, the objects may look something like this:</p></div><div class = navBox></div>',
     '<div class = centerbox><p class = block-text>On each trial you select one of the objects to get points using the arrow keys (left, down and right keys for the left, middle and right objects, respectively). The object you choose determines the chance of getting a point.</p><p class = block-text>The objects differ in three dimensions: their color (red, blue, green), shape (square, circle, triangle) and pattern (lines, dots, waves). Only one dimension (color, shape or pattern) is relevant for determining the probability of winning a point at any time.</p><p class = block-text>One feature of that dimension will result in rewards more often than the others. For instance, if the relevant dimension is "color", "blue" objects may result in earning a point more often than "green" or "red" objects.</p><p class = block-text>Importantly, all rewards are probabilistic. This means that even the best object will sometimes not result in any points and bad objects can sometimes give points.</div>',
-    '<div class = centerbox><p class = block-text>The relevant dimension and feature can change between trials. One trial "color" may be the relevant dimension with "red" the relevant feature, while on the next trial "pattern" is the important dimension with "waves" the important feature.</p><p class = block-text>During an initial practice session these changes will be explicitly signaled and you will be told what the relevant feature is. During the main task, however, there will be no explicit instructions - you will have to figure out the important feature yourself.</p><p class = block-text>Your objective is to get as many point as possible! The trials go by quickly so you must respond quickly. There will be a number of breaks throughout the task. We will start with a practice session.'
+    '<div class = centerbox><p class = block-text>The relevant dimension and feature can change between trials. One trial "color" may be the relevant dimension with "red" the relevant feature, while on the next trial "pattern" is the relevant dimension with "waves" the relevant feature.</p><p class = block-text>During an initial practice session these changes will be explicitly signaled and you will be told what the relevant feature is. During the main task, however, there will be no explicit instructions - you will have to figure out the relevant feature yourself.</p><p class = block-text>Your objective is to get as many point as possible! The trials go by quickly so you must respond quickly. There will be a number of breaks throughout the task. We will start with a practice session after you end instructions.</p></div>'
   ],
   allow_keys: false,
   show_clickable_nav: true,
   timing_post_trial: 1000
 };
-instruction_trials.push(feedback_instruct_block)
-instruction_trials.push(instructions_block)
 
 var instruction_node = {
-  timeline: instruction_trials,
+  timeline: [feedback_instruct_block, instructions_block],
   /* This function defines stopping criteria */
   loop_function: function(data) {
     for (i = 0; i < data.length; i++) {
@@ -309,7 +318,7 @@ var start_test_block = {
     trial_id: "test_intro"
   },
   timing_response: 180000,
-  text: '<div class = centerbox><p class = shift-center-text>We will now start the test. You will no longer be told what the important feature is or when it switches. Press <strong>enter</strong> to begin.</p></div>',
+  text: '<div class = centerbox><p class = shift-center-text>We will now start the test. You will no longer be told what the relevant feature is or when it switches. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   timing_post_trial: 1000
 };
@@ -348,8 +357,8 @@ var alert_block = {
   stimulus: getAlert,
   is_html: true,
   choices: 'none',
-  timing_stim: 2000,
-  timing_response: 2000,
+  timing_stim: 200000,
+  timing_response: 200000,
   timing_post_trial: 1000
 };
 
@@ -508,7 +517,6 @@ var feedback_block = {
 /* create experiment definition array */
 var shift_task_experiment = [];
 shift_task_experiment.push(instruction_node);
-shift_task_experiment.push(start_practice_block);
 for (var i = 0; i < practice_len; i++) {
   shift_task_experiment.push(alert_node)
   shift_task_experiment.push(practice_stim_block);
@@ -524,4 +532,5 @@ for (var i = 0; i < exp_len; i++) {
     shift_task_experiment.push(rest_block)
   }
 }
+shift_task_experiment.push(post_task_block)
 shift_task_experiment.push(end_block);

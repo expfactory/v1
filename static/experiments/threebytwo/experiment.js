@@ -106,7 +106,7 @@ var genStims = function(n) {
 
 //Sets the cue-target-interval for the cue block
 var setCTI = function() {
-  return randomDraw([1, 100, 200, 400, 800])
+  return randomDraw([100, 900])
 }
 
 var getCTI = function() {
@@ -244,7 +244,7 @@ var response_keys = jsPsych.randomization.repeat([{
 }], 1, true)
 var choices = response_keys.key
 var practice_length = 60
-var test_length = 340
+var test_length = 440
 
 //set up block stim. correct_responses indexed by [block][stim][type]
 var tasks = {
@@ -325,9 +325,21 @@ var attention_node = {
   }
 }
 
+//Set up post task questionnaire
+var post_task_block = {
+   type: 'survey-text',
+   data: {
+       trial_id: "post task questions"
+   },
+   questions: ['<p class = center-block-text style = "font-size: 20px">Please summarize what you were asked to do in this task.</p>',
+              '<p class = center-block-text style = "font-size: 20px">Do you have any comments about this task?</p>'],
+   rows: [15, 15],
+   columns: [60,60]
+};
+
 /* define static blocks */
 var feedback_instruct_text =
-  'Welcome to the experiment. Press <strong>enter</strong> to begin.'
+  'Welcome to the experiment. This experiment will take about 24 minutes. Press <strong>enter</strong> to begin.'
 var feedback_instruct_block = {
   type: 'poldrack-text',
   data: {
@@ -339,7 +351,6 @@ var feedback_instruct_block = {
   timing_response: 180000
 };
 /// This ensures that the subject does not read through the instructions too quickly.  If they do it too quickly, then we will go over the loop again.
-var instruction_trials = []
 var instructions_block = {
   type: 'poldrack-instructions',
   data: {
@@ -355,11 +366,9 @@ var instructions_block = {
   show_clickable_nav: true,
   timing_post_trial: 1000
 };
-instruction_trials.push(feedback_instruct_block)
-instruction_trials.push(instructions_block)
 
 var instruction_node = {
-  timeline: instruction_trials,
+  timeline: [feedback_instruct_block, instructions_block],
   /* This function defines stopping criteria */
   loop_function: function(data) {
     for (i = 0; i < data.length; i++) {
@@ -480,7 +489,7 @@ var practice_block = {
   },
   timing_feedback_duration: 1000,
   show_stim_with_feedback: false,
-  timing_response: 1500,
+  timing_response: 2000,
   timing_stim: 1000,
   timing_post_trial: 0,
   prompt: '<div class = promptbox>' + prompt_task_list + '</div>',
@@ -498,7 +507,7 @@ var test_block = {
     exp_stage: 'test'
   },
   timing_post_trial: 0,
-  timing_response: 1500,
+  timing_response: 2000,
   timing_stim: 1000,
   prompt: '<div class = promptbox>' + prompt_task_list + '</div>',
   on_finish: appendData
@@ -540,4 +549,5 @@ for (var i = 0; i < stims.length; i++) {
   threebytwo_experiment.push(test_block);
 }
 threebytwo_experiment.push(attention_node)
+threebytwo_experiment.push(post_task_block)
 threebytwo_experiment.push(end_block)

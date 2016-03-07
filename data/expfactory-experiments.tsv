@@ -1,42 +1,43 @@
 preview	exp_id	contributors	time	cognitive_atlas_task_id
-"<a href=""bickel_titrator.html"" target=""_blank"">DEMO</a>"	bickel_titrator	Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack	2	trm_5696a599bfcb6
-"<a href=""local_global_shape.html"" target=""_blank"">DEMO</a>"	local_global_shape	Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack	5	trm_4f241d7adf14e
-"<a href=""willingness_to_wait.html"" target=""_blank"">DEMO</a>"	willingness_to_wait	Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack	5	trm_569989ef8cff4
-"<a href=""attention_network_task.html"" target=""_blank"">DEMO</a>"	attention_network_task	Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack	20	trm_551f0857e1db8
+"<a href=""angling_risk_task_always_sunny.html"" target=""_blank"">DEMO</a>"	angling_risk_task_always_sunny	Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack	20	trm_5667488d52ccc
+"<a href=""bickel_titrator.html"" target=""_blank"">DEMO</a>"	bickel_titrator	Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack	5	trm_5696a599bfcb6
+"<a href=""local_global_shape.html"" target=""_blank"">DEMO</a>"	local_global_shape	Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack	8	trm_4f241d7adf14e
+"<a href=""willingness_to_wait.html"" target=""_blank"">DEMO</a>"	willingness_to_wait	Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack	11	trm_569989ef8cff4
+"<a href=""attention_network_task.html"" target=""_blank"">DEMO</a>"	attention_network_task	Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack	15	trm_551f0857e1db8
 "<a href=""random_number_generation.html"" target=""_blank"">DEMO</a>"	random_number_generation	Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack	3	trm_4f2417d4a63ae
-"<a href=""stim_selective_stop_signal.html"" target=""_blank"">DEMO</a>"	stim_selective_stop_signal	Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack	30	trm_56a9123fe580f
-"<a href=""motor_selective_stop_signal.html"" target=""_blank"">DEMO</a>"	motor_selective_stop_signal	Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack	30	trm_4cacf3fbc503b
+"<a href=""stim_selective_stop_signal.html"" target=""_blank"">DEMO</a>"	stim_selective_stop_signal	Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack	22	trm_56a9123fe580f
+"<a href=""motor_selective_stop_signal.html"" target=""_blank"">DEMO</a>"	motor_selective_stop_signal	Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack	22	trm_4cacf3fbc503b
 "<a href=""sensation_seeking.html"" target=""_blank"">DEMO</a>"	sensation_seeking	Zeynep Enkavi,Ian Eisenberg,Patrick Bissett,Vanessa Sochat,Russell Poldrack	999	trm_56abebfe9aaa3
 "<a href=""ravens.html"" target=""_blank"">DEMO</a>"	ravens	Zeynep Enkavi,Ian Eisenberg,Patrick Bissett,Vanessa Sochat,Russell Poldrack	999	trm_4f24211a03b07
 "<a href=""eating_questionnaire.html"" target=""_blank"">DEMO</a>"	eating_questionnaire	Zeynep Enkavi,Ian Eisenberg,Patrick Bissett,Vanessa Sochat,Russell Poldrack	999	trm_56aac5f6e4702
 "<a href=""letter_memory.html"" target=""_blank"">DEMO</a>"	letter_memory	Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack	5	trm_5696a9cfe45b1
-"<a href=""information_sampling_task.html"" target=""_blank"">DEMO</a>"	information_sampling_task	Jamie Li,Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack	999	trm_50f73d557c967
+"<a href=""information_sampling_task.html"" target=""_blank"">DEMO</a>"	information_sampling_task	Jamie Li,Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack	12	trm_50f73d557c967
 "<a href=""gm_paradigm.html"" target=""_blank"">DEMO</a>"	gm_paradigm	Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack	45	trm_569d6eef27433
 "<a href=""upps_impulsivity.html"" target=""_blank"">DEMO</a>"	upps_impulsivity	Zeynep Enkavi,Ian Eisenberg,Patrick Bissett,Vanessa Sochat,Russell Poldrack	999	trm_56a91a92043bc
 "<a href=""theories_of_willpower.html"" target=""_blank"">DEMO</a>"	theories_of_willpower	Zeynep Enkavi,Ian Eisenberg,Patrick Bissett,Vanessa Sochat,Russell Poldrack	999	trm_56a91a3082c31
-"<a href=""tower_of_london.html"" target=""_blank"">DEMO</a>"	tower_of_london	Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack	8	trm_4da87e439c411
+"<a href=""tower_of_london.html"" target=""_blank"">DEMO</a>"	tower_of_london	Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack	5	trm_4da87e439c411
 "<a href=""dospert_rp.html"" target=""_blank"">DEMO</a>"	dospert_rp	Zeynep Enkavi,Ian Eisenberg,Patrick Bissett,Vanessa Sochat,Russell Poldrack	999	trm_5696abecf2569
-"<a href=""digit_span.html"" target=""_blank"">DEMO</a>"	digit_span	Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack	5	tsk_4a57abb949a0d
-"<a href=""adaptive_n_back.html"" target=""_blank"">DEMO</a>"	adaptive_n_back	Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack	16	trm_56674133b666c
+"<a href=""digit_span.html"" target=""_blank"">DEMO</a>"	digit_span	Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack	7	tsk_4a57abb949a0d
+"<a href=""adaptive_n_back.html"" target=""_blank"">DEMO</a>"	adaptive_n_back	Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack	20	trm_56674133b666c
 "<a href=""leisure_time_activity.html"" target=""_blank"">DEMO</a>"	leisure_time_activity	Zeynep Enkavi,Ian Eisenberg,Patrick Bissett,Vanessa Sochat,Russell Poldrack	999	trm_56aaa613f0c1a
 "<a href=""stop_signal.html"" target=""_blank"">DEMO</a>"	stop_signal	Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack	30	tsk_4a57abb949e1a
 "<a href=""test_task.html"" target=""_blank"">DEMO</a>"	test_task	Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack	1	tsk_4a57abb949dc8
 "<a href=""flanker.html"" target=""_blank"">DEMO</a>"	flanker	Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack	6.5	tsk_4a57abb949a4f
 "<a href=""multiplication.html"" target=""_blank"">DEMO</a>"	multiplication	Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack	5	trm_5696c2c063222
-"<a href=""choice_reaction_time.html"" target=""_blank"">DEMO</a>"	choice_reaction_time	Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack	4	tsk_4a57abb949934
+"<a href=""choice_reaction_time.html"" target=""_blank"">DEMO</a>"	choice_reaction_time	Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack	5	tsk_4a57abb949934
 "<a href=""emotion_regulation.html"" target=""_blank"">DEMO</a>"	emotion_regulation	Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack	10	trm_4da890594742a
 "<a href=""brief_self_control.html"" target=""_blank"">DEMO</a>"	brief_self_control	Zeynep Enkavi,Ian Eisenberg,Patrick Bissett,Vanessa Sochat,Russell Poldrack	999	trm_56a915461cd91
 "<a href=""number_letter.html"" target=""_blank"">DEMO</a>"	number_letter	Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack	5	trm_4c3e0a9576c3b
-"<a href=""angling_risk_task.html"" target=""_blank"">DEMO</a>"	angling_risk_task	Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack	45	trm_5667488d52ccc
+"<a href=""angling_risk_task.html"" target=""_blank"">DEMO</a>"	angling_risk_task	Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack	25	trm_5667488d52ccc
 "<a href=""antisaccade.html"" target=""_blank"">DEMO</a>"	antisaccade	Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack	8	tsk_4a57abb949869
 "<a href=""bis_bas.html"" target=""_blank"">DEMO</a>"	bis_bas	Zeynep Enkavi,Ian Eisenberg,Patrick Bissett,Vanessa Sochat,Russell Poldrack	999	trm_56a9137d9dce1
 "<a href=""tone_monitoring.html"" target=""_blank"">DEMO</a>"	tone_monitoring	Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack	6	trm_4c8a84825c4e4
 "<a href=""keep_track.html"" target=""_blank"">DEMO</a>"	keep_track	Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack	6	trm_4c40d4054f38b
 "<a href=""ax_cpt.html"" target=""_blank"">DEMO</a>"	ax_cpt	Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack	20	trm_4c40d2a93ea15
-"<a href=""cognitive_reflection.html"" target=""_blank"">DEMO</a>"	cognitive_reflection	Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack	999	trm_56675359b663a
+"<a href=""cognitive_reflection.html"" target=""_blank"">DEMO</a>"	cognitive_reflection	Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack	5	trm_56675359b663a
 "<a href=""impulsive_venture.html"" target=""_blank"">DEMO</a>"	impulsive_venture	Zeynep Enkavi,Ian Eisenberg,Patrick Bissett,Vanessa Sochat,Russell Poldrack	999	trm_56a91e3e982f9
-"<a href=""spatial_span.html"" target=""_blank"">DEMO</a>"	spatial_span	Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack	5	trm_4da86b539924c
-"<a href=""stroop.html"" target=""_blank"">DEMO</a>"	stroop	Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack	5	tsk_4a57abb949e27
+"<a href=""spatial_span.html"" target=""_blank"">DEMO</a>"	spatial_span	Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack	7	trm_4da86b539924c
+"<a href=""stroop.html"" target=""_blank"">DEMO</a>"	stroop	Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack	8	tsk_4a57abb949e27
 "<a href=""volatile_bandit.html"" target=""_blank"">DEMO</a>"	volatile_bandit	Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack	18	trm_5696b180169bd
 "<a href=""plus_minus.html"" target=""_blank"">DEMO</a>"	plus_minus	Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack	5	trm_5696b316c220a
 "<a href=""time_perspective.html"" target=""_blank"">DEMO</a>"	time_perspective	Zeynep Enkavi,Ian Eisenberg,Patrick Bissett,Vanessa Sochat,Russell Poldrack	999	trm_56a91e92eab46
@@ -44,37 +45,39 @@ preview	exp_id	contributors	time	cognitive_atlas_task_id
 "<a href=""ten_item_personality.html"" target=""_blank"">DEMO</a>"	ten_item_personality	Zeynep Enkavi,Ian Eisenberg,Patrick Bissett,Vanessa Sochat,Russell Poldrack	999	trm_56a919a478935
 "<a href=""grit_scale.html"" target=""_blank"">DEMO</a>"	grit_scale	Zeynep Enkavi,Ian Eisenberg,Patrick Bissett,Vanessa Sochat,Russell Poldrack	999	trm_56a9166421494
 "<a href=""bis11.html"" target=""_blank"">DEMO</a>"	bis11	Zeynep Enkavi,Ian Eisenberg,Patrick Bissett,Vanessa Sochat,Russell Poldrack	999	trm_55a6a8e81b7f4
-"<a href=""writing_task.html"" target=""_blank"">DEMO</a>"	writing_task	Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack	15	trm_4c8a85c5c75eb
+"<a href=""writing_task.html"" target=""_blank"">DEMO</a>"	writing_task	Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack	5	trm_4c8a85c5c75eb
+"<a href=""demographics.html"" target=""_blank"">DEMO</a>"	demographics	Zeynep Enkavi,Ian Eisenberg,Patrick Bissett,Vanessa Sochat,Russell Poldrack	999	
 "<a href=""multisource.html"" target=""_blank"">DEMO</a>"	multisource	Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack	7	trm_5696b61ff253e
 "<a href=""dot_pattern_expectancy.html"" target=""_blank"">DEMO</a>"	dot_pattern_expectancy	Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack	15	trm_4da86c2a70a7d
 "<a href=""holt_laury.html"" target=""_blank"">DEMO</a>"	holt_laury	Zeynep Enkavi,Ian Eisenberg,Patrick Bissett,Vanessa Sochat,Russell Poldrack	999	trm_56674f71483b0
-"<a href=""hierarchical_rule.html"" target=""_blank"">DEMO</a>"	hierarchical_rule	Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack	5	trm_5696bb7166121
-"<a href=""directed_forgetting.html"" target=""_blank"">DEMO</a>"	directed_forgetting	Jamie Li,Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack	999	trm_56674c7c2fa4f
-"<a href=""dietary_decision.html"" target=""_blank"">DEMO</a>"	dietary_decision	Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack	10	trm_56674d6aa9faf
-"<a href=""discount_titrate.html"" target=""_blank"">DEMO</a>"	discount_titrate	Zeynep Enkavi,Ian Eisenberg,Patrick Bissett,Vanessa Sochat,Russell Poldrack	10	trm_566748c929afc
+"<a href=""hierarchical_rule.html"" target=""_blank"">DEMO</a>"	hierarchical_rule	Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack	22	trm_5696bb7166121
+"<a href=""directed_forgetting.html"" target=""_blank"">DEMO</a>"	directed_forgetting	Jamie Li,Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack	22	trm_56674c7c2fa4f
+"<a href=""dietary_decision.html"" target=""_blank"">DEMO</a>"	dietary_decision	Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack	14	trm_56674d6aa9faf
+"<a href=""discount_titrate.html"" target=""_blank"">DEMO</a>"	discount_titrate	Zeynep Enkavi,Ian Eisenberg,Patrick Bissett,Vanessa Sochat,Russell Poldrack	5	trm_566748c929afc
 "<a href=""future_time_perspective.html"" target=""_blank"">DEMO</a>"	future_time_perspective	Zeynep Enkavi,Ian Eisenberg,Patrick Bissett,Vanessa Sochat,Russell Poldrack	999	trm_56a915fe77945
 "<a href=""dickman.html"" target=""_blank"">DEMO</a>"	dickman	Zeynep Enkavi,Ian Eisenberg,Patrick Bissett,Vanessa Sochat,Russell Poldrack	999	trm_55a6a95f66508
-"<a href=""psychological_refractory_period.html"" target=""_blank"">DEMO</a>"	psychological_refractory_period	Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack	15	trm_51c453f64d2a6
+"<a href=""psychological_refractory_period_gonogo_choice.html"" target=""_blank"">DEMO</a>"	psychological_refractory_period_gonogo_choice	Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack	12	trm_51c453f64d2a6
 "<a href=""kirby.html"" target=""_blank"">DEMO</a>"	kirby	Zeynep Enkavi,Ian Eisenberg,Patrick Bissett,Vanessa Sochat,Russell Poldrack	5	tsk_4a57abb949e98
 "<a href=""treatment_self_regulation_questionnaire.html"" target=""_blank"">DEMO</a>"	treatment_self_regulation_questionnaire	Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack	5	trm_56aa9833c4be2
-"<a href=""simon.html"" target=""_blank"">DEMO</a>"	simon	Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack	5	tsk_4a57abb949dbb
+"<a href=""simon.html"" target=""_blank"">DEMO</a>"	simon	Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack	8	tsk_4a57abb949dbb
 "<a href=""five_facet_mindfulness.html"" target=""_blank"">DEMO</a>"	five_facet_mindfulness	Zeynep Enkavi,Ian Eisenberg,Patrick Bissett,Vanessa Sochat,Russell Poldrack	999	trm_56ab12e0f1a61
-"<a href=""local_global_letter.html"" target=""_blank"">DEMO</a>"	local_global_letter	Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack	5	trm_4f241d7adf14e
+"<a href=""local_global_letter.html"" target=""_blank"">DEMO</a>"	local_global_letter	Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack	8	trm_4f241d7adf14e
 "<a href=""dimensional_set_shifting.html"" target=""_blank"">DEMO</a>"	dimensional_set_shifting	Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack	10	trm_5667476fc14dd
-"<a href=""probabilistic_selection.html"" target=""_blank"">DEMO</a>"	probabilistic_selection	Jamie Li,Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack	999	trm_5667483dcc371
-"<a href=""recent_probes.html"" target=""_blank"">DEMO</a>"	recent_probes	Jamie Li,Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack	999	trm_56674987c8f0c
+"<a href=""probabilistic_selection.html"" target=""_blank"">DEMO</a>"	probabilistic_selection	Jamie Li,Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack	14	trm_5667483dcc371
+"<a href=""recent_probes.html"" target=""_blank"">DEMO</a>"	recent_probes	Jamie Li,Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack	22	trm_56674987c8f0c
 "<a href=""image_monitoring.html"" target=""_blank"">DEMO</a>"	image_monitoring	Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack	6	trm_5667436296862
 "<a href=""erq.html"" target=""_blank"">DEMO</a>"	erq	Zeynep Enkavi,Ian Eisenberg,Patrick Bissett,Vanessa Sochat,Russell Poldrack	999	trm_4da890594742a
 "<a href=""dospert_eb.html"" target=""_blank"">DEMO</a>"	dospert_eb	Zeynep Enkavi,Ian Eisenberg,Patrick Bissett,Vanessa Sochat,Russell Poldrack	999	trm_5696abecf2569
-"<a href=""shift_task.html"" target=""_blank"">DEMO</a>"	shift_task	Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack	20	trm_5696c3fa0061a
+"<a href=""psychological_refractory_period_two_choices.html"" target=""_blank"">DEMO</a>"	psychological_refractory_period_two_choices	Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack	12	trm_51c453f64d2a6
+"<a href=""shift_task.html"" target=""_blank"">DEMO</a>"	shift_task	Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack	22	trm_5696c3fa0061a
 "<a href=""threebytwo.html"" target=""_blank"">DEMO</a>"	threebytwo	Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack	24	trm_566745bbf272a
 "<a href=""go_nogo.html"" target=""_blank"">DEMO</a>"	go_nogo	Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack	7	tsk_4a57abb949a93
-"<a href=""simple_reaction_time.html"" target=""_blank"">DEMO</a>"	simple_reaction_time	Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack	3.5	tsk_4a57abb949dc8
-"<a href=""columbia_card_task_hot.html"" target=""_blank"">DEMO</a>"	columbia_card_task_hot	Jamie Li,Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack	999	trm_5667492c555b7
+"<a href=""simple_reaction_time.html"" target=""_blank"">DEMO</a>"	simple_reaction_time	Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack	3	tsk_4a57abb949dc8
+"<a href=""columbia_card_task_hot.html"" target=""_blank"">DEMO</a>"	columbia_card_task_hot	Jamie Li,Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack	25	trm_5667492c555b7
 "<a href=""selection_optimization_compensation.html"" target=""_blank"">DEMO</a>"	selection_optimization_compensation	Zeynep Enkavi,Ian Eisenberg,Patrick Bissett,Vanessa Sochat,Russell Poldrack	999	trm_56ac06bac9334
-"<a href=""columbia_card_task_cold.html"" target=""_blank"">DEMO</a>"	columbia_card_task_cold	Jamie Li,Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack	999	trm_5667492c555b7
+"<a href=""columbia_card_task_cold.html"" target=""_blank"">DEMO</a>"	columbia_card_task_cold	Jamie Li,Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack	15	trm_5667492c555b7
 "<a href=""two_stage_decision.html"" target=""_blank"">DEMO</a>"	two_stage_decision	Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack	26	trm_5667451917a34
-"<a href=""perceptual_metacognition.html"" target=""_blank"">DEMO</a>"	perceptual_metacognition	Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack	3.5	trm_553ebfc390256
+"<a href=""perceptual_metacognition.html"" target=""_blank"">DEMO</a>"	perceptual_metacognition	Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack	20	trm_553ebfc390256
 "<a href=""mpq_control.html"" target=""_blank"">DEMO</a>"	mpq_control	Zeynep Enkavi,Ian Eisenberg,Patrick Bissett,Vanessa Sochat,Russell Poldrack	999	trm_55a6aa62c54f8
 "<a href=""self_regulation.html"" target=""_blank"">DEMO</a>"	self_regulation	Zeynep Enkavi,Ian Eisenberg,Patrick Bissett,Vanessa Sochat,Russell Poldrack	999	trm_56a91ed5f1ccc
 "<a href=""mindful_attention_awareness.html"" target=""_blank"">DEMO</a>"	mindful_attention_awareness	Zeynep Enkavi,Ian Eisenberg,Patrick Bissett,Vanessa Sochat,Russell Poldrack	999	trm_56abcba3df89b

@@ -76,6 +76,18 @@ var attention_node = {
   }
 }
 
+//Set up post task questionnaire
+var post_task_block = {
+   type: 'survey-text',
+   data: {
+       trial_id: "post task questions"
+   },
+   questions: ['<p class = center-block-text style = "font-size: 20px">Please summarize what you were asked to do in this task.</p>',
+              '<p class = center-block-text style = "font-size: 20px">Do you have any comments about this task?</p>'],
+   rows: [15, 15],
+   columns: [60,60]
+};
+
 // generic task variables
 var run_attention_checks = false
 var attention_check_thresh = 0.65
@@ -108,7 +120,6 @@ var feedback_instruct_block = {
   timing_response: 180000
 };
 /// This ensures that the subject does not read through the instructions too quickly.  If they do it too quickly, then we will go over the loop again.
-var instruction_trials = []
 var instructions_block = {
   type: 'poldrack-instructions',
   pages: [
@@ -125,11 +136,9 @@ var instructions_block = {
   show_clickable_nav: true,
   timing_post_trial: 01000
 };
-instruction_trials.push(feedback_instruct_block)
-instruction_trials.push(instructions_block)
 
 var instruction_node = {
-  timeline: instruction_trials,
+  timeline: [feedback_instruct_block, instructions_block],
   /* This function defines stopping criteria */
   loop_function: function(data) {
     for (i = 0; i < data.length; i++) {
@@ -283,4 +292,5 @@ for (b = 0; b < blocks.length; b++) {
   ax_cpt_experiment.push(attention_node)
   ax_cpt_experiment.push(rest_block)
 }
+ax_cpt_experiment.push(post_task_block)
 ax_cpt_experiment.push(end_block)

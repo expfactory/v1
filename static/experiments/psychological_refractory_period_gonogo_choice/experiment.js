@@ -8,7 +8,7 @@ function getDisplayElement() {
 
 function addID() {
   jsPsych.data.addDataToLastTrial({
-    'exp_id': 'psychological_refractory_period'
+    'exp_id': 'psychological_refractory_period_gonogo_choice'
   })
 }
 
@@ -62,7 +62,7 @@ var randomDraw = function(lst) {
 }
 
 var getStim = function() {
-  var border_i = randomDraw([0, 1, 2, 3]) // get border index
+  var border_i = randomDraw([0, 1]) // get border index
   var number_i = randomDraw([0, 1]) // get inner index
   var stim = stim_prefix + path_source + borders[border_i] + ' </img></div></div>'
   var stim2 = stim_prefix + path_source + borders[border_i] +
@@ -70,7 +70,7 @@ var getStim = function() {
     inners[number_i] + '</div></div>'
     // set correct choice for first
   var gonogo_choice;
-  if (border_i < 2) {
+  if (border_i === 0) {
     gonogo_choice = 75
   } else {
     gonogo_choice = -1
@@ -105,7 +105,7 @@ var getFB = function() {
       tooShort = true
     } else {
       if (data.gonogo_correct_response != -1) {
-        gonogoFB = 'You responded to the colored square correctly!'
+        gonogoFB = 'You responded correctly to the colored square!'
       } else {
         gonogoFB = 'You should not respond to that colored square.'
       }
@@ -174,7 +174,7 @@ var credit_var = true
 
 // task specific variables
 var practice_len = 20
-var exp_len = 180
+var exp_len = 200
 var current_trial = 0
 var choices = [74, 75, 76]
 var practice_ISIs = jsPsych.randomization.repeat([5, 50, 100, 150, 200, 300, 400, 500, 700],
@@ -191,10 +191,10 @@ var curr_data = {
     choice_correct_response: ''
   }
   //stim variables
-var path_source = '/static/experiments/psychological_refractory_period/images/'
+var path_source = '/static/experiments/psychological_refractory_period_gonogo_choice/images/'
 var stim_prefix = '<div class = prp_centerbox><div class = prp_stimBox><img class = prpStim src ='
   // border color relates to the go-nogo task. The subject should GO to the first two borders in the following array:
-var borders = jsPsych.randomization.shuffle(['1_border.png', '2_border.png', '3_border.png',
+var borders = jsPsych.randomization.shuffle(['2_border.png',
     '4_border.png'
   ])
   // inner number reflect the choice RT. 
@@ -239,6 +239,18 @@ var attention_node = {
   }
 }
 
+//Set up post task questionnaire
+var post_task_block = {
+   type: 'survey-text',
+   data: {
+       trial_id: "post task questions"
+   },
+   questions: ['<p class = center-block-text style = "font-size: 20px">Please summarize what you were asked to do in this task.</p>',
+              '<p class = center-block-text style = "font-size: 20px">Do you have any comments about this task?</p>'],
+   rows: [15, 15],
+   columns: [60,60]
+};
+
 /* define static blocks */
 var end_block = {
   type: 'poldrack-text',
@@ -253,7 +265,7 @@ var end_block = {
 };
 
 var feedback_instruct_text =
-  'Welcome to the experiment. Press <strong>enter</strong> to begin.'
+  'Welcome to the experiment. This experiment will take about 12 minutes. Press <strong>enter</strong> to begin.'
 var feedback_instruct_block = {
   type: 'poldrack-text',
   data: {
@@ -265,14 +277,13 @@ var feedback_instruct_block = {
   timing_response: 180000
 };
 /// This ensures that the subject does not read through the instructions too quickly.  If they do it too quickly, then we will go over the loop again.
-var instruction_trials = []
 var instructions_block = {
   type: 'poldrack-instructions',
   data: {
     trial_id: 'instruction'
   },
   pages: [
-    '<div class = prp_centerbox><p class ="block-text">In this experiment, you will have to do two tasks in quick succession. You will respond by pressing the "J", "K" and "L" keys with your index, middle and ring fingers respectively.</p><p class ="block-text">First, a colored square will appear on the screen. If the square is either of the two below, you should press the "K" key with your middle finger. If it is not one of those colors, you should not respond.</p>' +
+    '<div class = prp_centerbox><p class ="block-text">In this experiment, you will have to do two tasks in quick succession. You will respond by pressing the "J", "K" and "L" keys with your index, middle and ring fingers respectively.</p><p class ="block-text">First, a colored square will appear on the screen. If the square is the one on the left below, you should press the "K" key with your middle finger. If it is the one on the right, you should not respond.</p>' +
     box1 + box2 + '</div>',
     '<div class = prp_centerbox><p class ="block-text">After a short delay one of two numbers will appear in the square (as you can see below). If the number is ' +
     inners[0] + ' press the "J" key with your index finger. If the number is ' + inners[1] +
@@ -283,11 +294,9 @@ var instructions_block = {
   show_clickable_nav: true,
   timing_post_trial: 1000
 };
-instruction_trials.push(feedback_instruct_block)
-instruction_trials.push(instructions_block)
 
 var instruction_node = {
-  timeline: instruction_trials,
+  timeline: [feedback_instruct_block, instructions_block],
   /* This function defines stopping criteria */
   loop_function: function(data) {
     for (i = 0; i < data.length; i++) {
@@ -410,19 +419,20 @@ var test_block = {
 
 
 /* create experiment definition array */
-var psychological_refractory_period_experiment = [];
-psychological_refractory_period_experiment.push(instruction_node);
-psychological_refractory_period_experiment.push(start_practice_block);
+var psychological_refractory_period_gonogo_choice_experiment = [];
+psychological_refractory_period_gonogo_choice_experiment.push(instruction_node);
+psychological_refractory_period_gonogo_choice_experiment.push(start_practice_block);
 for (var i = 0; i < practice_len; i++) {
-  psychological_refractory_period_experiment.push(fixation_block);
-  psychological_refractory_period_experiment.push(practice_block);
-  psychological_refractory_period_experiment.push(feedback_block);
+  psychological_refractory_period_gonogo_choice_experiment.push(fixation_block);
+  psychological_refractory_period_gonogo_choice_experiment.push(practice_block);
+  psychological_refractory_period_gonogo_choice_experiment.push(feedback_block);
 }
-psychological_refractory_period_experiment.push(attention_node);
-psychological_refractory_period_experiment.push(start_test_block);
+psychological_refractory_period_gonogo_choice_experiment.push(attention_node);
+psychological_refractory_period_gonogo_choice_experiment.push(start_test_block);
 for (var i = 0; i < exp_len; i++) {
-  psychological_refractory_period_experiment.push(fixation_block);
-  psychological_refractory_period_experiment.push(test_block)
+  psychological_refractory_period_gonogo_choice_experiment.push(fixation_block);
+  psychological_refractory_period_gonogo_choice_experiment.push(test_block)
 }
-psychological_refractory_period_experiment.push(attention_node);
-psychological_refractory_period_experiment.push(end_block);
+psychological_refractory_period_gonogo_choice_experiment.push(attention_node);
+psychological_refractory_period_gonogo_choice_experiment.push(post_task_block)
+psychological_refractory_period_gonogo_choice_experiment.push(end_block);

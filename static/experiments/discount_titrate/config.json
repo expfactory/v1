@@ -9,6 +9,7 @@
                  "static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js",
                  "static/js/jspsych/poldrack_plugins/jspsych-attention-check.js",
                  "static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js",
+                 "static/js/jspsych/plugins/jspsych-survey-text.js",
                  "experiment.js",
                  "static/css/jspsych.css",
                  "static/css/default_style.css",
@@ -23,7 +24,7 @@
                          "Vanessa Sochat",
                          "Russell Poldrack"
                         ], 
-        "time":10,
+        "time":5,
         "reference": "http://www.nature.com/neuro/journal/v13/n5/extref/nn.2516-S1.pdf",
         "publish":"True",
         "experiment_variables": [{

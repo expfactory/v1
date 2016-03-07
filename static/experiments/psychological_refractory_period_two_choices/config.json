@@ -10,12 +10,13 @@
                 "static/js/jspsych/poldrack_plugins/jspsych-attention-check.js",
                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js",
                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-multi-stim-multi-response.js",
+                "static/js/jspsych/plugins/jspsych-survey-text.js",
                 "experiment.js",
                 "static/css/jspsych.css",
                 "static/css/default_style.css",
                 "style.css"
                ],
-        "exp_id": "psychological_refractory_period",
+        "exp_id": "psychological_refractory_period_two_choices",
         "cognitive_atlas_task_id": "trm_51c453f64d2a6",
         "contributors": [
                          "Ian Eisenberg",
@@ -24,7 +25,7 @@
                          "Vanessa Sochat",
                          "Russell Poldrack"
                         ], 
-        "time": 15,
+        "time": 12,
         "reference": "http://psycnet.apa.org/journals/xge/79/1p1/122.pdf",
         "publish":"True",
         "experiment_variables": [{

@@ -10,6 +10,7 @@
                 "static/js/jspsych/poldrack_plugins/jspsych-attention-check.js",
                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js",
                 "static/js/jspsych/plugins/jspsych-call-function.js",
+                "static/js/jspsych/plugins/jspsych-survey-text.js",
                 "experiment.js",
                 "static/css/jspsych.css",
                 "static/css/default_style.css",
@@ -24,7 +25,7 @@
                          "Vanessa Sochat",
                          "Russell Poldrack"
                         ], 
-        "time":2,
+        "time": 5,
         "experiment_variables": "",
         "reference": "http://psycnet.apa.org/journals/pha/22/3/222.pdf",
         "publish":"True",

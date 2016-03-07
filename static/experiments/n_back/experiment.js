@@ -8,6 +8,11 @@ a match or not
 /* ************************************ */
 /* Define helper functions */
 /* ************************************ */
+function getDisplayElement() {
+	$('<div class = display_stage_background></div>').appendTo('body')
+	return $('<div class = display_stage></div>').appendTo('body')
+}
+
 function addID() {
 	jsPsych.data.addDataToLastTrial({
 		'exp_id': 'n_back'
@@ -98,6 +103,18 @@ var attention_node = {
 	}
 }
 
+//Set up post task questionnaire
+var post_task_block = {
+   type: 'survey-text',
+   data: {
+       trial_id: "post task questions"
+   },
+   questions: ['<p class = center-block-text style = "font-size: 20px">Please summarize what you were asked to do in this task.</p>',
+              '<p class = center-block-text style = "font-size: 20px">Do you have any comments about this task?</p>'],
+   rows: [15, 15],
+   columns: [60,60]
+};
+
 /* define static blocks */
 var feedback_instruct_text =
 	'Welcome to the experiment. Press <strong>enter</strong> to begin.'
@@ -112,7 +129,6 @@ var feedback_instruct_block = {
 	timing_response: 180000
 };
 /// This ensures that the subject does not read through the instructions too quickly.  If they do it too quickly, then we will go over the loop again.
-var instruction_trials = []
 var instructions_block = {
 	type: 'poldrack-instructions',
 	data: {
@@ -125,11 +141,9 @@ var instructions_block = {
 	show_clickable_nav: true,
 	timing_post_trial: 1000
 };
-instruction_trials.push(feedback_instruct_block)
-instruction_trials.push(instructions_block)
 
 var instruction_node = {
-	timeline: instruction_trials,
+	timeline: [feedback_instruct_block, instructions_block],
 	/* This function defines stopping criteria */
 	loop_function: function(data) {
 		for (i = 0; i < data.length; i++) {
@@ -275,4 +289,5 @@ if (control_before == 1) {
 	n_back_experiment.push(start_control_block)
 	n_back_experiment = n_back_experiment.concat(control_trials)
 }
+n_back_experiment.push(post_task_block)
 n_back_experiment.push(end_block)

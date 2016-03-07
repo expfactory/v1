@@ -86,10 +86,12 @@ var getFeedback = function() {
 
 var recordClick = function(elm) {
   response.push(Number($(elm).text()))
+  console.log(response)
 }
 
 var clearResponse = function() {
   response = []
+  console.log(response)
 }
 
 
@@ -128,7 +130,7 @@ var response_grid =
   '<button id = button_7 class = "square num-button" onclick = "recordClick(this)"><div class = content><div class = numbers>7</div></div></button>' +
   '<button id = button_8 class = "square num-button" onclick = "recordClick(this)"><div class = content><div class = numbers>8</div></div></button>' +
   '<button id = button_9 class = "square num-button" onclick = "recordClick(this)"><div class = content><div class = numbers>9</div></div></button>' +
-  '<button class = clear_button id = "ClearButton" onclick = "clearResponse">Clear</button>' +
+  '<button class = clear_button id = "ClearButton" onclick = "clearResponse()">Clear</button>' +
   '<button class = submit_button id = "SubmitButton">Submit Answer</button></div>'
 
 /* ************************************ */
@@ -152,9 +154,21 @@ var attention_node = {
   }
 }
 
+//Set up post task questionnaire
+var post_task_block = {
+   type: 'survey-text',
+   data: {
+       trial_id: "post task questions"
+   },
+   questions: ['<p class = center-block-text style = "font-size: 20px">Please summarize what you were asked to do in this task.</p>',
+              '<p class = center-block-text style = "font-size: 20px">Do you have any comments about this task?</p>'],
+   rows: [15, 15],
+   columns: [60,60]
+};
+
 /* define static blocks */
 var feedback_instruct_text =
-  'Welcome to the experiment. Press <strong>enter</strong> to begin.'
+  'Welcome to the experiment. This experiment will take less than 10 minutes. Press <strong>enter</strong> to begin.'
 var feedback_instruct_block = {
   type: 'poldrack-text',
   cont_key: [13],
@@ -166,7 +180,6 @@ var feedback_instruct_block = {
   timing_response: 6000
 };
 /// This ensures that the subject does not read through the instructions too quickly.  If they do it too quickly, then we will go over the loop again.
-var instruction_trials = []
 var instructions_block = {
   type: 'poldrack-instructions',
   data: {
@@ -179,11 +192,9 @@ var instructions_block = {
   show_clickable_nav: true,
   timing_post_trial: 1000
 };
-instruction_trials.push(feedback_instruct_block)
-instruction_trials.push(instructions_block)
 
 var instruction_node = {
-  timeline: instruction_trials,
+  timeline: [feedback_instruct_block, instructions_block],
   /* This function defines stopping criteria */
   loop_function: function(data) {
     for (i = 0; i < data.length; i++) {
@@ -387,4 +398,5 @@ digit_span_experiment.push(forward_node)
 digit_span_experiment.push(attention_node)
 digit_span_experiment.push(start_reverse_block)
 digit_span_experiment.push(reverse_node)
+digit_span_experiment.push(post_task_block)
 digit_span_experiment.push(end_block)

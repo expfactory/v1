@@ -1,29 +1,6 @@
 /* ************************************ */
 /* Define helper functions */
 /* ************************************ */
-var changeData = function() {
-  data = jsPsych.data.getTrialsOfType('poldrack-text')
-  practiceDataCount = 0
-  testDataCount = 0
-  for (i = 0; i < data.length; i++) {
-    if (data[i].trial_id == 'practice_intro') {
-      practiceDataCount = practiceDataCount + 1
-    } else if (data[i].trial_id == 'test_intro') {
-      testDataCount = testDataCount + 1
-    }
-  }
-  if (practiceDataCount >= 1 && testDataCount === 0) {
-    //temp_id = data[i].trial_id
-    jsPsych.data.addDataToLastTrial({
-      exp_stage: "practice"
-    })
-  } else if (practiceDataCount >= 1 && testDataCount >= 1) {
-    //temp_id = data[i].trial_id
-    jsPsych.data.addDataToLastTrial({
-      exp_stage: "test"
-    })
-  }
-}
 
 function assessPerformance() {
   var experiment_data = jsPsych.data.getTrialsOfType('poldrack-single-stim')
@@ -134,6 +111,8 @@ var delay = 0
 var practice_delays = [10000, 50000, 5000]
 var block_start_time = new Date();
 var total_money = 0 //in dollars
+var time_limit = 10
+var exp_stage = 'practice'
 
 /* ************************************ */
 /* Set up jsPsych blocks */
@@ -153,13 +132,25 @@ var attention_node = {
   }
 }
 
+//Set up post task questionnaire
+var post_task_block = {
+   type: 'survey-text',
+   data: {
+       trial_id: "post task questions"
+   },
+   questions: ['<p class = center-block-text style = "font-size: 20px">Please summarize what you were asked to do in this task.</p>',
+              '<p class = center-block-text style = "font-size: 20px">Do you have any comments about this task?</p>'],
+   rows: [15, 15],
+   columns: [60,60]
+};
+
 /* define static blocks */
 var welcome_block = {
   type: 'poldrack-text',
   data: {
     trial_id: 'welcome'
   },
-  text: '<div class = centerbox><p class = center-block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
+  text: '<div class = centerbox><p class = center-block-text>Welcome to the experiment. This task will take about 11 minutes. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   timing_response: 180000,
   timing_post_trial: 0
@@ -191,7 +182,6 @@ var feedback_instruct_block = {
   timing_response: 180000
 };
 /// This ensures that the subject does not read through the instructions too quickly.  If they do it too quickly, then we will go over the loop again.
-var instruction_trials = []
 var instructions_block = {
   type: 'poldrack-instructions',
   data: {
@@ -204,11 +194,9 @@ var instructions_block = {
   show_clickable_nav: true,
   timing_post_trial: 1000
 };
-instruction_trials.push(feedback_instruct_block)
-instruction_trials.push(instructions_block)
 
 var instruction_node = {
-  timeline: instruction_trials,
+  timeline: [feedback_instruct_block, instructions_block],
   /* This function defines stopping criteria */
   loop_function: function(data) {
     for (i = 0; i < data.length; i++) {
@@ -237,7 +225,10 @@ var start_test_block = {
   text: '<div class = centerbox><p class = center-block-text>We will now start the main experiment. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   timing_response: 180000,
-  timing_post_trial: 1000
+  timing_post_trial: 1000,
+  on_finish: function() {
+    exp_stage = 'test'
+  }
 };
 
 var start_practice_block = {
@@ -307,17 +298,17 @@ var feedback_block = {
   timing_post_trial: 1000,
   on_finish: function(data) {
     jsPsych.data.addDataToLastTrial({
-      'delay': delay
+      'delay': delay,
+      exp_stage: exp_stage
     })
-    changeData()
   }
 };
 
 var test_node = {
   timeline: [test_block, feedback_block],
   loop_function: function() {
-    var elapsed = (new Date() - block_start_time) / 180000
-    if (elapsed > 10) {
+    var elapsed = (new Date() - block_start_time) / 60000
+    if (elapsed > time_limit) {
       return false
     } else {
       return true
@@ -339,4 +330,5 @@ for (var i = 0; i < practice_delays.length; i++) {
 willingness_to_wait_experiment.push(start_test_block);
 willingness_to_wait_experiment.push(test_node)
 willingness_to_wait_experiment.push(attention_node)
+willingness_to_wait_experiment.push(post_task_block)
 willingness_to_wait_experiment.push(end_block);

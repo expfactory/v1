@@ -248,22 +248,26 @@ var test_block_data = [] // records the data in the current block to calculate f
 var stimulus = [{
   stimulus: '<div class = shapebox><img class = stim src = ' + images[0] + '></img></div>',
   data: {
-    correct_response: correct_responses[0][1]
+    correct_response: correct_responses[0][1],
+    trial_id: 'stim'
   }
 }, {
   stimulus: '<div class = shapebox><img class = stim src = ' + images[1] + '></img></div>',
   data: {
-    correct_response: correct_responses[1][1]
+    correct_response: correct_responses[1][1],
+    trial_id: 'stim'
   }
 }, {
   stimulus: '<div class = shapebox><img class = stim src = ' + images[2] + '></img></div>',
   data: {
-    correct_response: correct_responses[2][1]
+    correct_response: correct_responses[2][1],
+    trial_id: 'stim'
   }
 }, {
   stimulus: '<div class = shapebox><img class = stim src = ' + images[3] + '></img></div>',
   data: {
-    correct_response: correct_responses[3][1]
+    correct_response: correct_responses[3][1],
+    trial_id: 'stim'
   }
 }]
 
@@ -305,6 +309,18 @@ var attention_node = {
   }
 }
 
+//Set up post task questionnaire
+var post_task_block = {
+   type: 'survey-text',
+   data: {
+       trial_id: "post task questions"
+   },
+   questions: ['<p class = center-block-text style = "font-size: 20px">Please summarize what you were asked to do in this task.</p>',
+              '<p class = center-block-text style = "font-size: 20px">Do you have any comments about this task?</p>'],
+   rows: [15, 15],
+   columns: [60,60]
+};
+
 /* define static blocks */
 var end_block = {
   type: 'poldrack-text',
@@ -319,7 +335,7 @@ var end_block = {
 };
 
 var feedback_instruct_text =
-  'Welcome to the experiment. Press <strong>enter</strong> to begin.'
+  'Welcome to the experiment. This experiment will take about 22 minutes. Press <strong>enter</strong> to begin.'
 var feedback_instruct_block = {
   type: 'poldrack-text',
   data: {
@@ -331,7 +347,6 @@ var feedback_instruct_block = {
   timing_response: 180000
 };
 /// This ensures that the subject does not read through the instructions too quickly.  If they do it too quickly, then we will go over the loop again.
-var instruction_trials = []
 var instructions_block = {
   type: 'poldrack-instructions',
   data: {
@@ -347,11 +362,9 @@ var instructions_block = {
   show_clickable_nav: true,
   timing_post_trial: 1000
 };
-instruction_trials.push(feedback_instruct_block)
-instruction_trials.push(instructions_block)
 
 var instruction_node = {
-  timeline: instruction_trials,
+  timeline: [feedback_instruct_block, instructions_block],
   /* This function defines stopping criteria */
   loop_function: function(data) {
     for (i = 0; i < data.length; i++) {
@@ -596,8 +609,7 @@ var practice_node = {
     } else {
       //rerandomize stim and stop_trial order
       practice_list = jsPsych.randomization.repeat(stimulus, 5, true)
-      practice_stop_trials = jsPsych.randomization.repeat(['stop', 'stop', 'stop', 'go', 'go',
-          'go', 'go', 'go', 'go', 'go'
+      practice_stop_trials = jsPsych.randomization.repeat(['stop', 'stop', 'ignore', 'ignore', 'go', 'go', 'go', 'go', 'go', 'go'
         ], practice_list.data.length / 10, false)
         // keep going until they are faster!
       practice_feedback_text +=
@@ -678,4 +690,5 @@ for (var b = 0; b < numblocks; b++) {
   }
   stim_selective_stop_signal_experiment.push(test_feedback_block)
 }
+stim_selective_stop_signal_experiment.push(post_task_block)
 stim_selective_stop_signal_experiment.push(end_block)

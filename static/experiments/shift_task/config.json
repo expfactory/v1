@@ -11,6 +11,7 @@
                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js",
                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-categorize.js",
                 "static/js/jspsych/plugins/jspsych-call-function.js",
+                "static/js/jspsych/plugins/jspsych-survey-text.js",
                 "experiment.js",
                 "static/css/jspsych.css",
                 "static/css/default_style.css",
@@ -26,7 +27,7 @@
                          "Russell Poldrack"
                         ], 
         "lab": "Poldracklab",
-        "time":20,
+        "time":22,
         "reference": "http://www.ncbi.nlm.nih.gov/pmc/articles/PMC3264902/",
         "publish":"True",
         "experiment_variables": [{
