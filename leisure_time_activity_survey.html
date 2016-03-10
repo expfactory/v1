@@ -1,0 +1,132 @@
+<!DOCTYPE html><html class=''>
+<head>
+    <meta charset='UTF-8'>
+    <meta name="robots" content="noindex">
+    <title>The Experiment Factory: Survey</title>
+    
+
+<link rel='stylesheet' type='text/css' href='https://code.getmdl.io/1.1.1/material.blue-red.min.css'>
+<link rel='stylesheet' type='text/css' href='static/css/surveys.css'>
+<link rel='stylesheet' type='text/css' href='static/js/jquery/ui/smoothness/jquery-ui-1.10.4.custom.min.css'>
+</head>
+
+<body>
+
+
+<script src='static/js/jquery/jquery-2.1.1.min.js'></script>
+<script src='https://code.getmdl.io/1.1.1/material.min.js'></script>
+<script src='static/js/jquery/ui/jquery-ui-1.10.4.custom.min.js'></script>
+<script src='static/js/jquery/jquery.wizard.js'></script>
+<script src='static/js/jquery/form/jquery.form-3.50.js'></script>
+<script src='static/js/jquery/validate/jquery.validate-1.12.0.min.js'></script>
+
+<div class="experiment-layout mdl-layout mdl-layout--fixed-header mdl-js-layout mdl-color--grey-100">
+<div class="experiment-ribbon"></div>
+<main class="experiment-main mdl-layout__content">
+<div class="experiment-container mdl-grid">
+<div class="mdl-cell mdl-cell--2-col mdl-cell--hide-tablet mdl-cell--hide-phone">
+</div>
+<div class="experiment-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--8-col">
+
+<div id="questions">
+
+<form name="questions" action="#">
+<div class="step">
+<h3>Welcome to this survey. Press <strong>Next</strong> to begin.</h3><br><br><br><br></div>
+<div class="step">
+<h3>Please answer the following question on your level of physical activity.</h3><br><br><br><br></div>
+<div class="step">
+<p>During the past month, which statement best describes the kinds of physical activity you usually did? Do not include the time you spent working at a job. Please read all six statements before selecting one.</p>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-leisure_time_activity_survey_2_0">
+<input type="radio" id="option-leisure_time_activity_survey_2_0" class="mdl-radio__button " name="leisure_time_activity_survey_2_options" value="1">
+<span class="mdl-radio__label">I did not do much physical activity. I mostly did things like watching television / reading / playing cards / or playing computer games. Only occasionally no more than once or twice a month did I do anything more active such as going for a walk or playing tennis.</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-leisure_time_activity_survey_2_1">
+<input type="radio" id="option-leisure_time_activity_survey_2_1" class="mdl-radio__button " name="leisure_time_activity_survey_2_options" value="2">
+<span class="mdl-radio__label">Once or twice a week I did light activities such as getting outdoors on the weekends for an easy walk or stroll. Or once or twice a week I did chores around the house such as sweeping floors or vacuuming.</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-leisure_time_activity_survey_2_2">
+<input type="radio" id="option-leisure_time_activity_survey_2_2" class="mdl-radio__button " name="leisure_time_activity_survey_2_options" value="3">
+<span class="mdl-radio__label">About three times a week I did moderate activities such as brisk walking / swimming / or riding a bike for about 15 - 20 minutes each time. Or about once a week I did moderately difficult chores such as raking or mowing the lawn for about 45 - 60 minutes. Or about once a week I played sports such as softball / basketball / or soccer for about 45 - 60 minutes.</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-leisure_time_activity_survey_2_3">
+<input type="radio" id="option-leisure_time_activity_survey_2_3" class="mdl-radio__button " name="leisure_time_activity_survey_2_options" value="4">
+<span class="mdl-radio__label">Almost daily - that is five or more times a week - I did moderate activities such as brisk walking / swimming / or riding a bike for 30 minutes or more each time. Or about once a week I did moderately difficult chores or played sports for 2 hours or more.</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-leisure_time_activity_survey_2_4">
+<input type="radio" id="option-leisure_time_activity_survey_2_4" class="mdl-radio__button " name="leisure_time_activity_survey_2_options" value="5">
+<span class="mdl-radio__label">About three times a week I did vigorous activities such as running or riding hard on a bike for 30 minutes or more each time.</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-leisure_time_activity_survey_2_5">
+<input type="radio" id="option-leisure_time_activity_survey_2_5" class="mdl-radio__button " name="leisure_time_activity_survey_2_options" value="6">
+<span class="mdl-radio__label">Almost daily - that is - five or more times a week - I did vigorous activities such as running or riding hard on a bike for 30 minutes or more each time.</span>
+</label><br><br><br><br></div>
+<div class="step">
+<h3>Congratulations for completing this survey! Press <strong>finish</strong> to continue.</h3><br><br><br><br></div>
+
+<div class="navigation">
+    <ul class="clearfix">
+        <li><button type="button" name="backward" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent backward">Previous</button></li>
+	<li><button type="button" name="forward" class="forward mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Next</button></li>
+        <li><button type="submit" name="process" class="submit mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Finish</button></li>
+    </ul>
+</div>
+
+<div class="pad">
+    <div id="progressbar"></div>
+</div>
+</form>
+</div>
+
+<script>
+$( document ).ready(function() {
+
+    expfactory_finished = false;
+
+    // Basic wizard with progress bar
+    $(".submit").enable() // no validation for now
+    $( "#progressbar" ).progressbar();
+    $( "#questions" ).wizard({
+        stepsWrapper: "#wrapped",
+	submit: ".submit",
+	beforeForward: function( event, state ) {
+	    return !!$( this ).wizard( "form" ).valid();
+        },
+	afterSelect: function( event, state ) {
+	    $( "#progressbar" ).progressbar( "value", state.percentComplete );
+            $(".submit").enable()
+        }
+
+    // Form submission
+    }).wizard( "form" ).submit(function( event ) {
+	event.preventDefault();
+        
+        // Save data to browser
+        var form = $(document.questions);
+        var data = "text/json;charset=utf-8," + JSON.stringify(form.serializeArray());
+        var a = document.createElement('a');
+        a.title = "Download"
+        a.id = "download"
+        a.type = "button"
+        a.download = 'expfactory_result.json';
+        a.href = 'data:' + data;
+        $(".submit").html("Download")
+        $(".submit").click(function(){
+            $("body").append(a)
+            a.click()
+        })
+
+     // Validation
+     }).validate({
+	errorPlacement: function( error, element ) {
+	    if ( element.is( ":radio" ) || element.is( ":checkbox" ) ) {
+		error.insertBefore( element.next() );
+            } else {
+	        error.insertAfter( element );
+	 }
+      }
+  });
+});
+</script>
+</body>
+</html>

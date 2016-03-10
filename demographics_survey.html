@@ -1,0 +1,785 @@
+<!DOCTYPE html><html class=''>
+<head>
+    <meta charset='UTF-8'>
+    <meta name="robots" content="noindex">
+    <title>The Experiment Factory: Survey</title>
+    
+
+<link rel='stylesheet' type='text/css' href='https://code.getmdl.io/1.1.1/material.blue-red.min.css'>
+<link rel='stylesheet' type='text/css' href='static/css/surveys.css'>
+<link rel='stylesheet' type='text/css' href='static/js/jquery/ui/smoothness/jquery-ui-1.10.4.custom.min.css'>
+</head>
+
+<body>
+
+
+<script src='static/js/jquery/jquery-2.1.1.min.js'></script>
+<script src='https://code.getmdl.io/1.1.1/material.min.js'></script>
+<script src='static/js/jquery/ui/jquery-ui-1.10.4.custom.min.js'></script>
+<script src='static/js/jquery/jquery.wizard.js'></script>
+<script src='static/js/jquery/form/jquery.form-3.50.js'></script>
+<script src='static/js/jquery/validate/jquery.validate-1.12.0.min.js'></script>
+
+<div class="experiment-layout mdl-layout mdl-layout--fixed-header mdl-js-layout mdl-color--grey-100">
+<div class="experiment-ribbon"></div>
+<main class="experiment-main mdl-layout__content">
+<div class="experiment-container mdl-grid">
+<div class="mdl-cell mdl-cell--2-col mdl-cell--hide-tablet mdl-cell--hide-phone">
+</div>
+<div class="experiment-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--8-col">
+
+<div id="questions">
+
+<form name="questions" action="#">
+<div class="step">
+<h3>Welcome to this survey. Press <strong>Next</strong> to begin.</h3><br><br><br><br></div>
+<div class="step">
+<h3>Please answer the following questions regarding your demographics.</h3><br><br><br><br></div>
+<div class="step">
+<p>What is your sex?</p>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_2_0">
+<input type="radio" id="option-demographics_survey_2_0" class="mdl-radio__button " name="demographics_survey_2_options" value="0">
+<span class="mdl-radio__label">Male</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_2_1">
+<input type="radio" id="option-demographics_survey_2_1" class="mdl-radio__button " name="demographics_survey_2_options" value="1">
+<span class="mdl-radio__label">Female</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_2_2">
+<input type="radio" id="option-demographics_survey_2_2" class="mdl-radio__button " name="demographics_survey_2_options" value="2">
+<span class="mdl-radio__label">Choose not to respond</span>
+</label><br><br><br><br>
+<p>What is your marital status?</p>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_3_0">
+<input type="radio" id="option-demographics_survey_3_0" class="mdl-radio__button " name="demographics_survey_3_options" value="0">
+<span class="mdl-radio__label">Single</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_3_1">
+<input type="radio" id="option-demographics_survey_3_1" class="mdl-radio__button " name="demographics_survey_3_options" value="1">
+<span class="mdl-radio__label">Married</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_3_2">
+<input type="radio" id="option-demographics_survey_3_2" class="mdl-radio__button " name="demographics_survey_3_options" value="2">
+<span class="mdl-radio__label">Separated</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_3_3">
+<input type="radio" id="option-demographics_survey_3_3" class="mdl-radio__button " name="demographics_survey_3_options" value="3">
+<span class="mdl-radio__label">Divorced</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_3_4">
+<input type="radio" id="option-demographics_survey_3_4" class="mdl-radio__button " name="demographics_survey_3_options" value="4">
+<span class="mdl-radio__label">Widowed</span>
+</label><br><br><br><br>
+<p>What is your ethnic background?</p>
+<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-demographics_survey_4_0">
+<input type="checkbox" id="checkbox-demographics_survey_4_0" class="mdl-checkbox__input ">
+<span class="mdl-checkbox__label">American Indian or Alaska Native</span>
+</label>
+<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-demographics_survey_4_1">
+<input type="checkbox" id="checkbox-demographics_survey_4_1" class="mdl-checkbox__input ">
+<span class="mdl-checkbox__label">Asian</span>
+</label>
+<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-demographics_survey_4_2">
+<input type="checkbox" id="checkbox-demographics_survey_4_2" class="mdl-checkbox__input ">
+<span class="mdl-checkbox__label"> Black or African American</span>
+</label>
+<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-demographics_survey_4_3">
+<input type="checkbox" id="checkbox-demographics_survey_4_3" class="mdl-checkbox__input ">
+<span class="mdl-checkbox__label">Hispanic or Latino</span>
+</label>
+<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-demographics_survey_4_4">
+<input type="checkbox" id="checkbox-demographics_survey_4_4" class="mdl-checkbox__input ">
+<span class="mdl-checkbox__label">Native Hawaiian or Other Pacific Islander</span>
+</label>
+<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-demographics_survey_4_5">
+<input type="checkbox" id="checkbox-demographics_survey_4_5" class="mdl-checkbox__input ">
+<span class="mdl-checkbox__label">White</span>
+</label>
+<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-demographics_survey_4_6">
+<input type="checkbox" id="checkbox-demographics_survey_4_6" class="mdl-checkbox__input ">
+<span class="mdl-checkbox__label">Choose not to respond</span>
+</label>
+<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-demographics_survey_4_7">
+<input type="checkbox" id="checkbox-demographics_survey_4_7" class="mdl-checkbox__input ">
+<span class="mdl-checkbox__label">Other</span>
+</label><br><br><br>
+<p>How many children do you have?</p>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_5_0">
+<input type="radio" id="option-demographics_survey_5_0" class="mdl-radio__button " name="demographics_survey_5_options" value="1">
+<span class="mdl-radio__label">0</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_5_1">
+<input type="radio" id="option-demographics_survey_5_1" class="mdl-radio__button " name="demographics_survey_5_options" value="2">
+<span class="mdl-radio__label">1</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_5_2">
+<input type="radio" id="option-demographics_survey_5_2" class="mdl-radio__button " name="demographics_survey_5_options" value="3">
+<span class="mdl-radio__label">2</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_5_3">
+<input type="radio" id="option-demographics_survey_5_3" class="mdl-radio__button " name="demographics_survey_5_options" value="4">
+<span class="mdl-radio__label">3</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_5_4">
+<input type="radio" id="option-demographics_survey_5_4" class="mdl-radio__button " name="demographics_survey_5_options" value="5">
+<span class="mdl-radio__label">4</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_5_5">
+<input type="radio" id="option-demographics_survey_5_5" class="mdl-radio__button " name="demographics_survey_5_options" value="6">
+<span class="mdl-radio__label">5-10</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_5_6">
+<input type="radio" id="option-demographics_survey_5_6" class="mdl-radio__button " name="demographics_survey_5_options" value="7">
+<span class="mdl-radio__label">>10</span>
+</label><br><br><br><br>
+<p>How tall are you (in inches - one foot = 12 inches)?</p>
+<div class="mdl-textfield mdl-js-textfield">
+<input class="mdl-textfield__input " type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="demographics_survey_6">
+<label class="mdl-textfield__label" for="demographics_survey_6"></label>
+<span class="mdl-textfield__error">Input is not a number!</span>
+</div><br><br><br>
+<p>How much do you weigh?</p>
+<div class="mdl-textfield mdl-js-textfield">
+<input class="mdl-textfield__input " type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="demographics_survey_7">
+<label class="mdl-textfield__label" for="demographics_survey_7"></label>
+<span class="mdl-textfield__error">Input is not a number!</span>
+</div><br><br><br>
+<p>How many traffic tickets have you gotten in the last year?</p>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_8_0">
+<input type="radio" id="option-demographics_survey_8_0" class="mdl-radio__button " name="demographics_survey_8_options" value="1">
+<span class="mdl-radio__label">0</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_8_1">
+<input type="radio" id="option-demographics_survey_8_1" class="mdl-radio__button " name="demographics_survey_8_options" value="2">
+<span class="mdl-radio__label">1</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_8_2">
+<input type="radio" id="option-demographics_survey_8_2" class="mdl-radio__button " name="demographics_survey_8_options" value="3">
+<span class="mdl-radio__label">2</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_8_3">
+<input type="radio" id="option-demographics_survey_8_3" class="mdl-radio__button " name="demographics_survey_8_options" value="4">
+<span class="mdl-radio__label">3</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_8_4">
+<input type="radio" id="option-demographics_survey_8_4" class="mdl-radio__button " name="demographics_survey_8_options" value="5">
+<span class="mdl-radio__label">4</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_8_5">
+<input type="radio" id="option-demographics_survey_8_5" class="mdl-radio__button " name="demographics_survey_8_options" value="6">
+<span class="mdl-radio__label">5-10</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_8_6">
+<input type="radio" id="option-demographics_survey_8_6" class="mdl-radio__button " name="demographics_survey_8_options" value="7">
+<span class="mdl-radio__label">>10</span>
+</label><br><br><br><br></div>
+<div class="step">
+<p>Altogether, have you smoked at least 100 or more cigarettes in your entire lifetime?</p>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_9_0">
+<input type="radio" id="option-demographics_survey_9_0" class="mdl-radio__button " name="demographics_survey_9_options" value="1">
+<span class="mdl-radio__label">Yes</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_9_1">
+<input type="radio" id="option-demographics_survey_9_1" class="mdl-radio__button " name="demographics_survey_9_options" value="2">
+<span class="mdl-radio__label">No</span>
+</label><br><br><br><br>
+<p>How long have you smoked (cumulatively)?</p>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_10_0">
+<input type="radio" id="option-demographics_survey_10_0" class="mdl-radio__button " name="demographics_survey_10_options" value="1">
+<span class="mdl-radio__label">Less than a year</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_10_1">
+<input type="radio" id="option-demographics_survey_10_1" class="mdl-radio__button " name="demographics_survey_10_options" value="2">
+<span class="mdl-radio__label">1 year</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_10_2">
+<input type="radio" id="option-demographics_survey_10_2" class="mdl-radio__button " name="demographics_survey_10_options" value="3">
+<span class="mdl-radio__label">2 years</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_10_3">
+<input type="radio" id="option-demographics_survey_10_3" class="mdl-radio__button " name="demographics_survey_10_options" value="4">
+<span class="mdl-radio__label"> 3 years</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_10_4">
+<input type="radio" id="option-demographics_survey_10_4" class="mdl-radio__button " name="demographics_survey_10_options" value="5">
+<span class="mdl-radio__label">4 years</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_10_5">
+<input type="radio" id="option-demographics_survey_10_5" class="mdl-radio__button " name="demographics_survey_10_options" value="6">
+<span class="mdl-radio__label">5-10 years</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_10_6">
+<input type="radio" id="option-demographics_survey_10_6" class="mdl-radio__button " name="demographics_survey_10_options" value="7">
+<span class="mdl-radio__label">More than 10 years</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_10_7">
+<input type="radio" id="option-demographics_survey_10_7" class="mdl-radio__button " name="demographics_survey_10_options" value="0">
+<span class="mdl-radio__label">I don't smoke</span>
+</label><br><br><br><br>
+<p>Do you now smoke cigarettes every day, some days or not at all?</p>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_11_0">
+<input type="radio" id="option-demographics_survey_11_0" class="mdl-radio__button " name="demographics_survey_11_options" value="3">
+<span class="mdl-radio__label">Every day</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_11_1">
+<input type="radio" id="option-demographics_survey_11_1" class="mdl-radio__button " name="demographics_survey_11_options" value="2">
+<span class="mdl-radio__label">Some days</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_11_2">
+<input type="radio" id="option-demographics_survey_11_2" class="mdl-radio__button " name="demographics_survey_11_options" value="1">
+<span class="mdl-radio__label">Not at all</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_11_3">
+<input type="radio" id="option-demographics_survey_11_3" class="mdl-radio__button " name="demographics_survey_11_options" value="0">
+<span class="mdl-radio__label">I don't smoke</span>
+</label><br><br><br><br>
+<p>On average, how many cigarettes do you now smoke a day (1 pack = 20 cigarettes)?</p>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_12_0">
+<input type="radio" id="option-demographics_survey_12_0" class="mdl-radio__button " name="demographics_survey_12_options" value="1">
+<span class="mdl-radio__label">Less than a cigarette a day</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_12_1">
+<input type="radio" id="option-demographics_survey_12_1" class="mdl-radio__button " name="demographics_survey_12_options" value="2">
+<span class="mdl-radio__label"><5</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_12_2">
+<input type="radio" id="option-demographics_survey_12_2" class="mdl-radio__button " name="demographics_survey_12_options" value="3">
+<span class="mdl-radio__label">5-10</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_12_3">
+<input type="radio" id="option-demographics_survey_12_3" class="mdl-radio__button " name="demographics_survey_12_options" value="4">
+<span class="mdl-radio__label">10-20</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_12_4">
+<input type="radio" id="option-demographics_survey_12_4" class="mdl-radio__button " name="demographics_survey_12_options" value="5">
+<span class="mdl-radio__label">1 pack</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_12_5">
+<input type="radio" id="option-demographics_survey_12_5" class="mdl-radio__button " name="demographics_survey_12_options" value="6">
+<span class="mdl-radio__label">2 packs</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_12_6">
+<input type="radio" id="option-demographics_survey_12_6" class="mdl-radio__button " name="demographics_survey_12_options" value="7">
+<span class="mdl-radio__label">More than 2 packs</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_12_7">
+<input type="radio" id="option-demographics_survey_12_7" class="mdl-radio__button " name="demographics_survey_12_options" value="0">
+<span class="mdl-radio__label">I don't smoke</span>
+</label><br><br><br><br>
+<p>How soon after you wake up do you smoke your first cigarette?</p>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_13_0">
+<input type="radio" id="option-demographics_survey_13_0" class="mdl-radio__button " name="demographics_survey_13_options" value="1">
+<span class="mdl-radio__label">Within 5 minutes</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_13_1">
+<input type="radio" id="option-demographics_survey_13_1" class="mdl-radio__button " name="demographics_survey_13_options" value="2">
+<span class="mdl-radio__label">6-30 minutes</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_13_2">
+<input type="radio" id="option-demographics_survey_13_2" class="mdl-radio__button " name="demographics_survey_13_options" value="3">
+<span class="mdl-radio__label">31-60 minutes</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_13_3">
+<input type="radio" id="option-demographics_survey_13_3" class="mdl-radio__button " name="demographics_survey_13_options" value="4">
+<span class="mdl-radio__label">After 60 minutes</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_13_4">
+<input type="radio" id="option-demographics_survey_13_4" class="mdl-radio__button " name="demographics_survey_13_options" value="5">
+<span class="mdl-radio__label">Don't know</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_13_5">
+<input type="radio" id="option-demographics_survey_13_5" class="mdl-radio__button " name="demographics_survey_13_options" value="0">
+<span class="mdl-radio__label">I don't smoke</span>
+</label><br><br><br><br>
+<p>In the past 30 days, what tobacco products OTHER THAN cigarettes have you used (check all that apply)?</p>
+<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-demographics_survey_14_0">
+<input type="checkbox" id="checkbox-demographics_survey_14_0" class="mdl-checkbox__input ">
+<span class="mdl-checkbox__label">Chewing tobacco (dip)</span>
+</label>
+<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-demographics_survey_14_1">
+<input type="checkbox" id="checkbox-demographics_survey_14_1" class="mdl-checkbox__input ">
+<span class="mdl-checkbox__label">Cigars</span>
+</label>
+<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-demographics_survey_14_2">
+<input type="checkbox" id="checkbox-demographics_survey_14_2" class="mdl-checkbox__input ">
+<span class="mdl-checkbox__label">Pipe</span>
+</label>
+<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-demographics_survey_14_3">
+<input type="checkbox" id="checkbox-demographics_survey_14_3" class="mdl-checkbox__input ">
+<span class="mdl-checkbox__label">Tobacco for your nose (snuff)</span>
+</label>
+<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-demographics_survey_14_4">
+<input type="checkbox" id="checkbox-demographics_survey_14_4" class="mdl-checkbox__input ">
+<span class="mdl-checkbox__label">E-cigarettes</span>
+</label>
+<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-demographics_survey_14_5">
+<input type="checkbox" id="checkbox-demographics_survey_14_5" class="mdl-checkbox__input ">
+<span class="mdl-checkbox__label">E-hookah or vape pens</span>
+</label>
+<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-demographics_survey_14_6">
+<input type="checkbox" id="checkbox-demographics_survey_14_6" class="mdl-checkbox__input ">
+<span class="mdl-checkbox__label">Cigarillos or little cigars</span>
+</label>
+<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-demographics_survey_14_7">
+<input type="checkbox" id="checkbox-demographics_survey_14_7" class="mdl-checkbox__input ">
+<span class="mdl-checkbox__label">Don't Know</span>
+</label>
+<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-demographics_survey_14_8">
+<input type="checkbox" id="checkbox-demographics_survey_14_8" class="mdl-checkbox__input ">
+<span class="mdl-checkbox__label">I don't smoke</span>
+</label><br><br><br></div>
+<div class="step">
+<p>How often do you have a drink containing alcohol?</p>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_15_0">
+<input type="radio" id="option-demographics_survey_15_0" class="mdl-radio__button " name="demographics_survey_15_options" value="1">
+<span class="mdl-radio__label">Never</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_15_1">
+<input type="radio" id="option-demographics_survey_15_1" class="mdl-radio__button " name="demographics_survey_15_options" value="2">
+<span class="mdl-radio__label">Montly or less</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_15_2">
+<input type="radio" id="option-demographics_survey_15_2" class="mdl-radio__button " name="demographics_survey_15_options" value="3">
+<span class="mdl-radio__label">2 to 4 times a month</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_15_3">
+<input type="radio" id="option-demographics_survey_15_3" class="mdl-radio__button " name="demographics_survey_15_options" value="4">
+<span class="mdl-radio__label">2 to 3 times a week</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_15_4">
+<input type="radio" id="option-demographics_survey_15_4" class="mdl-radio__button " name="demographics_survey_15_options" value="5">
+<span class="mdl-radio__label">4 or more times a week</span>
+</label><br><br><br><br>
+<p>How many drinks containing alcohol do you have on a typical day when you are drinking?</p>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_16_0">
+<input type="radio" id="option-demographics_survey_16_0" class="mdl-radio__button " name="demographics_survey_16_options" value="1">
+<span class="mdl-radio__label">1 or 2</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_16_1">
+<input type="radio" id="option-demographics_survey_16_1" class="mdl-radio__button " name="demographics_survey_16_options" value="2">
+<span class="mdl-radio__label">3 or 4</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_16_2">
+<input type="radio" id="option-demographics_survey_16_2" class="mdl-radio__button " name="demographics_survey_16_options" value="3">
+<span class="mdl-radio__label">5 or 6</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_16_3">
+<input type="radio" id="option-demographics_survey_16_3" class="mdl-radio__button " name="demographics_survey_16_options" value="4">
+<span class="mdl-radio__label">7 8 or 9</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_16_4">
+<input type="radio" id="option-demographics_survey_16_4" class="mdl-radio__button " name="demographics_survey_16_options" value="5">
+<span class="mdl-radio__label">10 or more</span>
+</label><br><br><br><br>
+<p>How often do you have six or more drinks on one occasion?</p>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_17_0">
+<input type="radio" id="option-demographics_survey_17_0" class="mdl-radio__button " name="demographics_survey_17_options" value="1">
+<span class="mdl-radio__label">Never</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_17_1">
+<input type="radio" id="option-demographics_survey_17_1" class="mdl-radio__button " name="demographics_survey_17_options" value="2">
+<span class="mdl-radio__label">Less than monthly</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_17_2">
+<input type="radio" id="option-demographics_survey_17_2" class="mdl-radio__button " name="demographics_survey_17_options" value="3">
+<span class="mdl-radio__label">Monthly</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_17_3">
+<input type="radio" id="option-demographics_survey_17_3" class="mdl-radio__button " name="demographics_survey_17_options" value="4">
+<span class="mdl-radio__label">Weekly</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_17_4">
+<input type="radio" id="option-demographics_survey_17_4" class="mdl-radio__button " name="demographics_survey_17_options" value="5">
+<span class="mdl-radio__label">Daily or almost daily</span>
+</label><br><br><br><br>
+<p>How often during the last year have you found that you were not able to stop drinking once you had started?</p>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_18_0">
+<input type="radio" id="option-demographics_survey_18_0" class="mdl-radio__button " name="demographics_survey_18_options" value="1">
+<span class="mdl-radio__label">Never</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_18_1">
+<input type="radio" id="option-demographics_survey_18_1" class="mdl-radio__button " name="demographics_survey_18_options" value="2">
+<span class="mdl-radio__label">Less than monthly</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_18_2">
+<input type="radio" id="option-demographics_survey_18_2" class="mdl-radio__button " name="demographics_survey_18_options" value="3">
+<span class="mdl-radio__label">Monthly</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_18_3">
+<input type="radio" id="option-demographics_survey_18_3" class="mdl-radio__button " name="demographics_survey_18_options" value="4">
+<span class="mdl-radio__label">Weekly</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_18_4">
+<input type="radio" id="option-demographics_survey_18_4" class="mdl-radio__button " name="demographics_survey_18_options" value="5">
+<span class="mdl-radio__label">Daily or almost daily</span>
+</label><br><br><br><br>
+<p>How often during the last year have you failed to do what was normally expected from you because of drinking?</p>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_19_0">
+<input type="radio" id="option-demographics_survey_19_0" class="mdl-radio__button " name="demographics_survey_19_options" value="1">
+<span class="mdl-radio__label">Never</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_19_1">
+<input type="radio" id="option-demographics_survey_19_1" class="mdl-radio__button " name="demographics_survey_19_options" value="2">
+<span class="mdl-radio__label">Less than monthly</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_19_2">
+<input type="radio" id="option-demographics_survey_19_2" class="mdl-radio__button " name="demographics_survey_19_options" value="3">
+<span class="mdl-radio__label">Monthly</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_19_3">
+<input type="radio" id="option-demographics_survey_19_3" class="mdl-radio__button " name="demographics_survey_19_options" value="4">
+<span class="mdl-radio__label">Weekly</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_19_4">
+<input type="radio" id="option-demographics_survey_19_4" class="mdl-radio__button " name="demographics_survey_19_options" value="5">
+<span class="mdl-radio__label">Daily or almost daily</span>
+</label><br><br><br><br>
+<p>How often during the last year have you needed a first drink in the morning to get yourself going after a heavy drinking session?</p>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_20_0">
+<input type="radio" id="option-demographics_survey_20_0" class="mdl-radio__button " name="demographics_survey_20_options" value="1">
+<span class="mdl-radio__label">Never</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_20_1">
+<input type="radio" id="option-demographics_survey_20_1" class="mdl-radio__button " name="demographics_survey_20_options" value="2">
+<span class="mdl-radio__label">Less than monthly</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_20_2">
+<input type="radio" id="option-demographics_survey_20_2" class="mdl-radio__button " name="demographics_survey_20_options" value="3">
+<span class="mdl-radio__label">Monthly</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_20_3">
+<input type="radio" id="option-demographics_survey_20_3" class="mdl-radio__button " name="demographics_survey_20_options" value="4">
+<span class="mdl-radio__label">Weekly</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_20_4">
+<input type="radio" id="option-demographics_survey_20_4" class="mdl-radio__button " name="demographics_survey_20_options" value="5">
+<span class="mdl-radio__label">Daily or almost daily</span>
+</label><br><br><br><br>
+<p>How often during the last year have you had a feeling of guilt or remorse after drinking?</p>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_21_0">
+<input type="radio" id="option-demographics_survey_21_0" class="mdl-radio__button " name="demographics_survey_21_options" value="1">
+<span class="mdl-radio__label">Never</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_21_1">
+<input type="radio" id="option-demographics_survey_21_1" class="mdl-radio__button " name="demographics_survey_21_options" value="2">
+<span class="mdl-radio__label">Less than monthly</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_21_2">
+<input type="radio" id="option-demographics_survey_21_2" class="mdl-radio__button " name="demographics_survey_21_options" value="3">
+<span class="mdl-radio__label">Monthly</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_21_3">
+<input type="radio" id="option-demographics_survey_21_3" class="mdl-radio__button " name="demographics_survey_21_options" value="4">
+<span class="mdl-radio__label">Weekly</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_21_4">
+<input type="radio" id="option-demographics_survey_21_4" class="mdl-radio__button " name="demographics_survey_21_options" value="5">
+<span class="mdl-radio__label">Daily or almost daily</span>
+</label><br><br><br><br>
+<p>How often during the last year have you been unable to remember what happened the night before because you had been drinking?</p>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_22_0">
+<input type="radio" id="option-demographics_survey_22_0" class="mdl-radio__button " name="demographics_survey_22_options" value="1">
+<span class="mdl-radio__label">Never</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_22_1">
+<input type="radio" id="option-demographics_survey_22_1" class="mdl-radio__button " name="demographics_survey_22_options" value="2">
+<span class="mdl-radio__label">Less than monthly</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_22_2">
+<input type="radio" id="option-demographics_survey_22_2" class="mdl-radio__button " name="demographics_survey_22_options" value="3">
+<span class="mdl-radio__label">Monthly</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_22_3">
+<input type="radio" id="option-demographics_survey_22_3" class="mdl-radio__button " name="demographics_survey_22_options" value="4">
+<span class="mdl-radio__label">Weekly</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_22_4">
+<input type="radio" id="option-demographics_survey_22_4" class="mdl-radio__button " name="demographics_survey_22_options" value="5">
+<span class="mdl-radio__label">Daily or almost daily</span>
+</label><br><br><br><br>
+<p>Have you or someone else been injured as a result of your drinking?</p>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_23_0">
+<input type="radio" id="option-demographics_survey_23_0" class="mdl-radio__button " name="demographics_survey_23_options" value="1">
+<span class="mdl-radio__label">No</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_23_1">
+<input type="radio" id="option-demographics_survey_23_1" class="mdl-radio__button " name="demographics_survey_23_options" value="2">
+<span class="mdl-radio__label">Yes but not in the last year</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_23_2">
+<input type="radio" id="option-demographics_survey_23_2" class="mdl-radio__button " name="demographics_survey_23_options" value="3">
+<span class="mdl-radio__label">Yes during the last year</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_23_3">
+<input type="radio" id="option-demographics_survey_23_3" class="mdl-radio__button " name="demographics_survey_23_options" value="0">
+<span class="mdl-radio__label">I don't drink</span>
+</label><br><br><br><br>
+<p>Has a relative or friend or a doctor or another health worker been concerned about your drinking or suggested you cut down?</p>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_24_0">
+<input type="radio" id="option-demographics_survey_24_0" class="mdl-radio__button " name="demographics_survey_24_options" value="1">
+<span class="mdl-radio__label">No</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_24_1">
+<input type="radio" id="option-demographics_survey_24_1" class="mdl-radio__button " name="demographics_survey_24_options" value="2">
+<span class="mdl-radio__label">Yes but not in the last year</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_24_2">
+<input type="radio" id="option-demographics_survey_24_2" class="mdl-radio__button " name="demographics_survey_24_options" value="3">
+<span class="mdl-radio__label">Yes during the last year</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_24_3">
+<input type="radio" id="option-demographics_survey_24_3" class="mdl-radio__button " name="demographics_survey_24_options" value="0">
+<span class="mdl-radio__label">I don't drink</span>
+</label><br><br><br><br></div>
+<div class="step">
+<p>What is your daily caffeine intake (in mg)? (1 cup of regular coffee ~ 120 mg, 1 cup black tea ~ 50 mg, 1 cup green tea ~ 40 mg)</p>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_25_0">
+<input type="radio" id="option-demographics_survey_25_0" class="mdl-radio__button " name="demographics_survey_25_options" value="1">
+<span class="mdl-radio__label">0 mg</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_25_1">
+<input type="radio" id="option-demographics_survey_25_1" class="mdl-radio__button " name="demographics_survey_25_options" value="2">
+<span class="mdl-radio__label"><50 mg</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_25_2">
+<input type="radio" id="option-demographics_survey_25_2" class="mdl-radio__button " name="demographics_survey_25_options" value="3">
+<span class="mdl-radio__label">50-100 mg</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_25_3">
+<input type="radio" id="option-demographics_survey_25_3" class="mdl-radio__button " name="demographics_survey_25_options" value="4">
+<span class="mdl-radio__label">100-150 mg</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_25_4">
+<input type="radio" id="option-demographics_survey_25_4" class="mdl-radio__button " name="demographics_survey_25_options" value="5">
+<span class="mdl-radio__label">150-200 mg</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_25_5">
+<input type="radio" id="option-demographics_survey_25_5" class="mdl-radio__button " name="demographics_survey_25_options" value="6">
+<span class="mdl-radio__label">200-250 mg</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_25_6">
+<input type="radio" id="option-demographics_survey_25_6" class="mdl-radio__button " name="demographics_survey_25_options" value="7">
+<span class="mdl-radio__label">>250 mg</span>
+</label><br><br><br><br>
+<p>Do you have any chronic medical problems which continue to interfere with your life?</p>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_26_0">
+<input type="radio" id="option-demographics_survey_26_0" class="mdl-radio__button " name="demographics_survey_26_options" value="1">
+<span class="mdl-radio__label">Yes</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_26_1">
+<input type="radio" id="option-demographics_survey_26_1" class="mdl-radio__button " name="demographics_survey_26_options" value="2">
+<span class="mdl-radio__label">No</span>
+</label><br><br><br><br>
+<p>Are you taking any prescribed medication on a regular basis for a physical problem?</p>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_27_0">
+<input type="radio" id="option-demographics_survey_27_0" class="mdl-radio__button " name="demographics_survey_27_options" value="1">
+<span class="mdl-radio__label">Yes</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_27_1">
+<input type="radio" id="option-demographics_survey_27_1" class="mdl-radio__button " name="demographics_survey_27_options" value="2">
+<span class="mdl-radio__label">No</span>
+</label><br><br><br><br>
+<p>In addition to visits related to a chronic problem how often do you visit your doctor/have annual check ups in a year?</p>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_28_0">
+<input type="radio" id="option-demographics_survey_28_0" class="mdl-radio__button " name="demographics_survey_28_options" value="1">
+<span class="mdl-radio__label">0</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_28_1">
+<input type="radio" id="option-demographics_survey_28_1" class="mdl-radio__button " name="demographics_survey_28_options" value="2">
+<span class="mdl-radio__label">1</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_28_2">
+<input type="radio" id="option-demographics_survey_28_2" class="mdl-radio__button " name="demographics_survey_28_options" value="3">
+<span class="mdl-radio__label">2</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_28_3">
+<input type="radio" id="option-demographics_survey_28_3" class="mdl-radio__button " name="demographics_survey_28_options" value="4">
+<span class="mdl-radio__label">3</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_28_4">
+<input type="radio" id="option-demographics_survey_28_4" class="mdl-radio__button " name="demographics_survey_28_options" value="5">
+<span class="mdl-radio__label">4</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_28_5">
+<input type="radio" id="option-demographics_survey_28_5" class="mdl-radio__button " name="demographics_survey_28_options" value="6">
+<span class="mdl-radio__label">5-10</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_28_6">
+<input type="radio" id="option-demographics_survey_28_6" class="mdl-radio__button " name="demographics_survey_28_options" value="7">
+<span class="mdl-radio__label">>10</span>
+</label><br><br><br><br>
+<p>How many times in your life have you been arrested and/or charged with illigal activities?</p>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_29_0">
+<input type="radio" id="option-demographics_survey_29_0" class="mdl-radio__button " name="demographics_survey_29_options" value="1">
+<span class="mdl-radio__label">0</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_29_1">
+<input type="radio" id="option-demographics_survey_29_1" class="mdl-radio__button " name="demographics_survey_29_options" value="2">
+<span class="mdl-radio__label">1</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_29_2">
+<input type="radio" id="option-demographics_survey_29_2" class="mdl-radio__button " name="demographics_survey_29_options" value="3">
+<span class="mdl-radio__label">2</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_29_3">
+<input type="radio" id="option-demographics_survey_29_3" class="mdl-radio__button " name="demographics_survey_29_options" value="4">
+<span class="mdl-radio__label">3</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_29_4">
+<input type="radio" id="option-demographics_survey_29_4" class="mdl-radio__button " name="demographics_survey_29_options" value="5">
+<span class="mdl-radio__label">4</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_29_5">
+<input type="radio" id="option-demographics_survey_29_5" class="mdl-radio__button " name="demographics_survey_29_options" value="6">
+<span class="mdl-radio__label">5-10</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_29_6">
+<input type="radio" id="option-demographics_survey_29_6" class="mdl-radio__button " name="demographics_survey_29_options" value="7">
+<span class="mdl-radio__label">>10</span>
+</label><br><br><br><br>
+<p>Do you have a retirement account?</p>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_30_0">
+<input type="radio" id="option-demographics_survey_30_0" class="mdl-radio__button " name="demographics_survey_30_options" value="1">
+<span class="mdl-radio__label">Yes</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_30_1">
+<input type="radio" id="option-demographics_survey_30_1" class="mdl-radio__button " name="demographics_survey_30_options" value="2">
+<span class="mdl-radio__label">No</span>
+</label><br><br><br><br>
+<p>Do you have any debt (credit card or other)?</p>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_31_0">
+<input type="radio" id="option-demographics_survey_31_0" class="mdl-radio__button " name="demographics_survey_31_options" value="1">
+<span class="mdl-radio__label">Yes</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_31_1">
+<input type="radio" id="option-demographics_survey_31_1" class="mdl-radio__button " name="demographics_survey_31_options" value="2">
+<span class="mdl-radio__label">No</span>
+</label><br><br><br><br>
+<p>If you have any debt how much (in dollars)?</p>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_32_0">
+<input type="radio" id="option-demographics_survey_32_0" class="mdl-radio__button " name="demographics_survey_32_options" value="1">
+<span class="mdl-radio__label"><$500</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_32_1">
+<input type="radio" id="option-demographics_survey_32_1" class="mdl-radio__button " name="demographics_survey_32_options" value="2">
+<span class="mdl-radio__label">$500-$2500</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_32_2">
+<input type="radio" id="option-demographics_survey_32_2" class="mdl-radio__button " name="demographics_survey_32_options" value="3">
+<span class="mdl-radio__label">$2500-$10000</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_32_3">
+<input type="radio" id="option-demographics_survey_32_3" class="mdl-radio__button " name="demographics_survey_32_options" value="4">
+<span class="mdl-radio__label">$10000-$25000</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_32_4">
+<input type="radio" id="option-demographics_survey_32_4" class="mdl-radio__button " name="demographics_survey_32_options" value="5">
+<span class="mdl-radio__label">$25000-$50000</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_32_5">
+<input type="radio" id="option-demographics_survey_32_5" class="mdl-radio__button " name="demographics_survey_32_options" value="6">
+<span class="mdl-radio__label">$50000-$100000</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_32_6">
+<input type="radio" id="option-demographics_survey_32_6" class="mdl-radio__button " name="demographics_survey_32_options" value="7">
+<span class="mdl-radio__label">$100000-$200000</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_32_7">
+<input type="radio" id="option-demographics_survey_32_7" class="mdl-radio__button " name="demographics_survey_32_options" value="8">
+<span class="mdl-radio__label">>$200000</span>
+</label><br><br><br><br>
+<p>Do you own or the house you live in?</p>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_33_0">
+<input type="radio" id="option-demographics_survey_33_0" class="mdl-radio__button " name="demographics_survey_33_options" value="1">
+<span class="mdl-radio__label">Yes</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-demographics_survey_33_1">
+<input type="radio" id="option-demographics_survey_33_1" class="mdl-radio__button " name="demographics_survey_33_options" value="2">
+<span class="mdl-radio__label">No</span>
+</label><br><br><br><br>
+<p>What are you motivations for participating in this experiment?</p>
+<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-demographics_survey_34_0">
+<input type="checkbox" id="checkbox-demographics_survey_34_0" class="mdl-checkbox__input ">
+<span class="mdl-checkbox__label">money</span>
+</label>
+<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-demographics_survey_34_1">
+<input type="checkbox" id="checkbox-demographics_survey_34_1" class="mdl-checkbox__input ">
+<span class="mdl-checkbox__label">tasks are fun</span>
+</label>
+<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-demographics_survey_34_2">
+<input type="checkbox" id="checkbox-demographics_survey_34_2" class="mdl-checkbox__input ">
+<span class="mdl-checkbox__label">want to contribute to research</span>
+</label>
+<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-demographics_survey_34_3">
+<input type="checkbox" id="checkbox-demographics_survey_34_3" class="mdl-checkbox__input ">
+<span class="mdl-checkbox__label">other</span>
+</label><br><br><br></div>
+<div class="step">
+<h3>Congratulations for completing this survey! Press <strong>finish</strong> to continue.</h3><br><br><br><br></div>
+
+<div class="navigation">
+    <ul class="clearfix">
+        <li><button type="button" name="backward" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent backward">Previous</button></li>
+	<li><button type="button" name="forward" class="forward mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Next</button></li>
+        <li><button type="submit" name="process" class="submit mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Finish</button></li>
+    </ul>
+</div>
+
+<div class="pad">
+    <div id="progressbar"></div>
+</div>
+</form>
+</div>
+
+<script>
+$( document ).ready(function() {
+
+    expfactory_finished = false;
+
+    // Basic wizard with progress bar
+    $(".submit").enable() // no validation for now
+    $( "#progressbar" ).progressbar();
+    $( "#questions" ).wizard({
+        stepsWrapper: "#wrapped",
+	submit: ".submit",
+	beforeForward: function( event, state ) {
+	    return !!$( this ).wizard( "form" ).valid();
+        },
+	afterSelect: function( event, state ) {
+	    $( "#progressbar" ).progressbar( "value", state.percentComplete );
+            $(".submit").enable()
+        }
+
+    // Form submission
+    }).wizard( "form" ).submit(function( event ) {
+	event.preventDefault();
+        
+        // Save data to browser
+        var form = $(document.questions);
+        var data = "text/json;charset=utf-8," + JSON.stringify(form.serializeArray());
+        var a = document.createElement('a');
+        a.title = "Download"
+        a.id = "download"
+        a.type = "button"
+        a.download = 'expfactory_result.json';
+        a.href = 'data:' + data;
+        $(".submit").html("Download")
+        $(".submit").click(function(){
+            $("body").append(a)
+            a.click()
+        })
+
+     // Validation
+     }).validate({
+	errorPlacement: function( error, element ) {
+	    if ( element.is( ":radio" ) || element.is( ":checkbox" ) ) {
+		error.insertBefore( element.next() );
+            } else {
+	        error.insertAfter( element );
+	 }
+      }
+  });
+});
+</script>
+</body>
+</html>
