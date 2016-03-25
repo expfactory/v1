@@ -12,7 +12,7 @@
 <script src='static/games/bridge_game/Preloader.js'></script>
 <script src='static/games/bridge_game/Menu.js'></script>
 <script src='static/games/bridge_game/Instructions.js'></script>
-<script src='static/games/bridge_game/Bridge_Game.js'></script>
+<script src='static/games/bridge_game/Run.js'></script>
 <script src='static/games/bridge_game/problems.js'></script>
     </head>
 
@@ -27,7 +27,7 @@ game.state.add('Boot', Game.Boot)
 game.state.add('Preloader', Game.Preloader)
 game.state.add('Menu',Game.Menu)
 game.state.add('Instructions', Game.Instructions)
-game.state.add('Bridge_Game', Game.Bridge_Game)
+game.state.add('Run', Game.Run)
 //Now start the Boot state.
 game.state.start('Boot', true, false, problem_set)
 
