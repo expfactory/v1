@@ -146,41 +146,45 @@ $( document ).ready(function() {
  if ($(".page3.required:checked").length != 1){
 is_required($(".page3.required:not(checked)"));
 return false;
-}} if ( state.stepIndex === 4 ) {
+}} else if ( state.stepIndex === 4 ) {
  if ($(".page4.required:checked").length != 1){
 is_required($(".page4.required:not(checked)"));
 return false;
-}} if ( state.stepIndex === 5 ) {
+}} else if ( state.stepIndex === 5 ) {
  if ($(".page5.required:checked").length != 1){
 is_required($(".page5.required:not(checked)"));
 return false;
-}} if ( state.stepIndex === 6 ) {
+}} else if ( state.stepIndex === 6 ) {
  if ($(".page6.required:checked").length != 1){
 is_required($(".page6.required:not(checked)"));
 return false;
-}} if ( state.stepIndex === 7 ) {
+}} else if ( state.stepIndex === 7 ) {
  if ($(".page7.required:checked").length != 1){
 is_required($(".page7.required:not(checked)"));
 return false;
-}} if ( state.stepIndex === 8 ) {
+}} else if ( state.stepIndex === 8 ) {
  if ($(".page8.required:checked").length != 1){
 is_required($(".page8.required:not(checked)"));
 return false;
-}} if ( state.stepIndex === 9 ) {
+}} else if ( state.stepIndex === 9 ) {
  if ($(".page9.required:checked").length != 1){
 is_required($(".page9.required:not(checked)"));
 return false;
-}} if ( state.stepIndex === 10 ) {
+}} else if ( state.stepIndex === 10 ) {
  if ($(".page10.required:checked").length != 1){
 is_required($(".page10.required:not(checked)"));
 return false;
+ } else {
+expfactory_finished=true;
 }}
 
 	    return !!$( this ).wizard( "form" ).valid();
         },
 	afterSelect: function( event, state ) {
 	    $( "#progressbar" ).progressbar( "value", state.percentComplete );
-            $(".submit").enable()
+            if (expfactory_finished == true){
+                $(".submit").enable();
+            }
         }
 
     // Form submission

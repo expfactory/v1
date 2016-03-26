@@ -357,13 +357,17 @@ $( document ).ready(function() {
  if ($(".page3.required:checked").length != 13){
 is_required($(".page3.required:not(checked)"));
 return false;
+ } else {
+expfactory_finished=true;
 }}
 
 	    return !!$( this ).wizard( "form" ).valid();
         },
 	afterSelect: function( event, state ) {
 	    $( "#progressbar" ).progressbar( "value", state.percentComplete );
-            $(".submit").enable()
+            if (expfactory_finished == true){
+                $(".submit").enable();
+            }
         }
 
     // Form submission
