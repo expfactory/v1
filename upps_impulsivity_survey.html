@@ -30,7 +30,7 @@
 
 <div id="questions">
 
-<form name="questions" action="#">
+<form name="questions" action="#", method="POST">
 <div class="step">
 <h3>Welcome to this survey. Press <strong>Next</strong> to begin.</h3><br><br><br><br></div>
 <div class="step">
@@ -1065,7 +1065,6 @@ $( document ).ready(function() {
     expfactory_finished = false;
 
     // Basic wizard with progress bar
-    $(".submit").enable() // no validation for now
     $( "#progressbar" ).progressbar();
     $( "#questions" ).wizard({
         stepsWrapper: "#wrapped",
@@ -1087,19 +1086,19 @@ $( document ).ready(function() {
             }
 
              if ( state.stepIndex === 3 ) {
- if ($(".page3.required:checked").length != 15){
+ if (($(".page3.required:checked").length + $(".page3.required:text").filter(function() { return $(this).val();}).length) != 15){
 is_required($(".page3.required:not(checked)"));
 return false;
 }} else if ( state.stepIndex === 4 ) {
- if ($(".page4.required:checked").length != 15){
+ if (($(".page4.required:checked").length + $(".page4.required:text").filter(function() { return $(this).val();}).length) != 15){
 is_required($(".page4.required:not(checked)"));
 return false;
 }} else if ( state.stepIndex === 5 ) {
- if ($(".page5.required:checked").length != 15){
+ if (($(".page5.required:checked").length + $(".page5.required:text").filter(function() { return $(this).val();}).length) != 15){
 is_required($(".page5.required:not(checked)"));
 return false;
 }} else if ( state.stepIndex === 6 ) {
- if ($(".page6.required:checked").length != 14){
+ if (($(".page6.required:checked").length + $(".page6.required:text").filter(function() { return $(this).val();}).length) != 14){
 is_required($(".page6.required:not(checked)"));
 return false;
  } else {
