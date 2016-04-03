@@ -15,10 +15,11 @@
 <script src='static/games/bridge_game/Run.js'></script>
 <script src='static/games/bridge_game/problems.js'></script>
     </head>
-
+    <body>
     <script type="text/javascript">
 
     this.data = {}
+    this.taskdata = []
 
     function inputData(field, value) {
         this.data[field] = value
@@ -27,8 +28,28 @@
 
     function sendData(trial) {
         inputData('trial', trial)
-        console.log(trial);
-        console.log(this.data);
+        this.taskdata.push(this.data);
+       
+        if (data.finished == 1) {
+
+            setTimeout(function() { 
+                var data = "text/json;charset=utf-8," + JSON.stringify(this.taskdata);
+                var a = document.createElement('a');
+                a.title = "Download"
+                a.id = "download"
+                a.type = "button"
+                a.download = 'expfactory_result.json';
+                a.href = 'data:' + data;
+                $("#finished").show();
+                $("#download").click(function(){
+                    $("body").append(a)
+                    a.click()
+                })
+            },2000)
+        }
+
+        this.data = {};
+
     }
 
     window.onload = function() {
@@ -48,6 +69,9 @@ game.state.start('Boot', true, false, problem_set)
     }
 
     </script>
-
-    <body>
+    <div id="finished" hidden>
+      <button id="download" type="button" style="background-color:white;padding:10px; border-radius:5px">Download</button>
+    </div>
+    </body>
+    
 </html>
