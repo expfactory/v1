@@ -18,6 +18,19 @@
 
     <script type="text/javascript">
 
+    this.data = {}
+
+    function inputData(field, value) {
+        this.data[field] = value
+    }
+
+
+    function sendData(trial) {
+        inputData('trial', trial)
+        console.log(trial);
+        console.log(this.data);
+    }
+
     window.onload = function() {
 
       //create the game and the game states
