@@ -298,16 +298,16 @@ $( document ).ready(function() {
             }
 
              if ( state.stepIndex === 3 ) {
- if (($(".page3.required:checked").length + $(".page3.required:text").filter(function() { return $(this).val();}).length) != 8){
-is_required($(".page3.required:not(checked)"));
+ if (($.unique($('.page3.required[type=number],.page3.required:text').map(function(){return this.name})).map(function() {return $('[name*=' + this + '].required[type=number], [name*=' + this + '].required:text').filter(function() { return $(this).val();}).length > 0}).get().indexOf(false) != -1) || ($.unique($('.page3.required:not([type=number]):not(:text)').map(function(){return this.name})).map(function() {return $('[name*=' + this + '].required:checked').length > 0}).get().indexOf(false) != -1)){
+is_required($('.page3.required:not(checked)'));
 return false;
 }} else if ( state.stepIndex === 4 ) {
- if (($(".page4.required:checked").length + $(".page4.required:text").filter(function() { return $(this).val();}).length) != 8){
-is_required($(".page4.required:not(checked)"));
+ if (($.unique($('.page4.required[type=number],.page3.required:text').map(function(){return this.name})).map(function() {return $('[name*=' + this + '].required[type=number], [name*=' + this + '].required:text').filter(function() { return $(this).val();}).length > 0}).get().indexOf(false) != -1) || ($.unique($('.page4.required:not([type=number]):not(:text)').map(function(){return this.name})).map(function() {return $('[name*=' + this + '].required:checked').length > 0}).get().indexOf(false) != -1)){
+is_required($('.page4.required:not(checked)'));
 return false;
 }} else if ( state.stepIndex === 5 ) {
- if (($(".page5.required:checked").length + $(".page5.required:text").filter(function() { return $(this).val();}).length) != 8){
-is_required($(".page5.required:not(checked)"));
+ if (($.unique($('.page5.required[type=number],.page3.required:text').map(function(){return this.name})).map(function() {return $('[name*=' + this + '].required[type=number], [name*=' + this + '].required:text').filter(function() { return $(this).val();}).length > 0}).get().indexOf(false) != -1) || ($.unique($('.page5.required:not([type=number]):not(:text)').map(function(){return this.name})).map(function() {return $('[name*=' + this + '].required:checked').length > 0}).get().indexOf(false) != -1)){
+is_required($('.page5.required:not(checked)'));
 return false;
  } else {
 expfactory_finished=true;
@@ -329,7 +329,8 @@ expfactory_finished=true;
         // Save data to browser
         var $inputs = $("input:checked");
         var $text = $("input:text")
-        var $elements = $inputs.add($text)
+	var $number = $("input[type = number]")
+        var $elements = $inputs.add($text).add($number)
         
         var results = []
         $elements.each(function(index, element) {
@@ -337,7 +338,11 @@ expfactory_finished=true;
 
           if ($.inArray( $(element).attr("name"), [ "forward", "backward", "process"] ) == -1) {
               result.name = $(element).attr("name");
-              result.value = $(element).attr("value");
+              if ($(element).attr("value") == undefined) {
+                result.value = $(element).val();
+                } else {
+                    result.value = $(element).attr("value");
+                }
               result.options = $(element).attr("meta-options");
               result.text = $(element).attr("meta-text");
               results.push(result);

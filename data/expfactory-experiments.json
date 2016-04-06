@@ -878,5 +878,13 @@
         "preview": "<a href=\"bridge_game.html\" target=\"_blank\">DEMO</a>",
         "template": "phaser",
         "time": 999
+    },
+    {
+        "cognitive_atlas_task_id": "",
+        "contributors": "Jonathan Nicholas,Christian Battista,Vanessa Sochat",
+        "exp_id": "bucket_game",
+        "preview": "<a href=\"bucket_game.html\" target=\"_blank\">DEMO</a>",
+        "template": "phaser",
+        "time": 999
     }
 ]
