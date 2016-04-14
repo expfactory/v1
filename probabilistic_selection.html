@@ -20,6 +20,7 @@
 <script src='static/js/jspsych/poldrack_plugins/jspsych-attention-check.js'></script>
 <script src='static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js'></script>
 <script src='static/js/jspsych/plugins/jspsych-survey-text.js'></script>
+<script src='static/js/utils/poldrack_utils.js'></script>
 <script src='static/experiments/probabilistic_selection/experiment.js'></script>
 
 <script>
@@ -32,7 +33,7 @@ timeline: probabilistic_selection_experiment,
 display_element: "getDisplayElement",
 fullscreen: true,
 on_trial_finish: function(data){
-addID()
+addID('probabilistic_selection')
 },
 on_finish: function(data){
 jsPsych.data.localSave('probabilistic_selection_results.csv', 'csv');

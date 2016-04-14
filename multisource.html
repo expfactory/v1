@@ -19,6 +19,7 @@
 <script src='static/js/jspsych/poldrack_plugins/jspsych-attention-check.js'></script>
 <script src='static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js'></script>
 <script src='static/js/jspsych/plugins/jspsych-survey-text.js'></script>
+<script src='static/js/utils/poldrack_utils.js'></script>
 <script src='static/experiments/multisource/experiment.js'></script>
 
 <script>
@@ -31,7 +32,7 @@ timeline: multisource_experiment,
 display_element: "getDisplayElement",
 fullscreen: true,
 on_trial_finish: function(data){
-addID()
+addID('multisource')
 },
 on_finish: function(data){
 jsPsych.data.localSave('multisource_results.csv', 'csv');

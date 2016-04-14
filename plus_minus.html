@@ -17,6 +17,7 @@
 <script src='static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js'></script>
 <script src='static/js/jspsych/poldrack_plugins/jspsych-attention-check.js'></script>
 <script src='static/js/jspsych/plugins/jspsych-survey-text.js'></script>
+<script src='static/js/utils/poldrack_utils.js'></script>
 <script src='static/experiments/plus_minus/experiment.js'></script>
 
 <script>
@@ -29,7 +30,7 @@ timeline: plus_minus_experiment,
 display_element: "getDisplayElement",
 fullscreen: true,
 on_trial_finish: function(data){
-addID()
+addID('plus_minus')
 },
 on_finish: function(data){
 jsPsych.data.localSave('plus_minus_results.csv', 'csv');

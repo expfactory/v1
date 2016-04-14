@@ -20,6 +20,7 @@
 <script src='static/js/jspsych/poldrack_plugins/jspsych-attention-check.js'></script>
 <script src='static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js'></script>
 <script src='static/js/jspsych/plugins/jspsych-survey-text.js'></script>
+<script src='static/js/utils/poldrack_utils.js'></script>
 <script src='static/experiments/two_stage_decision/experiment.js'></script>
 
 <script>
@@ -32,7 +33,7 @@ timeline: two_stage_decision_experiment,
 display_element: "getDisplayElement",
 fullscreen: true,
 on_trial_finish: function(data){
-addID()
+addID('two_stage_decision')
 },
 on_finish: function(data){
 jsPsych.data.localSave('two_stage_decision_results.csv', 'csv');

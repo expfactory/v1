@@ -21,6 +21,7 @@
 <script src='static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js'></script>
 <script src='static/js/jspsych/poldrack_plugins/jspsych-single-stim-button.js'></script>
 <script src='static/js/jspsych/plugins/jspsych-survey-text.js'></script>
+<script src='static/js/utils/poldrack_utils.js'></script>
 <script src='static/experiments/spatial_span/experiment.js'></script>
 
 <script>
@@ -33,7 +34,7 @@ timeline: spatial_span_experiment,
 display_element: "getDisplayElement",
 fullscreen: true,
 on_trial_finish: function(data){
-addID()
+addID('spatial_span')
 },
 on_finish: function(data){
 jsPsych.data.localSave('spatial_span_results.csv', 'csv');

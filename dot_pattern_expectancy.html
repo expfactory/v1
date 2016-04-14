@@ -20,6 +20,7 @@
 <script src='static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js'></script>
 <script src='static/js/jspsych/poldrack_plugins/jspsych-poldrack-categorize.js'></script>
 <script src='static/js/jspsych/plugins/jspsych-survey-text.js'></script>
+<script src='static/js/utils/poldrack_utils.js'></script>
 <script src='static/experiments/dot_pattern_expectancy/experiment.js'></script>
 
 <script>
@@ -32,7 +33,7 @@ timeline: dot_pattern_expectancy_experiment,
 display_element: "getDisplayElement",
 fullscreen: true,
 on_trial_finish: function(data){
-addID()
+addID('dot_pattern_expectancy')
 },
 on_finish: function(data){
 jsPsych.data.localSave('dot_pattern_expectancy_results.csv', 'csv');

@@ -20,6 +20,7 @@
 <script src='static/js/jspsych/poldrack_plugins/jspsych-single-stim-button.js'></script>
 <script src='static/js/jspsych/plugins/jspsych-call-function.js'></script>
 <script src='static/js/jspsych/plugins/jspsych-survey-text.js'></script>
+<script src='static/js/utils/poldrack_utils.js'></script>
 <script src='static/experiments/information_sampling_task/experiment.js'></script>
 
 <script>
@@ -31,6 +32,9 @@ $( document ).ready(function() {
 timeline: information_sampling_task_experiment,
 display_element: "getDisplayElement",
 fullscreen: true,
+on_trial_finish: function(data){
+addID('information_sampling_task')
+},
 on_finish: function(data){
 jsPsych.data.localSave('information_sampling_task_results.csv', 'csv');
 expfactory_finished = true;

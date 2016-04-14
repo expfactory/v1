@@ -18,6 +18,7 @@
 <script src='static/js/jspsych/poldrack_plugins/jspsych-attention-check.js'></script>
 <script src='static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js'></script>
 <script src='static/js/jspsych/plugins/jspsych-survey-text.js'></script>
+<script src='static/js/utils/poldrack_utils.js'></script>
 <script src='static/experiments/letter_memory/experiment.js'></script>
 
 <script>
@@ -30,7 +31,7 @@ timeline: letter_memory_experiment,
 display_element: "getDisplayElement",
 fullscreen: true,
 on_trial_finish: function(data){
-addID()
+addID('letter_memory')
 },
 on_finish: function(data){
 jsPsych.data.localSave('letter_memory_results.csv', 'csv');

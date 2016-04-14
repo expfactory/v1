@@ -20,6 +20,7 @@
 <script src='static/js/jspsych/poldrack_plugins/jspsych-attention-check.js'></script>
 <script src='static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js'></script>
 <script src='static/js/jspsych/plugins/jspsych-survey-text.js'></script>
+<script src='static/js/utils/poldrack_utils.js'></script>
 <script src='static/experiments/recent_probes/experiment.js'></script>
 
 <script>
@@ -32,7 +33,7 @@ timeline: recent_probes_experiment,
 display_element: "getDisplayElement",
 fullscreen: true,
 on_trial_finish: function(data){
-addID()
+addID('recent_probes')
 },
 on_finish: function(data){
 jsPsych.data.localSave('recent_probes_results.csv', 'csv');

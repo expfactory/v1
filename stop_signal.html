@@ -21,6 +21,7 @@
 <script src='static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js'></script>
 <script src='static/js/jspsych/poldrack_plugins/jspsych-poldrack-categorize.js'></script>
 <script src='static/js/jspsych/plugins/jspsych-survey-text.js'></script>
+<script src='static/js/utils/poldrack_utils.js'></script>
 <script src='static/experiments/stop_signal/experiment.js'></script>
 <script src='static/js/jspsych/poldrack_plugins/jspsych-stop-signal.js'></script>
 
@@ -34,7 +35,7 @@ timeline: stop_signal_experiment,
 display_element: "getDisplayElement",
 fullscreen: true,
 on_trial_finish: function(data){
-addID()
+addID('stop_signal')
 },
 on_finish: function(data){
 jsPsych.data.localSave('stop_signal_results.csv', 'csv');

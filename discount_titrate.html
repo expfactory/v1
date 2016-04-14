@@ -19,6 +19,7 @@
 <script src='static/js/jspsych/poldrack_plugins/jspsych-attention-check.js'></script>
 <script src='static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js'></script>
 <script src='static/js/jspsych/plugins/jspsych-survey-text.js'></script>
+<script src='static/js/utils/poldrack_utils.js'></script>
 <script src='static/experiments/discount_titrate/experiment.js'></script>
 
 <script>
@@ -31,7 +32,7 @@ timeline: discount_titrate_experiment,
 display_element: "getDisplayElement",
 fullscreen: true,
 on_trial_finish: function(data){
-addID()
+addID('discount_titrate')
 },
 on_finish: function(data){
 jsPsych.data.localSave('discount_titrate_results.csv', 'csv');

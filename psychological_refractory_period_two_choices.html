@@ -20,6 +20,7 @@
 <script src='static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js'></script>
 <script src='static/js/jspsych/poldrack_plugins/jspsych-poldrack-multi-stim-multi-response.js'></script>
 <script src='static/js/jspsych/plugins/jspsych-survey-text.js'></script>
+<script src='static/js/utils/poldrack_utils.js'></script>
 <script src='static/experiments/psychological_refractory_period_two_choices/experiment.js'></script>
 
 <script>
@@ -32,7 +33,7 @@ timeline: psychological_refractory_period_two_choices_experiment,
 display_element: "getDisplayElement",
 fullscreen: true,
 on_trial_finish: function(data){
-addID()
+addID('psychological_refractory_period_two_choices')
 },
 on_finish: function(data){
 jsPsych.data.localSave('psychological_refractory_period_two_choices_results.csv', 'csv');

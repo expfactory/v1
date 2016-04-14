@@ -21,6 +21,7 @@
 <script src='static/js/jspsych/poldrack_plugins/jspsych-poldrack-categorize.js'></script>
 <script src='static/js/jspsych/plugins/jspsych-call-function.js'></script>
 <script src='static/js/jspsych/plugins/jspsych-survey-text.js'></script>
+<script src='static/js/utils/poldrack_utils.js'></script>
 <script src='static/experiments/image_monitoring/experiment.js'></script>
 
 <script>
@@ -33,7 +34,7 @@ timeline: image_monitoring_experiment,
 display_element: "getDisplayElement",
 fullscreen: true,
 on_trial_finish: function(data){
-addID()
+addID('image_monitoring')
 },
 on_finish: function(data){
 jsPsych.data.localSave('image_monitoring_results.csv', 'csv');

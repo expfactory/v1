@@ -20,6 +20,7 @@
 <script src='static/js/jspsych/plugins/jspsych-call-function.js'></script>
 <script src='static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js'></script>
 <script src='static/js/jspsych/plugins/jspsych-survey-text.js'></script>
+<script src='static/js/utils/poldrack_utils.js'></script>
 <script src='static/experiments/emotion_regulation/experiment.js'></script>
 
 <script>
@@ -32,7 +33,7 @@ timeline: emotion_regulation_experiment,
 display_element: "getDisplayElement",
 fullscreen: true,
 on_trial_finish: function(data){
-addID()
+addID('emotion_regulation')
 },
 on_finish: function(data){
 jsPsych.data.localSave('emotion_regulation_results.csv', 'csv');

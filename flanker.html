@@ -20,6 +20,7 @@
 <script src='static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js'></script>
 <script src='static/js/jspsych/poldrack_plugins/jspsych-poldrack-categorize.js'></script>
 <script src='static/js/jspsych/plugins/jspsych-survey-text.js'></script>
+<script src='static/js/utils/poldrack_utils.js'></script>
 <script src='static/experiments/flanker/experiment.js'></script>
 
 <script>
@@ -32,7 +33,7 @@ timeline: flanker_experiment,
 display_element: "getDisplayElement",
 fullscreen: true,
 on_trial_finish: function(data){
-addID()
+addID('flanker')
 },
 on_finish: function(data){
 jsPsych.data.localSave('flanker_results.csv', 'csv');

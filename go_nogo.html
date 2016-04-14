@@ -21,6 +21,7 @@
 <script src='static/js/jspsych/poldrack_plugins/jspsych-poldrack-categorize.js'></script>
 <script src='static/js/jspsych/plugins/jspsych-call-function.js'></script>
 <script src='static/js/jspsych/plugins/jspsych-survey-text.js'></script>
+<script src='static/js/utils/poldrack_utils.js'></script>
 <script src='static/experiments/go_nogo/experiment.js'></script>
 
 <script>
@@ -33,7 +34,7 @@ timeline: go_nogo_experiment,
 display_element: "getDisplayElement",
 fullscreen: true,
 on_trial_finish: function(data){
-addID()
+addID('go_nogo')
 },
 on_finish: function(data){
 jsPsych.data.localSave('go_nogo_results.csv', 'csv');

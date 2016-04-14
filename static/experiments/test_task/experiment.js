@@ -1,17 +1,6 @@
 /* ************************************ */
 /* Define helper functions */
 /* ************************************ */
-function getDisplayElement() {
-  $('<div class = display_stage_background></div>').appendTo('body')
-  return $('<div class = display_stage></div>').appendTo('body')
-}
-
-function addID() {
-  jsPsych.data.addDataToLastTrial({
-    'exp_id': 'test_task'
-  })
-}
-
 function evalAttentionChecks() {
   var check_percent = 1
   if (run_attention_checks) {
@@ -60,6 +49,13 @@ var attention_node = {
   }
 }
 
+var add_data = {
+  type: 'call-function',
+  func: function() {
+    jsPsych.data.addDataToLastTrial({'added_Data?': 'success!'})
+  }
+}
+
 //Set up post task questionnaire
 var post_task_block = {
    type: 'survey-text',
@@ -69,12 +65,16 @@ var post_task_block = {
    questions: ['<p class = center-block-text style = "font-size: 20px">Please summarize what you were asked to do in this task.</p>',
               '<p class = center-block-text style = "font-size: 20px">Do you have any comments about this task?</p>'],
    rows: [15, 15],
-   columns: [60,60]
+   columns: [60,60],
 };
 
 /* define static blocks */
 var end_block = {
   type: 'poldrack-text',
+  data: {
+    trial_id: 'end',
+    exp_id: 'test_task'
+  },
   timing_response: 180000,
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
   cont_key: [13],
@@ -91,7 +91,10 @@ var test_block = {
   },
   choices: [32],
   timing_response: 2000,
-  timing_post_trial: 100
+  timing_post_trial: 100,
+  on_finish: function() {
+    jsPsych.data.addDataToLastTrial({'addingOnTrial': 'added!'})
+  }
 }
 
 /* create experiment definition array */
@@ -99,6 +102,7 @@ var test_task_experiment = [];
 for (var i = 0; i < experiment_len; i++) {
   test_task_experiment.push(test_block);
 }
+test_task_experiment.push(add_data)
 test_task_experiment.push(attention_node)
 test_task_experiment.push(post_task_block)
 test_task_experiment.push(end_block);

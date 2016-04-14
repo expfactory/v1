@@ -19,6 +19,7 @@
 <script src='static/js/jspsych/poldrack_plugins/jspsych-attention-check.js'></script>
 <script src='static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js'></script>
 <script src='static/js/jspsych/plugins/jspsych-survey-text.js'></script>
+<script src='static/js/utils/poldrack_utils.js'></script>
 <script src='static/experiments/volatile_bandit/experiment.js'></script>
 
 <script>
@@ -31,7 +32,7 @@ timeline: volatile_bandit_experiment,
 display_element: "getDisplayElement",
 fullscreen: true,
 on_trial_finish: function(data){
-addID()
+addID('volatile_bandit')
 },
 on_finish: function(data){
 jsPsych.data.localSave('volatile_bandit_results.csv', 'csv');
