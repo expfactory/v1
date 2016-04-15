@@ -49,7 +49,7 @@ Game.Run.prototype = {
     problems = problemGen(this.week, this.problem_set)
     this.op1s = problems[1]
     this.op2s = problems[2]
-    //this.problem_ids = problems[3]
+    this.problem_ids = problems[3]
     this.numProblems = this.op1s.length
 
     //task info
@@ -299,6 +299,7 @@ Game.Run.prototype = {
     this.problem[0] = +op1;
     this.problem[1] = +op2;
     this.problem[2] = +op1 + +op2;
+    this.problem[3] = this.problem_ids[this.trial]
     //this.problem[3] = this.s[this.trial]
 
     this.trial++;
@@ -387,7 +388,7 @@ Game.Run.prototype = {
     inputData('n1', parseInt(this.problem[0]))
     inputData('n2', parseInt(this.problem[1]))
     inputData('points', this.points)
-    //inputData('problem_id', parseInt(this.problem[3]))
+    inputData('problem_id', parseInt(this.problem[3]))
     inputData('solution', parseInt(this.problem[2]))
     inputData('RT', this.RT/1000)
 
@@ -607,7 +608,7 @@ Game.Run.prototype = {
         totalPoints = this.points
         this.points = 0
         //  Then let's go back to the main menu.
-        this.game.time.events.add(Phaser.Timer.SECOND * 2, function() {this.state.start('Menu', true, false, this.problem_set);}, this);
+        //this.game.time.events.add(Phaser.Timer.SECOND * 2, function() {this.state.start('Menu', true, false, this.problem_set);}, this);
       }, this);
   }
 };

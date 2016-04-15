@@ -50,7 +50,7 @@ Game.Run.prototype = {
     problems = problemGen(this.week, this.problem_set)
     this.op1s = problems[1]
     this.op2s = problems[2]
-    //this.problem_ids = problems[3]
+    this.problem_ids = problems[3]
 
     //task info
     this.task = 'VS_verification'
@@ -158,7 +158,7 @@ Game.Run.prototype = {
     d = new Date()
     this.start_time = d.getTime()
 
-    this.equal = this.game.add.button(340, 500, 'equalB')
+    this.equal = this.game.add.button(500, 500, 'equalB')
     this.equal.scale.x = .3
     this.equal.scale.y = .3
     this.equal.onInputDown.add(function() {
@@ -175,7 +175,7 @@ Game.Run.prototype = {
       }, 1000)
     }, this)
 
-    this.unequal = this.game.add.button(500, 500, 'unequalB')
+    this.unequal = this.game.add.button(340, 500, 'unequalB')
     this.unequal.scale.x = 0.3
     this.unequal.scale.y = 0.3
     this.unequal.onInputDown.add(function() {
@@ -327,8 +327,7 @@ Game.Run.prototype = {
     }
 
     this.numGraded++
-
-    if ((this.numGraded) >= this.op1s.length && this.answer == 'correct') {
+    if (this.trial >= this.op1s.length && this.answer == 'correct') {
       inputData('finished', 1)
     } else {
       inputData('finished', 0)
@@ -360,11 +359,13 @@ Game.Run.prototype = {
       this.problem[0] = +op1;
       this.problem[1] = +op2;
       this.problem[2] = +op1 + +op2;
+      this.problem[3] = this.problem_ids[this.trial]
       this.trial++
     } else if (this.answer == "incorrect") {
       this.problem[0] = this.problem[0]
       this.problem[1] = this.problem[1]
       this.problem[2] = this.problem[2]
+      this.problem[3] = this.problem[3]
     }
 
     this.dispenser1 = this.game.add.sprite(100,-130,'dispenser')
@@ -534,7 +535,7 @@ Game.Run.prototype = {
         totalPoints = this.points
         this.points = 0
         //  Then let's go back to the main menu.
-        this.game.time.events.add(Phaser.Timer.SECOND * 2, function() {this.state.start('gamePlay', true, false, totalPoints, tasks_to_play, this.week, this.problem_set);}, this);
+        //this.game.time.events.add(Phaser.Timer.SECOND * 2, function() {this.state.start('Menu', true, false, this.problem_set);}, this);
       }, this);
   }
 };

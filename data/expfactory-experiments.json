@@ -658,6 +658,22 @@
     {
         "cognitive_atlas_task_id": "",
         "contributors": "Jonathan Nicholas,Christian Battista,Vanessa Sochat",
+        "exp_id": "number_line",
+        "preview": "<a href=\"number_line.html\" target=\"_blank\">DEMO</a>",
+        "template": "phaser",
+        "time": 999
+    },
+    {
+        "cognitive_atlas_task_id": "",
+        "contributors": "Jonathan Nicholas,Christian Battista,Vanessa Sochat",
+        "exp_id": "whats_missing_lightning",
+        "preview": "<a href=\"whats_missing_lightning.html\" target=\"_blank\">DEMO</a>",
+        "template": "phaser",
+        "time": 999
+    },
+    {
+        "cognitive_atlas_task_id": "",
+        "contributors": "Jonathan Nicholas,Christian Battista,Vanessa Sochat",
         "exp_id": "bridge_game",
         "preview": "<a href=\"bridge_game.html\" target=\"_blank\">DEMO</a>",
         "template": "phaser",
@@ -668,6 +684,46 @@
         "contributors": "Jonathan Nicholas,Christian Battista,Vanessa Sochat",
         "exp_id": "bucket_game",
         "preview": "<a href=\"bucket_game.html\" target=\"_blank\">DEMO</a>",
+        "template": "phaser",
+        "time": 999
+    },
+    {
+        "cognitive_atlas_task_id": "",
+        "contributors": "Jonathan Nicholas,Christian Battista,Vanessa Sochat",
+        "exp_id": "is_it_equal_lightning",
+        "preview": "<a href=\"is_it_equal_lightning.html\" target=\"_blank\">DEMO</a>",
+        "template": "phaser",
+        "time": 999
+    },
+    {
+        "cognitive_atlas_task_id": "",
+        "contributors": "Jonathan Nicholas,Christian Battista,Vanessa Sochat",
+        "exp_id": "is_it_equal_zen",
+        "preview": "<a href=\"is_it_equal_zen.html\" target=\"_blank\">DEMO</a>",
+        "template": "phaser",
+        "time": 999
+    },
+    {
+        "cognitive_atlas_task_id": "",
+        "contributors": "Jonathan Nicholas,Christian Battista,Vanessa Sochat",
+        "exp_id": "whats_missing_zen",
+        "preview": "<a href=\"whats_missing_zen.html\" target=\"_blank\">DEMO</a>",
+        "template": "phaser",
+        "time": 999
+    },
+    {
+        "cognitive_atlas_task_id": "",
+        "contributors": "Jonathan Nicholas,Christian Battista,Vanessa Sochat",
+        "exp_id": "add_it_up_zen",
+        "preview": "<a href=\"add_it_up_zen.html\" target=\"_blank\">DEMO</a>",
+        "template": "phaser",
+        "time": 999
+    },
+    {
+        "cognitive_atlas_task_id": "",
+        "contributors": "Jonathan Nicholas,Christian Battista,Vanessa Sochat",
+        "exp_id": "add_it_up_lightning",
+        "preview": "<a href=\"add_it_up_lightning.html\" target=\"_blank\">DEMO</a>",
         "template": "phaser",
         "time": 999
     }
