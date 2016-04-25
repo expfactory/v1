@@ -32,6 +32,9 @@ $( document ).ready(function() {
 timeline: columbia_card_task_hot_experiment,
 display_element: "getDisplayElement",
 fullscreen: true,
+on_trial_finish: function(data){
+addID('columbia_card_task_hot')
+},
 on_finish: function(data){
 jsPsych.data.localSave('columbia_card_task_hot_results.csv', 'csv');
 expfactory_finished = true;
