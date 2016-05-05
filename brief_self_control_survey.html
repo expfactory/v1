@@ -8,6 +8,7 @@
 <link rel='stylesheet' type='text/css' href='https://code.getmdl.io/1.1.1/material.blue-red.min.css'>
 <link rel='stylesheet' type='text/css' href='static/css/surveys.css'>
 <link rel='stylesheet' type='text/css' href='static/js/jquery/ui/smoothness/jquery-ui-1.10.4.custom.min.css'>
+<link rel='stylesheet' type='text/css' href='static/surveys/brief_self_control_survey/style.css'>
 </head>
 
 <body>
@@ -353,7 +354,7 @@ $( document ).ready(function() {
             }
 
              if ( state.stepIndex === 3 ) {
- if (($.unique($('.page3.required[type=number],.page3.required:text').map(function(){return this.name})).map(function() {return $('[name*=' + this + '].required[type=number], [name*=' + this + '].required:text').filter(function() { return $(this).val();}).length > 0}).get().indexOf(false) != -1) || ($.unique($('.page3.required:not([type=number]):not(:text)').map(function(){return this.name})).map(function() {return $('[name*=' + this + '].required:checked').length > 0}).get().indexOf(false) != -1)){
+ if (($.unique($('.page3.required[type=number],.page3.required:text').map(function(){return this.vname})).map(function() {return $('[vname*=' + this + '].required[type=number], [vname*=' + this + '].required:text').filter(function() { return $(this).val();}).length > 0}).get().indexOf(false) != -1) || ($.unique($('.page3.required:not([type=number]):not(:text)').map(function(){return this.vname})).map(function() {return $('[vname*=' + this + '].required:checked').length > 0}).get().indexOf(false) != -1)){
 is_required($('.page3.required:not(checked)'));
 return false;
  } else {

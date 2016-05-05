@@ -26,8 +26,10 @@ function assessPerformance() {
 	for (var j = 0; j < rt_array.length; j++) {
 		sum += rt_array[j]
 	}
-	var avg_rt = sum / rt_array.length
-	credit_var = (avg_rt > 200)
+	var avg_rt = sum / rt_array.length || -1
+	var missed_percent = missed_count/experiment_data.length
+  	credit_var = (missed_percent < 0.4 && avg_rt > 200)
+	jsPsych.data.addDataToLastTrial({"credit_var": credit_var})
 }
 
 function deleteText(input, search_term) {
@@ -737,6 +739,7 @@ var payoutTrial = {
 		prize2 = randomRoundPointsArray.pop()
 		prize3 = randomRoundPointsArray.pop()
 		performance_var = prize1 + prize2 + prize3
+		jsPsych.data.addDataToLastTrial({"performance_var": performance_var})
 	}
 };
 

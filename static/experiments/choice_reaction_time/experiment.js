@@ -46,7 +46,7 @@ function assessPerformance() {
 	for (var j = 0; j < rt_array.length; j++) {
 		sum += rt_array[j]
 	}
-	var avg_rt = sum / rt_array.length
+	var avg_rt = sum / rt_array.length || -1
 		//calculate whether response distribution is okay
 	var responses_ok = true
 	Object.keys(choice_counts).forEach(function(key, index) {
@@ -54,7 +54,9 @@ function assessPerformance() {
 			responses_ok = false
 		}
 	})
-	credit_var = (avg_rt > 200) && responses_ok
+	var missed_percent = missed_count/trial_count
+	credit_var = (missed_percent < 0.4 && avg_rt > 200 && responses_ok)
+	jsPsych.data.addDataToLastTrial({"credit_var": credit_var})
 }
 
 var getInstructFeedback = function() {
@@ -103,7 +105,6 @@ var practice_stimuli = [{
   stimulus: '<div class = centerbox><div  id = "stim1"></div></div>',
   data: {
     stim_id: 1,
-    correct_response: correct_responses[0][1],
     trial_id: 'stim',
     exp_stage: 'practice'
   },
@@ -112,7 +113,6 @@ var practice_stimuli = [{
   stimulus: '<div class = centerbox><div id = "stim2"></div></div>',
   data: {
     stim_id: 2,
-    correct_response: correct_responses[1][1],
     trial_id: 'stim',
     exp_stage: 'practice'
   },
@@ -123,7 +123,6 @@ var test_stimuli_block = [{
   stimulus: '<div class = centerbox><div  id = "stim1"></div></div>',
   data: {
     stim_id: 1,
-    correct_response: correct_responses[0][1],
     trial_id: 'stim',
     exp_stage: 'test'
   }
@@ -131,7 +130,6 @@ var test_stimuli_block = [{
   stimulus: '<div class = centerbox><div id = "stim2"></div></div>',
   data: {
     stim_id: 2,
-    correct_response: correct_responses[1][1],
     trial_id: 'stim',
     exp_stage: 'test'
   }
