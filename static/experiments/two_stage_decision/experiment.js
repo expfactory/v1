@@ -105,9 +105,7 @@ var get_current_trial = function() {
 }
 
 var initialize_FB_matrix = function() {
-	return [Math.random() * 0.5 + 0.25, Math.random() * 0.5 + 0.25, Math.random() * 0.5 + 0.025, Math
-		.random() * 0.5 + 0.25
-	]
+	return [Math.random() * 0.5 + 0.25, Math.random() * 0.5 + 0.25, Math.random() * 0.5 + 0.25, Math.random() * 0.5 + 0.25]
 }
 
 //Change phase from practice to test
@@ -209,10 +207,7 @@ var get_first_selected = function() {
 		first_selected = stim_ids[choice]
 		var first_notselected = stim_ids[1 - choice]
 		jsPsych.data.addDataToLastTrial({
-			stim_selected: first_selected,
-			stim_order: stim_ids,
-			stage: 0,
-			trial_num: current_trial
+			stim_selected: first_selected
 		})
 		return "<div class = 'selected " + stim_side[choice] + "' style='background:" + curr_colors[0] +
 			"; '>" +
@@ -223,10 +218,7 @@ var get_first_selected = function() {
 	} else {
 		first_selected = -1
 		jsPsych.data.addDataToLastTrial({
-			stim_selected: first_selected,
-			stim_order: stim_ids,
-			stage: 0,
-			trial_num: current_trial
+			stim_selected: first_selected
 		})
 	}
 }
@@ -271,11 +263,7 @@ var get_second_selected = function() {
 		second_selected = stim_ids[choice]
 		var second_notselected = stim_ids[1 - choice]
 		jsPsych.data.addDataToLastTrial({
-			stim_selected: second_selected,
-			stim_order: stim_ids,
-			stage: stage + 1,
-			stage_transition: transition,
-			trial_num: current_trial
+			stim_selected: second_selected
 		})
 		return "<div class = '" + stim_side[choice] + " selected' style='background:" + curr_colors[
 				stage + 1] + "; '>" +
@@ -286,11 +274,7 @@ var get_second_selected = function() {
 	} else {
 		second_selected = -1
 		jsPsych.data.addDataToLastTrial({
-			stim_selected: second_selected,
-			stim_order: stim_ids,
-			stage: stage + 1,
-			stage_transition: transition,
-			trial_num: current_trial
+			stim_selected: second_selected
 		})
 	}
 	
@@ -370,6 +354,7 @@ var second_selected = -1 //Tracks the ID of the selected fs stimulus
 var FB_on = 1 //tracks whether FB should be displayed on this trial
 var FB = -1 //tracks FB value
 var stage = 0 //stage is used to track which second stage was shown, 0 or 1
+var transition = ''
 var FB_matrix = initialize_FB_matrix() //tracks the reward probabilities for the four final stimulus
 var exp_stage = 'practice'
 
@@ -631,7 +616,10 @@ var first_stage = {
 	},
 	on_finish: function() {
 		jsPsych.data.addDataToLastTrial({
-			exp_stage: exp_stage
+			exp_stage: exp_stage,
+			trial_num: current_trial,
+			stim_order: stim_ids,
+			stage: 0
 		})
 	}
 }
@@ -668,7 +656,11 @@ var second_stage = {
 	timing_post_trial: 0,
 	on_finish: function() {
 		jsPsych.data.addDataToLastTrial({
-			exp_stage: exp_stage
+			exp_stage: exp_stage,
+			trial_num: current_trial,
+			stim_order: stim_ids,
+			stage: stage + 1,
+			stage_transition: transition
 		})
 	}
 }

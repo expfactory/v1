@@ -422,7 +422,7 @@ for (i = 0; i < block.data.length; i++) {
 	} else {
 		var spatial_cue = {
 			type: 'poldrack-single-stim',
-			stimulus: '<div class = centerbox><div class = ANT_' + block.data[i].location +
+			stimulus: '<div class = centerbox><div class = ANT_text>+</div></div><div class = centerbox><div class = ANT_' + block.data[i].flanker_location +
 				'><div class = ANT_text>*</p></div></div>',
 			is_html: true,
 			choices: 'none',
@@ -519,7 +519,7 @@ for (b = 0; b < blocks.length; b++) {
 		} else {
 			var spatial_cue = {
 				type: 'poldrack-single-stim',
-				stimulus: '<div class = centerbox><div class = ANT_' + block.data[i].location +
+				stimulus: '<div class = centerbox><div class = ANT_text>+</div></div><div class = centerbox><div class = ANT_' + block.data[i].flanker_location +
 					'><div class = ANT_text>*</p></div></div>',
 				is_html: true,
 				choices: 'none',
@@ -547,8 +547,10 @@ for (b = 0; b < blocks.length; b++) {
 			timing_stim: 1700,
 			response_ends_trial: true,
 			timing_post_trial: 0,
-			on_finish: function() {
+			on_finish: function(data) {
+				correct = data.key_press === data.correct_response
 				jsPsych.data.addDataToLastTrial({
+					correct: correct,
 					exp_stage: exp_stage
 				})
 			}

@@ -381,7 +381,7 @@
         "exp_id": "go_nogo",
         "preview": "<a href=\"go_nogo.html\" target=\"_blank\">DEMO</a>",
         "template": "jspsych",
-        "time": 7
+        "time": 10
     },
     {
         "cognitive_atlas_task_id": "tsk_4a57abb949dc8",

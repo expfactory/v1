@@ -25,6 +25,8 @@ Game.Run = function (game) {
     this.buttonPressed = 'none'
     this.numGraded = 0
     this.points = 0
+    this.streak = 0
+    this.reps = 0
 
 };
 
@@ -137,10 +139,10 @@ Game.Run.prototype = {
     this.problem[2] = +op1 + +op2;
 
     this.trial++
-    this.progress = this.game.add.text(860, 560, this.trial + ' out of 26', {font:'30px Arial', fill:'#FFFFFF', align:'center'})
+    this.progress = this.game.add.text(860, 560, this.trial + ' out of 24', {font:'30px Arial', fill:'#FFFFFF', align:'center'})
     this.progress.anchor.x = 0.5
 
-    this.pointDisplay = this.game.add.text(85, 560, 'Points: ' + this.points, {font:'30px Arial', fill:'#FFFFFF', align:'center'})
+    this.pointDisplay = this.game.add.text(85, 560, 'Coins: ' + this.points, {font:'30px Arial', fill:'#FFFFFF', align:'center'})
     this.pointDisplay.anchor.x = 0.5
 
     this.makeProb()
@@ -190,13 +192,28 @@ Game.Run.prototype = {
         this.answer = 'incorrect'
       }
     }
-    this.onSubmit()
 
     if (this.answer == 'correct') {
       this.points+= 1
+      if (this.reps == 0) {
+        this.streak += 1
+      }
+      this.reps = 0
     } else if (this.answer = 'incorrect') {
-      this.points-= 1
+      this.streak = 0
+      this.reps += 1
+      if (this.points == 0) {
+        this.points = 0
+      } else {
+        this.points -= 1
+      }
     }
+
+    if (this.streak == 3 || this.streak == 7 || this.streak == 15 || this.streak == 24) {
+      this.points += 1
+    }
+
+    this.onSubmit()
 
     this.save()
 
@@ -242,15 +259,31 @@ Game.Run.prototype = {
   },
 
   endTrial: function () {
-    correct_feedback = ['Way to go!','Awesome!','You Rock!','Correct!','Fantastic!','Nice!']
-    feedbackIndex = Math.floor(Math.random() * correct_feedback.length) + 0
-    corrFeedback = correct_feedback[feedbackIndex]
+
+    if (this.streak == 3) {
+      corrFeedback = '3 in a row! Extra coin!'
+      disp_col = '#3CF948'
+    } else if (this.streak == 7) {
+      corrFeedback = '7 in a row! Extra coin!'
+      disp_col = '#3CF948'
+    } else if (this.streak == 15) {
+      corrFeedback = '15 in a row! Extra coin!'
+      disp_col = '#3CF948'
+    } else if (this.streak == 24) {
+      corrFeedback = 'Perfect Score! Extra coin!'
+      disp_col = '#3CF948'
+    } else {
+      correct_feedback = ['Way to go!','Awesome!','You Rock!','Correct!','Fantastic!','Nice!']
+      feedbackIndex = Math.floor(Math.random() * correct_feedback.length) + 0
+      corrFeedback = correct_feedback[feedbackIndex]
+      disp_col = '#FFFFFF'
+    }
 
     this.game.world.remove(this.probText)
     this.equal.visible = false
     this.unequal.visible = false
     if ((this.trial) >= this.op1s.length && this.answer == "correct" && !this.timedOut) {
-      this.feedback = this.game.add.text(this.game.width/2, 50, corrFeedback, {font:'96px Arial', fill:'#FFFFFF', align:'center'})
+      this.feedback = this.game.add.text(this.game.width/2, 50, corrFeedback, {font:'80px Arial', fill:disp_col, align:'center'})
       this.feedback.anchor.x = 0.5
       this.numFeedback.visible = true
       this.game.world.remove(this.progress)
@@ -266,7 +299,7 @@ Game.Run.prototype = {
     } else {
       that = this
       if (this.answer == "incorrect") {
-        this.feedback = this.game.add.text(this.game.width/2, 50, "Try Again!", {font:'96px Arial', fill:'#FFFFFF', align:'center'})
+        this.feedback = this.game.add.text(this.game.width/2, 50, "Try Again!", {font:'80px Arial', fill:disp_col, align:'center'})
         this.feedback.anchor.x = 0.5
         this.numFeedback.visible = true
         this.game.world.remove(this.progress)
@@ -280,10 +313,10 @@ Game.Run.prototype = {
           that.numFeedback.visible = false
           that.makeProb()
           that.makeButtons()
-          that.progress = that.game.add.text(860, 560, that.trial + ' out of 26', {font:'30px Arial', fill:'#FFFFFF', align:'center'})
+          that.progress = that.game.add.text(860, 560, that.trial + ' out of 24', {font:'30px Arial', fill:'#FFFFFF', align:'center'})
           that.progress.anchor.x = 0.5
 
-          that.pointDisplay = that.game.add.text(85, 560, 'Points: ' + that.points, {font:'30px Arial', fill:'#FFFFFF', align:'center'})
+          that.pointDisplay = that.game.add.text(85, 560, 'Coins: ' + that.points, {font:'30px Arial', fill:'#FFFFFF', align:'center'})
           that.pointDisplay.anchor.x = 0.5
 
           if (that.maxTime != 0) {
@@ -299,7 +332,7 @@ Game.Run.prototype = {
         this.game.world.remove(this.progress)
         this.game.world.remove(this.pointDisplay)
         this.timedOut = false
-        this.feedback = this.game.add.text(this.game.width/2, 50, "Try Again!", {font:'96px Arial', fill:'#FFFFFF', align:'center'})
+        this.feedback = this.game.add.text(this.game.width/2, 50, "Try Again!", {font:'80px Arial', fill:disp_col, align:'center'})
         this.feedback.anchor.x = 0.5
         //this.answer = 'none'
         if (this.maxTime != 0) {
@@ -311,11 +344,11 @@ Game.Run.prototype = {
           that.numFeedback.visible = false
           that.makeProb()
           that.makeButtons()
-          that.progress = that.game.add.text(860, 560, that.trial + ' out of 26', {font:'30px Arial', fill:'#FFFFFF', align:'center'})
+          that.progress = that.game.add.text(860, 560, that.trial + ' out of 24', {font:'30px Arial', fill:'#FFFFFF', align:'center'})
           that.progress.anchor.x = 0.5
 
 
-          that.pointDisplay = that.game.add.text(85, 560, 'Points: ' + that.points, {font:'30px Arial', fill:'#FFFFFF', align:'center'})
+          that.pointDisplay = that.game.add.text(85, 560, 'Coins: ' + that.points, {font:'30px Arial', fill:'#FFFFFF', align:'center'})
           that.pointDisplay.anchor.x = 0.5
 
           if (that.maxTime != 0) {
@@ -325,7 +358,7 @@ Game.Run.prototype = {
 
         }, 1000)
       } else {
-        this.feedback = this.game.add.text(this.game.width/2, 50, corrFeedback, {font:'96px Arial', fill:'#FFFFFF', align:'center'})
+        this.feedback = this.game.add.text(this.game.width/2, 50, corrFeedback, {font:'80px Arial', fill:disp_col, align:'center'})
         this.feedback.anchor.x = 0.5
         this.numFeedback.visible = true
         this.game.world.remove(this.progress)

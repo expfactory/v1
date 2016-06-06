@@ -36,6 +36,8 @@ Game.Run = function (game) {
     this.stopDispensing = null
     this.numGraded = 0
     this.points = 0
+    this.reps = 0
+    this.streak = 0
 
 };
 
@@ -92,11 +94,11 @@ Game.Run.prototype = {
     this.ballCollisionGroup = this.game.physics.p2.createCollisionGroup()
 
     //first trial
-    this.progress = this.game.add.text(this.game.world.centerX*2-100, 560, '1 out of 13', {font:'30px Arial', fill:'#FFFFFF', align:'center'})
+    this.progress = this.game.add.text(this.game.world.centerX*2-100, 560, '1 out of 12', {font:'30px Arial', fill:'#FFFFFF', align:'center'})
     this.progress.fixedToCamera = true
     this.progress.anchor.x = 0.5
 
-    this.pointDisplay = this.game.add.text(85, 560, 'Points: ' + this.points, {font:'30px Arial', fill:'#FFFFFF', align:'center'})
+    this.pointDisplay = this.game.add.text(85, 560, 'Coins: ' + this.points, {font:'30px Arial', fill:'#FFFFFF', align:'center'})
     this.pointDisplay.anchor.x = 0.5
     this.pointDisplay.fixedToCamera = true
 
@@ -166,6 +168,9 @@ Game.Run.prototype = {
       newd = new Date();
       this.RT = newd.getTime() - this.start_time;
       //check to see if they are correct
+      if (this.equalBool) {
+        this.coin.visible = true
+      }
       this.adjustBalance()
       this.unequal.kill()
       this.equal.kill()
@@ -183,6 +188,9 @@ Game.Run.prototype = {
       newd = new Date();
       this.RT = newd.getTime() - this.start_time;
       //check to see if they are correct
+      if (!this.equalBool) {
+        this.coin.visible = true
+      }
       this.adjustBalance()
       this.unequal.kill()
       this.equal.kill()
@@ -199,21 +207,39 @@ Game.Run.prototype = {
       this.points += 1
     } else if (this.buttonPressed == 'equal' && this.equivalence[this.trial-1] == 2) { //it is equal and they are incorrect
       this.answer = 'incorrect'
-      this.points -= 1
+      if (this.points == 0) {
+        this.points = 0
+      } else {
+        this.points -= 1
+      }
     } else if (this.buttonPressed == 'unequal') {
       if (this.equivalence[this.trial-1] == 2) { //it is unequal and they are correct
         this.answer = 'correct'
         this.points += 1
       } else  { //it is unequal and they are incorrect
         this.answer = 'incorrect'
-        this.points -= 1
+        if (this.points == 0) {
+          this.points = 0
+        } else {
+          this.points -= 1
+        }
       }
     }
 
     if (this.answer == "incorrect") {
-      giveFeedback(this, false, 480, 50, "60px Arial")
+      this.reps += 1
+      this.streak = 0
+      giveFeedback(this, false, this.streak,'vnt',480, 50, "60px Arial")
     } else {
-      giveFeedback(this, true, 480, 50, "60px Arial")
+      if (this.reps == 0) {
+        this.streak += 1
+      }
+      this.reps = 0
+      giveFeedback(this, true, this.streak,'vnt',480, 50, "60px Arial")
+    }
+
+    if (this.streak == 3 || this.streak == 7 || this.streak == 12) {
+      this.points += 1
     }
 
     this.balance[0].weight = 0
@@ -323,7 +349,7 @@ Game.Run.prototype = {
       trialData.ACC[curr_trial-1] == 1
     } else  {
       inputData('ACC', 0)
-      trialData.ACC[curr_Trial-1] == 0
+      trialData.ACC[curr_trial-1] == 0
     }
 
     this.numGraded++
@@ -343,11 +369,11 @@ Game.Run.prototype = {
     //reset the RT counter
     if (this.answer == "correct" || this.trial == 0) {
       if (this.trial == 0) {
-        this.progress.setText(1 + ' out of 13')
-        this.pointDisplay.setText("Points: " + this.points)
+        this.progress.setText(1 + ' out of 12')
+        this.pointDisplay.setText("Coins: " + this.points)
       } else {
-        this.progress.setText(this.trial+1 + ' out of 13')
-        this.pointDisplay.setText("Points: " + this.points)
+        this.progress.setText(this.trial+1 + ' out of 12')
+        this.pointDisplay.setText("Coins: " + this.points)
       }
       if (this.op1s[this.trial] <= 9) {
           op1 = '  ' + this.op1s[this.trial];
@@ -401,13 +427,20 @@ Game.Run.prototype = {
   dropBall: function() {
 
     if (this.equivalence[this.trial-1] == 1) {
-      equal = true
+      this.equalBool = true
     } else {
-      equal = false
+      this.equalBool = false
     }
 
+    if (this.equalBool) {
+      this.coin = this.game.add.sprite(540,500,'coin')
+    } else {
+      this.coin = this.game.add.sprite(380,500,'coin')
+    }
+    this.coin.visible = false
+
     if (this.buttonPressed == 'none' || this.answer == 'correct') {
-      this.ballsToDrop = unequalGen(equal, this.problem[2], this.problem[0], this.problem[1])
+      this.ballsToDrop = unequalGen(this.equalBool, this.problem[2], this.problem[0], this.problem[1])
     } else if (this.answer == 'incorrect'){
       this.ballsToDrop = this.ballsToDrop
     }
@@ -471,12 +504,18 @@ Game.Run.prototype = {
 
     var that = this
     if ((this.trial) >= this.op1s.length && this.answer == 'correct') {
-      this.pointDisplay.setText("Points: " + this.points)
+      this.pointDisplay.setText("Coins: " + this.points)
+      if (this.coin) {
+        this.game.world.remove(this.coin)
+      }
       setTimeout(function() {
         that.quitGame();
       }, 2500)
     } else {
-      this.pointDisplay.setText("Points: " + this.points)
+      this.pointDisplay.setText("Coins: " + this.points)
+      if (this.coin) {
+        this.game.world.remove(this.coin)
+      }
       setTimeout(function() {
       that.nextTrial()
       setTimeout(function() {
