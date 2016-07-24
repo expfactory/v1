@@ -66,6 +66,48 @@ var getInstructFeedback = function() {
 		'</p></div>'
 }
 
+var getTestFeedback = function() {
+	var global_trial = jsPsych.progress().current_trial_global
+	var data_length = num_trials * 6
+	var start_cut = global_trial - data_length
+	var test_feedback_text = ''
+
+	//below are counters to see if the subject is treating this task as a directed remembering as opposed to a directed forgetting task
+	var respond_remember_total = 0
+	var neg_respond_remember = 0
+	var pos_respond_remember = 0
+	
+	for(var b =0; b < data_length; b++){
+		if(jsPsych.data.getDataByTrialIndex(start_cut + b - 1).probe_type == 'neg'){
+			respond_remember_total += 1
+			if(jsPsych.data.getDataByTrialIndex(start_cut + b - 1).key_press == '37'){
+				neg_respond_remember += 1
+			}
+		}else if (jsPsych.data.getDataByTrialIndex(start_cut + b - 1).probe_type == 'pos'){
+			respond_remember_total += 1
+			if(jsPsych.data.getDataByTrialIndex(start_cut + b - 1).key_press == '39'){
+				pos_respond_remember += 1
+			}
+		}
+	}
+	
+	var directed_remembering_total = neg_respond_remember + pos_respond_remember
+	var directed_remembering_percent = directed_remembering_total / respond_remember_total 
+
+	
+	if (directed_remembering_percent >= 0.75){
+	test_feedback_text = 'According to the pattern of your responses, we believe that you are treating this task as a directed remembering task.  Please remember that <strong>this is a directed forgetting task</strong>.</p>'+
+						 '<p class = block-text>When you are presented with the cue TOP, you should <strong> forget the top letters</strong> and <strong>remember the bottom letters.</strong></p>'+
+						 '<p class = block-text>When you are presented with the cue BOT, you should <strong> forget the bottom letters</strong> and <strong>remember the top letters.</strong></p>'+
+						 '<p class = block-text>Press the <strong>left</strong> arrow key if the probe letter <strong> is in the memory set</strong>, and the <strong>right</strong> if it is <strong>not in the memory set</strong>.</p>'+
+						 '<p class = block-text>Press enter to continue.'		
+	} else {
+	test_feedback_text = 'Press <strong> enter </strong>to continue'
+	}
+		
+  	return '<div class = centerbox><p class = block-text>' + test_feedback_text + '</p></div>'
+}
+
 /* Append gap and current trial to data and then recalculate for next trial*/
 
 //this adds the current trial and the stims shown to the data
@@ -263,6 +305,7 @@ var credit_var = true
 // task specific variables
 var choices = [37, 39]
 var exp_stage = 'practice'
+var practice_length = 8
 var num_trials = 24
 var num_runs = 3 
 var experimentLength = num_trials * num_runs
@@ -278,7 +321,7 @@ var preceeding1stims = []
 var preceeding2stims = []
 var probes = ['pos', 'pos', 'neg', 'con']
 var probeTypeArray = jsPsych.randomization.repeat(probes, experimentLength / 4)
-var practiceProbeTypeArray = jsPsych.randomization.repeat(probes, 1)
+var practiceProbeTypeArray = jsPsych.randomization.repeat(probes, practice_length/2)
 var stimFix = ['fixation']
 var pathSource = '/static/experiments/directed_forgetting/images/'
 var fileType = '.png'
@@ -294,6 +337,47 @@ jsPsych.pluginAPI.preloadImages(images)
 /* ************************************ */
 /* Set up jsPsych blocks */
 /* ************************************ */
+var test_img_block1 = {
+	type: 'poldrack-single-stim',
+	stimulus: '<div class = instructBox><p class = block-text>This is what a trial will look like.  The letters A, B, and C are on the top portion, while the letters D, E, and F are on the bottom portion.  After these letters disappear, a cue will be presented.  If the cue presented is <strong>TOP</strong>, then you should <strong> forget the letters A, B, and C</strong> and remember D, E, and F.  If the cue presented is <strong>BOT</strong>, then you should <strong> forget D, E, and F </strong> and remember A, B, and C.    Press <strong> enter</strong> to continue.</div>'+
+		'<div class = centerbox><div class = fixation><span style="color:red">+</span></div></div>' +
+		'<div class = topLeft><img class = forgetStim src ="' + pathSource + stimArray[0] + fileType +
+		'"></img></div>' +
+		'<div class = topMiddle><img class = forgetStim src ="' + pathSource + stimArray[1] + fileType +
+		'"></img></div>' +
+		'<div class = topRight><img class = forgetStim src ="' + pathSource + stimArray[2] + fileType +
+		'"></img></div>' +
+		'<div class = bottomLeft><img class = forgetStim src ="' + pathSource + stimArray[3] + fileType +
+		'"></img></div>' +
+		'<div class = bottomMiddle><img class = forgetStim src ="' + pathSource + stimArray[4] + fileType +
+		'"></img></div>' +
+		'<div class = bottomRight><img class = forgetStim src ="' + pathSource + stimArray[5] + fileType +
+		'"></img></div>',
+	is_html: true,
+	choices: [13],
+	data: {
+		trial_id: "instruction_images"
+	},
+	timing_post_trial: 0,
+	timing_stim: 300000,
+	timing_response: 300000,
+	response_ends_trial: true,
+}
+
+var test_img_block2 = {
+	type: 'poldrack-single-stim',
+	stimulus: '<div class = centerbox><p class = center-block-text>We will present you with 1 example.  Press <strong> enter</strong> to begin.</p></div>',
+	is_html: true,
+	choices: [13],
+	data: {
+		trial_id: "instruction_images"
+	},
+	timing_post_trial: 0,
+	timing_stim: 300000,
+	timing_response: 300000,
+	response_ends_trial: true,
+}
+
 // Set up attention check node
 var attention_check_block = {
 	type: 'attention-check',
@@ -337,6 +421,8 @@ var end_block = {
 	on_finish: assessPerformance
 };
 
+
+
 var feedback_instruct_text =
 	'Welcome to the experiment. This task will take around 20 minutes. Press <strong>enter</strong> to begin.'
 var feedback_instruct_block = {
@@ -356,7 +442,7 @@ var instructions_block = {
 		trial_id: 'instruction'
 	},
 	pages: [
-		'<div class = centerbox><p class = block-text>In this experiment, you will be presented with 6 letters on each trial. You must memorize all 6 letters. </p><p class = block-text>After the presentation of 6 letters, there will be a short delay. You will then be presented with a cue, either <strong>TOP</strong> or <strong>BOT</strong>. This will instruct you to forget the 3 letters located at either the top or bottom (respectively) of the screen.</p> <p class = block-text> The three remaining letters that you must remember are called your <strong>memory set</strong>.</p><p class = block-text>You will then be presented with a single letter, respond with the <strong> Left</strong> arrow key if it is in the memory set, and the <strong> Right </strong> arrow key if it was not in the memory set.</p><p class = block-text>Practice will start after you end the instructions.</p></div>',
+		'<div class = centerbox><p class = block-text>In this experiment, on each trial you will be presented with 6 letters. You must memorize all 6 letters. </p><p class = block-text>After the presentation of 6 letters, there will be a short delay. You will then be presented with a cue, either <strong>TOP</strong> or <strong>BOT</strong>. This will instruct you to <strong>forget</strong> the 3 letters located at either the top or bottom (respectively) of the screen.</p> <p class = block-text> The three remaining letters that you must remember are called your <strong>memory set</strong>. You should remember these three letters while forgetting the other three.</p><p class = block-text>You will then be presented with a single letter. Respond with the <strong> Left</strong> arrow key if it is in the memory set, and the <strong> Right </strong> arrow key if it was not in the memory set.</p><p class = block-text>Please make sure you understand these instructions before continuing. You will see an example trial after you end the instructions.</p></div>',
 	],
 	allow_keys: false,
 	show_clickable_nav: true,
@@ -384,6 +470,18 @@ var instruction_node = {
 	}
 }
 
+var start_practice_block = {
+	type: 'poldrack-instructions',
+	data: {
+		trial_id: 'instruction'
+	},
+	pages: [
+		'<div class = centerbox><p class = block-text>As you saw, there are three letters at the top of the screen and three letters on the bottom of the screen. After a delay, the cue (TOP or BOT) tells you whether to <strong>forget</strong> the three letters at the top or bottom of the screen, respectively. The other three letters are your memory set.</p><p class = block-text>After the cue, you are shown a letter and respond with the <strong> Left</strong> arrow key if it is in the memory set, and the <strong> Right </strong> arrow key if it was not in the memory set.</p><p class = block-text>We will now start with a number of practice trials.</p></div>',
+	],
+	allow_keys: false,
+	show_clickable_nav: true,
+	timing_post_trial: 1000
+};
 
 var start_test_block = {
 	type: 'poldrack-text',
@@ -397,6 +495,8 @@ var start_test_block = {
 	timing_post_trial: 1000,
 	on_finish: resetTrial,
 };
+
+
 
 var start_fixation_block = {
 	type: 'poldrack-single-stim',
@@ -512,7 +612,7 @@ var intro_test_block = {
 		trial_id: "intro_test",
 		exp_stage: "test"
 	},
-	text: '<div class = centerbox><p class = block-text>We will now begin the experiment.  For these trials, you will no longer get feedback.</p><p class = block-text> Remember, at the end of the trial respond with the <strong> Left</strong> arrow key if the letter presented is in the memory set, and the <strong> Right </strong> arrow key if it is not in the memory set.</p><p class = block-text> Press <strong>Enter</strong> to begin the experiment.</p></div>',
+	text: '<div class = centerbox><p class = block-text>We will now begin the experiment.  For these trials, you will no longer get feedback.</p><p class = block-text> Remember, the cue (TOP or BOT) tells you which letters to <strong>forget</strong>. At the end of the trial respond with the <strong> Left</strong> arrow key if the letter presented is in the memory set, and the <strong> Right </strong> arrow key if it is not in the memory set.</p><p class = block-text> Press <strong>Enter</strong> to begin the experiment.</p></div>',
 	cont_key: [13],
 	timing_post_trial: 1000,
 	on_finish: resetTrial,
@@ -535,10 +635,33 @@ var practice_probe_block = {
 	on_finish: appendPracticeProbeData,
 };
 
+var test_feedback_block = {
+	type: 'poldrack-text',
+	data: {
+		trial_id: 'instruction'
+	},
+	cont_key: [13],
+	text: getTestFeedback,
+	timing_post_trial: 0,
+	timing_response: 180000
+};
+
 /* create experiment definition array */
 var directed_forgetting_experiment = [];
+
 directed_forgetting_experiment.push(instruction_node);
-for (i = 0; i < 4; i++) {
+directed_forgetting_experiment.push(test_img_block1);
+directed_forgetting_experiment.push(test_img_block2);
+// show one practice trial
+directed_forgetting_experiment.push(start_fixation_block);
+directed_forgetting_experiment.push(training_block);
+directed_forgetting_experiment.push(cue_block);
+directed_forgetting_experiment.push(fixation_block);
+directed_forgetting_experiment.push(practice_probe_block);
+directed_forgetting_experiment.push(ITI_fixation_block);
+// start practice
+directed_forgetting_experiment.push(start_practice_block);
+for (i = 0; i < (practice_length-1); i++) {
 	directed_forgetting_experiment.push(start_fixation_block);
 	directed_forgetting_experiment.push(training_block);
 	directed_forgetting_experiment.push(cue_block);
@@ -561,6 +684,7 @@ for (r = 0; r < num_runs; r++) {
 		directed_forgetting_experiment.push(probe_block);
 		directed_forgetting_experiment.push(ITI_fixation_block);
 	}
+	directed_forgetting_experiment.push(test_feedback_block)
 	directed_forgetting_experiment.push(attention_node)
 }
 directed_forgetting_experiment.push(post_task_block)

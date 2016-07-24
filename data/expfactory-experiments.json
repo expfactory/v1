@@ -149,7 +149,7 @@
         "exp_id": "choice_reaction_time",
         "preview": "<a href=\"choice_reaction_time.html\" target=\"_blank\">DEMO</a>",
         "template": "jspsych",
-        "time": 5
+        "time": 8
     },
     {
         "cognitive_atlas_task_id": "trm_4da890594742a",
@@ -232,6 +232,14 @@
         "time": 5
     },
     {
+        "cognitive_atlas_task_id": "tsk_4a57abb949dc8",
+        "contributors": "Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack",
+        "exp_id": "test_task_always_fail",
+        "preview": "<a href=\"test_task_always_fail.html\" target=\"_blank\">DEMO</a>",
+        "template": "jspsych",
+        "time": 1
+    },
+    {
         "cognitive_atlas_task_id": "trm_4c8a85c5c75eb",
         "contributors": "Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack",
         "exp_id": "writing_task",
@@ -312,6 +320,14 @@
         "time": 8
     },
     {
+        "cognitive_atlas_task_id": "trm_4f241ee9c4e37",
+        "contributors": "Ian Eisenberg",
+        "exp_id": "shape_matching",
+        "preview": "<a href=\"shape_matching.html\" target=\"_blank\">DEMO</a>",
+        "template": "jspsych",
+        "time": 20
+    },
+    {
         "cognitive_atlas_task_id": "trm_4f241d7adf14e",
         "contributors": "Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack",
         "exp_id": "local_global_letter",
@@ -389,7 +405,7 @@
         "exp_id": "simple_reaction_time",
         "preview": "<a href=\"simple_reaction_time.html\" target=\"_blank\">DEMO</a>",
         "template": "jspsych",
-        "time": 3
+        "time": 8
     },
     {
         "cognitive_atlas_task_id": "trm_5667492c555b7",
@@ -504,6 +520,14 @@
         "time": 999
     },
     {
+        "cognitive_atlas_task_id": "",
+        "contributors": "Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack",
+        "exp_id": "alcohol_drugs_survey",
+        "preview": "<a href=\"alcohol_drugs_survey.html\" target=\"_blank\">DEMO</a>",
+        "template": "survey",
+        "time": 999
+    },
+    {
         "cognitive_atlas_task_id": "trm_56a91a92043bc",
         "contributors": "Zeynep Enkavi,Ian Eisenberg,Patrick Bissett,Vanessa Sochat,Russell Poldrack",
         "exp_id": "upps_impulsivity_survey",
@@ -540,6 +564,14 @@
         "contributors": "Zeynep Enkavi,Ian Eisenberg,Patrick Bissett,Vanessa Sochat,Russell Poldrack",
         "exp_id": "dospert_rp_survey",
         "preview": "<a href=\"dospert_rp_survey.html\" target=\"_blank\">DEMO</a>",
+        "template": "survey",
+        "time": 999
+    },
+    {
+        "cognitive_atlas_task_id": "",
+        "contributors": "Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Vanessa Sochat,Russell Poldrack",
+        "exp_id": "k6_survey",
+        "preview": "<a href=\"k6_survey.html\" target=\"_blank\">DEMO</a>",
         "template": "survey",
         "time": 999
     },

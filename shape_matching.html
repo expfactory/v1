@@ -1,0 +1,46 @@
+<!DOCTYPE html><html class=''>
+<head>
+    <meta charset='UTF-8'>
+    <meta name="robots" content="noindex">
+    <title>The Experiment Factory: Preview</title>
+    
+<link rel='stylesheet' type='text/css' href='static/css/jspsych.css'>
+<link rel='stylesheet' type='text/css' href='static/css/default_style.css'>
+<link rel='stylesheet' type='text/css' href='static/experiments/shape_matching/style.css'>
+</head>
+
+<body>
+<script src='//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+
+<script src='static/js/jspsych/jspsych.js'></script>
+<script src='static/js/jspsych/plugins/jspsych-text.js'></script>
+<script src='static/js/jspsych/poldrack_plugins/jspsych-poldrack-text.js'></script>
+<script src='static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js'></script>
+<script src='static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js'></script>
+<script src='static/js/jspsych/poldrack_plugins/jspsych-poldrack-categorize.js'></script>
+<script src='static/js/jspsych/plugins/jspsych-survey-text.js'></script>
+<script src='static/js/utils/poldrack_utils.js'></script>
+<script src='static/experiments/shape_matching/experiment.js'></script>
+
+<script>
+$( document ).ready(function() {
+
+    expfactory_finished = false;
+
+    jsPsych.init({
+timeline: shape_matching_experiment,
+display_element: "getDisplayElement",
+fullscreen: true,
+on_trial_finish: function(data){
+addID('shape_matching')
+},
+on_finish: function(data){
+jsPsych.data.localSave('shape_matching_results.csv', 'csv');
+expfactory_finished = true;
+}
+});
+
+});
+</script>
+</body>
+</html>

@@ -70,6 +70,38 @@ var randomDraw = function(lst) {
 var getPracticeFeedback = function() {
   return '<div class = centerbox><p class = block-text>' + practice_feedback_text + '</p></div>'
 }
+var getSelectiveFeedback = function(){
+	var data_length = 0
+	var global_trial = jsPsych.progress().current_trial_global
+	if(jsPsych.data.getDataByTrialIndex(global_trial - 5).exp_stage == 'practice'){
+		data_length = 60
+	}else if (jsPsych.data.getDataByTrialIndex(global_trial - 5).exp_stage == 'test'){
+		data_length = 100
+	}
+	var start_cut = global_trial - data_length
+	var numIgnore = 0
+	var ignoreRespond = 0
+	for (var i = 0; i < data_length; i++){
+		if(jsPsych.data.getDataByTrialIndex(start_cut + i).trial_id == 'stim' &&  jsPsych.data.getDataByTrialIndex(start_cut + i).condition == 'ignore'){
+			numIgnore = numIgnore + 1
+			if(jsPsych.data.getDataByTrialIndex(start_cut + i).rt != -1){
+				ignoreRespond = ignoreRespond + 1
+			}
+		}
+	}
+	var ignoreRespond_percent = ignoreRespond / numIgnore
+	if (ignoreRespond_percent <= selective_threshold){
+      	selective_feedback_text =
+          '<p class = block-text> You have been stopping to both the blue and orange stars.  Please make sure to <strong>stop your response only when the blue star appears.</strong></p><p class = block-text>Press <strong>enter</strong> to view block feedback.'
+  	} else {
+  		selective_feedback_text =
+          '<p class = block-text>Press<strong> enter </strong>to view block feedback.'
+    }
+  	return '<div class = centerbox>' + selective_feedback_text + '</p></div>'
+}
+		
+	
+	
 
 /* After each test block let the subject know their average RT and accuracy. If they succeed or fail on too many stop signal trials, give them a reminder */
 var getTestFeedback = function() {
@@ -97,6 +129,7 @@ var getTestFeedback = function() {
       }
     }
   }
+
   var average_rt = -1;
   if (rt_array.length !== 0) {
     average_rt = math.median(rt_array);
@@ -111,8 +144,8 @@ var getTestFeedback = function() {
   var StopCorrect_percent = successful_stops / stop_length
   stopAccMeans.push(StopCorrect_percent)
   var stopAverage = math.mean(stopAccMeans)
-
-  test_feedback_text = "<br>In 20 seconds, this page will expire and the computer will automatically advance you to the next page.  Please take this time to read your feedback and to take a short break!"
+  
+  test_feedback_text = "<br>Done with a test block. Please take this time to read your feedback and to take a short break! Press <strong>enter</strong> to continue after you have read the feedback."
   test_feedback_text += "</p><p class = block-text><strong>Average reaction time:  " + Math.round(average_rt) + " ms. Accuracy for non-blue star trials: " + Math.round(GoCorrect_percent * 100)+ "%</strong>" 
   if (average_rt > RT_thresh || rt_diff > rt_diff_thresh) {
     test_feedback_text +=
@@ -125,12 +158,13 @@ var getTestFeedback = function() {
   if (GoCorrect_percent < accuracy_thresh) {
     test_feedback_text += '</p><p class = block-text>Your accuracy is too low. Remember, the correct keys are as follows: ' + prompt_text
   }
+      
   if (StopCorrect_percent < (0.5-stop_thresh) || stopAverage < 0.45){
         test_feedback_text +=
           '</p><p class = block-text><strong>Remember to try and withhold your response when you see a blue stop signal.</strong>' 
   } else if (StopCorrect_percent > (0.5+stop_thresh) || stopAverage > 0.55){
     test_feedback_text +=
-      '</p><p class = block-text><strong>Remember, do not slow your responses to the shape to see if a star will appear before you respond.  Please respond to each shape as quickly and as accurately as possible.</strong>'
+      '</p><p class = block-text><strong>Remember, do not slow your responses to the shape to see if a blue star will appear before you respond.  Please respond to each shape as quickly and as accurately as possible.</strong>'
   }
 
   return '<div class = centerbox><p class = block-text>' + test_feedback_text + '</p></div>'
@@ -139,7 +173,7 @@ var getTestFeedback = function() {
 
 /* Staircase procedure. After each successful stop, make the stop signal delay longer (making stopping harder) */
 var updateSSD = function(data) {
-  if (data.SS_trial_type == 'stop') {
+  if (data.condition == 'stop') {
     if (data.rt == -1 && SSD < 850) {
       SSD = SSD + 50
     } else if (data.rt != -1 && SSD > 0) {
@@ -205,11 +239,12 @@ var sumInstructTime = 0 //ms
 var instructTimeThresh = 0 ///in seconds
 var credit_var = true
 
+
 // task specific variables
 // Define and load images
 var prefix = '/static/experiments/stim_selective_stop_signal/images/'
-var images = [prefix + 'circle.png', prefix + 'rhombus.png', prefix + 'Lshape.png', prefix +
-  'triangle.png'
+var images = [prefix + 'rectangle.png', prefix + 'oval.png', prefix + 'trapezoid.png', prefix +
+  'moon.png'
 ]
 jsPsych.pluginAPI.preloadImages(images);
 
@@ -232,13 +267,11 @@ var correct_responses = jsPsych.randomization.shuffle([possible_responses[0], po
 ])
 var tab = '&nbsp&nbsp&nbsp&nbsp'
 var prompt_text = '<ul list-text><li><img class = prompt_stim src = ' + images[0] + '></img>' + tab +
-  correct_responses[0][0] + '</li><li><img class = prompt_stim src = ' + images[1] + '></img>' +
-  tab +
+  correct_responses[0][0] + '</li><li><img class = prompt_oval_stim src = ' + images[1] + '></img>' + tab +
   correct_responses[1][0] + ' </li><li><img class = prompt_stim src = ' + images[2] + '></img>   ' +
   '&nbsp&nbsp&nbsp' + correct_responses[2][0] +
-  ' </li><li><img class = prompt_stim src = ' + images[3] + '></img>' + tab + correct_responses[3][
-    0
-  ] + ' </li></ul>'
+  ' </li><li><img class = prompt_stim src = ' + images[3] + '></img>' + tab + correct_responses[3][0] +
+  ' </li></ul>'
 
 /* Global task variables */
 var current_trial = 0
@@ -246,6 +279,7 @@ var rtMedians = []
 var stopAccMeans =[]
 var RT_thresh = 1000
 var rt_diff_thresh = 75
+var selective_threshold = 0.6;
 var missed_response_thresh = 0.1
 var accuracy_thresh = 0.8
 var stop_thresh = 0.2
@@ -439,14 +473,26 @@ var practice_feedback_block = {
   text: getPracticeFeedback
 };
 
+var selective_feedback_text = ''
+var selective_feedback_block = {
+  type: 'poldrack-text',
+  data: {
+    trial_id: "feedback",
+    exp_stage: "practice"
+  },
+  timing_response: 180000,
+  cont_key: [13],
+  text: getSelectiveFeedback
+};
+
 var test_feedback_block = {
   type: 'poldrack-text',
   data: {
     trial_id: "feedback",
     exp_stage: "test"
   },
-  timing_response: 20000,
-  cont_key: 'none',
+  timing_response: 180000,
+  cont_key: [13],
   text: getTestFeedback,
   on_finish: function() {
     test_block_data = []
@@ -463,6 +509,7 @@ var stim_selective_stop_signal_experiment = []
 stim_selective_stop_signal_experiment.push(instruction_node);
 
 /* Practice block w/o SS */
+
 NoSS_practice_trials = []
 NoSS_practice_trials.push(practice_feedback_block)
 for (i = 0; i < NoSSpractice_block_len; i++) {
@@ -521,7 +568,7 @@ var NoSS_practice_node = {
       current_trial = 0
       practice_repetitions = 1
       practice_feedback_text +=
-        '</p><p class = block-text>For the rest of the experiment, on some proportion of trials a blue or orange star will appear around the shape. If the star is blue, it is a "stop signal". When a blue star appears please try your best to stop your response and press nothing on that trial.</p><p class = block-text>The star will appear around the same time or shortly after the shape appears. Because of this, you will not always be able to successfully stop when a blue star appears. However, if you continue to try very hard to stop when a blue star appears, you will be able to stop sometimes but not always.</p><p class = block-text>If an orange star appears, respond as you normally would by pressing the correct key. </p><p class = block-text><strong>Please balance the requirement to respond quickly and accurately to the shapes while trying very hard to stop to the blue stop signal.</strong></p><p class = block-text>Press <strong>Enter</strong> to continue'
+        '</p><p class = block-text>For the rest of the experiment, on some proportion of trials a blue or orange star will appear around the shape. If the star is blue, it is a "stop signal". <strong>When a blue star appears please try your best to stop your response and press nothing on that trial.  If the star is orange, please continue to respond to the shapes.</strong> </p><p class = block-text>The star will appear around the same time or shortly after the shape appears. Because of this, you will not always be able to successfully stop when a blue star appears. However, if you continue to try very hard to stop when a blue star appears, you will be able to stop sometimes but not always.</p><p class = block-text>If an orange star appears, respond as you normally would by pressing the correct key. </p><p class = block-text><strong>Please balance the requirement to respond quickly and accurately to the shapes while trying very hard to stop to the blue stop signal.</strong></p><p class = block-text>Press <strong>Enter</strong> to continue'
       return false;
     } else {
       //rerandomize stim order
@@ -576,12 +623,14 @@ for (i = 0; i < practice_block_len; i++) {
   }
   practice_trials.push(stop_signal_block)
 }
-
+practice_trials.push(selective_feedback_block)
 
 /* Practice node continues repeating until the subject reaches certain criteria */
+
+
 var practice_node = {
   timeline: practice_trials,
-  /* This function defines stopping criteria */
+  // This function defines stopping criteria 
   loop_function: function(data) {
     practice_repetitions += 1
     var rt_array = [];
@@ -609,16 +658,29 @@ var practice_node = {
         }
       }
     }
+    
+    var numIgnore = 0
+    var ignoreRespond = 0
+    for (var b = 0; b < data.length; b++){
+    	if(data[b].trial_id == 'stim' && data[b].condition == 'ignore'){
+    		numIgnore = numIgnore + 1
+    		if (data[b].rt != -1){
+    			ignoreRespond = ignoreRespond + 1
+    		}
+    	}
+    }
+    		
     var average_rt = -1
     if (rt_array.length !== 0) {
       average_rt = math.median(rt_array);
     }
+    var ignoreRespond_percent = ignoreRespond/numIgnore
     var GoCorrect_percent = sum_correct / go_length;
     var missed_responses = (go_length - num_responses) / go_length
     var StopCorrect_percent = successful_stops / stop_length
     practice_feedback_text = "</p><p class = block-text><strong>Average reaction time:  " + Math.round(average_rt) + " ms. Accuracy for non-blue star trials: " + Math.round(GoCorrect_percent * 100)+ "%</strong>" 
     if ((average_rt < RT_thresh && GoCorrect_percent > accuracy_thresh && missed_responses <
-        missed_response_thresh && StopCorrect_percent > 0.2 && StopCorrect_percent < 0.8) || practice_repetitions >
+        missed_response_thresh && StopCorrect_percent > 0.2 && StopCorrect_percent < 0.8 && ignoreRespond_percent > selective_threshold) || practice_repetitions >
       practice_repetition_thresh) {
       // end the loop
       current_trial = 0
@@ -648,12 +710,13 @@ var practice_node = {
         practice_feedback_text +=
           '</p><p class = block-text>Your accuracy is too low. Remember, the correct keys are as follows: ' + prompt_text
       }
+      
       if (StopCorrect_percent < 0.8){
         practice_feedback_text +=
           '</p><p class = block-text><strong>Remember to try and withhold your response when you see a blue stop signal.</strong>' 
       } else if (StopCorrect_percent > 0.2){
         practice_feedback_text +=
-          '</p><p class = block-text><strong>Remember, do not slow your responses to the shape to see if a star will appear before you respond.  Please respond to each shape as quickly and as accurately as possible.</strong>'
+          '</p><p class = block-text><strong>Remember, do not slow your responses to the shape to see if a blue star will appear before you respond.  Please respond to each shape as quickly and as accurately as possible.</strong>'
       }
       practice_feedback_text += '</p><p class = block-text>Press <strong>Enter</strong> to continue'
       return true;
@@ -685,6 +748,7 @@ for (var b = 0; b < numblocks; b++) {
     } else {
       var stop_stim = stop_signal
       var stop_trial = stop_trials[i]
+      
     }
     var stop_signal_block = {
       type: 'stop-signal',
@@ -716,6 +780,7 @@ for (var b = 0; b < numblocks; b++) {
   if ($.inArray(b, [0, 1, 4]) != -1) {
     stim_selective_stop_signal_experiment.push(attention_node)
   }
+  stim_selective_stop_signal_experiment.push(selective_feedback_block)
   stim_selective_stop_signal_experiment.push(test_feedback_block)
 }
 stim_selective_stop_signal_experiment.push(post_task_block)

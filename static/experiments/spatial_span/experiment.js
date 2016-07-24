@@ -40,7 +40,7 @@ var setStims = function() {
   curr_seq = []
   stim_array = [first_grid]
   time_array = [1000]
-  var spaces = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26]
+  var spaces = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25]
   var last_space = 0
   for (var i = 0; i < num_spaces; i++) {
     var space = randomDraw(spaces.filter(function(x) {return x!=last_space}))
@@ -60,6 +60,7 @@ var setStims = function() {
     stim_array.push(stim_grid)
     time_array.push(stim_time)
   }
+  console.log(stim_array)
   total_time = num_spaces * (stim_time) + 1000
 }
 
@@ -171,7 +172,7 @@ var feedback_instruct_block = {
   },
   text: getInstructFeedback,
   timing_post_trial: 0,
-  timing_response: 6000
+  timing_response: 180000
 };
 /// This ensures that the subject does not read through the instructions too quickly.  If they do it too quickly, then we will go over the loop again.
 var instructions_block = {
