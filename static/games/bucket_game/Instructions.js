@@ -1,35 +1,47 @@
 Game.Instructions = function (game) {
 
-    "use strict";
+    "use strict"
 
-    this.game;      //  a reference to the currently running game (Phaser.Game)
-    this.add;       //  used to add sprites, text, groups, etc (Phaser.GameObjectFactory)
-    this.camera;    //  a reference to the game camera (Phaser.Camera)
-    this.cache;     //  the game cache (Phaser.Cache)
-    this.input;     //  the global input manager. You can access this.input.keyboard, this.input.mouse, as well from it. (Phaser.Input)
-    this.load;      //  for preloading assets (Phaser.Loader)
-    this.math;      //  lots of useful common math operations (Phaser.Math)
-    this.sound;     //  the sound manager - add a sound, play one, set-up markers, etc (Phaser.SoundManager)
-    this.stage;     //  the game stage (Phaser.Stage)
-    this.time;      //  the clock (Phaser.Time)
-    this.tweens;    //  the tween manager (Phaser.TweenManager)
-    this.state;     //  the state manager (Phaser.StateManager)
-    this.world;     //  the game world (Phaser.World)
-    this.particles; //  the particle manager (Phaser.Particles)
-    this.physics;   //  the physics manager (Phaser.Physics)
-    this.rnd;       //  the repeatable random number generator (Phaser.RandomDataGenerator)
+    this.game      //  a reference to the currently running game (Phaser.Game)
+    this.add      //  used to add sprites, text, groups, etc (Phaser.GameObjectFactory)
+    this.camera    //  a reference to the game camera (Phaser.Camera)
+    this.cache     //  the game cache (Phaser.Cache)
+    this.input     //  the global input manager. You can access this.input.keyboard, this.input.mouse, as well from it. (Phaser.Input)
+    this.load      //  for preloading assets (Phaser.Loader)
+    this.math      //  lots of useful common math operations (Phaser.Math)
+    this.sound     //  the sound manager - add a sound, play one, set-up markers, etc (Phaser.SoundManager)
+    this.stage     //  the game stage (Phaser.Stage)
+    this.time      //  the clock (Phaser.Time)
+    this.tweens    //  the tween manager (Phaser.TweenManager)
+    this.state     //  the state manager (Phaser.StateManager)
+    this.world     //  the game world (Phaser.World)
+    this.particles //  the particle manager (Phaser.Particles)
+    this.physics   //  the physics manager (Phaser.Physics)
+    this.rnd      //  the repeatable random number generator (Phaser.RandomDataGenerator)
 
-    this.trial = 0
-    this.problem = [0,0,0]
+    this.feedback
+    this.stats
+    this.trial = 0;
+    this.balanceFriction = 400
+    this.balance = []
+    this.balanceY = 350
+    this.cBalanceX = 272
+    this.uBalanceX = 678
+    this.problem = [0,0,0];
+    this.submitted = false;
     this.buttonPressed = 'none'
+    this.answer = 'none'
+    this.userDropped = false
+    this.startDispensing = null
+    this.stopDispensing = null
     this.numGraded = 0
     this.points = 0
-    this.streak = 0
     this.reps = 0
-    this.usedLocs = []
-    this.threeTries = false
-		this.inst_num = 1
-		this.inst_finished = false
+    this.streak = 0
+    this.rmInstructB = false
+    this.inst_num = 1
+    this.inst_finished = false
+    this.pressable = false
 
 };
 
@@ -40,552 +52,688 @@ Game.Instructions.prototype = {
     this.problem_set = problem_set
   },
 
-  create: function() {
+  create: function () {
     problems = problemGen(this.week, this.problem_set)
     reProblems = problemGen(this.week, this.problem_set) //repeat problem set in SPT
-		this.op1s = [1]//problems[1].concat(reProblems[1])
-		this.op2s = [2]//problems[2].concat(reProblems[2])
-		this.problem_ids = [0]//problems[3].concat(reProblems[3])
+    this.op1s = [1]
+    this.op2s = [2]
+    this.problem_ids = [0]
 
+    //this.op1s = [12,10]
+    //this.op2s = [12,8]
+    //this.problem_ids = [2,2]
     //task info
     this.task = 'VS_verification'
     task_type = 'VS'
-    //initializing subject for this game
 
-    //this.results = set_up_subject(this.task)
-    //user = this.results[0]
-    //session = this.results[1]
-    //play = this.results[2]
-    //this.subject = new Subject(user, this.task, task_type, this.problem_set, session, play)
+    //this.logger - new Logger(this.task, this)
 
-    equivalenceGen(true)
-    this.equivalence = equivalence
+    this.points = 0
 
-    this.game.world.setBounds(0, 0, 600, 800)
-    //background = this.game.add.sprite(0,0,'chalkboard')
-    //background.width = this.game.width
-    //background.height = this.game.height
+    equivalenceGen(false)
+    // this.equivalence = equivalence
+
+    this.equivalence = [2]
+
+    this.game.world.setBounds(0, 0, 960, 600);
+    this.game.physics.startSystem(Phaser.Physics.P2JS);
+    this.game.physics.p2.restitution = 0.1;//0.75
+    this.game.physics.p2.gravity.y = 600;//400;
 
     d = new Date()
     this.startTime = d.getTime()
 
-    this.makeButtons()
+    this.numUserBalls = 0
 
-    this.nextTrial()
+    trialData = {}
+    trialData['ACC'] = []
 
-		this.instruct(this.inst_num)
+    this.balance[0] = this.game.add.group()
+    this.balance[0].weight = 0
+    this.balance[1] = this.game.add.group()
+    this.balance[1].weight = 0
 
-  },
+    this.scaleGroup = this.game.add.group()
 
-	makeBox: function(x,y,width,height) {
-		rect = this.game.add.graphics(x,y)
-		rect.lineStyle(2, 0x13bee3, 1);
-		rect.beginFill(0x0c3ef0, 1)
-		rect.drawRect(0,0, width, height)
-		return rect
-	},
+    this.jarCollisionGroup = this.game.physics.p2.createCollisionGroup()
+    this.ballCollisionGroup = this.game.physics.p2.createCollisionGroup()
 
-	instruct: function (num) {
-		if (num == 1) {
-					instruct_text = this.game.add.text(this.game.world.centerX-60,260,"In this game you'll be deciding if the total number of \ndots on the left is the same as the number on the right",
-					{font: "20px Arial", fill: "#FFFFFF", align: "center"})
-					this.nextB = this.add.button(this.game.world.centerX+175, 330, 'next', function () {
-						this.game.world.remove(instruct_text)
-						this.rmInstructB = true
-					}, this);
-					this.inst_finished = false
-					this.back_ground = this.makeBox(instruct_text.x-10,instruct_text.y-10,500,120)
-					this.game.world.sendToBack(this.back_ground)
-					this.nextB.anchor.x = (0.5,0.5)
-					this.nextB.scale.setTo(0.5,0.5)
-					this.game.world.bringToTop(this.back_ground)
-					this.game.world.bringToTop(instruct_text)
-					this.game.world.bringToTop(this.nextB)
-
-		} if (num == 2) {
-					instruct_text = this.game.add.text(this.game.world.centerX-20,260,"If they do equal the number, press True.\nIf they don't equal the number, press False.",
-					{font: "20px Arial", fill: "#FFFFFF", align: "center"})
-					this.nextB = this.add.button(this.game.world.centerX+175, 330, 'next', function () {
-						this.game.world.remove(instruct_text)
-						this.rmInstructB = true
-					}, this);
-					this.inst_finished = false
-					this.nextB.anchor.x = (0.5,0.5)
-					this.nextB.scale.setTo(0.5,0.5)
-					this.game.world.bringToTop(instruct_text)
-					this.game.world.bringToTop(this.nextB)
-		} if (num == 3) {
-					instruct_text = this.game.add.text(this.game.world.centerX+40,260,"Hit next to try this problem now.",
-					{font: "20px Arial", fill: "#FFFFFF", align: "center"})
-					this.nextB = this.add.button(this.game.world.centerX+175, 330, 'next', function () {
-						this.game.world.remove(instruct_text)
-						this.rmInstructB = true
-						this.inst_finished = true
-						this.game.world.remove(this.back_ground)
-					}, this);
-					this.inst_finished = false
-					this.nextB.anchor.x = (0.5,0.5)
-					this.nextB.scale.setTo(0.5,0.5)
-					this.game.world.bringToTop(instruct_text)
-					this.game.world.bringToTop(this.nextB)
-		}
-	},
-
-
-  makeButtons: function () {
-    d = new Date()
-    this.start_time = d.getTime()
-
-    this.equal = this.game.add.button(540, 540, 'equalB')
-    this.equal.scale.x = 0.3
-    this.equal.scale.y = 0.3
-    this.equal.onInputDown.add(function() {
-			if (this.inst_finished) {
-				this.buttonPressed = 'equal'
-	      newd = new Date()
-	      this.RT = newd.getTime() - this.start_time
-	      //check to see if they are correct
-	      this.grade(this.start_time)
-			}
-    }, this)
-
-    this.unequal = this.game.add.button(315, 540, 'unequalB')
-    this.unequal.scale.x = .3
-    this.unequal.scale.y = .3
-    this.unequal.onInputDown.add(function() {
-			if (this.inst_finished) {
-				this.buttonPressed = 'unequal'
-	      newd = new Date()
-	      this.RT = newd.getTime() - this.start_time
-	      //check to see if they are correct
-	      this.grade(this.start_time)
-			}
-    }, this)
-  },
-
-  nextTrial: function () {
-
-    var d = new Date()
-    this.start_time = d.getTime()
-
-    if (this.op1s[this.trial] <= 9) {
-        op1 = '  ' + this.op1s[this.trial];
-    } else { op1 = this.op1s[this.trial];}
-
-    if (this.op2s[this.trial] <= 9) {
-        op2 = '  ' + this.op2s[this.trial];
-    } else { op2 = this.op2s[this.trial];}
-
-    this.problem[0] = +op1;
-    this.problem[1] = +op2;
-    this.problem[2] = +op1 + +op2;
-
-    this.trial++
-    this.progress = this.game.add.text(860, 560, this.trial + ' out of ' + this.op1s.length, {font:'30px Arial', fill:'#FFFFFF', align:'center'})
+    //first trial
+    this.progress = this.game.add.text(this.game.world.centerX*2-100, 560, '1 out of '+this.op1s.length, {font:'30px Arial', fill:'#FFFFFF', align:'center'})
+    this.progress.fixedToCamera = true
     this.progress.anchor.x = 0.5
 
     this.pointDisplay = this.game.add.text(85, 560, 'Coins: ' + this.points, {font:'30px Arial', fill:'#FFFFFF', align:'center'})
     this.pointDisplay.anchor.x = 0.5
+    this.pointDisplay.fixedToCamera = true
 
-    this.makeProb()
-    this.equal.visible = true
-    this.unequal.visible = true
+    this.leftBeam = this.game.add.sprite(this.cBalanceX,this.balanceY,'board')
+    this.leftBeam.scale.x = 4
+    this.leftBeam.scale.y = 5//6
+    this.leftBeam.anchor.x = 0.5
+    this.leftBeam.anchor.y = 0.5
+    this.leftBeam.enableBody = true
+    this.game.physics.p2.enableBody(this.leftBeam)
+    this.leftBeam.body.immovable = true
+    this.leftBeam.body.static = true
+    this.leftBeam.body.setCollisionGroup(this.jarCollisionGroup)
+    this.leftBeam.body.collides([this.ballCollisionGroup])
+    this.balance[0].add(this.leftBeam)
+
+    this.rightBeam = this.game.add.sprite(this.uBalanceX,this.balanceY,'board')
+    this.rightBeam.scale.x = 4
+    this.rightBeam.scale.y = 5//6
+    this.rightBeam.anchor.x = 0.5
+    this.rightBeam.anchor.y = 0.5
+    this.game.physics.p2.enableBody(this.rightBeam)
+    this.rightBeam.body.immovable = true
+    this.rightBeam.body.static = true
+    this.rightBeam.body.setCollisionGroup(this.jarCollisionGroup)
+    this.rightBeam.body.collides([this.ballCollisionGroup])
+
+    this.balance[1].add(this.rightBeam)
+
+    this.waterBase1 = this.makeWaterBase(168, 300, 'small')
+    this.waterBase1.anchor.y = 1
+    this.waterBase1.height = 0
+
+    this.waterBase2 = this.makeWaterBase(368, 300, 'small')
+    this.waterBase2.anchor.y = 1
+    this.waterBase2.height = 0
+    this.balance[0].add(this.waterBase1)
+    this.balance[0].add(this.waterBase2)
+
+    this.waterBase3 = this.makeWaterBase(663,300, 'small')
+    this.waterBase3.anchor.y = 1
+    this.waterBase3.height = 0
+    this.balance[1].add(this.waterBase3)
+
+    measure1 = this.game.add.sprite(-95,31,'measurer')
+    measure1.height = measure1.height/1.5
+    measure1.width = measure1.width*1.8
+    this.balance[0].add(measure1)
+
+    measure2 = this.game.add.sprite(105,31,'measurer')
+    measure2.height = measure2.height/1.5
+    measure2.width = measure2.width*1.8
+    this.balance[0].add(measure2)
+
+    measure3 = this.game.add.sprite(400,31,'measurer')
+    measure3.height = measure3.height/1.5
+    measure3.width = measure3.width*1.8
+    this.balance[1].add(measure3)
+
+    this.pivot = this.game.add.sprite(480,440,'board')
+    this.pivot.anchor.x = 0.5
+    this.pivot.anchor.y = 0.5
+    this.pivot.width = this.pivot.width*4
+    this.pivot.height = this.pivot.height*2
+    this.scaleGroup.add(this.pivot)
+
+    this.attach1 = this.game.add.sprite(270,400,'board')
+    this.attach1.anchor.x = 0.5
+    this.attach1.anchor.y = 0.5
+    this.attach1.height = this.attach1.height*13
+    this.attach1.width = this.attach1.width/2
+    this.balance[0].add(this.attach1)
+
+    this.attach2 = this.game.add.sprite(670,400,'board')
+    this.attach2.anchor.x = 0.5
+    this.attach2.anchor.y = 0.5
+    this.attach2.height = this.attach2.height*13
+    this.attach2.width = this.attach2.width/2
+    this.balance[1].add(this.attach2)
+
+    this.triangle = this.game.add.sprite(475,435,'triangle')
+    this.triangle.anchor.x = 0.5
+    this.triangle.anchor.y = 0.5
+    this.triangle.height = this.triangle.height/2
+    this.triangle.width = this.triangle.width/2
+    this.scaleGroup.add(this.triangle)
+
+    this.pp1 = this.game.add.sprite(475,440,'circle')
+    this.pp1.anchor.x = 0.5
+    this.pp1.anchor.y = 0.5
+    this.pp1.height = this.pp1.height/6
+    this.pp1.width = this.pp1.width/6
+    this.scaleGroup.add(this.pp1)
+
+    this.pp2 = this.game.add.sprite(270,440,'circle')
+    this.pp2.anchor.x = 0.5
+    this.pp2.anchor.y = 0.5
+    this.pp2.height = this.pp2.height/6
+    this.pp2.width = this.pp2.width/6
+    this.balance[0].add(this.pp2)
+
+    this.pp3 = this.game.add.sprite(670,440,'circle')
+    this.pp3.anchor.x = 0.5
+    this.pp3.anchor.y = 0.5
+    this.pp3.height = this.pp3.height/6
+    this.pp3.width = this.pp3.width/6
+    this.balance[1].add(this.pp3)
+    this.game.world.bringToTop(this.balance[1])
+
+    this.nextTrial()
+
+    this.instruct(this.inst_num)
+
   },
 
-  makeProb: function() {
-    trialNum = this.trial-1
-		this.equalVal = true
-
-    // if (this.buttonPressed == 'none' || this.answer == 'correct' || this.reps == 1) {
-    //   this.presentedNum = unequalGen(equal, this.problem[2], this.problem[0], this.problem[1])
-    // } else if (this.answer == 'incorrect') {
-    //   this.presentedNum = this.presentedNum
-    // }
-    this.presentedNum = unequalGen(this.equalVal, this.problem[2], this.problem[0], this.problem[1])
-
-    this.probText = this.game.add.group()
-    this.game.add.text(376.5,this.game.height/2-75,'+',{font:'80px Arial', fill:'#FFFFFF', align:'center'}, this.probText)
-    this.game.add.text(790,this.game.height/2-75,'=',{font:'80px Arial', fill:'#FFFFFF', align:'center'}, this.probText)
-    this.game.add.text(850,this.game.height/2-75,this.presentedNum,{font:'80px Arial', fill:'#FFFFFF', align:'center'}, this.probText)
-
-    this.circle_group = this.game.add.group()
-
-    this.op1_circs = this.circleGen(this.problem[0],1)
-    this.op2_circs = this.circleGen(this.problem[1],2)
-
-    this.op1_box = this.boxGen(1)
-    this.op2_box = this.boxGen(2)
-
-
-    this.answerText = [this.problem[0],' + ',this.problem[1], ' = ',this.presentedNum]
-    this.answerText = this.answerText.join('')
-    // this.probText = this.game.add.text(this.game.width/2, this.game.height/2-100, this.answerText, {font:'80px Arial', fill:'#FFFFFF', align:'center'})
-    // this.probText.anchor.x = 0.5
-    //
-    if (this.equalVal) {
-      numFeedbackText = this.answerText
+  instruct: function(num) {
+    if (num == 1) {
+      this.back_ground = this.makeBox(220,370,500,190)
+      instruct_text = that.game.add.text(this.game.world.centerX-5,425,
+        "In this game, test tubes will\n fill with water like this...",
+      {font: "20px Arial", fill: "#FFFFFF", align: "center"})
+      instruct_text.anchor.x = (0.5,0.5)
+      this.nextB = this.add.button(475, 500, 'next', function () {
+        this.game.world.remove(instruct_text)
+        this.rmInstructB = true
+      }, this);
+      this.inst_finished = false
+      this.nextB.anchor.x = (0.5,0.5)
+      this.nextB.scale.setTo(0.5,0.5)
+    } else if (num == 2) {
+      this.back_ground = this.makeBox(220,370,500,190)
+      this.arrows = this.game.add.group()
+      this.arrow1 = this.game.add.sprite(220,340,'arrow')
+      this.arrow1.scale.x = 0.3
+      this.arrow1.scale.y = 0.4
+      this.arrow1.angle = this.arrow1.angle-25
+      this.arrows.add(this.arrow1)
+      this.arrow2 = this.game.add.sprite(330,330,'arrow')
+      this.arrow2.scale.x = 0.4
+      this.arrow2.scale.y = 0.38
+      this.arrow2.angle = this.arrow2.angle+25
+      this.arrows.add(this.arrow2)
+      this.arrow3 = this.game.add.sprite(645,330,'arrow')
+      this.arrow3.scale.x = 0.4
+      this.arrow3.scale.y = 0.4
+      this.arrows.add(this.arrow3)
+      rect1 = this.game.add.graphics(220,340)
+      rect1.lineStyle(2, 0xff5b5b, 1);
+      rect1.drawRect(67,110, 115, 30)
+      this.arrows.add(rect1)
+      rect2 = this.game.add.graphics(508,340)
+      rect2.lineStyle(2, 0xff5b5b, 1);
+      rect2.drawRect(67,110, 86, 30)
+      this.arrows.add(rect2)
+      instruct_text = that.game.add.text(this.game.world.centerX-5,425,
+        "Your job is to say whether the water in\nthese tubes equals the water in this tube",
+      {font: "20px Arial", fill: "#FFFFFF", align: "center"})
+      instruct_text.anchor.x = (0.5,0.5)
+      this.nextB = this.add.button(475, 500, 'next', function () {
+        this.game.world.remove(instruct_text)
+        this.game.world.remove(this.arrows)
+        this.rmInstructB = true
+        this.pressable = true
+      }, this);
+      this.inst_finished = false
+      this.nextB.anchor.x = (0.5,0.5)
+      this.nextB.scale.setTo(0.5,0.5)
+    } else if (num == 3) {
+      this.back_ground = this.makeBox(220,290,500,190)
+      instruct_text = that.game.add.text(this.game.world.centerX-5,325,
+        "If the two sides are equal, touch the equal button.\n If they not equal, touch the unequal button.\n Press next to give your answer now!",
+      {font: "20px Arial", fill: "#FFFFFF", align: "center"})
+      instruct_text.anchor.x = (0.5,0.5)
+      this.nextB = this.add.button(475, 425, 'next', function () {
+        this.game.world.remove(instruct_text)
+        this.rmInstructB = true
+      }, this);
+      this.inst_finished = false
+      this.nextB.anchor.x = (0.5,0.5)
+      this.nextB.scale.setTo(0.5,0.5)
     } else {
-      numFeedbackText = [this.problem[0],' + ',this.problem[1], ' ≠ ',this.presentedNum]
-      numFeedbackText = numFeedbackText.join('')
+      this.inst_finished = true
     }
-    this.numFeedback = this.game.add.text(this.game.width/2, this.game.height/2-100, numFeedbackText, {font:'80px Arial', fill:'#FFFFFF', align:'center'})
-    this.numFeedback.anchor.x = 0.5
-    this.numFeedback.visible = false
-
   },
 
-  boxGen: function(op) {
-    graphics = this.game.add.graphics(0,0)
-    if (op == 1) {
-      x = 30
-    } else {
-      x = 430
-    }
-    graphics.lineStyle(6, 0xffffff, 1);
-    graphics.drawRect(x, 20, 340, 500);
-    this.circle_group.add(graphics)
-
-    return graphics
+  makeBox: function(x,y,width,height) {
+    rect = this.game.add.graphics(x,y)
+    rect.lineStyle(2, 0x13bee3, 1);
+    rect.beginFill(0x0c3ef0, 1)
+    rect.drawRect(0,0, width, height)
+    return rect
   },
 
-
-  circleGen: function(numCircs,op) {
-    // numCircs = 15
-    // if ((this.reps == 0 && typeof(this.answer) == 'undefined') || (this.reps == 1 && this.answer == 'incorrect') || this.answer == 'correct') {
-      this.circVals = []
-
-      if (op == 1) {
-        graphics = this.game.add.graphics(50,20)
-        //color = 0xff6262
+  drawScale: function(x,value) {
+    hashes = this.game.add.group()
+    hashY = 103
+    for (i = 0; i < 35; i++) {
+      if (35-i == value) {
+        lineWidth = 4
+        lineStart = -70
+        lineEnd = 90
       } else {
-        graphics = this.game.add.graphics(450,20)
-        //color = 0x65c5f0
+        lineWidth = 2
+        lineStart = 0
+        lineEnd = 20
       }
-      color = 0xffffff
-
-      y = 50
-      coords = []
-      for (j = 0; j < 5; j++) {
-        x = 50
-        for (i = 0; i < 3; i++) {
-          x = x + 50 + 50
-          coords.push([x,y])
-        }
-        y = y + 50 + 50
-      }
-
-      this.usedLocs = []
-      for (i = 0; i < numCircs; i++) {
-        rProb = this.getRandom(0,1)
-        if (rProb <= 0.6) {
-          r = this.getRandom(10,30)
-        } else if (rProb <= 0.85) {
-          r = this.getRandom(31,40)
-        } else {
-          r = this.getRandom(61,90)
-        }
-        loc = Math.floor(this.getRandom(0,coords.length))
-        for (c = 0; c < 1000; c++) {
-          if (this.usedLocs.indexOf(loc) >= 0) {
-            loc = Math.floor(this.getRandom(0,coords.length))
-          }
-        }
-        if (r <= 20) {
-          yOffset = this.getRandom(0,35)
-          xOffset = this.getRandom(0,35)
-        } if (r <= 30) {
-          yOffset = this.getRandom(0,25)
-          xOffset = this.getRandom(0,25)
-        } else if (r <= 60) {
-          yOffset = this.getRandom(0,15)
-          xOffset = this.getRandom(0,15)
-        } else if (r <= 80) {
-          yOffset = this.getRandom(3,8)
-          xOffset = this.getRandom(3,8)
-        } else if (r <= 90) {
-          yOffset = this.getRandom(1,4)
-          xOffset = this.getRandom(1,4)
-        } else {
-          offsetAmount = 0
-          yOffset = 0
-          xOffset = 0
-        }
-        offsetDirection = this.getRandom(0,1)
-        if (offsetDirection >= 0.5) {
-          xOffset = -xOffset
-        } else {
-          yOffset = -yOffset
-        }
-
-        graphics.lineStyle(0)
-        graphics.beginFill(color, 1)
-        graphics.drawCircle(coords[loc][0]-100+xOffset,coords[loc][1]+yOffset,r)
-        graphics.endFill()
-
-        this.circle_group.add(graphics)
-
-        this.usedLocs.push(loc)
-
-        this.circVals.push([coords[loc][0]-100+xOffset,coords[loc][1]+yOffset,r])
-        }
-    // } else {
-    //   if (op == 1) {
-    //     this.graphics = this.game.add.graphics(50,20)
-    //     this.circVals = this.op1_circs
-    //     color = 0xff6262
-    //   } else {
-    //     this.graphics = this.game.add.graphics(440,20)
-    //     this.circVals = this.op2_circs
-    //     color = 0x65c5f0
-    //   }
-    //   for (i=0; i < numCircs; i++) {
-    //     this.graphics.lineStyle(0)
-    //     this.graphics.beginFill(color, 1)
-    //     this.graphics.drawCircle(this.circVals[i][0],this.circVals[i][1],this.circVals[i][2])
-    //     this.graphics.endFill()
-    //   }
-    // }
-    return this.circVals
-
+      hashMark = this.game.add.graphics(x+lineStart,hashY)
+      hashMark.lineStyle(lineWidth, 0xFFFFFF)
+      hashMark.lineTo(lineEnd,0)
+      hashes.add(hashMark)
+      hashY = hashY + 6
+    }
+    return hashes
   },
 
-  getRandom: function(min, max) {
-    return Math.random() * (max - min) + min;
+  makeWaterBase: function(x,y, type) {
+    water_base = this.game.add.sprite(x,y+13,'water_base')
+    water_base.width = water_base.width-3
+    left_wall = this.game.add.sprite(x-47,0,'board')
+    right_wall = this.game.add.sprite(x+47,0,'board')
+    this.game.physics.p2.enableBody(water_base)
+    water_base.body.setCollisionGroup(this.jarCollisionGroup)
+    water_base.body.collides([this.ballCollisionGroup])
+    water_base.body.static = true
+
+    left_wall.height = left_wall.height*100
+    left_wall.width = 10
+    this.game.physics.p2.enableBody(left_wall)
+    left_wall.body.setCollisionGroup(this.jarCollisionGroup)
+    left_wall.body.collides([this.ballCollisionGroup])
+    left_wall.body.static = true
+    left_wall.alpha = 0
+
+    right_wall.height = left_wall.height*100
+    right_wall.width = 10
+    this.game.physics.p2.enableBody(right_wall)
+    right_wall.body.setCollisionGroup(this.jarCollisionGroup)
+    right_wall.body.collides([this.ballCollisionGroup])
+    right_wall.body.static = true
+    right_wall.alpha = 0
+
+  return water_base
+  },
+
+  makeButtons: function() {
+    d = new Date()
+    this.start_time = d.getTime()
+
+    this.equal = this.game.add.button(500, 500, 'equalB')
+    this.equal.scale.x = .3
+    this.equal.scale.y = .3
+    this.equal.onInputDown.add(function() {
+      if (this.pressable) {
+        this.buttonPressed = 'equal'
+        newd = new Date();
+        this.RT = newd.getTime() - this.start_time;
+        //check to see if they are correct
+        //if (this.equalBool) {
+        //  this.coin.visible = true
+        //}
+        this.adjustBalance()
+        this.unequal.kill()
+        this.equal.kill()
+        that = this
+        setTimeout(function() {
+          that.grade(that.start_time)
+        }, 1000)
+      }
+    }, this)
+
+    this.unequal = this.game.add.button(340, 500, 'unequalB')
+    this.unequal.scale.x = 0.3
+    this.unequal.scale.y = 0.3
+    this.unequal.onInputDown.add(function() {
+      if (this.pressable) {
+        this.buttonPressed = 'unequal'
+        newd = new Date();
+        this.RT = newd.getTime() - this.start_time;
+        //check to see if they are correct
+        //if (!this.equalBool) {
+        //  this.coin.visible = true
+        //}
+        this.adjustBalance()
+        this.unequal.kill()
+        this.equal.kill()
+        that = this
+        setTimeout(function() {
+          that.grade(that.start_time)
+        }, 1000)
+      }
+    }, this)
   },
 
   grade: function(time_stamp) {
-    this.numGraded += 1
-    if (this.buttonPressed == 'equal') { //it is equal and they are correct
+
+    if (this.buttonPressed == 'equal') {
+      this.answer = 'incorrect'
+      this.points-=1
+    } else {
       this.answer = 'correct'
-    } else if (this.buttonPressed == 'unequal') {
-      if (this.equivalence[this.trial-1] == 2) { //it is unequal and they are correct
-        this.answer = 'incorrect'
-      }
+      this.points+=1
+    }
+    if (this.points < 0) {
+      this.points = 0
     }
 
-    if (this.answer == 'correct') {
-      this.points+= 1
+    if (this.answer == "incorrect") {
+      this.reps += 1
+      this.streak = 0
+      giveFeedback(this, false, this.streak,'vnt',480, 500, "60px Arial")
+    } else {
       if (this.reps == 0) {
         this.streak += 1
       }
       this.reps = 0
-    } else if (this.answer = 'incorrect') {
-      this.streak = 0
-      this.reps += 1
-      if (this.points == 0) {
-        this.points = 0
-      } else {
-        this.points -= 1
-      }
+      giveFeedback(this, true, this.streak,'vnt',480, 500, "60px Arial")
     }
 
-    if (this.streak == 3 || this.streak == 7 || this.streak == 15 || this.streak == 24) {
+    if (this.streak == 3 || this.streak == 7 || this.streak == 12) {
       this.points += 1
     }
 
-    this.onSubmit()
+    this.balance[0].weight = 0
+    this.balance[1].weight = 0
 
-    //this.save()
+    that = this
+    setTimeout(function() {
 
+    comp1Text = that.game.add.text(143,that.waterBase1.y-(6*that.problem[0])-20,that.problem[0], {font: "50px Arial", fill: "#FFFFFF", align: "center"});
+    comp1Text.anchor.y = 0.5
+    that.balance[0].add(comp1Text)
+
+    comp2Text = that.game.add.text(343,that.waterBase2.y-(6*that.problem[1])-20,that.problem[1], {font: "50px Arial", fill: "#FFFFFF", align: "center"});
+    comp2Text.anchor.y = 0.5
+    that.balance[0].add(comp2Text)
+
+    userText = that.game.add.text(633,that.waterBase3.y-(6*that.numUserBalls)-20,that.numUserBalls, {font: "50px Arial", fill: "#FFFFFF", align: "center"});
+    userText.anchor.y = 0.5
+    that.balance[1].add(userText)
+
+    hash1 = that.drawScale(195,that.problem[0])
+    that.balance[0].add(hash1)
+
+    hash2 = that.drawScale(395,that.problem[1])
+    that.balance[0].add(hash2)
+
+    hash3 = that.drawScale(690,that.numUserBalls)
+    that.balance[1].add(hash3)
+
+    if (that.equivalence[that.trial-1] == 1) {
+      equalSign = that.game.add.text(510, that.balance[0].y+200,'=', {font: "60px Arial", fill: "#FFFFFF", align: "center"});
+    } else {
+      equalSign = that.game.add.text(510, that.balance[0].y+200,'≠', {font: "60px Arial", fill: "#FFFFFF", align: "center"});
+    }
+    plus = that.game.add.text(255, that.balance[0].y+200,'+', {font: "60px Arial", fill: "#FFFFFF", align: "center"});
+
+    that.endTrial()
+    setTimeout(function() {
+      comp1Text.kill()
+      comp2Text.kill()
+      userText.kill()
+      plus.kill()
+      equalSign.kill()
+      hash1.forEach(function (h) { h.kill() })
+      hash2.forEach(function (h) { h.kill() })
+      hash3.forEach(function (h) { h.kill() })
+
+      that.game.add.tween(that.waterBase1).to({
+        height: 0
+      },500, Phaser.Easing.Quadratic.Out, true)
+
+      that.game.add.tween(that.waterBase2).to({
+        height: 0
+      },500, Phaser.Easing.Quadratic.Out, true)
+
+      that.game.add.tween(that.waterBase3).to({
+        height: 0
+      },500, Phaser.Easing.Quadratic.Out, true)
+
+      that.adjustBalance()
+
+    }, 2000) //1750
+
+  }, 1100) //1100
+
+  //this.save(this.numGraded)
 
   },
 
-  save: function() {
+  save: function (curr_trial) {
     if (this.buttonPressed == 'equal') {
-      inputData('answer', 0)
+      this.logger.inputData('answer', 0)
     } else {
-      inputData('answer', 1)
+      this.logger.inputData('answer', 1)
     }
-    inputData('problem', [this.problem[0],' + ',this.problem[1],' = ',this.presentedNum].join(""))
-    inputData('RT', this.RT/1000)
-    inputData('n1', this.op1s[this.trial-1])
-    inputData('n2', this.op2s[this.trial-1])
-    inputData('points', this.points)
-    inputData('problem_id', this.problem_ids[this.trial-1])
-    inputData('solution', this.op1s[this.trial-1] + this.op2s[this.trial-1])
+
+    this.logger.inputData('problem', [this.problem[0],' + ',this.problem[1],' = ',this.ballsToDrop].join(""))
+    this.logger.inputData('RT', this.RT/1000)
+    this.logger.inputData('n1', parseInt(this.problem[0]))
+    this.logger.inputData('n2', parseInt(this.problem[1]))
+    this.logger.inputData('points', this.points)
+    this.logger.inputData('problem_id', parseInt(this.problem[3]))
+    this.logger.inputData('solution', parseInt(this.problem[2]))
 
     if (this.answer == 'correct') {
-      inputData('ACC', 1)
-    } else {
-      inputData('ACC',0)
+      this.logger.inputData('ACC', 1)
+      trialData.ACC[curr_trial-1] == 1
+    } else  {
+      this.logger.inputData('ACC', 0)
+      trialData.ACC[curr_trial-1] == 0
     }
 
+    this.numGraded++
     if (this.trial >= this.op1s.length && this.answer == 'correct') {
-      inputData('finished', 1)
+      this.logger.inputData('finished', 1)
     } else {
-      inputData('finished', 0)
+      this.logger.inputData('finished', 0)
     }
 
-    sendData(this.numGraded)
+    this.logger.sendData(this.numGraded)
 
   },
 
-  onSubmit: function () {
-      this.endTrial();
+  nextTrial: function() {
+    var d = new Date();
+    this.start_time = d.getTime();
+      if (this.op1s[this.trial] <= 9) {
+          op1 = '  ' + this.op1s[this.trial];
+      } else { op1 = this.op1s[this.trial];}
+
+      if (this.op2s[this.trial] <= 9) {
+          op2 = '  ' + this.op2s[this.trial];
+      } else { op2 = this.op2s[this.trial];}
+      this.problem[0] = +op1;
+      this.problem[1] = +op2;
+      this.problem[2] = +op1 + +op2;
+      this.problem[3] = this.problem_ids[this.trial]
+    if (this.answer == "incorrect") {
+        this.op1s.push(this.op1s[this.trial])
+        this.op2s.push(this.op2s[this.trial])
+        this.problem_ids.push(this.problem_ids[this.trial])
+        this.equivalence.push(this.equivalence[this.trial])
+    }
+    if (this.trial == 0) {
+      this.progress.setText(1 + ' out of '+this.op1s.length)
+      this.pointDisplay.setText("Coins: " + this.points)
+    } else {
+      this.progress.setText(this.trial+1 + ' out of '+this.op1s.length)
+      this.pointDisplay.setText("Coins: " + this.points)
+    }
+    this.trial++
+
+    this.problem[0] = [1]
+    this.problem[1] = [2]
+    this.problem[2] = this.equivalence[0]
+
+    this.dropBall()
+    this.waterTable()
+
+    this.numCompBalls = this.problem[2]
+    this.balance[0].weight = (3000 * this.numCompBalls)
+
   },
 
-  endTrial: function () {
-
-    // this.graphics.lineStyle(0)
-    // this.graphics.beginFill(0x000000, 1)
-    // this.graphics.drawRect(-600, 0, 1200, 500);
-    // this.graphics.endFill()
-
-    this.circle_group.destroy()
-    this.probText.destroy()
-
-    if (this.streak == 3) {
-      corrFeedback = '3 in a row! Extra coin!'
-      disp_col = '#3CF948'
-    } else if (this.streak == 7) {
-      corrFeedback = '7 in a row! Extra coin!'
-      disp_col = '#3CF948'
-    } else if (this.streak == 15) {
-      corrFeedback = '15 in a row! Extra coin!'
-      disp_col = '#3CF948'
-    } else if (this.streak == 24) {
-      corrFeedback = 'Perfect Score! Extra coin!'
-      disp_col = '#3CF948'
-    } else {
-      correct_feedback = ['Way to go!','Awesome!','You Rock!','Correct!','Fantastic!','Nice!']
-      feedbackIndex = Math.floor(Math.random() * correct_feedback.length) + 0
-      corrFeedback = correct_feedback[feedbackIndex]
-      disp_col = '#FFFFFF'
-    }
-
-    this.equal.visible = false
-    this.unequal.visible = false
-		that = this
-    if (this.trial >= this.op1s.length && this.answer == "correct") {
-      this.feedback = this.game.add.text(this.game.width/2, 50, corrFeedback, {font:'80px Arial', fill:disp_col, align:'center'})
-      this.feedback.anchor.x = 0.5
-      this.numFeedback.visible = true
-      this.game.world.remove(this.progress)
-      this.game.world.remove(this.pointDisplay)
-      setTimeout(function() {
-        that.game.world.remove(that.feedback)
-        that.numFeedback.visible = false
-        that.quitGame()
-      }, 1000)
-    } else {
-      that = this
-      if (this.answer == "incorrect") {
-        this.feedback = this.game.add.text(this.game.width/2, 50, "Sorry, that's incorrect :(", {font:'80px Arial', fill:disp_col, align:'center'})
-        this.feedback.anchor.x = 0.5
-        this.numFeedback.visible = true
-        this.game.world.remove(this.progress)
-        this.game.world.remove(this.pointDisplay)
-
-        setTimeout(function() {
-          if (that.reps == 1) {
-            that.threeTries = true
-            that.game.world.remove(that.feedback)
-            that.numFeedback.visible = false
-            that.op1s.push(that.op1s[that.trial-1])
-            that.op2s.push(that.op2s[that.trial-1])
-            that.nextTrial()
-          } else {
-            that.game.world.remove(that.feedback)
-            that.numFeedback.visible = false
-            that.numFeedback.visible = false
-            that.op1s.push(that.op1s[that.trial-1])
-            that.op2s.push(that.op2s[that.trial-1])
-            that.nextTrial()
-            // that.makeProb()
-            // that.makeButtons()
-            // that.progress = that.game.add.text(860, 560, that.trial + ' out of ' + that.op1s.length, {font:'30px Arial', fill:'#FFFFFF', align:'center'})
-            // that.progress.anchor.x = 0.5
-            //
-            // that.pointDisplay = that.game.add.text(85, 560, 'Coins: ' + that.points, {font:'30px Arial', fill:'#FFFFFF', align:'center'})
-            // that.pointDisplay.anchor.x = 0.5
-          }
-          if (that.equalVal == true) {
-            that.equivalence.push(1)
-          } else {
-            that.equivalence.push(0)
-          }
-
-        }, 1000)
-
+  makeBalls: function(x,numBalls,bal) {
+    numBalls = 15
+    y = 300
+    for (i = 0; i < numBalls; i++) {
+      if (i < 8) {
+        ball = this.game.add.sprite(x-45+(i*8),y,"balls")
       } else {
-				this.feedback = this.game.add.text(this.game.width/2, 50, corrFeedback, {font:'80px Arial', fill:disp_col, align:'center'})
-	      this.feedback.anchor.x = 0.5
-	      this.numFeedback.visible = true
-	      this.game.world.remove(this.progress)
-	      this.game.world.remove(this.pointDisplay)
-	      setTimeout(function() {
-	        that.game.world.remove(that.feedback)
-	        that.numFeedback.visible = false
-	        that.quitGame()
-	      }, 1000)
+        ball = this.game.add.sprite(x-45+((i-8)*8),y-6,"balls")
       }
+      //ball = this.game.add.sprite(x,(60-i*20),"balls")
+      //ball.width = ball.width/2
+      //ball.height = ball.height/2
+      this.game.physics.p2.enableBody(ball)
+      ball.body.setCircle(ball.width * 0.3); //0.3
+      ball.body.setCollisionGroup(this.ballCollisionGroup)
+      ball.body.collides([this.jarCollisionGroup, this.ballCollisionGroup])//, this.leftBall2CollisionGroup])
+      //ball.body.mass = 50
+      //ball.body.damping = 0.3;
+      this.balance[bal].add(ball)
+      //ball.filters = [this.blurX, this.blurY,this.threshold]
+      //ball.filterArea = this.game.camera.view;
+    }
+  },
+
+  dropBall: function() {
+
+    if (this.equivalence[this.trial-1] == 1) {
+      this.equalBool = true
+    } else {
+      this.equalBool = false
+    }
+    if (this.equalBool) {
+      this.coin = this.game.add.sprite(540,500,'coin')
+    } else {
+      this.coin = this.game.add.sprite(380,500,'coin')
+    }
+    this.coin.visible = false
+    this.ballsToDrop = unequalGen(this.equalBool, this.problem[2], this.problem[0], this.problem[1])
+    this.numUserBalls = this.ballsToDrop
+    this.balance[1].weight = (3000 * this.numUserBalls)
+    this.makeButtons()
+  },
+
+  dropCompBall: function() {
+    var that = this
+    setTimeout(function() {
+      setTimeout(function() {
+        that.comp2Dropped = true
+      }, 10) //2500
+    }, 10) //3000
+
+      setTimeout(function() {
+        that.comp1Dropped = true
+        setTimeout(function() {
+          setTimeout(function() {
+            that.userDropped = true
+          }, 10) //2500
+          that.dropBall()
+        }, 10) //3500
+      }, 10)
+  },
+
+  adjustBalance: function() {
+    this.submitted = true
+
+    weightDiff = ((this.balance[0].weight-this.balance[1].weight)/this.balanceFriction)
+    if (weightDiff > this.game.height/3) { //edge cases
+      weightDiff = this.game.height/3
+    }
+    if (weightDiff < -this.game.height/3) {
+      weightDiff = -this.game.height/3
+    }
+
+    angDiff = (-weightDiff)/4
+
+    balanceTweenComp = this.game.add.tween(this.balance[0]).to({
+      y: weightDiff
+    }, 1000, Phaser.Easing.Quadratic.Out, true)
+
+    balanceTweenUser = this.game.add.tween(this.balance[1]).to({
+      y: -weightDiff
+    }, 1000, Phaser.Easing.Quadratic.Out, true)
+
+    pivotTween = this.game.add.tween(this.pivot).to({
+      angle: angDiff
+    }, 1000, Phaser.Easing.Quadratic.Out, true)
+
+  },
+
+  waterTable: function() {
+
+    waterLevel1 = 6*this.problem[0]
+    waterLevel2 = 6*this.problem[1]
+    waterLevel3 = 6*this.ballsToDrop
+
+    that = this
+    setTimeout(function() {
+      that.game.add.tween(that.waterBase1).to({
+        height: waterLevel1
+      },700, Phaser.Easing.Quadratic.Out, true)
+
+      that.game.add.tween(that.waterBase2).to({
+        height: waterLevel2
+      },700, Phaser.Easing.Quadratic.Out, true)
+
+      that.game.add.tween(that.waterBase3).to({
+        height: waterLevel3
+      },700, Phaser.Easing.Quadratic.Out, true)
+    },700)
+  },
+
+  endTrial: function() {
+    var that = this
+    if ((this.trial) >= this.op1s.length && this.answer == 'correct') {
+      this.pointDisplay.setText("Coins: " + this.points)
+      if (this.coin) {
+        this.game.world.remove(this.coin)
+      }
+      setTimeout(function() {
+        that.quitGame();
+      }, 2500)
+    } else {
+      this.pointDisplay.setText("Coins: " + this.points)
+      if (this.coin) {
+        this.game.world.remove(this.coin)
+      }
+      setTimeout(function() {
+        that.nextTrial()
+      }, 2500)
     }
   },
 
   update: function() {
-		if (this.rmInstructB) {
+    if (this.rmInstructB) {
       this.game.world.remove(this.nextB)
+      this.game.world.remove(this.back_ground)
       this.rmInstructB = false
       this.inst_num += 1
       this.instruct(this.inst_num)
     }
-
-    if (this.correct) {
-      this.game.world.remove(this.instruct_text)
-    }
-
   },
 
   quitGame: function () {
-    d = new Date()
-    endTime = d.getTime()
+      this.balance[0].destroy()
+      this.balance[1].destroy()
+      this.scaleGroup.destroy()
+      this.game.world.remove(this.pointDisplay)
+      this.game.world.remove(this.progress)
 
-    this.trial = 0
-    this.numGraded = 0
+      this.trial = 0
+      this.inst_num = 1
+      this.inst_finished = false
+      this.pressable = false
 
-    //this.subject.inputData('endGameStats', [this.startTime, endTime, 'completed'])
-    //nextTask(this.results[0], this.task)
+      d = new Date()
+      endTime = d.getTime()
 
+      this.gameFinished = false
 
-		      d = new Date()
-		      endTime = d.getTime()
-
-		      this.numGraded = 0
-
-		      //this.subject.inputData('endGameStats', [this.gameStartTime, endTime, 'completed'])
-		      //session_url = 'http://' + homebase + '/session/'
-
-		      //nextTask(this.results[0], this.task)
-
-		      //Let them know it's done...
-		      this.game.time.events.add(Phaser.Timer.SECOND, function () {
-		        instructions = this.game.add.text(490, 50, 'Nice job! Make sense? If so you can get started by pressing the "go" button.\nIf not, you can repeat the instructions by clicking the "back" button\nYou will complete 24 problems in the main game.', {font:'20px Arial', fill:'#FFFFFF', align:'center'});
-		        instructions.anchor.x = 0.5
-		        instructions.lineSpacing = -8
-		        this.back_ground = this.makeBox(143,instructions.y-10,instructions.width+20,instructions.height+200)
-		        this.game.world.sendToBack(this.back_ground)
-		        this.go = this.add.button(250, 225, 'go', function () {this.state.start('Run', true, false, 0, false, this.problem_set);}, this);
-		        this.back = this.add.button(650, 225, 'back', function () {
-
-		          this.cx = 0;
-		          this.cy = 0;
-
-							this.trial = 0
-					    this.problem = [0,0,0]
-					    this.buttonPressed = 'none'
-					    this.numGraded = 0
-					    this.points = 0
-					    this.streak = 0
-					    this.reps = 0
-					    this.usedLocs = []
-					    this.threeTries = false
-							this.inst_num = 1
-							this.inst_finished = false
-
-		          this.state.start('Instructions', true, false, this.week, this.problem_set);}, this);
-
-
-		      }, this);
+      //Let them know it's done...
+      this.game.time.events.add(Phaser.Timer.SECOND, function () {
+        instructions = this.game.add.text(490, 250, 'Nice job! Make sense? If so you can get started by pressing the "go" button.\nIf not, you can repeat the instructions by clicking the "back" button\nYou will complete 24 problems in the main game.', {font:'20px Arial', fill:'#FFFFFF', align:'center'});
+        instructions.anchor.x = 0.5
+        instructions.lineSpacing = -8
+        this.go = this.add.button(250, 375, 'go', function () {this.state.start('Run', true, false, this.problem_set);}, this);
+        this.back = this.add.button(650, 375, 'back', function () {this.state.start('Instructions', true, false, this.problem_set);}, this);
+      }, this);
   }
-
 };
