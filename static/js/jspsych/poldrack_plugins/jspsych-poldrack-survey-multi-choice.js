@@ -4,7 +4,7 @@
  *
  * A. Zeynep Enkavi
  *
- * documentation: https://github.com/expfactory/expfactory-battery/tree/master/static/js/jspsych/poldrack_plugins/docs
+ * documentation: https://github.com/expfactory/expfactory-battery/tree/masterstatic/js/jspsych/poldrack_plugins/docs
  * 
  * Features:
  * - Store each question in separate rows
